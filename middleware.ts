@@ -1,5 +1,4 @@
 import createMiddleware from 'next-intl/middleware';
-import {type NextRequest, type NextResponse} from 'next/server';
 
 export default createMiddleware({
   // A list of all locales that are supported
@@ -10,6 +9,9 @@ export default createMiddleware({
 });
  
 export const config = {
-  // Match only internationalized pathnames
-  matcher: ['/', '/(id|en)/:path*']
+  // Match all pathnames except for
+  // - API routes
+  // - Next.js internals
+  // - Static files
+  matcher: ['/((?!api|_next|.*\\..*).*)']
 };
