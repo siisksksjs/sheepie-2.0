@@ -1,12 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import {
+  ArrowRight,
+  Check,
+  Package2,
+  ShieldCheck,
+  Sparkles,
+  Truck,
+  WalletCards,
+} from "lucide-react";
 import { BuyButtons } from "@/components/product/buy-buttons";
 import { Badge } from "@/components/ui/badge";
-import { Check, Star, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { getProductPageContent } from "@/lib/product-page-content";
 
 interface ProductVariant {
   name: string;
@@ -34,125 +43,264 @@ interface ProductDetailsProps {
   locale: string;
 }
 
-export function ProductDetails({ product, locale }: ProductDetailsProps) {
-  const t = useTranslations('ProductDetails');
-  const tProd = useTranslations('Products');
+function parsePrice(value?: string) {
+  if (!value) return null;
+  const digits = value.replace(/[^\d]/g, "");
+  return digits ? Number(digits) : null;
+}
 
+export function ProductDetails({ product, locale }: ProductDetailsProps) {
+  const tProd = useTranslations("Products");
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     product.variants ? product.variants[0] : null
   );
+  const content = getProductPageContent(product.slug, locale);
+  const isId = locale === "id";
 
   const currentPrice = selectedVariant ? selectedVariant.price : product.price;
   const currentOriginalPrice = selectedVariant ? selectedVariant.originalPrice : product.originalPrice;
   const currentShopeeUrl = selectedVariant ? selectedVariant.shopeeUrl : product.shopeeUrl;
   const currentTokopediaUrl = selectedVariant ? selectedVariant.tokopediaUrl : product.tokopediaUrl;
+  const currentProductName = tProd(`${product.slug}.name` as any);
+  const currentPriceValue = parsePrice(currentPrice);
+  const currentOriginalPriceValue = parsePrice(currentOriginalPrice);
+  const savings =
+    currentPriceValue && currentOriginalPriceValue && currentOriginalPriceValue > currentPriceValue
+      ? currentOriginalPriceValue - currentPriceValue
+      : null;
 
   return (
-    <div className="sticky top-24 space-y-8 p-6 md:p-8 rounded-3xl border border-border/40 bg-white/50 backdrop-blur-xl shadow-sm">
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <Badge variant="secondary" className="bg-primary/5 text-primary hover:bg-primary/10 transition-colors px-3 py-1 text-xs font-semibold tracking-wider uppercase border-none">
-            {t('collection')}
-          </Badge>
-          <div className="flex items-center gap-1 text-amber-400 text-xs font-bold">
-            <Star className="w-3 h-3 fill-current" />
-            <span>4.9</span>
+    <div className="space-y-5">
+      <div className="overflow-hidden rounded-[2rem] border border-primary/10 bg-white shadow-[0_24px_80px_-48px_rgba(33,51,104,0.45)]">
+        <div className="border-b border-border/60 bg-[linear-gradient(180deg,#f8fbfd_0%,#ffffff_100%)] p-6 md:p-8">
+          <div className="flex flex-wrap items-center gap-3">
+            <Badge
+              variant="secondary"
+              className="border-none bg-primary/7 px-3 py-1 text-xs font-semibold tracking-[0.24em] uppercase text-primary hover:bg-primary/10"
+            >
+              {content.eyebrow}
+            </Badge>
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white px-3 py-1 text-xs font-medium text-muted-foreground">
+              <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+              <span>{isId ? "Marketplace checkout aman" : "Secure marketplace checkout"}</span>
+            </div>
+            {savings && (
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white">
+                <Sparkles className="h-3.5 w-3.5" />
+                <span>
+                  {isId
+                    ? `Hemat ${new Intl.NumberFormat("id-ID").format(savings)}`
+                    : `Save ${new Intl.NumberFormat("id-ID").format(savings)}`}
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="mt-5 space-y-4">
+            <h1 className="font-display text-4xl leading-tight text-primary md:text-5xl lg:text-[3.6rem]">
+              {currentProductName}
+            </h1>
+
+            <p className="max-w-2xl text-2xl leading-tight text-foreground/88">
+              {content.headline}
+            </p>
+
+            <p className="max-w-2xl text-base leading-8 text-muted-foreground">
+              {content.summary}
+            </p>
+          </div>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-2xl border border-border/60 bg-white p-4">
+              <Truck className="h-4 w-4 text-primary" />
+              <p className="mt-3 text-sm font-medium text-foreground">{content.trustBadges[0]}</p>
+            </div>
+            <div className="rounded-2xl border border-border/60 bg-white p-4">
+              <ShieldCheck className="h-4 w-4 text-primary" />
+              <p className="mt-3 text-sm font-medium text-foreground">{content.trustBadges[1]}</p>
+            </div>
+            <div className="rounded-2xl border border-border/60 bg-white p-4">
+              <Package2 className="h-4 w-4 text-primary" />
+              <p className="mt-3 text-sm font-medium text-foreground">{content.trustBadges[2]}</p>
+            </div>
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {content.fitTags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-border/60 bg-white px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-primary/80"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {product.slug === "cervicloud" && (
+            <Link href={`/${locale}/products/calmicloud`} className="mt-5 block">
+              <div className="group rounded-2xl border border-green-100 bg-green-50 p-4 transition-all hover:border-green-200 hover:bg-green-100/80">
+                <div className="flex items-start gap-3">
+                  <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+                  <div className="flex-1">
+                    <p className="flex items-center gap-2 text-sm font-medium text-foreground">
+                      {isId ? "Tambahkan CalmiCloud ke sleep setup Anda" : "Add CalmiCloud to your sleep setup"}
+                      <ArrowRight className="h-4 w-4 text-green-600 opacity-0 transition-opacity group-hover:opacity-100" />
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {isId
+                        ? "Bagus sebagai add-on kalau suara juga mengganggu kualitas tidur Anda."
+                        : "A useful add-on if sound is also part of the problem."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )}
+        </div>
+
+        <div className="grid gap-5 border-b border-border/60 p-6 md:grid-cols-[1fr_auto] md:items-end md:p-8">
+          <div>
+            <div className="flex flex-wrap items-end gap-3">
+              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/60">
+                {isId ? "Harga sekarang" : "Current price"}
+              </span>
+              {currentOriginalPrice && (
+                <span className="text-xl font-light text-muted-foreground/60 line-through decoration-muted-foreground/60 decoration-1">
+                  {currentOriginalPrice}
+                </span>
+              )}
+              <div className="font-display text-4xl font-medium text-primary">{currentPrice}</div>
+              {savings && (
+                <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-green-700">
+                  {isId ? "Harga promo" : "Offer price"}
+                </span>
+              )}
+            </div>
+            <p className="mt-3 text-sm leading-7 text-muted-foreground">
+              {isId
+                ? "Checkout melalui marketplace favorit Anda. Cocok untuk pembelian langsung tanpa ribet."
+                : "Checkout through your preferred marketplace for a straightforward purchase flow."}
+            </p>
+          </div>
+
+          <div className="rounded-[1.5rem] border border-primary/10 bg-[#f8fbfd] p-4 md:min-w-[220px]">
+            <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+              <WalletCards className="h-4 w-4" />
+              <span>{isId ? "Belanja via marketplace" : "Buy via marketplace"}</span>
+            </div>
+            <p className="mt-2 text-sm leading-7 text-muted-foreground">
+              {isId
+                ? "Shopee & Tokopedia untuk pembayaran, promo channel, dan tracking pesanan."
+                : "Shopee and Tokopedia for payment, channel promos, and order tracking."}
+            </p>
           </div>
         </div>
 
-        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-primary leading-tight">
-          {tProd(`${product.slug}.name` as any)}
-        </h1>
-
-        <p className="text-xl text-muted-foreground font-light italic">
-          {tProd(`${product.slug}.tagline` as any)}
-        </p>
-
-        {/* CalmiCloud Inclusion Banner - CerviCloud only */}
-        {product.slug === 'cervicloud' && (
-          <Link href={`/${locale}/products/calmicloud`} className="block">
-            <div className="bg-green-50 border border-green-100 rounded-xl p-4 hover:bg-green-100/80 hover:border-green-200 transition-all cursor-pointer group">
-              <div className="flex items-start gap-3">
-                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                <div className="flex-1">
-                  <p className="font-medium text-foreground text-sm flex items-center gap-2">
-                    {t('includesCalmiCloud')}
-                    <ArrowRight className="w-4 h-4 text-green-600 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {t('includesCalmiCloudSubtext')}
-                  </p>
-                </div>
+        <div className="space-y-5 p-6 md:p-8">
+          {product.variants && (
+            <div className="space-y-3">
+              <span className="text-sm font-bold uppercase tracking-[0.24em] text-primary/60">
+                {isId ? "Pilih opsi" : "Choose option"}
+              </span>
+              <div className="flex flex-wrap gap-3">
+                {product.variants.map((variant) => (
+                  <button
+                    key={variant.name}
+                    onClick={() => setSelectedVariant(variant)}
+                    className={cn(
+                      "rounded-full border px-4 py-2 text-sm font-medium transition-all",
+                      selectedVariant?.name === variant.name
+                        ? "border-primary bg-primary text-white shadow-md"
+                        : "border-border bg-white text-muted-foreground hover:border-primary/50"
+                    )}
+                  >
+                    {variant.name}
+                  </button>
+                ))}
               </div>
             </div>
-          </Link>
-        )}
-
-        <div className="flex items-baseline gap-3 pt-2">
-          {currentOriginalPrice && (
-            <span className="text-xl text-muted-foreground/60 line-through decoration-muted-foreground/60 decoration-1 font-light">
-              {currentOriginalPrice}
-            </span>
           )}
-          <div className="text-3xl font-display font-medium text-primary">
-            {currentPrice}
+
+          <div className="space-y-4">
+            <h3 className="font-display text-lg font-medium text-primary">
+              {isId ? "Kenapa orang pilih produk ini" : "Why people choose this"}
+            </h3>
+            <ul className="space-y-3">
+              {content.keyBenefits.map((benefit) => (
+                <li key={benefit} className="group flex items-start gap-3 text-sm text-foreground/85 md:text-base">
+                  <div className="mt-1 rounded-full bg-green-50 p-1 text-green-600 transition-colors group-hover:bg-green-100">
+                    <Check className="h-3 w-3" />
+                  </div>
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-[1.5rem] border border-primary/10 bg-primary p-5 text-primary-foreground">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary-foreground/70">
+              {content.bundleTitle}
+            </p>
+            <p className="mt-3 text-sm leading-7 text-primary-foreground/82">{content.bundleBody}</p>
+            <Link
+              href={`/${locale}/products/${content.relatedSlug}`}
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white"
+            >
+              {content.relatedCta}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="pt-2 space-y-4">
+            <BuyButtons
+              shopeeUrl={currentShopeeUrl}
+              tokopediaUrl={currentTokopediaUrl}
+              productSlug={product.slug}
+              className="w-full"
+            />
+            <p className="text-center text-xs text-muted-foreground/70">
+              {isId
+                ? "Belanja aman lewat marketplace favorit Anda. Scroll ke bawah untuk lihat perbandingan, FAQ, dan guide fit."
+                : "Secure checkout through your preferred marketplace. Scroll down for comparisons, FAQs, and fit guidance."}
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Variant Selector */}
-      {product.variants && (
-        <div className="space-y-3">
-          <span className="text-sm font-bold text-primary/60 uppercase tracking-widest">{t('selectOption')}</span>
-          <div className="flex flex-wrap gap-3">
-            {product.variants.map((variant) => (
-              <button
-                key={variant.name}
-                onClick={() => setSelectedVariant(variant)}
-                className={cn(
-                  "px-4 py-2 rounded-full border transition-all text-sm font-medium",
-                  selectedVariant?.name === variant.name
-                    ? "bg-primary text-white border-primary shadow-md"
-                    : "bg-white text-muted-foreground border-border hover:border-primary/50"
-                )}
-              >
-                {variant.name}
-              </button>
+      <div className="grid gap-5 md:grid-cols-2">
+        <div className="rounded-[1.75rem] border border-border/60 bg-white p-5 shadow-sm">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary/60">
+            {isId ? "Quick fit guide" : "Quick fit guide"}
+          </p>
+          <div className="mt-4 space-y-3">
+            {content.goodFit.slice(0, 3).map((item) => (
+              <div key={item} className="flex gap-3 text-sm leading-7 text-foreground/85">
+                <Check className="mt-1 h-4 w-4 flex-none text-primary" />
+                <span>{item}</span>
+              </div>
             ))}
           </div>
         </div>
-      )}
 
-      <div className="w-full h-px bg-border/50" />
-
-      <div className="prose prose-lg text-muted-foreground font-light leading-relaxed">
-        <p>{tProd(`${product.slug}.description` as any)}</p>
-      </div>
-
-      <div className="space-y-4">
-        <h3 className="font-display font-medium text-lg text-primary">{t('keyBenefits')}</h3>
-        <ul className="space-y-3">
-          {[0, 1, 2, 3].map((i) => (
-            <li key={i} className="flex items-start gap-3 text-sm md:text-base text-foreground/80 group">
-              <div className="mt-1 bg-green-50 rounded-full p-1 text-green-600 group-hover:bg-green-100 transition-colors">
-                <Check className="w-3 h-3" />
-              </div>
-              <span>{tProd(`${product.slug}.benefits.${i}` as any)}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="pt-10 space-y-4">
-        <BuyButtons 
-          shopeeUrl={currentShopeeUrl} 
-          tokopediaUrl={currentTokopediaUrl} 
-          productSlug={product.slug}
-          className="w-full"
-        />
-        <p className="text-center text-xs text-muted-foreground/60">
-          {t('secureCheckout')}
-        </p>
+        <div className="rounded-[1.75rem] border border-border/60 bg-white p-5 shadow-sm">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary/60">
+            {isId ? "Why buy here" : "Why buy here"}
+          </p>
+          <div className="mt-4 space-y-3 text-sm leading-7 text-foreground/85">
+            <div className="flex gap-3">
+              <ShieldCheck className="mt-1 h-4 w-4 flex-none text-primary" />
+              <span>{isId ? "Checkout resmi via Shopee dan Tokopedia" : "Official checkout via Shopee and Tokopedia"}</span>
+            </div>
+            <div className="flex gap-3">
+              <Truck className="mt-1 h-4 w-4 flex-none text-primary" />
+              <span>{isId ? "Pengiriman Indonesia dan support lokal" : "Indonesia shipping with local support"}</span>
+            </div>
+            <div className="flex gap-3">
+              <Package2 className="mt-1 h-4 w-4 flex-none text-primary" />
+              <span>{isId ? "Lebih enak dibundle untuk sleep setup lengkap" : "Works best as part of a fuller sleep setup bundle"}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

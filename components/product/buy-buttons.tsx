@@ -15,6 +15,7 @@ interface BuyButtonsProps {
 
 export function BuyButtons({ shopeeUrl, tokopediaUrl, productSlug, className }: BuyButtonsProps) {
   const pathname = usePathname();
+  const isId = pathname?.startsWith("/id");
 
   const handleBuy = (marketplace: 'shopee' | 'tokopedia', url: string) => {
     trackMarketplaceClick({
@@ -35,7 +36,7 @@ export function BuyButtons({ shopeeUrl, tokopediaUrl, productSlug, className }: 
         onClick={() => handleBuy('shopee', shopeeUrl)}
       >
         <ShoppingBag className="mr-2 h-4 w-4" />
-        Buy on Shopee
+        {isId ? "Belanja di Shopee" : "Buy on Shopee"}
       </Button>
       <Button 
         size="lg" 
@@ -44,7 +45,7 @@ export function BuyButtons({ shopeeUrl, tokopediaUrl, productSlug, className }: 
         onClick={() => handleBuy('tokopedia', tokopediaUrl)}
       >
         <ShoppingBag className="mr-2 h-4 w-4" />
-        Buy on Tokopedia
+        {isId ? "Belanja di Tokopedia" : "Buy on Tokopedia"}
       </Button>
     </div>
   );
