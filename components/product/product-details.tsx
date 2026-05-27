@@ -135,27 +135,6 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
               </span>
             ))}
           </div>
-
-          {product.slug === "cervicloud" && (
-            <Link href={`/${locale}/products/calmicloud`} className="mt-5 block">
-              <div className="group rounded-2xl border border-green-100 bg-green-50 p-4 transition-all hover:border-green-200 hover:bg-green-100/80">
-                <div className="flex items-start gap-3">
-                  <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
-                  <div className="flex-1">
-                    <p className="flex items-center gap-2 text-sm font-medium text-foreground">
-                      {isId ? "Tambahkan CalmiCloud ke sleep setup Anda" : "Add CalmiCloud to your sleep setup"}
-                      <ArrowRight className="h-4 w-4 text-green-600 opacity-0 transition-opacity group-hover:opacity-100" />
-                    </p>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {isId
-                        ? "Bagus sebagai add-on kalau suara juga mengganggu kualitas tidur Anda."
-                        : "A useful add-on if sound is also part of the problem."}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          )}
         </div>
 
         <div className="grid gap-5 border-b border-border/60 p-6 md:grid-cols-[1fr_auto] md:items-end md:p-8">

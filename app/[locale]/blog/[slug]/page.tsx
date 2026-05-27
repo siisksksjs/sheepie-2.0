@@ -7,6 +7,8 @@ import { Footer } from "@/components/layout/footer";
 import blogData from "@/data/blog.json";
 import { ArrowLeft } from "lucide-react";
 
+const baseUrl = "https://sheepiesleep.com";
+
 export async function generateStaticParams() {
   return blogData.map((post) => ({
     slug: post.slug,
@@ -22,7 +24,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${post.title} | Sheepie Journal`,
     description: post.excerpt,
+    alternates: {
+      canonical: `${baseUrl}/id/blog/${post.slug}`,
+    },
+    robots: locale === 'id'
+      ? undefined
+      : {
+          index: false,
+          follow: true,
+        },
     openGraph: {
+      url: `${baseUrl}/id/blog/${post.slug}`,
       images: [post.image],
     },
   };

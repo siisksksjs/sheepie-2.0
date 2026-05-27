@@ -4,6 +4,7 @@ import blogPosts from '../data/blog.json'
 
 const baseUrl = 'https://sheepiesleep.com'
 const locales = ['en', 'id']
+const blogLocale = 'id'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
@@ -57,16 +58,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       })
     }
 
-    // 3. Blog Pages
-    for (const post of blogPosts) {
-      const path = `/blog/${post.slug}`
-      sitemapEntries.push({
-        url: `${baseUrl}/${locale}${path}`,
-        lastModified: new Date(), // Could parse post.date if formatted strictly
-        changeFrequency: 'monthly',
-        priority: 0.7,
-        alternates: getAlternates(path)
-      })
+    // Blog SEO is intentionally Indonesian-only for marketplace traffic.
+    if (locale === blogLocale) {
+      for (const post of blogPosts) {
+        const path = `/blog/${post.slug}`
+        sitemapEntries.push({
+          url: `${baseUrl}/${blogLocale}${path}`,
+          lastModified: new Date(), // Could parse post.date if formatted strictly
+          changeFrequency: 'weekly',
+          priority: 0.75,
+          alternates: {
+            languages: {
+              id: `${baseUrl}/${blogLocale}${path}`,
+            },
+          },
+        })
+      }
     }
   }
 
