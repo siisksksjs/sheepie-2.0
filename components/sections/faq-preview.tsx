@@ -25,8 +25,7 @@ export function FAQPreview() {
     <section className="py-24 bg-[#F8FAFC]">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="text-center mb-12">
-          <span className="text-primary/60 text-xs font-bold tracking-widest uppercase">{t('label')}</span>
-          <h2 className="text-4xl font-display font-medium text-primary mt-2">
+          <h2 className="text-4xl font-display font-medium text-primary text-balance">
             {t('title')}
           </h2>
         </div>
@@ -73,7 +72,7 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden"
           >
-            <div className="p-6 pt-0 text-muted-foreground font-light leading-relaxed">
+            <div className="p-6 pt-0 text-foreground/70 leading-relaxed text-pretty">
               {answer}
             </div>
           </motion.div>

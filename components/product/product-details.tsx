@@ -8,7 +8,6 @@ import {
   Check,
   Package2,
   ShieldCheck,
-  Sparkles,
   Truck,
   WalletCards,
 } from "lucide-react";
@@ -76,7 +75,7 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
           <div className="flex flex-wrap items-center gap-3">
             <Badge
               variant="secondary"
-              className="border-none bg-primary/7 px-3 py-1 text-xs font-semibold tracking-[0.24em] uppercase text-primary hover:bg-primary/10"
+              className="border-none bg-primary/[0.07] px-3 py-1 text-xs font-medium text-primary hover:bg-primary/10"
             >
               {content.eyebrow}
             </Badge>
@@ -85,8 +84,7 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
               <span>{isId ? "Marketplace checkout aman" : "Secure marketplace checkout"}</span>
             </div>
             {savings && (
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                <Sparkles className="h-3.5 w-3.5" />
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
                 <span>
                   {isId
                     ? `Hemat ${new Intl.NumberFormat("id-ID").format(savings)}`
@@ -105,23 +103,23 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
               {content.headline}
             </p>
 
-            <p className="max-w-2xl text-base leading-8 text-muted-foreground">
+            <p className="max-w-2xl text-base leading-8 text-foreground/70">
               {content.summary}
             </p>
           </div>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-2xl border border-border/60 bg-white p-4">
-              <Truck className="h-4 w-4 text-primary" />
-              <p className="mt-3 text-sm font-medium text-foreground">{content.trustBadges[0]}</p>
+          <div className="mt-6 flex flex-col gap-3 border-t border-border/50 pt-5 sm:flex-row sm:items-center sm:gap-8">
+            <div className="flex items-center gap-2.5 text-sm font-medium text-foreground">
+              <Truck className="h-4 w-4 flex-none text-primary" strokeWidth={1.5} />
+              {content.trustBadges[0]}
             </div>
-            <div className="rounded-2xl border border-border/60 bg-white p-4">
-              <ShieldCheck className="h-4 w-4 text-primary" />
-              <p className="mt-3 text-sm font-medium text-foreground">{content.trustBadges[1]}</p>
+            <div className="flex items-center gap-2.5 text-sm font-medium text-foreground">
+              <ShieldCheck className="h-4 w-4 flex-none text-primary" strokeWidth={1.5} />
+              {content.trustBadges[1]}
             </div>
-            <div className="rounded-2xl border border-border/60 bg-white p-4">
-              <Package2 className="h-4 w-4 text-primary" />
-              <p className="mt-3 text-sm font-medium text-foreground">{content.trustBadges[2]}</p>
+            <div className="flex items-center gap-2.5 text-sm font-medium text-foreground">
+              <Package2 className="h-4 w-4 flex-none text-primary" strokeWidth={1.5} />
+              {content.trustBadges[2]}
             </div>
           </div>
 
@@ -129,7 +127,7 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
             {content.fitTags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-border/60 bg-white px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-primary/80"
+                className="rounded-full border border-border/60 bg-white px-3.5 py-1.5 text-xs font-medium text-primary/80"
               >
                 {tag}
               </span>
@@ -140,34 +138,34 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
         <div className="grid gap-5 border-b border-border/60 p-6 md:grid-cols-[1fr_auto] md:items-end md:p-8">
           <div>
             <div className="flex flex-wrap items-end gap-3">
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/60">
+              <span className="text-xs font-medium text-primary/60">
                 {isId ? "Harga sekarang" : "Current price"}
               </span>
               {currentOriginalPrice && (
-                <span className="text-xl font-light text-muted-foreground/60 line-through decoration-muted-foreground/60 decoration-1">
+                <span className="text-xl font-light text-foreground/40 line-through decoration-foreground/40 decoration-1">
                   {currentOriginalPrice}
                 </span>
               )}
               <div className="font-display text-4xl font-medium text-primary">{currentPrice}</div>
               {savings && (
-                <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-green-700">
+                <span className="rounded-full bg-secondary/30 px-3 py-1 text-xs font-semibold text-primary">
                   {isId ? "Harga promo" : "Offer price"}
                 </span>
               )}
             </div>
-            <p className="mt-3 text-sm leading-7 text-muted-foreground">
+            <p className="mt-3 text-sm leading-7 text-foreground/70">
               {isId
                 ? "Checkout melalui marketplace favorit Anda. Cocok untuk pembelian langsung tanpa ribet."
                 : "Checkout through your preferred marketplace for a straightforward purchase flow."}
             </p>
           </div>
 
-          <div className="rounded-[1.5rem] border border-primary/10 bg-[#f8fbfd] p-4 md:min-w-[220px]">
+          <div className="rounded-2xl border border-primary/10 bg-[#f8fbfd] p-4 md:min-w-[220px]">
             <div className="flex items-center gap-2 text-sm font-semibold text-primary">
-              <WalletCards className="h-4 w-4" />
+              <WalletCards className="h-4 w-4" strokeWidth={1.5} />
               <span>{isId ? "Belanja via marketplace" : "Buy via marketplace"}</span>
             </div>
-            <p className="mt-2 text-sm leading-7 text-muted-foreground">
+            <p className="mt-2 text-sm leading-7 text-foreground/70">
               {isId
                 ? "Shopee & Tokopedia untuk pembayaran, promo channel, dan tracking pesanan."
                 : "Shopee and Tokopedia for payment, channel promos, and order tracking."}
@@ -178,7 +176,7 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
         <div className="space-y-5 p-6 md:p-8">
           {product.variants && (
             <div className="space-y-3">
-              <span className="text-sm font-bold uppercase tracking-[0.24em] text-primary/60">
+              <span className="text-sm font-medium text-primary/60">
                 {isId ? "Pilih opsi" : "Choose option"}
               </span>
               <div className="flex flex-wrap gap-3">
@@ -187,10 +185,10 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
                     key={variant.name}
                     onClick={() => setSelectedVariant(variant)}
                     className={cn(
-                      "rounded-full border px-4 py-2 text-sm font-medium transition-all",
+                      "rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-200",
                       selectedVariant?.name === variant.name
-                        ? "border-primary bg-primary text-white shadow-md"
-                        : "border-border bg-white text-muted-foreground hover:border-primary/50"
+                        ? "border-primary bg-primary text-white"
+                        : "border-border bg-white text-foreground/70 hover:border-primary/50"
                     )}
                   >
                     {variant.name}
@@ -207,8 +205,8 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
             <ul className="space-y-3">
               {content.keyBenefits.map((benefit) => (
                 <li key={benefit} className="group flex items-start gap-3 text-sm text-foreground/85 md:text-base">
-                  <div className="mt-1 rounded-full bg-green-50 p-1 text-green-600 transition-colors group-hover:bg-green-100">
-                    <Check className="h-3 w-3" />
+                  <div className="mt-1 rounded-full bg-secondary/30 p-1 text-primary transition-colors group-hover:bg-secondary/50">
+                    <Check className="h-3 w-3" strokeWidth={2} />
                   </div>
                   <span>{benefit}</span>
                 </li>
@@ -216,8 +214,8 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
             </ul>
           </div>
 
-          <div className="rounded-[1.5rem] border border-primary/10 bg-primary p-5 text-primary-foreground">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary-foreground/70">
+          <div className="rounded-2xl border border-primary/10 bg-primary p-5 text-primary-foreground">
+            <p className="text-sm font-medium text-primary-foreground/70">
               {content.bundleTitle}
             </p>
             <p className="mt-3 text-sm leading-7 text-primary-foreground/82">{content.bundleBody}</p>
@@ -247,8 +245,8 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
-        <div className="rounded-[1.75rem] border border-border/60 bg-white p-5 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary/60">
+        <div className="rounded-2xl border border-border/60 bg-white p-5 shadow-sm">
+          <p className="font-display text-lg font-medium text-primary">
             {isId ? "Quick fit guide" : "Quick fit guide"}
           </p>
           <div className="mt-4 space-y-3">
@@ -261,8 +259,8 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
           </div>
         </div>
 
-        <div className="rounded-[1.75rem] border border-border/60 bg-white p-5 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary/60">
+        <div className="rounded-2xl border border-border/60 bg-white p-5 shadow-sm">
+          <p className="font-display text-lg font-medium text-primary">
             {isId ? "Why buy here" : "Why buy here"}
           </p>
           <div className="mt-4 space-y-3 text-sm leading-7 text-foreground/85">

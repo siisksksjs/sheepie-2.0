@@ -68,7 +68,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
         <Button 
           variant="outline" 
           size="icon" 
-          className="rounded-full bg-white/80 backdrop-blur-sm border-white/50 shadow-sm hover:bg-white pointer-events-auto h-12 w-12"
+          className="rounded-full bg-white border-border/60 shadow-md hover:bg-white pointer-events-auto h-12 w-12"
           onClick={scrollPrev}
         >
           <ChevronLeft className="h-6 w-6 text-primary" />
@@ -79,7 +79,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
         <Button 
           variant="outline" 
           size="icon" 
-          className="rounded-full bg-white/80 backdrop-blur-sm border-white/50 shadow-sm hover:bg-white pointer-events-auto h-12 w-12"
+          className="rounded-full bg-white border-border/60 shadow-md hover:bg-white pointer-events-auto h-12 w-12"
           onClick={scrollNext}
         >
           <ChevronRight className="h-6 w-6 text-primary" />

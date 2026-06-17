@@ -93,7 +93,7 @@ export function Navbar() {
 
               <div className="mt-8">
                 <SheetClose asChild>
-                  <Button asChild className="w-full h-12 text-base shadow-lg shadow-primary/20">
+                  <Button asChild className="w-full h-12 text-base">
                     <Link href={getPath("/products")}>
                       {t('shopAll')}
                     </Link>

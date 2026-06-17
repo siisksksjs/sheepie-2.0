@@ -9,6 +9,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { LanguageModal } from "@/components/layout/language-modal";
 import { UmamiAnalytics } from "@/components/analytics/umami-analytics";
+import { MotionProvider } from "@/components/providers/motion-provider";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -59,11 +60,13 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <ReactLenis root>
-            <BackgroundClouds />
-            <LanguageModal />
-            {children}
-            <UmamiAnalytics />
-            <Analytics />
+            <MotionProvider>
+              <BackgroundClouds />
+              <LanguageModal />
+              {children}
+              <UmamiAnalytics />
+              <Analytics />
+            </MotionProvider>
           </ReactLenis>
         </NextIntlClientProvider>
       </body>

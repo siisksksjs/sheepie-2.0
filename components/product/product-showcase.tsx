@@ -1,119 +1,164 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import products from "@/data/products.json";
 import { useTranslations, useLocale } from "next-intl";
 
-// Specific image overrides for the Trinity Showcase
+// Editorial showcase imagery (kept from the original art direction)
 const showcaseImages: Record<string, string> = {
-  "lumicloud": "/images/edited/DSC01278.JPG",
-  "cervicloud": "/images/photoshoot/DSC01110.JPG",
-  "calmicloud": "/images/edited/DSC01313.JPG"
+  lumicloud: "/images/edited/DSC01278.JPG",
+  cervicloud: "/images/photoshoot/DSC01110.JPG",
+  calmicloud: "/images/edited/DSC01313.JPG",
 };
 
+// Premium ease-out curve (transitions.dev "smooth ease out" token)
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 export function ProductShowcase() {
-  const t = useTranslations('ProductShowcase');
+  const t = useTranslations("ProductShowcase");
+  const tProducts = useTranslations("Products");
   const locale = useLocale();
   const getPath = (path: string) => `/${locale}${path}`;
 
-  const targetRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-75%"]);
+  const [feature, ...rest] = products;
 
   return (
-    <section ref={targetRef} id="products" className="relative h-[300vh] bg-neutral-900">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex gap-12 px-12 md:px-24">
-          
-          {/* Intro Card */}
-          <div className="relative h-[70vh] w-[80vw] md:w-[40vw] flex-shrink-0 flex flex-col justify-center text-white z-10">
-            <h2 className="text-6xl md:text-8xl font-display font-medium leading-tight mb-8">
-              {t.rich('title', {
-                br: () => <br/>
-              })}
-            </h2>
-            <p className="text-xl md:text-2xl text-white/60 font-light max-w-md">
-              {t('subtitle')}
-            </p>
-            <div className="mt-12 flex gap-4">
-               <div className="h-px w-24 bg-white/20 my-auto" />
-               <span className="text-xs uppercase tracking-widest text-white/40">{t('scroll')}</span>
-            </div>
+    <section id="products" className="py-24 md:py-32 bg-white">
+      <div className="container mx-auto px-4">
+        {/* Section header — the Playfair display carries the hierarchy, no kicker */}
+        <div className="max-w-2xl mb-14 md:mb-20">
+          <h2 className="text-5xl md:text-7xl font-display font-medium text-primary leading-[0.95] tracking-tight text-balance">
+            {t.rich("title", { br: () => <br /> })}
+          </h2>
+          <p className="mt-6 text-lg md:text-xl text-foreground/70 leading-relaxed max-w-md text-pretty">
+            {t("subtitle")}
+          </p>
+        </div>
+
+        {/* Asymmetric feature + duo grid (scannable, not a uniform card row) */}
+        <div className="grid gap-5 md:gap-6 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <ProductCard
+              product={feature}
+              size="feature"
+              name={tProducts(`${feature.slug}.name` as any)}
+              tagline={tProducts(`${feature.slug}.tagline` as any)}
+              href={getPath(`/products/${feature.slug}`)}
+            />
           </div>
 
-          {/* Product Cards */}
-          {products.map((product, i) => (
-            <ProductSlide key={product.slug} product={product} index={i} />
-          ))}
+          <div className="lg:col-span-5 grid gap-5 md:gap-6">
+            {rest.map((product) => (
+              <ProductCard
+                key={product.slug}
+                product={product}
+                size="compact"
+                name={tProducts(`${product.slug}.name` as any)}
+                tagline={tProducts(`${product.slug}.tagline` as any)}
+                href={getPath(`/products/${product.slug}`)}
+              />
+            ))}
+          </div>
+        </div>
 
-          {/* CTA Card */}
-           <div className="relative h-[70vh] w-[80vw] md:w-[40vw] flex-shrink-0 flex flex-col justify-center items-center text-center text-white bg-white/5 rounded-[3rem] backdrop-blur-sm border border-white/10">
-              <h3 className="text-4xl font-display mb-6">{t('ctaTitle')}</h3>
-              <Button size="lg" className="rounded-full px-12 h-16 text-lg bg-white text-black hover:bg-white/90" asChild>
-                <Link href={getPath("/products")}>{t('ctaButton')}</Link>
-              </Button>
-           </div>
-
-        </motion.div>
+        {/* Collection CTA */}
+        <div className="mt-12 flex justify-center">
+          <Button
+            size="lg"
+            variant="outline"
+            className="rounded-full h-14 px-10 text-base border-primary/20 text-primary hover:bg-primary hover:text-white transition-colors duration-300"
+            asChild
+          >
+            <Link href={getPath("/products")}>{t("ctaButton")}</Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
 }
 
-function ProductSlide({ product, index }: { product: any, index: number }) {
-  const t = useTranslations('Products');
-  const tShowcase = useTranslations('ProductShowcase');
-  const locale = useLocale();
-  const getPath = (path: string) => `/${locale}${path}`;
-
-  // Use the override image if it exists, otherwise fall back to the first product image
-  const displayImage = showcaseImages[product.slug] || product.images[0];
-  const productName = t(`${product.slug}.name` as any);
+function ProductCard({
+  product,
+  size,
+  name,
+  tagline,
+  href,
+}: {
+  product: (typeof products)[number];
+  size: "feature" | "compact";
+  name: string;
+  tagline: string;
+  href: string;
+}) {
+  const image = showcaseImages[product.slug] || product.images[0];
+  const isFeature = size === "feature";
+  const hasDiscount = product.originalPrice !== product.price;
 
   return (
-    <div className="group relative h-[70vh] w-[85vw] md:w-[50vw] flex-shrink-0 bg-white rounded-[3rem] overflow-hidden transition-transform duration-500 hover:scale-[1.02]">
-      <Link href={getPath(`/products/${product.slug}`)} className="block h-full w-full">
-        {/* Image Half */}
-        <div className="absolute inset-0 h-full w-full">
-           <Image
-            src={displayImage}
-            alt={productName}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
-            sizes="(max-width: 768px) 80vw, 50vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
-        </div>
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.6, ease: EASE }}
+      className="h-full"
+    >
+      <Link
+        href={href}
+        className={`group relative block w-full overflow-hidden rounded-[2rem] md:rounded-[2.5rem] bg-neutral-100 ${
+          isFeature ? "h-[60vh] lg:h-[78vh]" : "h-[37vh] lg:h-[37vh]"
+        }`}
+      >
+        <Image
+          src={image}
+          alt={`${name} — ${tagline}`}
+          fill
+          className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-[1.04]"
+          sizes={isFeature ? "(max-width: 1024px) 100vw, 58vw" : "(max-width: 1024px) 100vw, 42vw"}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
 
-        {/* Content Overlay */}
-        <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 text-white">
-          <div className="flex items-end justify-between">
+        <div className="absolute inset-x-0 bottom-0 p-7 md:p-9 text-white">
+          <div className="flex items-end justify-between gap-4">
             <div className="space-y-2">
-              <span className="inline-block px-3 py-1 rounded-full border border-white/30 bg-black/20 backdrop-blur-md text-xs font-bold uppercase tracking-widest mb-2">
-                0{index + 1} — {tShowcase(`category.${product.slug}` as any)}
-              </span>
-              <h3 className="text-4xl md:text-6xl font-display font-medium leading-none">
-                {productName}
+              <h3
+                className={`font-display font-medium leading-none ${
+                  isFeature ? "text-4xl md:text-6xl" : "text-2xl md:text-3xl"
+                }`}
+              >
+                {name}
               </h3>
-              <p className="text-lg md:text-xl text-white/80 font-light max-w-md pt-2 line-clamp-2">
-                {t(`${product.slug}.tagline` as any)}
+              <p
+                className={`text-white/80 max-w-md text-pretty ${
+                  isFeature ? "text-base md:text-lg pt-1" : "text-sm"
+                }`}
+              >
+                {tagline}
               </p>
+              <div className="flex items-baseline gap-2.5 pt-2">
+                <span className={`font-display ${isFeature ? "text-xl md:text-2xl" : "text-lg"}`}>
+                  {product.price}
+                </span>
+                {hasDiscount && (
+                  <span className="text-sm text-white/50 line-through">{product.originalPrice}</span>
+                )}
+              </div>
             </div>
-            
-            <div className="hidden md:flex h-20 w-20 rounded-full border border-white/30 bg-white/10 backdrop-blur-md items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300">
-              <ArrowRight className="w-8 h-8 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-            </div>
+
+            <span
+              className={`hidden md:flex flex-shrink-0 items-center justify-center rounded-full border border-white/40 text-white transition-colors duration-300 group-hover:bg-white group-hover:text-primary ${
+                isFeature ? "h-16 w-16" : "h-12 w-12"
+              }`}
+              aria-hidden="true"
+            >
+              <ArrowUpRight className={isFeature ? "h-7 w-7" : "h-5 w-5"} />
+            </span>
           </div>
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
 }

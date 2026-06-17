@@ -106,4 +106,21 @@
   .text-balance {
     text-wrap: balance;
   }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Accessibility: honor reduced-motion for all CSS-driven motion
+   (marquees, parallax scroll behavior). Framer Motion is handled
+   separately via <MotionConfig reducedMotion="user">. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

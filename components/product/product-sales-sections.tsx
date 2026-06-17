@@ -67,7 +67,7 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
 
   return (
     <div className="space-y-10 lg:space-y-14">
-      <section className="overflow-hidden rounded-full border border-border/60 bg-primary text-primary-foreground shadow-lg shadow-primary/10">
+      <section className="overflow-hidden rounded-full border border-border/60 bg-primary text-primary-foreground shadow-sm">
         <div className="flex w-max min-w-full animate-marquee gap-6 py-4 pr-6">
           {repeatedMarqueeItems.map((item, index) => (
             <div key={`${item}-${index}`} className="flex items-center gap-6 whitespace-nowrap pl-6">
@@ -79,11 +79,11 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="rounded-[2rem] border border-border/60 bg-[linear-gradient(180deg,#ffffff_0%,#f4f8fb_100%)] p-8 shadow-sm lg:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary/70">{content.problemTitle}</p>
+        <div className="rounded-3xl border border-border/60 bg-[linear-gradient(180deg,#ffffff_0%,#f4f8fb_100%)] p-8 shadow-sm lg:p-10">
+          <p className="text-sm font-medium text-primary/70">{content.problemTitle}</p>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-muted-foreground">{content.problemIntro}</p>
           <div className="mt-8 grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
-            <div className="relative min-h-[340px] overflow-hidden rounded-[1.75rem] bg-[#eef4fb]">
+            <div className="relative min-h-[340px] overflow-hidden rounded-2xl bg-[#eef4fb]">
               <Image
                 src={lifestyleImage}
                 alt={`${product.name} lifestyle`}
@@ -93,7 +93,7 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/70">
+                <p className="text-xs font-medium text-white/70">
                   {isId ? "Real sleep problem" : "Real sleep problem"}
                 </p>
                 <p className="mt-2 max-w-sm text-base leading-7">
@@ -105,7 +105,7 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
             </div>
 
             <div className="grid gap-4">
-              <div className="relative min-h-[162px] overflow-hidden rounded-[1.5rem] border border-border/60 bg-white">
+              <div className="relative min-h-[162px] overflow-hidden rounded-2xl border border-border/60 bg-white">
                 <Image
                   src={detailImageOne}
                   alt={`${product.name} detail`}
@@ -115,7 +115,7 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
                 />
               </div>
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="relative min-h-[162px] overflow-hidden rounded-[1.5rem] border border-border/60 bg-white">
+                <div className="relative min-h-[162px] overflow-hidden rounded-2xl border border-border/60 bg-white">
                   <Image
                     src={detailImageTwo}
                     alt={`${product.name} angle view`}
@@ -124,7 +124,7 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
                     sizes="(max-width: 1024px) 50vw, 12vw"
                   />
                 </div>
-                <div className="relative min-h-[162px] overflow-hidden rounded-[1.5rem] border border-border/60 bg-white">
+                <div className="relative min-h-[162px] overflow-hidden rounded-2xl border border-border/60 bg-white">
                   <Image
                     src={detailImageThree}
                     alt={`${product.name} close-up`}
@@ -138,7 +138,7 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {content.problemPoints.map((point) => (
-              <div key={point} className="rounded-[1.5rem] border border-border/60 bg-white/90 p-5">
+              <div key={point} className="rounded-2xl border border-border/60 bg-white/90 p-5">
                 <CircleAlert className="h-5 w-5 text-primary" />
                 <p className="mt-4 text-sm leading-7 text-foreground/85">{point}</p>
               </div>
@@ -146,12 +146,12 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
           </div>
         </div>
 
-        <div className="rounded-[2rem] border border-primary/10 bg-primary p-8 text-primary-foreground shadow-lg shadow-primary/10 lg:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary-foreground/70">{content.solutionTitle}</p>
+        <div className="rounded-3xl border border-primary/10 bg-primary p-8 text-primary-foreground shadow-sm lg:p-10">
+          <p className="text-sm font-medium text-primary-foreground/70">{content.solutionTitle}</p>
           <p className="mt-4 text-base leading-8 text-primary-foreground/80">{content.solutionIntro}</p>
           <div className="mt-8 space-y-4">
             {content.features.map((feature) => (
-              <div key={feature.title} className="rounded-[1.5rem] border border-white/10 bg-white/8 p-5 backdrop-blur-sm">
+              <div key={feature.title} className="rounded-2xl border border-white/10 bg-white/10 p-5">
                 <div className="flex items-start gap-3">
                   <div className="rounded-full bg-white/12 p-2">
                     <Check className="h-4 w-4" />
@@ -168,8 +168,8 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="rounded-[2rem] border border-border/60 bg-white p-5 shadow-sm lg:p-6">
-          <div className="relative min-h-[360px] overflow-hidden rounded-[1.6rem] bg-[#eef4fb]">
+        <div className="rounded-3xl border border-border/60 bg-white p-5 shadow-sm lg:p-6">
+          <div className="relative min-h-[360px] overflow-hidden rounded-2xl bg-[#eef4fb]">
             <Image
               src={detailImageOne}
               alt={`${product.name} feature visual`}
@@ -181,15 +181,15 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
         </div>
 
         <div className="grid gap-6">
-          <div className="rounded-[2rem] border border-border/60 bg-white p-8 shadow-sm lg:p-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary/70">
+          <div className="rounded-3xl border border-border/60 bg-white p-8 shadow-sm lg:p-10">
+            <p className="text-sm font-medium text-primary/70">
               {isId ? "At a glance" : "At a glance"}
             </p>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {content.features.map((feature, index) => {
                 const image = [detailImageOne, detailImageTwo, detailImageThree][index] || detailImageOne;
                 return (
-                  <div key={feature.title} className="overflow-hidden rounded-[1.5rem] border border-border/60 bg-[#fbfcfe]">
+                  <div key={feature.title} className="overflow-hidden rounded-2xl border border-border/60 bg-[#fbfcfe]">
                     <div className="relative h-44 overflow-hidden">
                       <Image
                         src={image}
@@ -211,7 +211,7 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
 
           <div className="grid gap-4 md:grid-cols-3">
             {content.keyBenefits.slice(0, 3).map((benefit) => (
-              <div key={benefit} className="rounded-[1.5rem] border border-border/60 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbfd_100%)] p-5 shadow-sm">
+              <div key={benefit} className="rounded-2xl border border-border/60 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbfd_100%)] p-5 shadow-sm">
                 <Check className="h-5 w-5 text-primary" />
                 <p className="mt-4 text-sm leading-7 text-foreground/85">{benefit}</p>
               </div>
@@ -221,7 +221,7 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
       </section>
 
       <section className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-[2rem] border border-border/60 bg-white p-8 shadow-sm lg:p-10">
+        <div className="rounded-3xl border border-border/60 bg-white p-8 shadow-sm lg:p-10">
           <div className="flex items-center gap-3">
             <PackageCheck className="h-5 w-5 text-primary" />
             <h2 className="text-2xl text-primary">{content.goodFitTitle}</h2>
@@ -236,7 +236,7 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
           </ul>
         </div>
 
-        <div className="rounded-[2rem] border border-border/60 bg-[#fbfcfe] p-8 shadow-sm lg:p-10">
+        <div className="rounded-3xl border border-border/60 bg-[#fbfcfe] p-8 shadow-sm lg:p-10">
           <div className="flex items-center gap-3">
             <CircleAlert className="h-5 w-5 text-primary" />
             <h2 className="text-2xl text-primary">{content.notFitTitle}</h2>
@@ -252,14 +252,14 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-border/60 bg-white p-8 shadow-sm lg:p-10">
+      <section className="rounded-3xl border border-border/60 bg-white p-8 shadow-sm lg:p-10">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary/70">{content.compareTitle}</p>
+          <p className="text-sm font-medium text-primary/70">{content.compareTitle}</p>
           <p className="mt-4 text-lg leading-8 text-muted-foreground">{content.compareLead}</p>
         </div>
 
         <div className="mt-8 overflow-x-auto">
-          <div className="min-w-[720px] overflow-hidden rounded-[1.5rem] border border-border/60">
+          <div className="min-w-[720px] overflow-hidden rounded-2xl border border-border/60">
             <div className="grid grid-cols-[1.1fr_1fr_1fr] bg-primary px-5 py-4 text-sm font-semibold text-primary-foreground">
               <div>{isId ? "Aspek" : "Category"}</div>
               <div>Sheepie</div>
@@ -282,8 +282,8 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="rounded-[2rem] border border-border/60 bg-[linear-gradient(180deg,#213368_0%,#2d437f_100%)] p-8 text-primary-foreground shadow-lg shadow-primary/10 lg:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary-foreground/70">{content.bundleTitle}</p>
+        <div className="rounded-3xl border border-border/60 bg-[linear-gradient(180deg,#213368_0%,#2d437f_100%)] p-8 text-primary-foreground shadow-sm lg:p-10">
+          <p className="text-sm font-medium text-primary-foreground/70">{content.bundleTitle}</p>
           <p className="mt-4 max-w-xl text-base leading-8 text-primary-foreground/80">{content.bundleBody}</p>
           <div className="mt-8">
             <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
@@ -292,9 +292,9 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
           </div>
         </div>
 
-        <div className="rounded-[2rem] border border-border/60 bg-white p-8 shadow-sm lg:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary/70">{content.faqTitle}</p>
-          <div className="relative mt-6 h-44 overflow-hidden rounded-[1.5rem] border border-border/60 bg-[#eef4fb]">
+        <div className="rounded-3xl border border-border/60 bg-white p-8 shadow-sm lg:p-10">
+          <p className="text-sm font-medium text-primary/70">{content.faqTitle}</p>
+          <div className="relative mt-6 h-44 overflow-hidden rounded-2xl border border-border/60 bg-[#eef4fb]">
             <Image
               src={lifestyleImage}
               alt={`${product.name} FAQ visual`}
@@ -319,10 +319,10 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
         </div>
       </section>
 
-      <section className="rounded-[2.2rem] border border-primary/10 bg-[linear-gradient(135deg,#eef4fb_0%,#ffffff_50%,#f4f8fb_100%)] p-8 shadow-sm lg:p-10">
+      <section className="rounded-3xl border border-primary/10 bg-[linear-gradient(135deg,#eef4fb_0%,#ffffff_50%,#f4f8fb_100%)] p-8 shadow-sm lg:p-10">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary/70">
+            <p className="text-sm font-medium text-primary/70">
               {isId ? "Langkah berikutnya" : "Next step"}
             </p>
             <h2 className="mt-4 max-w-3xl text-3xl leading-tight text-primary lg:text-4xl">{content.ctaTitle}</h2>
@@ -330,7 +330,7 @@ export function ProductSalesSections({ product, locale }: ProductSalesSectionsPr
             <p className="mt-4 text-sm leading-7 text-foreground/75">{content.ctaNote}</p>
           </div>
 
-          <div className="rounded-[1.75rem] border border-white/70 bg-white/90 p-6 shadow-sm backdrop-blur-sm">
+          <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
             <BuyButtons
               shopeeUrl={product.variants?.[0]?.shopeeUrl ?? product.shopeeUrl}
               tokopediaUrl={product.variants?.[0]?.tokopediaUrl ?? product.tokopediaUrl}

@@ -31,26 +31,19 @@ export function ProductsClient() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
         
         <div className="container mx-auto px-4 text-center relative z-10 pt-20">
-          <motion.span 
-            initial={{ opacity: 0, y: 20 }}
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-xs font-bold tracking-[0.4em] text-primary/40 uppercase block mb-6"
-          >
-            {t('label')}
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-6xl md:text-8xl font-display font-medium text-primary mb-6 tracking-tight"
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="text-6xl md:text-8xl font-display font-medium text-primary mb-6 tracking-tight text-balance"
           >
             {t('title')}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-muted-foreground font-light text-lg max-w-md mx-auto"
+            transition={{ delay: 0.2 }}
+            className="text-foreground/70 text-lg max-w-md mx-auto text-pretty"
           >
             {t('subtitle')}
           </motion.p>
@@ -83,11 +76,10 @@ function ParallaxProductRow({ product, index }: { product: any, index: number })
 
   const isEven = index % 2 === 0;
 
-  // Gentle Parallax transforms
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]); 
+  // Gentle Parallax transforms (content stays fully legible — no fade-to-invisible)
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const textY = useTransform(scrollYProgress, [0, 1], [30, -30]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0]);
-  
+
   return (
     <section ref={containerRef} className="min-h-[80vh] flex items-center py-20 relative">
       <div className="container mx-auto px-4">
@@ -97,26 +89,19 @@ function ParallaxProductRow({ product, index }: { product: any, index: number })
           <div className={`lg:col-span-7 relative ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
              
              {/* Main Image Container */}
-             <motion.div 
-               style={{ y, opacity }} 
-               className="relative aspect-[3/4] md:aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl"
+             <motion.div
+               style={{ y }}
+               className="relative aspect-[3/4] md:aspect-[4/3] rounded-3xl overflow-hidden shadow-[0_30px_80px_-50px_rgba(33,51,104,0.45)]"
              >
                 <Image
                   src={productLifestyleMap[product.slug]}
-                  alt={`${tProd(`${product.slug}.name` as any)} Lifestyle`}
+                  alt={`${tProd(`${product.slug}.name` as any)} in a real sleep setting`}
                   fill
-                  className="object-cover object-center" 
+                  className="object-cover object-center"
                   sizes="(max-width: 768px) 100vw, 60vw"
                 />
-                
-                {/* Subtle overlay for text contrast if needed, but keeping it light for the white theme */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
              </motion.div>
-             
-             {/* Background Number - Subtler now */}
-             <div className={`absolute -top-16 ${isEven ? '-left-16' : '-right-16'} text-[10rem] md:text-[15rem] font-display font-bold text-primary/5 leading-none select-none -z-10`}>
-               0{index + 1}
-             </div>
           </div>
 
           {/* Content Column (5 cols) */}
@@ -138,20 +123,20 @@ function ParallaxProductRow({ product, index }: { product: any, index: number })
                className={`h-px w-24 bg-primary/20 ${isEven ? '' : 'ml-auto'}`}
              />
 
-             <p className="text-xl text-muted-foreground font-light leading-relaxed">
+             <p className="text-xl text-foreground/70 leading-relaxed text-pretty">
                {tProd(`${product.slug}.description` as any)}
              </p>
 
              <div className={`flex items-center gap-6 pt-2 ${isEven ? '' : 'justify-end'}`}>
                <div className="flex items-baseline gap-3">
                  {product.originalPrice && (
-                   <span className="text-lg text-muted-foreground/50 line-through decoration-muted-foreground/50 font-light">
+                   <span className="text-lg text-foreground/40 line-through decoration-foreground/40">
                      {product.originalPrice}
                    </span>
                  )}
                  <span className="text-3xl font-display text-primary">{product.price}</span>
                </div>
-               <Button className="rounded-full h-14 px-8 text-base shadow-lg shadow-primary/20 hover:scale-105 transition-all duration-300" asChild>
+               <Button size="lg" className="px-8" asChild>
                  <Link href={getPath(`/products/${product.slug}`)}>
                    {t('viewDetails')} <ArrowRight className="ml-2 w-4 h-4" />
                  </Link>

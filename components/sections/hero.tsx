@@ -44,12 +44,12 @@ export function Hero() {
           >
             <div className="flex items-center gap-4">
                <div className="h-px w-12 bg-primary/40" />
-               <span className="text-primary/80 text-sm font-bold tracking-[0.2em] uppercase font-body">
+               <span className="text-primary/70 text-sm font-medium font-body">
                  {t('subtitle')}
                </span>
             </div>
-            
-            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-medium text-primary leading-[0.9] tracking-tighter">
+
+            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-medium text-primary leading-[0.9] tracking-tight text-balance">
               {t.rich('title', {
                 br: () => <br/>,
                 span1: (chunks) => <span className="italic font-light text-primary/70">{chunks}</span>
@@ -61,7 +61,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-md"
+            className="text-lg md:text-xl text-foreground/75 font-normal leading-relaxed max-w-md text-pretty"
           >
             {t.rich('description', {
                 br: () => <br/>,
@@ -75,10 +75,10 @@ export function Hero() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="flex flex-wrap gap-4 pt-2"
           >
-            <Button size="lg" className="rounded-full h-14 px-8 text-base bg-primary text-white hover:bg-primary/90 shadow-xl hover:scale-105 transition-all duration-300" asChild>
+            <Button size="lg" asChild>
               <Link href="#products">{t('ctaPrimary')}</Link>
             </Button>
-            <Button size="lg" variant="ghost" className="rounded-full h-14 px-8 text-base hover:bg-primary/5 text-primary" asChild>
+            <Button size="lg" variant="ghost" asChild>
               <Link href={getPath("/about")}>{t('ctaSecondary')}</Link>
             </Button>
           </motion.div>
@@ -89,8 +89,8 @@ export function Hero() {
            <motion.div style={{ y, scale }} className="relative w-full h-full">
              <div className="absolute inset-0 rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl">
                <Image 
-                src="/images/edited/DSC01334.JPG" 
-                alt="Woman sleeping peacefully" 
+                src="/images/edited/DSC01334.JPG"
+                alt="A woman waking rested after a night with Sheepie sleep essentials"
                 fill
                 className="object-cover"
                 priority
@@ -100,20 +100,6 @@ export function Hero() {
                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent mix-blend-multiply" />
              </div>
              
-             {/* Floating Elements (Glassmorphism) */}
-             <motion.div 
-               animate={{ y: [0, -20, 0] }}
-               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-               className="absolute -bottom-10 -left-10 lg:left-[-20%] bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-xl max-w-xs border border-white/50 hidden md:block"
-             >
-                <div className="flex items-center gap-4 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-primary/60">{t('nowTrending')}</span>
-                </div>
-                <p className="font-display text-xl text-primary leading-tight">
-                  {t('testimonial')}
-                </p>
-             </motion.div>
            </motion.div>
         </div>
       </div>

@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { Moon, VolumeX, Activity } from "lucide-react";
+import { AlignmentIcon, DarknessIcon, SilenceIcon } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
@@ -11,23 +11,23 @@ import { useTranslations, useLocale } from "next-intl";
 const scienceSteps = [
   {
     id: "alignment",
-    icon: Activity,
+    icon: AlignmentIcon,
     image: "/images/edited/DSC01139.JPG",
     accent: "text-white",
     productLink: "/products/cervicloud"
   },
   {
     id: "darkness",
-    icon: Moon,
-    image: "/images/edited/DSC01058.JPG", 
-    accent: "text-blue-200",
+    icon: DarknessIcon,
+    image: "/images/edited/DSC01058.JPG",
+    accent: "text-secondary",
     productLink: "/products/lumicloud"
   },
   {
     id: "silence",
-    icon: VolumeX,
-    image: "/images/edited/DSC01316.JPG", 
-    accent: "text-indigo-200",
+    icon: SilenceIcon,
+    image: "/images/edited/DSC01316.JPG",
+    accent: "text-secondary",
     productLink: "/products/calmicloud"
   }
 ];
@@ -95,7 +95,7 @@ export function ScienceScroll() {
                className="space-y-6 max-w-lg"
              >
                 <div className={`flex items-center gap-3 ${step.accent}`}>
-                  <div className="p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/10">
+                  <div className="p-3 rounded-full bg-white/5 border border-white/20">
                     <step.icon className="w-6 h-6" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-[0.2em]">{t('method', {index: index + 1})}</span>

@@ -30,18 +30,18 @@ export function BuyButtons({ shopeeUrl, tokopediaUrl, productSlug, className }: 
 
   return (
     <div className={`flex flex-col gap-3 ${className}`}>
-      <Button 
-        size="lg" 
-        className="w-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-[1.02]"
+      <Button
+        size="lg"
+        className="w-full"
         onClick={() => handleBuy('shopee', shopeeUrl)}
       >
         <ShoppingBag className="mr-2 h-4 w-4" />
         {isId ? "Belanja di Shopee" : "Buy on Shopee"}
       </Button>
-      <Button 
-        size="lg" 
-        variant="outline" 
-        className="w-full border-primary/20 text-primary hover:bg-primary/5 transition-all duration-300 hover:scale-[1.02]"
+      <Button
+        size="lg"
+        variant="outline"
+        className="w-full"
         onClick={() => handleBuy('tokopedia', tokopediaUrl)}
       >
         <ShoppingBag className="mr-2 h-4 w-4" />

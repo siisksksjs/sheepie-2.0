@@ -17,22 +17,20 @@ export function TrustBar() {
   return (
     <section className="py-20 border-b border-border/40 bg-white relative z-20">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8 md:gap-12 md:divide-x divide-border/50">
           {benefits.map((item, idx) => (
-            <motion.div 
-              key={idx} 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.6 }}
-              className="flex flex-col items-center text-center space-y-4 group"
+              transition={{ delay: idx * 0.08, duration: 0.5, ease: "easeOut" }}
+              className="flex flex-col items-center text-center gap-4 md:px-6"
             >
-              <div className="p-4 rounded-2xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-500">
-                <item.icon className="w-8 h-8" strokeWidth={1.5} />
-              </div>
-              <div className="space-y-2">
+              <item.icon className="w-7 h-7 text-primary" strokeWidth={1.25} />
+              <div className="space-y-1.5">
                 <h3 className="font-display font-medium text-lg text-foreground">{t(`${item.id}.title` as any)}</h3>
-                <p className="text-sm text-muted-foreground font-light leading-relaxed max-w-[15ch] mx-auto">{t(`${item.id}.desc` as any)}</p>
+                <p className="text-sm text-foreground/65 leading-relaxed max-w-[18ch] mx-auto text-pretty">{t(`${item.id}.desc` as any)}</p>
               </div>
             </motion.div>
           ))}
