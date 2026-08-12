@@ -54,7 +54,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                 src={src}
                 alt={`${productName} - View ${index + 1}`}
                 fill
-                className="object-contain p-8 md:p-12"
+                className={index === 0 ? "object-contain" : "object-contain p-8 md:p-12"}
                 priority={index === 0}
                 sizes="(max-width: 1024px) 100vw, 60vw"
               />

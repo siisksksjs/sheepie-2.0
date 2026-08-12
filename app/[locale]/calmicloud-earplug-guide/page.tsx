@@ -304,7 +304,7 @@ export default async function CalmiCloudEarplugGuidePage({
               rel="noopener noreferrer"
               className="underline underline-offset-4"
             >
-              @sheepie.sleep
+              @sheepiesleep.id
             </a>{" "}
             {isId ? "di Instagram dan TikTok." : "on Instagram and TikTok."}
           </p>

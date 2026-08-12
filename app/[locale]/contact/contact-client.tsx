@@ -66,7 +66,7 @@ export function ContactClient() {
                     <span className="block font-bold text-foreground mb-1">{t('socialLabel')}</span>
                     <p className="text-muted-foreground mb-2">{t('socialNote')}</p>
                     <div className="flex gap-4">
-                      <a href="https://www.instagram.com/sheepie.sleep" target="_blank" className="text-sm font-medium text-primary underline underline-offset-4">Instagram</a>
+                      <a href="https://www.instagram.com/sheepiesleep.id" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-primary underline underline-offset-4">Instagram</a>
                       <a href="https://www.tiktok.com/@sheepiesleep" target="_blank" className="text-sm font-medium text-primary underline underline-offset-4">TikTok</a>
                     </div>
                   </div>

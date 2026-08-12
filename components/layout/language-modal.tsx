@@ -18,14 +18,17 @@ export function LanguageModal() {
   const pathname = usePathname();
   const t = useTranslations('LanguageModal');
   const currentLocale = useLocale();
+  const isEventPage = pathname.endsWith('/sheepie-x-yoga-spin');
 
   useEffect(() => {
+    if (isEventPage) return;
     // Check if user has already made a choice
     const hasChosen = localStorage.getItem('language-chosen');
     if (!hasChosen) {
-      setOpen(true);
+      const frame = window.requestAnimationFrame(() => setOpen(true));
+      return () => window.cancelAnimationFrame(frame);
     }
-  }, []);
+  }, [isEventPage]);
 
   const selectLanguage = (newLocale: string) => {
     // Save preference
@@ -39,6 +42,8 @@ export function LanguageModal() {
     
     setOpen(false);
   };
+
+  if (isEventPage) return null;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
