@@ -221,7 +221,7 @@
   aspect-ratio: 1;
   border: 15px solid #fffdf8;
   border-radius: 50%;
-  background: conic-gradient(from -45deg, #213368 0deg 90deg, #e7ae78 90deg 180deg, #8fafd0 180deg 270deg, #fffaf2 270deg 360deg);
+  background: conic-gradient(from -60deg, #213368 0deg 120deg, #e7ae78 120deg 240deg, #fffaf2 240deg 360deg);
   box-shadow: 0 35px 80px rgba(33, 51, 104, .24), inset 0 0 0 4px rgba(33, 51, 104, .12);
   transition: transform 5s cubic-bezier(.12, .72, .06, 1);
   will-change: transform;
@@ -257,10 +257,9 @@
 }
 .prizeLabel span { font-family: var(--font-display), Georgia, serif; font-size: clamp(1rem, 1.4vw, 1.35rem); font-weight: 700; }
 .prizeLabel small { margin-top: 2px; text-transform: uppercase; letter-spacing: .11em; font-size: .55rem; font-weight: 800; }
-.label0 { color: white; transform: translate(-50%, -50%) translateY(-190px); }
-.label1 { transform: translate(-50%, -50%) translateX(190px) rotate(90deg); }
-.label2 { color: white; transform: translate(-50%, -50%) translateY(190px) rotate(180deg); }
-.label3 { transform: translate(-50%, -50%) translateX(-190px) rotate(-90deg); }
+.label0 { color: white; transform: translate(-50%, -50%) translateY(-170px); }
+.label1 { transform: translate(-50%, -50%) rotate(120deg) translateY(-170px); }
+.label2 { transform: translate(-50%, -50%) rotate(240deg) translateY(-170px); }
 
 .pointer {
   position: absolute;
@@ -374,10 +373,9 @@
   .qrCardHidden { transform: translateY(8px) scale(.96); }
   .wheelStage { min-height: 570px; }
   .wheel { width: min(75vw, 520px); }
-  .label0 { transform: translate(-50%, -50%) translateY(-31vw); }
-  .label1 { transform: translate(-50%, -50%) translateX(31vw) rotate(90deg); }
-  .label2 { transform: translate(-50%, -50%) translateY(31vw) rotate(180deg); }
-  .label3 { transform: translate(-50%, -50%) translateX(-31vw) rotate(-90deg); }
+  .label0 { transform: translate(-50%, -50%) translateY(max(-150px, -22vw)); }
+  .label1 { transform: translate(-50%, -50%) rotate(120deg) translateY(max(-150px, -22vw)); }
+  .label2 { transform: translate(-50%, -50%) rotate(240deg) translateY(max(-150px, -22vw)); }
   .pointer { top: 17px; }
   .footer { position: relative; bottom: auto; margin: 10px auto 23px; }
 }
@@ -397,10 +395,9 @@
   .prizeLabel { width: 112px; }
   .prizeLabel span { font-size: .85rem; }
   .prizeLabel small { font-size: .42rem; }
-  .label0 { transform: translate(-50%, -50%) translateY(-35vw); }
-  .label1 { transform: translate(-50%, -50%) translateX(35vw) rotate(90deg); }
-  .label2 { transform: translate(-50%, -50%) translateY(35vw) rotate(180deg); }
-  .label3 { transform: translate(-50%, -50%) translateX(-35vw) rotate(-90deg); }
+  .label0 { transform: translate(-50%, -50%) translateY(-22vw); }
+  .label1 { transform: translate(-50%, -50%) rotate(120deg) translateY(-22vw); }
+  .label2 { transform: translate(-50%, -50%) rotate(240deg) translateY(-22vw); }
   .pointer { top: 2px; width: 46px; height: 60px; }
   .pointer span { left: 14px; width: 18px; height: 18px; }
   .resultCard { padding: 42px 24px 28px; border-radius: 32px; border-width: 5px; }

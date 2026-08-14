@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Gift, RotateCcw, Sparkles } from "lucide-react";
 import styles from "./spin-wheel.module.css";
 
-type PrizeId = "cervicloud" | "lumicloud" | "snack" | "try-again";
+type PrizeId = "cervicloud" | "lumicloud" | "try-again";
 type PrizeStock = Record<PrizeId, number>;
 
 type Prize = {
@@ -17,11 +17,10 @@ type Prize = {
   claimable: boolean;
 };
 
-const STORAGE_KEY = "sheepie-yoga-prize-pool-v1";
+const STORAGE_KEY = "sheepie-yoga-prize-pool-v2";
 const INITIAL_STOCK: PrizeStock = {
-  cervicloud: 4,
-  lumicloud: 8,
-  snack: 13,
+  cervicloud: 8,
+  lumicloud: 17,
   "try-again": 25,
 };
 
@@ -40,14 +39,6 @@ const PRIZES: Prize[] = [
     wheelDetail: "Rp5k Off",
     resultTitle: "Rp5k Discount",
     resultDetail: "for LumiCloud Eye Mask",
-    claimable: true,
-  },
-  {
-    id: "snack",
-    wheelLabel: "Free",
-    wheelDetail: "Snack",
-    resultTitle: "Free Snack",
-    resultDetail: "A sweet treat after yoga",
     claimable: true,
   },
   {
@@ -137,8 +128,8 @@ export function SpinWheel() {
 
     const selectedIndex = PRIZES.findIndex((prize) => prize.id === selected.id);
     const currentNormalized = ((rotation % 360) + 360) % 360;
-    const targetNormalized = (360 - selectedIndex * 90) % 360;
-    const landingOffset = Math.random() * 30 - 15;
+    const targetNormalized = (360 - selectedIndex * 120) % 360;
+    const landingOffset = Math.random() * 40 - 20;
     const delta = 360 * 7 + ((targetNormalized + landingOffset - currentNormalized + 360) % 360);
     setRotation((current) => current + delta);
 

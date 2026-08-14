@@ -1,4 +1,4 @@
-const CACHE_NAME = "sheepie-event-v2";
+const CACHE_NAME = "sheepie-event-v3";
 
 self.addEventListener("install", () => self.skipWaiting());
 
