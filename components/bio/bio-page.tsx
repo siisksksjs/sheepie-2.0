@@ -160,7 +160,7 @@ export function BioPage({ config }: BioPageProps) {
                       position="product-primary"
                       className={styles.buyButton}
                     >
-                      Buy now
+                      Shop now
                     </MarketplaceButton>
                   </div>
                 </article>

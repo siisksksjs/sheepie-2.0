@@ -143,7 +143,7 @@ describe("bio page rendered contract", () => {
       expect(card).toMatch(/aria-label="Gambar sebelumnya/);
       expect(card).toMatch(/aria-label="Gambar berikutnya/);
       expect(card).toContain('data-bio-destination="shopee"');
-      expect(card).toContain("Buy now");
+      expect(card).toContain("Shop now");
     }
 
     // Every listing image is available to step through.
