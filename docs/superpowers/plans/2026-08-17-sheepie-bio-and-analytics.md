@@ -65,7 +65,7 @@ The workspace contains two independent Git repositories. Run commands from the r
 - Create: `lib/bio-analytics/schema-contract.test.ts`
 - Modify: `lib/types/database.types.ts`
 
-- [ ] **Step 1: Write the schema contract test**
+- [x] **Step 1: Write the schema contract test**
 
 Create `lib/bio-analytics/schema-contract.test.ts`:
 
@@ -101,13 +101,13 @@ describe("bio analytics schema", () => {
 })
 ```
 
-- [ ] **Step 2: Run the focused test and verify the missing migration failure**
+- [x] **Step 2: Run the focused test and verify the missing migration failure**
 
 Run: `npm test -- lib/bio-analytics/schema-contract.test.ts`
 
 Expected: FAIL because `20260817_add_bio_analytics.sql` does not exist.
 
-- [ ] **Step 3: Create the migration**
+- [x] **Step 3: Create the migration**
 
 Create `supabase/migrations/20260817_add_bio_analytics.sql` beginning with these objects:
 
@@ -182,7 +182,7 @@ In the same migration, add:
 - `delete_expired_bio_events(retain_months integer default 13)` deleting raw events and expired rate buckets.
 - Execute `REVOKE ALL ON FUNCTION ... FROM PUBLIC` for every function. Grant `ingest_bio_event` only to `service_role`; grant the three reporting functions to `authenticated, service_role`; grant `delete_expired_bio_events` only to `service_role`.
 
-- [ ] **Step 4: Add the database row type**
+- [x] **Step 4: Add the database row type**
 
 Append to `lib/types/database.types.ts`:
 
@@ -204,7 +204,7 @@ export type BioEvent = {
 }
 ```
 
-- [ ] **Step 5: Run verification and commit the schema**
+- [x] **Step 5: Run verification and commit the schema**
 
 Run: `npm test -- lib/bio-analytics/schema-contract.test.ts && npm run typecheck`
 
@@ -227,7 +227,7 @@ git commit -m "feat: add bio analytics event schema"
 - Create: `lib/bio-analytics/session.ts`
 - Create: `lib/bio-analytics/session.test.ts`
 
-- [ ] **Step 1: Install focused dependencies and configure tests**
+- [x] **Step 1: Install focused dependencies and configure tests**
 
 Run: `npm install @supabase/supabase-js && npm install -D vitest`
 
@@ -249,7 +249,7 @@ export default defineConfig({
 })
 ```
 
-- [ ] **Step 2: Write failing contract and session tests**
+- [x] **Step 2: Write failing contract and session tests**
 
 Test these exact behaviors:
 
@@ -269,7 +269,7 @@ Run: `npm test -- lib/bio-analytics/contracts.test.ts lib/bio-analytics/session.
 
 Expected: FAIL because the modules do not exist.
 
-- [ ] **Step 3: Implement the event contract**
+- [x] **Step 3: Implement the event contract**
 
 In `contracts.ts`, export the literal allowlists, `BioEventInput`, and:
 
@@ -285,7 +285,7 @@ export function getScreenCategory(width: number): "mobile" | "tablet" | "desktop
 
 The parser must reject unknown keys, invalid UUIDs, timestamps over five minutes in the future, unsupported products/destinations, invalid scroll depths, and JSON bodies above the route's 8 KB limit. It must normalize text before returning data.
 
-- [ ] **Step 4: Implement session and campaign state**
+- [x] **Step 4: Implement session and campaign state**
 
 In `session.ts`, export pure helpers plus a browser adapter:
 
@@ -301,7 +301,7 @@ export function createBioSession(storage: Pick<Storage, "getItem" | "setItem">, 
 
 Use `crypto.randomUUID()`, `localStorage` for the visitor and first-seen marker, and `sessionStorage` for session ID, activity time, sequence, and landing campaign. Rotate after 30 minutes of inactivity.
 
-- [ ] **Step 5: Verify and commit contracts**
+- [x] **Step 5: Verify and commit contracts**
 
 Run: `npm test -- lib/bio-analytics/contracts.test.ts lib/bio-analytics/session.test.ts && npm run typecheck`
 
@@ -322,7 +322,7 @@ git commit -m "feat: define bio analytics client contracts"
 - Create: `app/api/bio-events/route.test.ts`
 - Modify: `.env.example`
 
-- [ ] **Step 1: Write route tests against an injected ingestion function**
+- [x] **Step 1: Write route tests against an injected ingestion function**
 
 Cover:
 
@@ -337,7 +337,7 @@ Run: `npm test -- app/api/bio-events/route.test.ts`
 
 Expected: FAIL because the route does not exist.
 
-- [ ] **Step 2: Implement the server-only Supabase caller**
+- [x] **Step 2: Implement the server-only Supabase caller**
 
 Create `server.ts`:
 
@@ -363,7 +363,7 @@ export async function ingestBioEvent(event: BioEventInput, rateKey: string) {
 }
 ```
 
-- [ ] **Step 3: Implement the route**
+- [x] **Step 3: Implement the route**
 
 The route must:
 
@@ -378,7 +378,7 @@ The route must:
 
 Export a small `createPostHandler(deps)` factory and `POST = createPostHandler({ ingest: ingestBioEvent })` so tests do not access the network.
 
-- [ ] **Step 4: Document environment variables**
+- [x] **Step 4: Document environment variables**
 
 Add to `.env.example`:
 
@@ -388,7 +388,7 @@ SUPABASE_SERVICE_ROLE_KEY=
 BIO_ANALYTICS_RATE_SECRET=
 ```
 
-- [ ] **Step 5: Verify and commit ingestion**
+- [x] **Step 5: Verify and commit ingestion**
 
 Run: `npm test -- app/api/bio-events/route.test.ts && npm run typecheck && npm run lint`
 
@@ -412,7 +412,7 @@ git commit -m "feat: ingest privacy-safe bio events"
 - Modify: `middleware.ts`
 - Modify: `app/sitemap.ts`
 
-- [ ] **Step 1: Reserve the exact unlocalized route**
+- [x] **Step 1: Reserve the exact unlocalized route**
 
 Change the middleware matcher to exclude `bio` while continuing to localize all existing pages:
 
@@ -424,7 +424,7 @@ export const config = {
 
 Verify with `npm run dev` and `curl -I http://localhost:3000/bio`: expected `200`, not a redirect to `/en/bio`.
 
-- [ ] **Step 2: Create the typed page configuration**
+- [x] **Step 2: Create the typed page configuration**
 
 `data/bio.ts` must map the three existing `data/products.json` products into this contract:
 
@@ -463,13 +463,13 @@ Read the WhatsApp customer-service URL from the required `NEXT_PUBLIC_SHEEPIE_WH
 
 Use stable IDs such as `cervicloud_shopee_primary`, not translated button labels.
 
-- [ ] **Step 3: Create the standalone root layout and metadata page**
+- [x] **Step 3: Create the standalone root layout and metadata page**
 
 `app/bio/layout.tsx` imports `../globals.css`, configures the same Playfair Display and Quicksand CSS variables as the localized root layout, renders `UmamiAnalytics`, and does not render the main navbar, language modal, or Lenis scrolling.
 
 `app/bio/page.tsx` exports canonical metadata for `https://sheepiesleep.com/bio` and renders `<BioPage config={bioConfig} />`.
 
-- [ ] **Step 4: Implement the branded catalog**
+- [x] **Step 4: Implement the branded catalog**
 
 Build `BioPage` as server-rendered sections:
 
@@ -483,13 +483,13 @@ Build `BioPage` as server-rendered sections:
 
 Use the existing CSS variables, Playfair/Quicksand, `rounded-[2rem]` product framing, blue/cream blocks, cloud-like pseudo-elements, accessible focus rings, semantic headings, and `prefers-reduced-motion` support. Avoid a generic button stack.
 
-- [ ] **Step 5: Implement outbound buttons and sitemap entry**
+- [x] **Step 5: Implement outbound buttons and sitemap entry**
 
 `MarketplaceButton` must render a normal `<a target="_blank" rel="noopener noreferrer">` with `data-bio-*` attributes for stable IDs, product, destination, section, and position. It must work without JavaScript.
 
 Add `https://sheepiesleep.com/bio` to `app/sitemap.ts` with `changeFrequency: "weekly"` and `priority: 0.9`.
 
-- [ ] **Step 6: Verify and commit the public experience**
+- [x] **Step 6: Verify and commit the public experience**
 
 Run: `npm run lint && npm run typecheck && npm run build`
 
@@ -510,7 +510,7 @@ git commit -m "feat: add Sheepie social bio catalog"
 - Create: `components/bio/bio-tracker.tsx`
 - Modify: `components/bio/bio-page.tsx`
 
-- [ ] **Step 1: Write delivery and deduplication tests**
+- [x] **Step 1: Write delivery and deduplication tests**
 
 Test that `sendBioEvent` prefers `navigator.sendBeacon`, falls back to `fetch(..., { keepalive: true })`, and never throws. Test a `Set<string>`-backed `once(key, fn)` helper so section and scroll events are emitted only once per session.
 
@@ -518,7 +518,7 @@ Run: `npm test -- lib/bio-analytics/client.test.ts`
 
 Expected: FAIL because the client module does not exist.
 
-- [ ] **Step 2: Implement non-blocking delivery**
+- [x] **Step 2: Implement non-blocking delivery**
 
 ```ts
 export function sendBioEvent(event: BioEventInput, transport = defaultTransport): void {
@@ -536,7 +536,7 @@ export function sendBioEvent(event: BioEventInput, transport = defaultTransport)
 
 The client event factory must combine session state, elapsed time, campaign, language, timezone, screen category, stable element fields, and a new event UUID.
 
-- [ ] **Step 3: Implement the tracker component**
+- [x] **Step 3: Implement the tracker component**
 
 `BioTracker` must:
 
@@ -550,11 +550,11 @@ The client event factory must combine session state, elapsed time, campaign, lan
 
 Render `<BioTracker />` once inside `BioPage` and mark every section with a stable `data-bio-section`.
 
-- [ ] **Step 4: Verify navigation remains independent**
+- [x] **Step 4: Verify navigation remains independent**
 
 Run tests, then manually block `/api/bio-events` in browser developer tools and click every marketplace button. Expected: each destination opens immediately and no visitor-facing error appears.
 
-- [ ] **Step 5: Verify and commit tracking**
+- [x] **Step 5: Verify and commit tracking**
 
 Run: `npm test && npm run lint && npm run typecheck && npm run build`
 
@@ -578,7 +578,7 @@ git commit -m "feat: track bio engagement and outbound clicks"
 - Create: `lib/bio-analytics/umami.ts`
 - Create: `lib/bio-analytics/umami.test.ts`
 
-- [ ] **Step 1: Write range and metric tests**
+- [x] **Step 1: Write range and metric tests**
 
 Cover Jakarta-local inclusive dates converted to exclusive UTC bounds, presets, invalid dates, hour/day/month Umami unit selection, zero-denominator CTR, and timestamp-based merging:
 
@@ -590,15 +590,15 @@ expect(selectUmamiUnit({ days: 90 })).toBe("day")
 expect(parseRange({ preset: "7d" }, new Date("2026-08-17T12:00:00+07:00"))).toMatchObject({ timezone: "Asia/Jakarta" })
 ```
 
-- [ ] **Step 2: Implement shared dashboard contracts**
+- [x] **Step 2: Implement shared dashboard contracts**
 
 Define `BioAnalyticsFilters`, `BioAnalyticsSummary`, `UmamiBundle`, `BioAnalyticsBundle`, `SourceStatus`, product/marketplace/funnel/heatmap rows, journeys, and paginated events. Make source status one of `healthy | unavailable | unconfigured`.
 
-- [ ] **Step 3: Implement pure range and metric helpers**
+- [x] **Step 3: Implement pure range and metric helpers**
 
 Use Asia/Jakarta as the explicit reporting timezone. `mergeTrafficSeries` must align ISO timestamps and return `{ timestamp, visitors, sessions, clicks }`. `percent` rounds to one decimal and never returns `NaN`/`Infinity`.
 
-- [ ] **Step 4: Write Umami client request tests**
+- [x] **Step 4: Write Umami client request tests**
 
 Inject `fetch` and assert:
 
@@ -608,7 +608,7 @@ Inject `fetch` and assert:
 - stats, pageviews, metrics for `referrer/country/region/device/browser/os`, and weekly session heatmap are requested;
 - one failed endpoint produces an `unavailable` source result instead of throwing the whole dashboard.
 
-- [ ] **Step 5: Implement the server-only Umami service**
+- [x] **Step 5: Implement the server-only Umami service**
 
 Use the current official Umami Cloud API shape:
 
@@ -619,7 +619,7 @@ const root = process.env.UMAMI_API_BASE_URL ?? "https://api.umami.is/v1"
 
 Call `/websites/{id}/stats`, `/pageviews`, `/metrics?type=...`, and `/sessions/weekly` with `startAt`, `endAt`, `/bio` path filter, supported UTM filters, and correct time unit. Return `unconfigured` when either secret is absent. Limit concurrent requests with one `Promise.allSettled` bundle and cache for five minutes with `next.revalidate`.
 
-- [ ] **Step 6: Verify and commit dashboard foundations**
+- [x] **Step 6: Verify and commit dashboard foundations**
 
 Run: `npm test -- lib/bio-analytics && npm run typecheck`
 
@@ -638,11 +638,11 @@ git commit -m "feat: add bio analytics reporting contracts"
 - Create: `lib/actions/bio-analytics.ts`
 - Create: `lib/actions/bio-analytics.test.ts`
 
-- [ ] **Step 1: Write action tests with injected Supabase and Umami dependencies**
+- [x] **Step 1: Write action tests with injected Supabase and Umami dependencies**
 
 Test that the action calls `get_bio_analytics_summary`, `get_bio_filter_options`, and `get_bio_journeys` with the same UTC range and filter JSON; fetches a paginated event stream; merges Umami traffic; preserves Supabase results when Umami is unavailable; and throws a safe dashboard error when the authenticated Supabase query fails.
 
-- [ ] **Step 2: Implement the data bundle action**
+- [x] **Step 2: Implement the data bundle action**
 
 Export:
 
@@ -655,7 +655,7 @@ export async function getBioAnalyticsBundle(
 
 Use the existing authenticated `createClient()` for RPCs and event-table reads. Select only approved event fields, order by `occurred_at desc`, and paginate 50 rows at a time. Merge click counts into the Umami time series but keep source-specific metrics labeled; never infer purchases.
 
-- [ ] **Step 3: Verify and commit**
+- [x] **Step 3: Verify and commit**
 
 Run: `npm test -- lib/actions/bio-analytics.test.ts && npm run typecheck`
 
@@ -678,11 +678,11 @@ git commit -m "feat: assemble hybrid bio analytics data"
 - Create: `components/bio-analytics/tables.tsx`
 - Modify: `components/layout/sidebar.tsx`
 
-- [ ] **Step 1: Add URL-backed filter parsing and the protected server page**
+- [x] **Step 1: Add URL-backed filter parsing and the protected server page**
 
 Accept `preset`, `from`, `to`, `product`, `destination`, `source`, `campaign`, `device`, `country`, `returning`, and `page`. Normalize with `parseRange`, discard invalid enumerations, call `getBioAnalyticsBundle`, and pass the result to the client component. The existing dashboard route group/middleware supplies authentication.
 
-- [ ] **Step 2: Add sidebar navigation**
+- [x] **Step 2: Add sidebar navigation**
 
 Import `MousePointerClick` from Lucide and add:
 
@@ -692,11 +692,11 @@ Import `MousePointerClick` from Lucide and add:
 
 Use `pathname === item.href || pathname.startsWith(item.href + "/")` so nested/filter routes remain highlighted.
 
-- [ ] **Step 3: Build filters and KPI row**
+- [x] **Step 3: Build filters and KPI row**
 
 Use current dashboard UI primitives. Filter changes update URL search parameters through `router.replace`; provide Today/7d/30d/90d/custom controls and a clear-all action. KPI cards show Visitors, Sessions, Engaged Sessions, Outbound Clicks, Outbound CTR, Average Engagement Time, and Returning Share, each with an `InfoTooltip` definition and a visible Umami/Supabase source label.
 
-- [ ] **Step 4: Build charts**
+- [x] **Step 4: Build charts**
 
 Use Recharts and Sheepie tokens for:
 
@@ -711,15 +711,15 @@ Use Recharts and Sheepie tokens for:
 
 Every chart needs a text title, legend, accessible table fallback or adjacent value list, responsive container, explicit empty state, and no misleading purchase/revenue terminology.
 
-- [ ] **Step 5: Build journey and event detail tables**
+- [x] **Step 5: Build journey and event detail tables**
 
 Journey rows show event sequence, session count, and share. The event table shows time, anonymous shortened session ID, event, product, destination, section/CTA, source/campaign, elapsed time, device/language, and new/returning status. Add previous/next links that preserve all active filters.
 
-- [ ] **Step 6: Add degraded source states**
+- [x] **Step 6: Add degraded source states**
 
 Render a compact banner for `unavailable` or `unconfigured` Umami while leaving Supabase sections usable. Distinguish “no matching events” from “data source unavailable.”
 
-- [ ] **Step 7: Verify and commit dashboard UI**
+- [x] **Step 7: Verify and commit dashboard UI**
 
 Run: `npm run lint && npm run typecheck && npm test && npm run build`
 
@@ -740,19 +740,19 @@ git commit -m "feat: add detailed bio analytics dashboard"
 - Create: `lib/bio-analytics/csv.test.ts`
 - Modify: `app/(dashboard)/bio-analytics/bio-analytics-client.tsx`
 
-- [ ] **Step 1: Write CSV escaping tests**
+- [x] **Step 1: Write CSV escaping tests**
 
 Verify commas, quotes, line breaks, nulls, formula-leading values (`=`, `+`, `-`, `@`), stable header order, and Jakarta timestamp formatting.
 
-- [ ] **Step 2: Implement safe CSV serialization**
+- [x] **Step 2: Implement safe CSV serialization**
 
 Export only approved fields. Prefix spreadsheet-formula-leading strings with a single quote, double embedded quotes, and quote every cell.
 
-- [ ] **Step 3: Implement authenticated export**
+- [x] **Step 3: Implement authenticated export**
 
 The route must call the existing server Supabase client and `auth.getUser()`, return `401` without a user, parse the same filter contract as the page, cap export at 100,000 ordered rows, and stream a UTF-8 BOM CSV response named `sheepie-bio-events-YYYY-MM-DD.csv`. Never include IP/rate keys or service credentials.
 
-- [ ] **Step 4: Add the export action and verify**
+- [x] **Step 4: Add the export action and verify**
 
 Add an Export CSV link that preserves active filters. Run:
 
@@ -775,7 +775,7 @@ git commit -m "feat: export filtered bio analytics events"
 - Modify: `sheepie/.env.example`
 - Modify: `sheepie/app/bio/page.tsx` privacy disclosure footer copy
 
-- [ ] **Step 1: Document dashboard configuration**
+- [x] **Step 1: Document dashboard configuration**
 
 Add:
 
@@ -801,7 +801,7 @@ Dashboard deployment: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 Do not copy server secrets into `NEXT_PUBLIC_*` variables.
 
-- [ ] **Step 4: Run both complete verification suites**
+- [x] **Step 4: Run both complete verification suites**
 
 From `sheepie`:
 
@@ -826,7 +826,7 @@ Expected: both suites and production builds pass.
 9. Block event ingestion and confirm all public outbound links remain functional.
 10. Export CSV and verify only filtered, approved fields appear.
 
-- [ ] **Step 6: Commit documentation in each repository**
+- [x] **Step 6: Commit documentation in each repository**
 
 In `dashboard-sheepie`:
 
@@ -840,10 +840,10 @@ The main-site environment and privacy disclosure are committed in Tasks 3 and 4;
 ## Final Verification Checklist
 
 - [ ] `/bio` is canonical, exact, mobile-first, Indonesian-first, and visually consistent with Sheepie rather than Cartiera.
-- [ ] CerviCloud, LumiCloud, and CalmiCloud use current code-configured prices, images, and marketplace destinations.
-- [ ] Standard links work with JavaScript disabled and during analytics failures.
-- [ ] Public event input is allowlisted, size-limited, rate-limited, deduplicated, and contains no direct personal identifiers or raw IP.
-- [ ] Umami traffic and Supabase behavior are labeled and combined without calling outbound clicks purchases.
+- [x] CerviCloud, LumiCloud, and CalmiCloud use current code-configured prices, images, and marketplace destinations.
+- [x] Standard links work with JavaScript disabled and during analytics failures.
+- [x] Public event input is allowlisted, size-limited, rate-limited, deduplicated, and contains no direct personal identifiers or raw IP.
+- [x] Umami traffic and Supabase behavior are labeled and combined without calling outbound clicks purchases.
 - [ ] Dashboard filters, funnels, journeys, heatmap, event stream, degraded states, pagination, and CSV export work.
-- [ ] Raw-event retention defaults to 13 months and can be invoked safely.
-- [ ] Both repositories pass tests, lint, type checking, and production builds.
+- [x] Raw-event retention defaults to 13 months and can be invoked safely.
+- [x] Both repositories pass tests, lint, type checking, and production builds.
