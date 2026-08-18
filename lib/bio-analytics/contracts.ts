@@ -24,6 +24,9 @@ export const REFERRER_CATEGORIES = ["instagram", "tiktok", "google", "direct", "
 export const SCREEN_CATEGORIES = ["mobile", "tablet", "desktop"] as const;
 export const SCROLL_DEPTHS = [25, 50, 75, 100] as const;
 
+/** Entry points that may record events: the bio page and the tracked redirect. */
+export const LANDING_PATHS = ["/bio", "/go"] as const;
+
 export const MAX_BIO_EVENT_BODY_BYTES = 8192;
 export const BIO_EVENT_TEXT_LIMITS = {
   section_id: 100,
@@ -47,6 +50,7 @@ export type BioDestination = (typeof DESTINATIONS)[number];
 export type ReferrerCategory = (typeof REFERRER_CATEGORIES)[number];
 export type ScreenCategory = (typeof SCREEN_CATEGORIES)[number];
 export type ScrollDepth = (typeof SCROLL_DEPTHS)[number];
+export type BioLandingPath = (typeof LANDING_PATHS)[number];
 
 type BioEventCommon = {
   event_id: string;
@@ -55,7 +59,7 @@ type BioEventCommon = {
   visitor_id: string;
   session_id: string;
   sequence_no: number;
-  landing_path: "/bio";
+  landing_path: BioLandingPath;
   referrer_category: ReferrerCategory | null;
   utm_source: string | null;
   utm_medium: string | null;
@@ -293,7 +297,7 @@ export function parseBioEvent(value: unknown): BioEventParseResult {
 
   if (record.schema_version !== 1) return failure("Unsupported schema_version");
   if (!isAllowed(BIO_EVENT_NAMES, record.event_name)) return failure("Unsupported event_name");
-  if (record.landing_path !== "/bio") return failure("Invalid landing_path");
+  if (!isAllowed(LANDING_PATHS, record.landing_path)) return failure("Invalid landing_path");
   if (typeof record.is_returning !== "boolean") return failure("Invalid is_returning");
 
   if (
@@ -426,7 +430,7 @@ export function parseBioEvent(value: unknown): BioEventParseResult {
       cta_id: ctaId,
       cta_position: ctaPosition,
       destination,
-      landing_path: "/bio",
+      landing_path: record.landing_path,
       referrer_category: parsedReferrer.value,
       utm_source: normalizedText.utm_source,
       utm_medium: normalizedText.utm_medium,

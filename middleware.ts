@@ -14,5 +14,5 @@ export const config = {
   // - Next.js internals
   // - Standalone /bio page (outside next-intl)
   // - Static files
-  matcher: ['/((?!api|_next|bio(?:/|$)|.*\\..*).*)']
+  matcher: ['/((?!api|_next|bio(?:/|$)|go(?:/|$)|.*\\..*).*)']
 };

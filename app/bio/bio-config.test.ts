@@ -46,18 +46,12 @@ describe("bio page configuration", () => {
       const source = productsSource.find((item) => item.slug === product.slug);
       expect(source).toBeDefined();
       expect(product.price).toBe(source?.price);
-      // Tokopedia follows the shared source; Shopee uses the bio page's own
-      // short canonical link, which must still point at the same listing.
       expect(product.actions).toEqual([
-        expect.objectContaining({
-          destination: "shopee",
-          href: expect.stringMatching(/^https:\/\/shopee\.co\.id\/product\/\d+\/\d+\/$/),
-        }),
+        expect.objectContaining({ destination: "shopee", href: source?.shopeeUrl }),
         expect.objectContaining({ destination: "tokopedia", href: source?.tokopediaUrl }),
       ]);
-
-      const [, shopId, itemId] = product.actions[0].href.match(/\/product\/(\d+)\/(\d+)\//)!;
-      expect(source?.shopeeUrl).toContain(`${shopId}.${itemId}`);
+      // Short canonical form: title-independent, so renaming a listing cannot rot it.
+      expect(source?.shopeeUrl).toMatch(/^https:\/\/shopee\.co\.id\/product\/\d+\/\d+\/$/);
     }
   });
 

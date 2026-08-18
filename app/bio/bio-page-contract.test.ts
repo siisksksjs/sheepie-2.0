@@ -163,6 +163,10 @@ describe("standalone bio routing contract", () => {
 
     expect(routeMatcher.test("/bio")).toBe(false);
     expect(routeMatcher.test("/bio/products")).toBe(false);
+    // The tracked story redirect must not be locale-prefixed either.
+    expect(routeMatcher.test("/go")).toBe(false);
+    expect(routeMatcher.test("/go/cervicloud")).toBe(false);
+    expect(routeMatcher.test("/gouda")).toBe(true);
     expect(routeMatcher.test("/biofoo")).toBe(true);
     expect(routeMatcher.test("/biography")).toBe(true);
     expect(routeMatcher.test("/api/bio-events")).toBe(false);
