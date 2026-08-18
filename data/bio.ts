@@ -71,96 +71,99 @@ export function maskAuthor(handle: string): string {
 /**
  * The strongest three five-star reviews per product, chosen for distinct angles
  * rather than repetition: an objection answered, the core benefit, and a signal
- * of repeat trust. Quotes are transcribed because the original screenshots are
- * desktop-width and render at roughly 5px of text on a phone; each card links to
- * its screenshot as proof.
+ * of repeat trust.
+ *
+ * Each screenshot is a phone capture, cropped above the star row so the
+ * reviewer's avatar and handle are removed from the image itself; the card shows
+ * a masked handle instead. `quote` carries the visible text for assistive
+ * technology and search engines.
  */
 const rawTestimonials: BioTestimonial[] = [
-  // CerviCloud — the shape looks odd at first, so lead with that objection.
+  // CerviCloud Pillow — the shape looks odd at first, so lead with that objection.
   {
-    id: "cervicloud-tokopedia-3",
+    id: "cervicloud-1",
     product: "cervicloud",
-    author: "H***y",
+    author: "H***u",
     marketplace: "tokopedia",
     quote:
-      "Awalnya agak aneh karena bentuknya beda dari bantal biasa, tapi setelah 2 minggu mulai kerasa bedanya. Leher jadi gak gampang pegal, dan bangun tidur gak kaku lagi.",
-    screenshot: { src: "/images/bio/testimonials/cervicloud-tokopedia-3.png", width: 596, height: 205 },
+      "Awalnya agak aneh karena bentuknya beda dari bantal biasa, tapi setelah 2 minggu mulai kerasa bedanya. Leher jadi gak gampang pegal, dan bangun tidur gak kaku lagi. Postur badan lebih terjaga pas tidur.",
+    screenshot: { src: "/images/bio/testimonials/cervicloud-1.jpg", width: 1170, height: 806 },
   },
   {
-    id: "cervicloud-tokopedia-2",
+    id: "cervicloud-2",
     product: "cervicloud",
     author: "Jiwon",
     marketplace: "tokopedia",
     quote:
-      "Memory foam nya mantap banget, real ngesupport. Sekarang malah gak bisa tidur pake bantal lain.",
-    screenshot: { src: "/images/bio/testimonials/cervicloud-tokopedia-2.png", width: 608, height: 197 },
+      "Pertama kali pakai rasanya beda banget, tapi adminnya sempat bilang memang perlu waktu untuk adaptasi. Memory foam nya mantap banget, real ngesupport. Sekarang malah gak bisa tidur pake bantal lain.",
+    screenshot: { src: "/images/bio/testimonials/cervicloud-2.jpg", width: 1170, height: 824 },
   },
   {
-    id: "cervicloud-tokopedia-1",
+    id: "cervicloud-3",
     product: "cervicloud",
     author: "s***i",
     marketplace: "tokopedia",
     quote:
-      "Udah beli 2 kali disini. Sama-sama tidur miring, suka banget sama desain ergonomiknya. Ada bagian khusus buat tangan pas tidur miring, gak kerasa kesemutan lagi.",
-    screenshot: { src: "/images/bio/testimonials/cervicloud-tokopedia-1.png", width: 609, height: 225 },
+      "Udah beli 2 kali disini. Sama-sama tidur miring, suka banget sama desain ergonomiknya, cerdas! Ada bagian khusus buat tangan pas tidur miring, gak kerasa kesemutan lagi.",
+    screenshot: { src: "/images/bio/testimonials/cervicloud-3.jpg", width: 1170, height: 866 },
   },
 
-  // LumiCloud — blackout is the promise; strap and comfort are the usual doubts.
+  // LumiCloud EyeMask — blackout is the promise; strap and comfort are the doubts.
   {
-    id: "lumicloud-shopee-3",
+    id: "lumicloud-1",
     product: "lumicloud",
     author: "steve969",
     marketplace: "shopee",
     quote:
-      "Bahan berkualitas, lembut, cahaya tidak tembus. Bahan lembut tidak buat sakit atau pegal bagian belakang kepala.",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-shopee-3.png", width: 951, height: 310 },
+      "Bahan berkualitas, lembut, cahaya tidak tembus. Bahan lembut tidak buat sakit atau pegal bagian belakang kepala, sangat recomended.",
+    screenshot: { src: "/images/bio/testimonials/lumicloud-1.jpg", width: 1170, height: 1116 },
   },
   {
-    id: "lumicloud-shopee-1",
+    id: "lumicloud-2",
     product: "lumicloud",
-    author: "indoshop_lokal",
+    author: "indarwati22",
     marketplace: "shopee",
     quote:
-      "Ringan dan enak. Strap nya kenceng dan ga nyangkut di rambut. Seller respon cepet, kirim juga sat set.",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-shopee-1.png", width: 957, height: 313 },
+      "Bagus halus banget bahannya, tebel empuk dan nyaman dipakai lama. Yang paling oke adalah fitur silent velcro nya.",
+    screenshot: { src: "/images/bio/testimonials/lumicloud-2.jpg", width: 1170, height: 1324 },
   },
   {
-    id: "lumicloud-shopee-2",
+    id: "lumicloud-3",
     product: "lumicloud",
     author: "c*****9",
     marketplace: "shopee",
     quote:
-      "Beneran halus dan gak ngerusak bulu mata palsuku! Tidur juga jadi makin pules soalnya aku gampang kebangun tengah malem.",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-shopee-2.png", width: 955, height: 227 },
+      "Aku udah coba pake dan beneran halus dan gak ngerusak bulu mata palsuku! Tidur juga jadi makin pules soalnya aku gampang kebangun tengah malem.",
+    screenshot: { src: "/images/bio/testimonials/lumicloud-3.jpg", width: 1168, height: 1052 },
   },
 
-  // CalmiCloud — noise is the problem; lead with the most concrete outcome.
+  // CalmiCloud Earplug — noise is the problem; lead with the most concrete outcome.
   {
-    id: "calmicloud-shopee-1",
+    id: "calmicloud-1",
     product: "calmicloud",
     author: "saalsabilaadinda",
     marketplace: "shopee",
     quote:
-      "Aku tipe orang light sleeper, ada suara dikit kebangun dan susah buat balik tidur lagi. Tapi pertama kali pake ini aku malemnya tidur 12 jam. Ini 100% ngeblock suara.",
-    screenshot: { src: "/images/bio/testimonials/calmicloud-shopee-1.png", width: 952, height: 423 },
+      "Aku tipe orang light sleeper, ada suara dikit kebangun dan susah buat balik tidur lagi. Tapi pertama kali pake ini aku malemnya tidur 12 jam. Cukup banget bahkan buat aku yang sensitif.",
+    screenshot: { src: "/images/bio/testimonials/calmicloud-1.jpg", width: 1170, height: 1700 },
   },
   {
-    id: "calmicloud-shopee-3",
-    product: "calmicloud",
-    author: "bennettonlin",
-    marketplace: "shopee",
-    quote:
-      "Barang sesuai, pengiriman cepat. Kosan berisik, pake ini jadi lebih kebantu buat tidur. Rekomended",
-    screenshot: { src: "/images/bio/testimonials/calmicloud-shopee-3.png", width: 967, height: 238 },
-  },
-  {
-    id: "calmicloud-shopee-2",
+    id: "calmicloud-2",
     product: "calmicloud",
     author: "bluenavy89",
     marketplace: "shopee",
     quote:
-      "Sesuai judulnya, Moldable jadi bisa ditempel langsung di sekitar lubang telinga sesuai bentuk yang kamu inginkan. Sangat bantu untuk redam suara dari luar.",
-    screenshot: { src: "/images/bio/testimonials/calmicloud-shopee-2.png", width: 959, height: 310 },
+      "Sesuai judulnya, Moldable jadi bisa ditempel langsung di sekitar lubang telinga sesuai dengan bentuk yang kamu inginkan. Sangat bantu untuk redam suara dari luar.",
+    screenshot: { src: "/images/bio/testimonials/calmicloud-2.jpg", width: 1170, height: 1442 },
+  },
+  {
+    id: "calmicloud-3",
+    product: "calmicloud",
+    author: "bennettonlin",
+    marketplace: "shopee",
+    quote:
+      "Barang sesuai, pengiriman cepat. Kosan berisik, pake ini jadi lebih kebantu buat tidur. Rekomended.",
+    screenshot: { src: "/images/bio/testimonials/calmicloud-3.jpg", width: 1170, height: 1118 },
   },
 ];
 
@@ -204,7 +207,7 @@ const productStories: Array<Omit<BioProduct, "price" | "actions">> = [
   {
     id: "bio-product-alignment",
     slug: "cervicloud",
-    name: "CerviCloud",
+    name: "CerviCloud Pillow",
     eyebrow: "Penyelarasan",
     headline: "Leher lebih ditopang, pagi terasa lebih ringan.",
     description:
@@ -217,7 +220,7 @@ const productStories: Array<Omit<BioProduct, "price" | "actions">> = [
   {
     id: "bio-product-darkness",
     slug: "lumicloud",
-    name: "LumiCloud",
+    name: "LumiCloud EyeMask",
     eyebrow: "Kegelapan",
     headline: "Redupkan dunia tanpa menekan mata.",
     description:
@@ -230,7 +233,7 @@ const productStories: Array<Omit<BioProduct, "price" | "actions">> = [
   {
     id: "bio-product-silence",
     slug: "calmicloud",
-    name: "CalmiCloud",
+    name: "CalmiCloud Earplug",
     eyebrow: "Keheningan",
     headline: "Bentuk ruang tenangmu sendiri.",
     description:

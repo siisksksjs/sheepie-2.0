@@ -12,9 +12,9 @@ describe("bio page configuration", () => {
 
     expect(config.products.map((product) => product.slug)).toEqual(expectedSlugs);
     expect(config.products.map((product) => product.name)).toEqual([
-      "CerviCloud",
-      "LumiCloud",
-      "CalmiCloud",
+      "CerviCloud Pillow",
+      "LumiCloud EyeMask",
+      "CalmiCloud Earplug",
     ]);
   });
 

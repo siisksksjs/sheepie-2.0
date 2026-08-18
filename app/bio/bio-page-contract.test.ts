@@ -111,23 +111,23 @@ describe("bio page rendered contract", () => {
       expect(reviews.length).toBeLessThanOrEqual(3);
     }
     // One tab per product, so only one product's reviews are on screen at a time.
-    for (const name of ["CerviCloud", "LumiCloud", "CalmiCloud"]) {
+    for (const name of ["CerviCloud Pillow", "LumiCloud EyeMask", "CalmiCloud Earplug"]) {
       expect(markup).toMatch(new RegExp(`role="tab"[^>]*>${name}<`));
     }
     expect((markup.match(/role="tab"/g) ?? [])).toHaveLength(3);
   });
 
-  it("renders each review as readable text with a link to the original screenshot", () => {
+  it("renders the review screenshot with its text as alt", () => {
     const cards = markup.match(/<li class="[^"]*testimonialCard[^"]*"[\s\S]*?<\/li>/g) ?? [];
 
     // Only the active tab renders, which keeps the section short.
     expect(cards.length).toBeGreaterThanOrEqual(2);
     expect(cards.length).toBeLessThanOrEqual(3);
     for (const card of cards) {
-      // The quote must be real text, not a downscaled screenshot nobody can read.
-      expect(card).toMatch(/testimonialQuote[^>]*>[^<]{40,}/);
-      expect(card).toMatch(/href="\/images\/bio\/testimonials\/[^"]+\.png"/);
-      // The screenshot opens in a modal, so it must not target a new tab.
+      expect(card).toMatch(/testimonials(?:%2F|\/)[^"']+\.jpg/);
+      // The quote is carried as alt text for assistive technology and search.
+      expect(card).toMatch(/alt="[^"]{40,}"/);
+      // The screenshot opens in a modal, so nothing targets a new tab.
       expect(card).not.toContain('target="_blank"');
     }
   });

@@ -64,9 +64,6 @@ export function BioTestimonials({ products, testimonials, logos }: BioTestimonia
         {shown.map((testimonial) => (
           <li key={testimonial.id} className={styles.testimonialCard}>
             <div className={styles.testimonialHead}>
-              <span className={styles.testimonialStars} aria-label="Lima dari lima bintang">
-                {"★★★★★"}
-              </span>
               <span className={styles.testimonialAuthor}>{testimonial.author}</span>
               <Image
                 src={logos[testimonial.marketplace]}
@@ -76,18 +73,23 @@ export function BioTestimonials({ products, testimonials, logos }: BioTestimonia
                 className={styles.testimonialSource}
               />
             </div>
-            <p className={styles.testimonialQuote}>{testimonial.quote}</p>
-            {/* Without JavaScript this stays a plain link to the image. */}
-            <a
-              href={testimonial.screenshot.src}
-              className={styles.testimonialProof}
-              onClick={(event) => {
-                event.preventDefault();
-                setPreview(testimonial);
-              }}
+            {/* The capture is a 3x phone screenshot, so it stays readable at
+                column width. Tapping opens it full size. */}
+            <button
+              type="button"
+              className={styles.testimonialShot}
+              onClick={() => setPreview(testimonial)}
+              aria-label={`Perbesar ulasan ${testimonial.author}. ${testimonial.quote}`}
             >
-              Lihat tangkapan layar ulasan
-            </a>
+              <Image
+                src={testimonial.screenshot.src}
+                alt={testimonial.quote}
+                width={testimonial.screenshot.width}
+                height={testimonial.screenshot.height}
+                sizes="(max-width: 480px) 92vw, 28rem"
+                className={styles.testimonialImage}
+              />
+            </button>
           </li>
         ))}
       </ul>
