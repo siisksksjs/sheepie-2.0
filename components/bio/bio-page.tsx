@@ -1,14 +1,14 @@
 import Image from "next/image";
 import {
+  Cloud,
   Globe2,
+  Heart,
   Instagram,
   Mail,
-  MapPin,
   MessageCircle,
   Music2,
-  PackageCheck,
-  ShieldCheck,
   ShoppingBag,
+  Star,
 } from "lucide-react";
 
 import type { BioAction, BioConfig } from "@/data/bio";
@@ -47,10 +47,11 @@ const brandLogos: Partial<Record<BioAction["destination"], string>> = {
 /** Storefronts, in the order they should be offered. */
 const MARKETPLACE_IDS = ["bio-hub-shopee", "bio-hub-tokopedia", "bio-hub-tiktok"] as const;
 
-const trustPoints = [
-  { icon: ShieldCheck, label: "Bayar di marketplace" },
-  { icon: MapPin, label: "Kirim se-Indonesia" },
-  { icon: PackageCheck, label: "Material pilihan" },
+/** Figures supplied by the store owner. */
+const trustStats = [
+  { icon: Star, value: "4.9/5", label: "from 1000+ reviews" },
+  { icon: Heart, value: "1000+", label: "happy sleepers" },
+  { icon: Cloud, value: "Proudly", label: "Indonesian Brand" },
 ];
 
 export function BioPage({ config }: BioPageProps) {
@@ -97,12 +98,21 @@ export function BioPage({ config }: BioPageProps) {
         </section>
 
         <ul
-          className={styles.trustLine}
+          className={styles.statRow}
           data-bio-section="bio-trust"
           data-bio-track-section="bio-trust"
         >
-          {trustPoints.map((point) => (
-            <li key={point.label}>{point.label}</li>
+          {trustStats.map((stat) => (
+            <li key={stat.label} className={styles.stat}>
+              <stat.icon
+                size={22}
+                strokeWidth={1.6}
+                aria-hidden="true"
+                className={styles.statIcon}
+              />
+              <p className={styles.statValue}>{stat.value}</p>
+              <p className={styles.statLabel}>{stat.label}</p>
+            </li>
           ))}
         </ul>
 

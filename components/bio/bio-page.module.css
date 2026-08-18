@@ -61,26 +61,44 @@
   inset: 0;
 }
 
-/* ---------- trust line ---------- */
+/* ---------- trust stats ---------- */
 
-/* A quiet line rather than a boxed pill: it reassures without competing
-   with the hero directly above it. */
-.trustLine {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.2rem 0.5rem;
+/* Three proof points on one row: icon, figure, then what the figure means. */
+.statRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
   margin-top: 0.9rem;
+  padding: 0.85rem 0.5rem;
+  border-radius: 0.6rem;
+  background: var(--bio-ice);
   list-style: none;
-  font-size: 0.63rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--bio-text-secondary);
 }
 
-.trustLine li + li::before {
-  content: "·";
-  margin-right: 0.5rem;
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.statIcon {
+  color: var(--bio-navy);
+  opacity: 0.75;
+}
+
+.statValue {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  margin-top: 0.1rem;
+  font-size: 0.63rem;
+  line-height: 1.35;
   color: var(--bio-text-secondary);
 }
 
