@@ -5,6 +5,7 @@
   --bio-white: #fff;
   --bio-text-secondary: #4b5878;
   --bio-border: color-mix(in srgb, var(--bio-navy) 12%, transparent);
+  --bio-blue-rule: #a8bdd8;
   min-height: 100vh;
   padding-left: max(0px, env(safe-area-inset-left));
   padding-right: max(0px, env(safe-area-inset-right));
@@ -47,14 +48,22 @@
    shown whole rather than cropped under an overlay. */
 .banner {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
   border-radius: 0.5rem;
   background: var(--bio-cream);
 }
 
 .bannerImage {
-  object-fit: contain;
+  object-fit: cover;
+}
+
+/* The artwork has a Shop Our Bestsellers button drawn into it, so the whole
+   hero is the target rather than leaving a button that does nothing. */
+.bannerLink {
+  display: block;
+  position: absolute;
+  inset: 0;
 }
 
 /* ---------- trust line ---------- */
@@ -86,16 +95,25 @@
   margin-top: 1.6rem;
 }
 
-.groupHeading {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin-bottom: 0.65rem;
-  font-size: 0.7rem;
-  font-weight: 700;
+/* Section titles carry the page's rhythm, so they are set in the display face
+   and given room, with one short rule instead of decorative furniture. */
+.sectionTitle {
+  margin-bottom: 1.1rem;
+  font-family: var(--font-display), serif;
+  font-size: 1.15rem;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--bio-text-secondary);
+  text-align: center;
+}
+
+.sectionTitle::after {
+  content: "";
+  display: block;
+  width: 2.75rem;
+  height: 1px;
+  margin: 0.55rem auto 0;
+  background: var(--bio-blue-rule);
 }
 
 /* ---------- product grid ---------- */
@@ -117,21 +135,33 @@
   padding-top: 0.2rem;
 }
 
-.layerLabel {
-  margin-bottom: 0.6rem;
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--bio-text-secondary);
+.gallery {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
-.productArt {
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.gallerySlide {
   position: relative;
+  /* Under a full column so the next slide peeks: that peek is the affordance. */
+  flex: 0 0 82%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 0.5rem;
   background: var(--bio-ice);
+  scroll-snap-align: start;
+}
+
+.galleryImage {
+  object-fit: contain;
 }
 
 /* contain, not cover: the listing artwork carries text that must not be cut off. */
@@ -140,9 +170,8 @@
 }
 
 .productName {
-  margin-top: 0.85rem;
   font-family: var(--font-display), serif;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: -0.025em;
   line-height: 1.15;
@@ -159,14 +188,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  margin-top: 0.9rem;
+  gap: 1rem;
+  margin-top: 0.95rem;
 }
 
-.productPrice {
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+.productCopy {
+  min-width: 0;
 }
 
 .buyButton {
@@ -189,17 +216,9 @@
 
 /* ---------- shop everywhere ---------- */
 
-.shopHeading {
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  text-align: center;
-}
-
 .shopSubheading {
-  margin-top: 0.3rem;
-  margin-bottom: 0.9rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
   font-size: 0.82rem;
   color: var(--bio-text-secondary);
   text-align: center;
@@ -239,7 +258,7 @@
 }
 
 .connectHeading {
-  margin-top: 1.4rem;
+  margin-top: 1.6rem;
   font-family: var(--font-display), serif;
   font-size: 0.95rem;
   font-style: italic;

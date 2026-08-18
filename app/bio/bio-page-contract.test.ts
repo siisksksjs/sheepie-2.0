@@ -16,19 +16,20 @@ describe("bio page rendered contract", () => {
   it("renders a unique placement ID for every CTA", () => {
     const ctaIds = attributes(markup, "data-bio-cta");
 
-    expect(ctaIds).toHaveLength(9);
+    expect(ctaIds).toHaveLength(10);
     expect(new Set(ctaIds).size).toBe(ctaIds.length);
     expect(ctaIds).toEqual(
       expect.arrayContaining([
         "bio-cervicloud-shopee",
         "bio-lumicloud-shopee",
         "bio-calmicloud-shopee",
-        "hub_tokopedia",
         "hub_shopee",
+        "hub_tokopedia",
         "hub_tiktok",
-        "hub_instagram",
-        "hub_email",
-        "hub_website",
+        "connect_instagram",
+        "connect_email",
+        "connect_website",
+        "connect_tiktok",
       ]),
     );
     // The closing CTA block duplicated the link hub and was removed.
@@ -74,7 +75,7 @@ describe("bio page rendered contract", () => {
   it("renders every outbound CTA as a safe normal anchor", () => {
     const outboundAnchors = markup.match(/<a [^>]*data-bio-cta="[^"]+"[^>]*>/g) ?? [];
 
-    expect(outboundAnchors).toHaveLength(9);
+    expect(outboundAnchors).toHaveLength(10);
     for (const anchor of outboundAnchors) {
       // mailto: hands off to a mail app, so it must not leave a blank tab behind.
       if (anchor.includes('href="mailto:')) {
@@ -133,13 +134,16 @@ describe("bio page rendered contract", () => {
     }
   });
 
-  it("puts a price and a Shopee CTA inside every product card", () => {
+  it("gives every product a browsable gallery and a Shopee CTA", () => {
     const cards = markup.match(/<article [^>]*data-bio-product="[^"]+"[\s\S]*?<\/article>/g) ?? [];
 
     expect(cards).toHaveLength(3);
     for (const card of cards) {
-      expect(card).toMatch(/(?:Rp|IDR)\s*[\d.]+/);
+      // Every listing image is present, so the strip can be swiped like a PDP.
+      const slides = card.match(/<li class="[^"]*gallerySlide/g) ?? [];
+      expect(slides.length).toBeGreaterThanOrEqual(9);
       expect(card).toContain('data-bio-destination="shopee"');
+      expect(card).toContain("Buy now");
     }
   });
 });

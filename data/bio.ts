@@ -25,6 +25,8 @@ export type BioProduct = {
     src: string;
     alt: string;
   };
+  /** Every listing image, browsable as a horizontal strip. */
+  gallery: string[];
   actions: [BioAction, BioAction];
 };
 
@@ -201,7 +203,7 @@ function productActions(slug: ProductSlug): [BioAction, BioAction] {
   ];
 }
 
-const productStories: Array<Omit<BioProduct, "price" | "actions">> = [
+const productStories: Array<Omit<BioProduct, "price" | "gallery" | "actions">> = [
   {
     id: "bio-product-alignment",
     slug: "cervicloud",
@@ -330,6 +332,14 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
   });
 
   hubActions.push({
+    id: "bio-connect-tiktok",
+    label: "TikTok",
+    href: siteSource.socials.tiktok,
+    destination: "tiktok",
+    accessibleLabel: "Ikuti Sheepie di TikTok (buka tab baru)",
+  });
+
+  hubActions.push({
     id: "bio-hub-website",
     label: "Website",
     href: "https://sheepiesleep.com/id",
@@ -353,12 +363,13 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
       alt: "Seseorang beristirahat menggunakan CerviCloud dan LumiCloud dari Sheepie",
     },
     bannerImage: {
-      src: "/images/bio/sheepie-banner.png",
-      alt: "Tiga produk Sheepie berjajar: LumiCloud Sleep Mask, CerviCloud Ergonomic Pillow, dan CalmiCloud Moldable Earplug, dengan tulisan Better Sleep Starts Here",
+      src: "/images/bio/sheepie-banner-hero.jpg",
+      alt: "Seseorang tidur nyenyak mengenakan LumiCloud Sleep Mask di atas bantal CerviCloud, dengan tulisan Better Sleep Starts Here",
     },
     products: productStories.map((story) => ({
       ...story,
       price: getSourceProduct(story.slug).price,
+      gallery: getSourceProduct(story.slug).images,
       actions: productActions(story.slug),
     })),
     hubActions,

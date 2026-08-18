@@ -9,7 +9,6 @@ import {
   PackageCheck,
   ShieldCheck,
   ShoppingBag,
-  Star,
 } from "lucide-react";
 
 import type { BioAction, BioConfig } from "@/data/bio";
@@ -44,8 +43,8 @@ const brandLogos: Partial<Record<BioAction["destination"], string>> = {
   tiktok: "/images/bio/tiktok-logo.png",
 };
 
-/** Places to buy, in the order the storefronts should be offered. */
-const MARKETPLACE_ORDER: Array<BioAction["destination"]> = ["shopee", "tokopedia", "tiktok"];
+/** Storefronts, in the order they should be offered. */
+const MARKETPLACE_IDS = ["bio-hub-shopee", "bio-hub-tokopedia", "bio-hub-tiktok"] as const;
 
 const trustPoints = [
   { icon: ShieldCheck, label: "Bayar di marketplace" },
@@ -89,6 +88,11 @@ export function BioPage({ config }: BioPageProps) {
             sizes="(max-width: 480px) 100vw, 30rem"
             className={styles.bannerImage}
           />
+          <a
+            href="#bio-produk"
+            className={styles.bannerLink}
+            aria-label="Lihat produk Sheepie"
+          />
         </section>
 
         <ul
@@ -101,9 +105,13 @@ export function BioPage({ config }: BioPageProps) {
           ))}
         </ul>
 
-        <section aria-labelledby="bio-products-heading" className={styles.group}>
-          <h2 id="bio-products-heading" className={styles.groupHeading}>
-            Produk
+        <section
+          id="bio-produk"
+          aria-labelledby="bio-products-heading"
+          className={styles.group}
+        >
+          <h2 id="bio-products-heading" className={styles.sectionTitle}>
+            Our Bestsellers
           </h2>
 
           <div className={styles.productList}>
@@ -119,25 +127,30 @@ export function BioPage({ config }: BioPageProps) {
                   data-bio-track-section={product.id}
                   data-bio-product={product.slug}
                 >
-                  {/* The eyebrow is the brand's own taxonomy: each product is one
-                      layer of rest, so it labels rather than decorates. */}
-                  <p className={styles.layerLabel}>{product.eyebrow}</p>
-
-                  <div className={styles.productArt}>
-                    <Image
-                      src={product.image.src}
-                      alt={product.image.alt}
-                      fill
-                      sizes="(max-width: 480px) 92vw, 28rem"
-                      className={styles.productImage}
-                    />
-                  </div>
-
-                  <h3 className={styles.productName}>{product.name}</h3>
-                  <p className={styles.productLine}>{product.headline}</p>
+                  {/* Every listing image, swipeable. The partial next slide is
+                      the affordance: no arrows or dots needed. */}
+                  <ul
+                    className={styles.gallery}
+                    aria-label={`Galeri ${product.name}`}
+                  >
+                    {product.gallery.map((src, index) => (
+                      <li key={src} className={styles.gallerySlide}>
+                        <Image
+                          src={src}
+                          alt={index === 0 ? product.image.alt : ""}
+                          fill
+                          sizes="(max-width: 480px) 72vw, 20rem"
+                          className={styles.galleryImage}
+                        />
+                      </li>
+                    ))}
+                  </ul>
 
                   <div className={styles.productBuy}>
-                    <span className={styles.productPrice}>{product.price}</span>
+                    <div className={styles.productCopy}>
+                      <h3 className={styles.productName}>{product.name}</h3>
+                      <p className={styles.productLine}>{product.headline}</p>
+                    </div>
                     <MarketplaceButton
                       action={shopee}
                       ctaId={shopee.id}
@@ -162,8 +175,8 @@ export function BioPage({ config }: BioPageProps) {
             data-bio-section="bio-testimonials"
             data-bio-track-section="bio-testimonials"
           >
-            <h2 id="bio-testimonials-heading" className={styles.groupHeading}>
-              <Star size={13} aria-hidden="true" /> Kata pembeli
+            <h2 id="bio-testimonials-heading" className={styles.sectionTitle}>
+              Loved by Our Sleepers
             </h2>
 
             <BioTestimonials products={config.products} testimonials={config.testimonials} />
@@ -176,15 +189,16 @@ export function BioPage({ config }: BioPageProps) {
           data-bio-section="bio-hub"
           data-bio-track-section="bio-hub"
         >
-          <h2 id="bio-hub-heading" className={styles.shopHeading}>
-            Belanja di mana saja
+          <h2 id="bio-hub-heading" className={styles.sectionTitle}>
+            Shop Everywhere
           </h2>
-          <p className={styles.shopSubheading}>Temukan Sheepie di platform favoritmu</p>
+          <p className={styles.shopSubheading}>Find Sheepie on your favorite platform</p>
 
           <div className={styles.shopRow}>
-            {MARKETPLACE_ORDER.flatMap((destination) => {
-              const action = config.hubActions.find((entry) => entry.destination === destination);
+            {MARKETPLACE_IDS.flatMap((id) => {
+              const action = config.hubActions.find((entry) => entry.id === id);
               if (!action) return [];
+              const destination = action.destination;
 
               return [
                 <MarketplaceButton
@@ -209,17 +223,17 @@ export function BioPage({ config }: BioPageProps) {
             })}
           </div>
 
-          <p className={styles.connectHeading}>Tetap terhubung</p>
+          <p className={styles.connectHeading}>Let&apos;s stay connected</p>
           <div className={styles.connectRow}>
             {config.hubActions
-              .filter((action) => !MARKETPLACE_ORDER.includes(action.destination))
+              .filter((action) => !MARKETPLACE_IDS.includes(action.id as (typeof MARKETPLACE_IDS)[number]))
               .map((action, index) => {
                 const Icon = destinationIcons[action.destination];
                 return (
                   <MarketplaceButton
                     key={action.id}
                     action={action}
-                    ctaId={`hub_${action.destination}`}
+                    ctaId={`connect_${action.destination}`}
                     section="bio-hub"
                     position={`connect-${index + 1}`}
                     className={styles.connectLink}
