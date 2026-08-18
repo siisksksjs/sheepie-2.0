@@ -148,6 +148,7 @@ export function BioPage({ config }: BioPageProps) {
                         alt=""
                         width={17}
                         height={17}
+                        unoptimized
                         className={styles.ctaLogo}
                       />
                       <span>Beli di Shopee</span>
@@ -204,6 +205,7 @@ export function BioPage({ config }: BioPageProps) {
                     alt=""
                     width={22}
                     height={22}
+                    unoptimized
                     className={styles.shopLogo}
                   />
                   <span>{action.label}</span>

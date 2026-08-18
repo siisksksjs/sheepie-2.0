@@ -112,6 +112,7 @@
 .productCard {
   display: grid;
   grid-template-columns: 38% 1fr;
+  align-items: center;
   overflow: hidden;
   border: 1px solid var(--bio-border);
   border-radius: 1rem;
@@ -120,11 +121,13 @@
 
 .productMedia {
   position: relative;
-  min-height: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--bio-ice);
 }
 
+/* contain, not cover: the listing artwork carries text that must not be cut off. */
 .productImage {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .productBody {
