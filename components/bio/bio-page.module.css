@@ -16,9 +16,6 @@
 /* ---------- logo nav ---------- */
 
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,13 +23,11 @@
   margin-inline: auto;
   padding-top: max(0.7rem, env(safe-area-inset-top));
   padding-bottom: 0.7rem;
-  background: color-mix(in srgb, var(--bio-cream) 92%, transparent);
-  backdrop-filter: blur(8px);
 }
 
 .logo {
   width: auto;
-  height: 3.75rem;
+  height: 4.25rem;
 }
 
 /* One narrow column at every width: this is a link hub, not a landing page. */
@@ -118,90 +113,100 @@
 
 /* ---------- product grid ---------- */
 
-.productList {
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem 0.7rem;
+}
+
+.productBand {
   display: flex;
   flex-direction: column;
 }
 
-/* Bands separated by a hairline instead of stacked cards: the listing art is
-   the only thing that needs a frame, so nothing else gets one. */
-.productBand {
-  padding: 1.4rem 0;
-  border-top: 1px solid var(--bio-border);
-}
-
-.productBand:first-child {
-  border-top: none;
-  padding-top: 0.2rem;
-}
-
 .gallery {
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  list-style: none;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.gallery::-webkit-scrollbar {
-  display: none;
-}
-
-.gallerySlide {
   position: relative;
-  /* Under a full column so the next slide peeks: that peek is the affordance. */
-  flex: 0 0 82%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 0.5rem;
   background: var(--bio-ice);
-  scroll-snap-align: start;
 }
 
 .galleryImage {
   object-fit: contain;
 }
 
-/* contain, not cover: the listing artwork carries text that must not be cut off. */
-.productImage {
-  object-fit: contain;
+.galleryArrow {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 1px solid var(--bio-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bio-white) 88%, transparent);
+  color: var(--bio-navy);
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+
+.galleryPrev {
+  left: 0.35rem;
+}
+
+.galleryNext {
+  right: 0.35rem;
+}
+
+.galleryCount {
+  position: absolute;
+  right: 0.4rem;
+  bottom: 0.4rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bio-navy) 78%, transparent);
+  color: var(--bio-white);
+  font-size: 0.6rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 .productName {
   font-family: var(--font-display), serif;
-  font-size: 1.3rem;
+  font-size: 1.02rem;
   font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .productLine {
-  margin-top: 0.3rem;
-  font-size: 0.85rem;
-  line-height: 1.5;
+  margin-top: 0.2rem;
+  font-size: 0.74rem;
+  line-height: 1.45;
   color: var(--bio-text-secondary);
 }
 
 .productBuy {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 0.95rem;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
 }
 
 .productCopy {
+  flex: 1;
   min-width: 0;
 }
 
 .buyButton {
-  display: inline-flex;
+  display: flex;
   min-height: 2.75rem;
   align-items: center;
   justify-content: center;
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
   border: 1px solid var(--bio-navy);
   border-radius: 999px;
   background: var(--bio-navy);
@@ -402,9 +407,13 @@
   .buyButton:hover {
     background: color-mix(in srgb, var(--bio-navy) 86%, #fff);
   }
+
+  .galleryArrow:hover {
+    background: var(--bio-white);
+  }
 }
 
-:is(.buyButton, .shopLink, .connectLink, .reviewTab):focus-visible {
+:is(.buyButton, .shopLink, .connectLink, .reviewTab, .galleryArrow):focus-visible {
   outline: 2px solid var(--bio-navy);
   outline-offset: 2px;
 }

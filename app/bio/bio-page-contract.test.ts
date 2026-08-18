@@ -139,11 +139,16 @@ describe("bio page rendered contract", () => {
 
     expect(cards).toHaveLength(3);
     for (const card of cards) {
-      // Every listing image is present, so the strip can be swiped like a PDP.
-      const slides = card.match(/<li class="[^"]*gallerySlide/g) ?? [];
-      expect(slides.length).toBeGreaterThanOrEqual(9);
+      // One frame at a time, stepped with arrows rather than scrolled.
+      expect(card).toMatch(/aria-label="Gambar sebelumnya/);
+      expect(card).toMatch(/aria-label="Gambar berikutnya/);
       expect(card).toContain('data-bio-destination="shopee"');
       expect(card).toContain("Buy now");
+    }
+
+    // Every listing image is available to step through.
+    for (const product of createBioConfig().products) {
+      expect(product.gallery.length).toBeGreaterThanOrEqual(9);
     }
   });
 });

@@ -14,6 +14,7 @@ import {
 import type { BioAction, BioConfig } from "@/data/bio";
 
 import { BioPostHog } from "./bio-posthog";
+import { BioProductGallery } from "./bio-product-gallery";
 import { BioTestimonials } from "./bio-testimonials";
 import { BioTracker } from "./bio-tracker";
 import { MarketplaceButton } from "./marketplace-button";
@@ -114,7 +115,7 @@ export function BioPage({ config }: BioPageProps) {
             Our Bestsellers
           </h2>
 
-          <div className={styles.productList}>
+          <div className={styles.productGrid}>
             {config.products.map((product) => {
               const shopee = product.actions.find((action) => action.destination === "shopee")!;
 
@@ -127,24 +128,11 @@ export function BioPage({ config }: BioPageProps) {
                   data-bio-track-section={product.id}
                   data-bio-product={product.slug}
                 >
-                  {/* Every listing image, swipeable. The partial next slide is
-                      the affordance: no arrows or dots needed. */}
-                  <ul
-                    className={styles.gallery}
-                    aria-label={`Galeri ${product.name}`}
-                  >
-                    {product.gallery.map((src, index) => (
-                      <li key={src} className={styles.gallerySlide}>
-                        <Image
-                          src={src}
-                          alt={index === 0 ? product.image.alt : ""}
-                          fill
-                          sizes="(max-width: 480px) 72vw, 20rem"
-                          className={styles.galleryImage}
-                        />
-                      </li>
-                    ))}
-                  </ul>
+                  <BioProductGallery
+                    images={product.gallery}
+                    alt={product.image.alt}
+                    productName={product.name}
+                  />
 
                   <div className={styles.productBuy}>
                     <div className={styles.productCopy}>
