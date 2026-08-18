@@ -45,6 +45,7 @@ describe("bio page rendered contract", () => {
       "bio-product-darkness",
       "bio-product-silence",
       "bio-hub",
+      "bio-testimonials",
       "bio-footer",
     ]) {
       expect(markup).toContain(`data-bio-section="${section}"`);
@@ -54,7 +55,7 @@ describe("bio page rendered contract", () => {
   it("exposes unique observer targets without tracking CTAs", () => {
     const trackedSections = attributes(markup, "data-bio-track-section");
 
-    expect(trackedSections).toHaveLength(8);
+    expect(trackedSections).toHaveLength(9);
     expect(new Set(trackedSections).size).toBe(trackedSections.length);
     expect(markup).not.toMatch(/<(?:a|button) [^>]*data-bio-track-section=/);
     expect(trackedSections).toEqual([
@@ -65,6 +66,7 @@ describe("bio page rendered contract", () => {
       "bio-product-darkness",
       "bio-product-silence",
       "bio-hub",
+      "bio-testimonials",
       "bio-footer",
     ]);
   });
@@ -83,6 +85,18 @@ describe("bio page rendered contract", () => {
       expect(anchor).toContain('rel="noopener noreferrer"');
     }
     expect(outboundAnchors.filter((anchor) => anchor.includes('href="mailto:'))).toHaveLength(1);
+  });
+
+  it("renders each review as readable text with a link to the original screenshot", () => {
+    const cards = markup.match(/<li class="[^"]*testimonialCard[^"]*"[\s\S]*?<\/li>/g) ?? [];
+
+    expect(cards.length).toBeGreaterThanOrEqual(12);
+    for (const card of cards) {
+      // The quote must be real text, not a downscaled screenshot nobody can read.
+      expect(card).toMatch(/testimonialQuote[^>]*>[^<]{40,}/);
+      expect(card).toMatch(/href="\/images\/bio\/testimonials\/[^"]+\.png"/);
+      expect(card).toContain('rel="noopener noreferrer"');
+    }
   });
 
   it("puts a price and a Shopee CTA inside every product card", () => {

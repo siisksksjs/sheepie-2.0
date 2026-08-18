@@ -192,20 +192,34 @@ export function BioPage({ config }: BioPageProps) {
             data-bio-track-section="bio-testimonials"
           >
             <h2 id="bio-testimonials-heading" className={styles.groupHeading}>
-              <Star size={13} aria-hidden="true" /> Ulasan pembeli Shopee
+              <Star size={13} aria-hidden="true" /> Kata pembeli
             </h2>
 
-            <ul className={styles.testimonialRow}>
+            <ul className={styles.testimonialList}>
               {config.testimonials.map((testimonial) => (
                 <li key={testimonial.id} className={styles.testimonialCard}>
-                  <Image
-                    src={testimonial.src}
-                    alt={testimonial.alt}
-                    width={480}
-                    height={640}
-                    sizes="(max-width: 480px) 70vw, 18rem"
-                    className={styles.testimonialImage}
-                  />
+                  <div className={styles.testimonialHead}>
+                    <span className={styles.testimonialStars} aria-label="Lima dari lima bintang">
+                      {"★★★★★"}
+                    </span>
+                    <span className={styles.testimonialAuthor}>{testimonial.author}</span>
+                    <Image
+                      src={brandLogos[testimonial.marketplace]!}
+                      alt={testimonial.marketplace === "shopee" ? "Shopee" : "Tokopedia"}
+                      width={16}
+                      height={16}
+                      className={styles.testimonialSource}
+                    />
+                  </div>
+                  <p className={styles.testimonialQuote}>{testimonial.quote}</p>
+                  <a
+                    href={testimonial.screenshot.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.testimonialProof}
+                  >
+                    Lihat tangkapan layar ulasan
+                  </a>
                 </li>
               ))}
             </ul>
