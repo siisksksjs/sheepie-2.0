@@ -46,6 +46,15 @@ const brandLogos: Partial<Record<BioAction["destination"], string>> = {
 /** Storefronts, in the order they should be offered. */
 const MARKETPLACE_IDS = ["bio-hub-shopee", "bio-hub-tokopedia", "bio-hub-tiktok"] as const;
 
+/** Ways to follow or reach us, in the order they should be offered. */
+const CONNECT_IDS = [
+  "bio-hub-instagram",
+  "bio-connect-tiktok",
+  "bio-hub-website",
+  "bio-hub-email",
+  "bio-hub-whatsapp",
+] as const;
+
 /** Figures supplied by the store owner. */
 const trustStats = [
   { icon: Star, value: "4.9/5", label: "from 1000+ reviews" },
@@ -232,11 +241,12 @@ export function BioPage({ config }: BioPageProps) {
 
           <p className={styles.connectHeading}>Let&apos;s stay connected</p>
           <div className={styles.connectRow}>
-            {config.hubActions
-              .filter((action) => !MARKETPLACE_IDS.includes(action.id as (typeof MARKETPLACE_IDS)[number]))
-              .map((action, index) => {
-                const Icon = destinationIcons[action.destination];
-                return (
+            {CONNECT_IDS.flatMap((id, index) => {
+              const action = config.hubActions.find((entry) => entry.id === id);
+              if (!action) return [];
+              const Icon = destinationIcons[action.destination];
+
+              return [
                   <MarketplaceButton
                     key={action.id}
                     action={action}
@@ -245,11 +255,11 @@ export function BioPage({ config }: BioPageProps) {
                     position={`connect-${index + 1}`}
                     className={styles.connectLink}
                   >
-                    <Icon size={20} aria-hidden="true" />
-                    <span>{action.label}</span>
-                  </MarketplaceButton>
-                );
-              })}
+                  <Icon size={20} aria-hidden="true" />
+                  <span>{action.label}</span>
+                </MarketplaceButton>,
+              ];
+            })}
           </div>
         </section>
 
