@@ -23,7 +23,10 @@ export default function BioLayout({ children }: Readonly<{ children: React.React
   return (
     <html lang="id">
       <body
-        className={`${playfair.variable} ${quicksand.variable} bg-background font-body text-foreground antialiased`}
+        className={`${playfair.variable} ${quicksand.variable} font-body text-foreground antialiased`}
+        // Set here as well as on the page so overscroll and short viewports
+        // never reveal a white band behind the cream.
+        style={{ backgroundColor: "#fffdf5" }}
       >
         {children}
       </body>

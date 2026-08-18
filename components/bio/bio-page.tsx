@@ -60,27 +60,27 @@ export function BioPage({ config }: BioPageProps) {
       <BioPostHog />
       <BioTracker />
 
-      <div className={styles.shell}>
-        <section
-          className={styles.banner}
-          data-bio-section="bio-banner"
-          data-bio-track-section="bio-banner"
-        >
-          <Image
-            src={config.bannerImage.src}
-            alt={config.bannerImage.alt}
-            fill
-            priority
-            sizes="(max-width: 480px) 100vw, 30rem"
-            className={styles.bannerImage}
-          />
-          <a
-            href="#bio-produk"
-            className={styles.bannerLink}
-            aria-label="Lihat produk Sheepie"
-          />
-        </section>
+      <section
+        className={styles.banner}
+        data-bio-section="bio-banner"
+        data-bio-track-section="bio-banner"
+      >
+        <Image
+          src={config.bannerImage.src}
+          alt={config.bannerImage.alt}
+          fill
+          priority
+          sizes="100vw"
+          className={styles.bannerImage}
+        />
+        <a
+          href="#bio-produk"
+          className={styles.bannerLink}
+          aria-label="Lihat produk Sheepie"
+        />
+      </section>
 
+      <div className={styles.shell}>
         <ul
           className={styles.statRow}
           data-bio-section="bio-trust"

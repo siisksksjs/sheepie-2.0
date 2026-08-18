@@ -1,14 +1,12 @@
 .page {
   --bio-navy: #213368;
   --bio-ice: #eaf2f8;
-  --bio-cream: #fbf8f1;
+  --bio-cream: #fffdf5;
   --bio-white: #fff;
   --bio-text-secondary: #4b5878;
   --bio-border: color-mix(in srgb, var(--bio-navy) 12%, transparent);
   --bio-blue-rule: #a8bdd8;
   min-height: 100vh;
-  padding-left: max(0px, env(safe-area-inset-left));
-  padding-right: max(0px, env(safe-area-inset-right));
   background: var(--bio-cream);
   color: var(--bio-navy);
 }
@@ -17,7 +15,9 @@
 .shell {
   width: min(100% - 2rem, 30rem);
   margin-inline: auto;
-  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-top: 1rem;
+  padding-left: max(0px, env(safe-area-inset-left));
+  padding-right: max(0px, env(safe-area-inset-right));
   padding-bottom: max(2rem, env(safe-area-inset-bottom));
 }
 
@@ -27,9 +27,9 @@
    shown whole rather than cropped under an overlay. */
 .banner {
   position: relative;
+  width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: 0.5rem;
   background: var(--bio-cream);
 }
 
@@ -37,7 +37,7 @@
   object-fit: cover;
 }
 
-/* The artwork has a Shop Our Bestsellers button drawn into it, so the whole
+/* The artwork has a Shop Our Best Sellers button drawn into it, so the whole
    hero is the target rather than leaving a button that does nothing. */
 .bannerLink {
   display: block;
@@ -453,6 +453,13 @@
 :is(.buyButton, .shopLink, .connectLink, .reviewTab, .galleryArrow):focus-visible {
   outline: 2px solid var(--bio-navy);
   outline-offset: 2px;
+}
+
+@media (min-width: 40rem) {
+  .banner {
+    width: min(100%, 40rem);
+    margin-inline: auto;
+  }
 }
 
 @media (max-width: 360px) {
