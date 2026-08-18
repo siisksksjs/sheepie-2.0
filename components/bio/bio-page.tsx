@@ -1,7 +1,6 @@
 import Image from "next/image";
 import {
   ArrowUpRight,
-  CloudMoon,
   Globe2,
   Instagram,
   Mail,
@@ -36,6 +35,12 @@ const destinationIcons: Record<BioAction["destination"], typeof Globe2> = {
   email: Mail,
 };
 
+/** Official marketplace brand colors, so each CTA reads as the right store. */
+const brandColors: Partial<Record<BioAction["destination"], string>> = {
+  shopee: "#ee4d2d",
+  tokopedia: "#42b549",
+};
+
 const trustPoints = [
   { icon: ShieldCheck, label: "Bayar di marketplace" },
   { icon: MapPin, label: "Kirim se-Indonesia" },
@@ -54,12 +59,14 @@ export function BioPage({ config }: BioPageProps) {
         data-bio-section="bio-header"
         data-bio-track-section="bio-header"
       >
-        <span className={styles.navBrand}>
-          <span className={styles.mark} aria-hidden="true">
-            <CloudMoon size={20} strokeWidth={1.7} />
-          </span>
-          <span className={styles.wordmark}>Sheepie.</span>
-        </span>
+        <Image
+          src="/images/bio/sheepie-logo.png"
+          alt="Sheepie"
+          width={400}
+          height={265}
+          priority
+          className={styles.logo}
+        />
         <ShareButton />
       </nav>
 
@@ -163,7 +170,11 @@ export function BioPage({ config }: BioPageProps) {
                   position={`hub-${index + 1}`}
                   className={styles.hubLink}
                 >
-                  <Icon size={17} aria-hidden="true" />
+                  <Icon
+                    size={17}
+                    aria-hidden="true"
+                    style={{ color: brandColors[action.destination] }}
+                  />
                   <span>{action.label}</span>
                 </MarketplaceButton>
               );
