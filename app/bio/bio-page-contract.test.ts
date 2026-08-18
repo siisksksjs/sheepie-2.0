@@ -65,8 +65,8 @@ describe("bio page rendered contract", () => {
       "bio-product-alignment",
       "bio-product-darkness",
       "bio-product-silence",
-      "bio-hub",
       "bio-testimonials",
+      "bio-hub",
       "bio-footer",
     ]);
   });
@@ -93,9 +93,10 @@ describe("bio page rendered contract", () => {
     for (const review of config.testimonials) {
       expect(review.author).toMatch(/^.\*{3,5}.$/);
     }
-    // The active tab's handles are rendered, and they are masked.
-    const rendered = config.testimonials.filter((review) => markup.includes(review.author));
-    expect(rendered.length).toBeGreaterThanOrEqual(2);
+    // Review cards show the screenshot alone, so no handle is rendered at all.
+    for (const review of config.testimonials) {
+      expect(markup).not.toContain(`>${review.author}<`);
+    }
     // No raw handle should survive into the rendered page.
     for (const raw of ["indoshop_lokal", "saalsabilaadinda", "bennettonlin", "bluenavy89", "steve969"]) {
       expect(markup).not.toContain(raw);
@@ -200,7 +201,7 @@ describe("standalone bio routing contract", () => {
 
     // A link hub is a single column at every width; no multi-column editorial grid.
     expect(cssSource).toMatch(/\.shell\s*\{[\s\S]*?width:\s*min\(100% - 2rem, 30rem\)/);
-    for (const removed of [".hero", ".trustGrid", ".finalCta", ".productStories", ".ambientCloud", ".secondaryButton"]) {
+    for (const removed of [".hero", ".trustGrid", ".finalCta", ".productStories", ".ambientCloud", ".secondaryButton", ".hubGrid"]) {
       expect(cssSource).not.toContain(`${removed} {`);
     }
 
@@ -217,7 +218,7 @@ describe("standalone bio routing contract", () => {
       new URL("../../components/bio/bio-page.module.css", import.meta.url),
       "utf8",
     );
-    const tapTargets = [".primaryButton {", ".hubLink {"];
+    const tapTargets = [".primaryButton {", ".shopLink {", ".connectLink {"];
 
     for (const selector of tapTargets) {
       const block = cssSource.slice(cssSource.indexOf(selector));

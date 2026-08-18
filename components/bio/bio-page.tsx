@@ -41,7 +41,11 @@ const destinationIcons: Record<BioAction["destination"], typeof Globe2> = {
 const brandLogos: Partial<Record<BioAction["destination"], string>> = {
   shopee: "/images/bio/shopee-logo.png",
   tokopedia: "/images/bio/tokopedia-logo.png",
+  tiktok: "/images/bio/tiktok-logo.png",
 };
+
+/** Places to buy, in the order the storefronts should be offered. */
+const MARKETPLACE_ORDER: Array<BioAction["destination"]> = ["shopee", "tokopedia", "tiktok"];
 
 const trustPoints = [
   { icon: ShieldCheck, label: "Bayar di marketplace" },
@@ -105,7 +109,7 @@ export function BioPage({ config }: BioPageProps) {
             Produk
           </h2>
 
-          <div className={styles.productGrid}>
+          <div className={styles.productList}>
             {config.products.map((product) => {
               const shopee = product.actions.find((action) => action.destination === "shopee")!;
 
@@ -123,13 +127,13 @@ export function BioPage({ config }: BioPageProps) {
                       src={product.image.src}
                       alt={product.image.alt}
                       fill
-                      sizes="(max-width: 480px) 45vw, 14rem"
+                      sizes="(max-width: 480px) 40vw, 12rem"
                       className={styles.productImage}
                     />
                   </div>
                   <div className={styles.productBody}>
                     <h3 className={styles.productName}>{product.name}</h3>
-                    <p className={styles.productEyebrow}>{product.eyebrow}</p>
+                    <p className={styles.productLine}>{product.headline}</p>
                     <p className={styles.productPrice}>{product.price}</p>
                     <MarketplaceButton
                       action={shopee}
@@ -155,41 +159,6 @@ export function BioPage({ config }: BioPageProps) {
           </div>
         </section>
 
-        <section
-          aria-labelledby="bio-hub-heading"
-          className={styles.group}
-          data-bio-section="bio-hub"
-          data-bio-track-section="bio-hub"
-        >
-          <h2 id="bio-hub-heading" className={styles.groupHeading}>
-            Kunjungi kami
-          </h2>
-
-          <div className={styles.hubGrid}>
-            {config.hubActions.map((action, index) => {
-              const Icon = destinationIcons[action.destination];
-              const logo = brandLogos[action.destination];
-              return (
-                <MarketplaceButton
-                  key={action.id}
-                  action={action}
-                  ctaId={`hub_${action.destination}`}
-                  section="bio-hub"
-                  position={`hub-${index + 1}`}
-                  className={styles.hubLink}
-                >
-                  {logo ? (
-                    <Image src={logo} alt="" width={22} height={22} className={styles.hubLogo} />
-                  ) : (
-                    <Icon size={17} aria-hidden="true" />
-                  )}
-                  <span>{action.label}</span>
-                </MarketplaceButton>
-              );
-            })}
-          </div>
-        </section>
-
         {config.testimonials.length > 0 ? (
           <section
             aria-labelledby="bio-testimonials-heading"
@@ -201,16 +170,70 @@ export function BioPage({ config }: BioPageProps) {
               <Star size={13} aria-hidden="true" /> Kata pembeli
             </h2>
 
-            <BioTestimonials
-              products={config.products}
-              testimonials={config.testimonials}
-              logos={{
-                shopee: brandLogos.shopee!,
-                tokopedia: brandLogos.tokopedia!,
-              }}
-            />
+            <BioTestimonials products={config.products} testimonials={config.testimonials} />
           </section>
         ) : null}
+
+        <section
+          aria-labelledby="bio-hub-heading"
+          className={styles.group}
+          data-bio-section="bio-hub"
+          data-bio-track-section="bio-hub"
+        >
+          <h2 id="bio-hub-heading" className={styles.shopHeading}>
+            Belanja di mana saja
+          </h2>
+          <p className={styles.shopSubheading}>Temukan Sheepie di platform favoritmu</p>
+
+          <div className={styles.shopRow}>
+            {MARKETPLACE_ORDER.flatMap((destination) => {
+              const action = config.hubActions.find((entry) => entry.destination === destination);
+              if (!action) return [];
+
+              return [
+                <MarketplaceButton
+                  key={action.id}
+                  action={action}
+                  ctaId={`hub_${action.destination}`}
+                  section="bio-hub"
+                  position={`shop-${destination}`}
+                  className={styles.shopLink}
+                >
+                  <Image
+                    src={brandLogos[destination]!}
+                    alt=""
+                    width={22}
+                    height={22}
+                    className={styles.shopLogo}
+                  />
+                  <span>{action.label}</span>
+                </MarketplaceButton>,
+              ];
+            })}
+          </div>
+
+          <p className={styles.connectHeading}>Tetap terhubung</p>
+          <div className={styles.connectRow}>
+            {config.hubActions
+              .filter((action) => !MARKETPLACE_ORDER.includes(action.destination))
+              .map((action, index) => {
+                const Icon = destinationIcons[action.destination];
+                return (
+                  <MarketplaceButton
+                    key={action.id}
+                    action={action}
+                    ctaId={`hub_${action.destination}`}
+                    section="bio-hub"
+                    position={`connect-${index + 1}`}
+                    className={styles.connectLink}
+                  >
+                    <Icon size={20} aria-hidden="true" />
+                    <span>{action.label}</span>
+                  </MarketplaceButton>
+                );
+              })}
+          </div>
+        </section>
 
         <footer
           className={styles.footer}

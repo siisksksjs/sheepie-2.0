@@ -301,7 +301,7 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
     },
     {
       id: "bio-hub-tiktok",
-      label: "TikTok",
+      label: "TikTok Shop",
       href: siteSource.socials.tiktok,
       destination: "tiktok",
       accessibleLabel: "Ikuti Sheepie di TikTok (buka tab baru)",

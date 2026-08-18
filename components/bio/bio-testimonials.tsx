@@ -10,10 +10,9 @@ import styles from "./bio-page.module.css";
 type BioTestimonialsProps = {
   products: BioProduct[];
   testimonials: BioTestimonial[];
-  logos: Record<"shopee" | "tokopedia", string>;
 };
 
-export function BioTestimonials({ products, testimonials, logos }: BioTestimonialsProps) {
+export function BioTestimonials({ products, testimonials }: BioTestimonialsProps) {
   const available = products.filter((product) =>
     testimonials.some((review) => review.product === product.slug),
   );
@@ -51,16 +50,6 @@ export function BioTestimonials({ products, testimonials, logos }: BioTestimonia
       >
         {shown.map((testimonial) => (
           <li key={testimonial.id} className={styles.testimonialCard}>
-            <div className={styles.testimonialHead}>
-              <span className={styles.testimonialAuthor}>{testimonial.author}</span>
-              <Image
-                src={logos[testimonial.marketplace]}
-                alt={testimonial.marketplace === "shopee" ? "Shopee" : "Tokopedia"}
-                width={16}
-                height={16}
-                className={styles.testimonialSource}
-              />
-            </div>
             {/* The capture is a 3x phone screenshot, so it stays readable at column width. */}
             <Image
               src={testimonial.screenshot.src}
