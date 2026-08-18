@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {
-  Cloud,
   Globe2,
   Heart,
   Instagram,
@@ -51,8 +50,9 @@ const MARKETPLACE_IDS = ["bio-hub-shopee", "bio-hub-tokopedia", "bio-hub-tiktok"
 const trustStats = [
   { icon: Star, value: "4.9/5", label: "from 1000+ reviews" },
   { icon: Heart, value: "1000+", label: "happy sleepers" },
-  { icon: Cloud, value: "Proudly", label: "Indonesian Brand" },
-];
+  // A real map of the archipelago rather than a generic glyph.
+  { map: "/images/bio/indonesia.svg", value: "Proudly", label: "Indonesian Brand" },
+] as const;
 
 export function BioPage({ config }: BioPageProps) {
   return (
@@ -104,13 +104,22 @@ export function BioPage({ config }: BioPageProps) {
         >
           {trustStats.map((stat) => (
             <li key={stat.label} className={styles.stat}>
-              <stat.icon
-                size={22}
-                strokeWidth={1.6}
-                aria-hidden="true"
-                className={styles.statIcon}
-              />
-              <p className={styles.statValue}>{stat.value}</p>
+              <p className={styles.statValue}>
+                {"map" in stat ? (
+                  <Image
+                    src={stat.map}
+                    alt=""
+                    width={44}
+                    height={17}
+                    // Next's optimizer rejects SVG by default; serve the file as-is.
+                    unoptimized
+                    className={styles.statMap}
+                  />
+                ) : (
+                  <stat.icon size={18} strokeWidth={1.7} aria-hidden="true" />
+                )}
+                {stat.value}
+              </p>
               <p className={styles.statLabel}>{stat.label}</p>
             </li>
           ))}
