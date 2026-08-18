@@ -87,6 +87,21 @@ describe("bio page rendered contract", () => {
     expect(outboundAnchors.filter((anchor) => anchor.includes('href="mailto:'))).toHaveLength(1);
   });
 
+  it("masks every reviewer handle", () => {
+    const config = createBioConfig();
+
+    for (const review of config.testimonials) {
+      expect(review.author).toMatch(/^.\*{3,5}.$/);
+    }
+    // The active tab's handles are rendered, and they are masked.
+    const rendered = config.testimonials.filter((review) => markup.includes(review.author));
+    expect(rendered.length).toBeGreaterThanOrEqual(2);
+    // No raw handle should survive into the rendered page.
+    for (const raw of ["indoshop_lokal", "saalsabilaadinda", "bennettonlin", "bluenavy89", "steve969"]) {
+      expect(markup).not.toContain(raw);
+    }
+  });
+
   it("shows two to three reviews for every product", () => {
     const config = createBioConfig();
 
@@ -95,22 +110,25 @@ describe("bio page rendered contract", () => {
       expect(reviews.length).toBeGreaterThanOrEqual(2);
       expect(reviews.length).toBeLessThanOrEqual(3);
     }
-    // Each product heading appears once inside the review section.
-    // CSS module class names carry a build hash, so match loosely.
+    // One tab per product, so only one product's reviews are on screen at a time.
     for (const name of ["CerviCloud", "LumiCloud", "CalmiCloud"]) {
-      expect(markup).toMatch(new RegExp(`reviewGroupHeading[^"]*">${name}<`));
+      expect(markup).toMatch(new RegExp(`role="tab"[^>]*>${name}<`));
     }
+    expect((markup.match(/role="tab"/g) ?? [])).toHaveLength(3);
   });
 
   it("renders each review as readable text with a link to the original screenshot", () => {
     const cards = markup.match(/<li class="[^"]*testimonialCard[^"]*"[\s\S]*?<\/li>/g) ?? [];
 
-    expect(cards.length).toBeGreaterThanOrEqual(9);
+    // Only the active tab renders, which keeps the section short.
+    expect(cards.length).toBeGreaterThanOrEqual(2);
+    expect(cards.length).toBeLessThanOrEqual(3);
     for (const card of cards) {
       // The quote must be real text, not a downscaled screenshot nobody can read.
       expect(card).toMatch(/testimonialQuote[^>]*>[^<]{40,}/);
       expect(card).toMatch(/href="\/images\/bio\/testimonials\/[^"]+\.png"/);
-      expect(card).toContain('rel="noopener noreferrer"');
+      // The screenshot opens in a modal, so it must not target a new tab.
+      expect(card).not.toContain('target="_blank"');
     }
   });
 

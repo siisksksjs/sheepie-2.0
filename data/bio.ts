@@ -56,13 +56,26 @@ export type BioConfig = {
 export const SHEEPIE_EMAIL = "hello@sheepiesleep.com";
 
 /**
+ * Masks a marketplace handle to the shape the stores themselves use, so no
+ * reviewer is identifiable from this page regardless of how the original
+ * marketplace displayed them.
+ */
+export function maskAuthor(handle: string): string {
+  const trimmed = handle.trim();
+  if (trimmed.length < 2) return "*****";
+
+  const stars = Math.min(5, Math.max(3, trimmed.length - 2));
+  return `${trimmed[0]}${"*".repeat(stars)}${trimmed[trimmed.length - 1]}`;
+}
+
+/**
  * The strongest three five-star reviews per product, chosen for distinct angles
  * rather than repetition: an objection answered, the core benefit, and a signal
  * of repeat trust. Quotes are transcribed because the original screenshots are
  * desktop-width and render at roughly 5px of text on a phone; each card links to
  * its screenshot as proof.
  */
-const testimonials: BioTestimonial[] = [
+const rawTestimonials: BioTestimonial[] = [
   // CerviCloud — the shape looks odd at first, so lead with that objection.
   {
     id: "cervicloud-tokopedia-3",
@@ -300,6 +313,12 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
       accessibleLabel: "Ikuti Sheepie di Instagram (buka tab baru)",
     },
   ];
+
+  // Masked at config-build time so raw handles never reach the client bundle.
+  const testimonials: BioTestimonial[] = rawTestimonials.map((testimonial) => ({
+    ...testimonial,
+    author: maskAuthor(testimonial.author),
+  }));
 
   hubActions.push({
     id: "bio-hub-email",
