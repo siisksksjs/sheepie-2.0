@@ -25,8 +25,14 @@ export type BioProduct = {
     src: string;
     alt: string;
   };
-  /** Every listing image, browsable as a horizontal strip. */
+  /** Every listing image, browsable one frame at a time. */
   gallery: string[];
+  /**
+   * Marketplace rating. Left undefined until the real figures are supplied:
+   * a rating is a factual claim to shoppers, so it is never estimated.
+   * Fill from Shopee/Tokopedia Seller Centre, e.g. { score: 4.9, count: "5,2 rb" }.
+   */
+  rating?: { score: number; count: string };
   actions: [BioAction, BioAction];
 };
 

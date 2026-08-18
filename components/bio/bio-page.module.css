@@ -136,6 +136,8 @@
   object-fit: contain;
 }
 
+/* Transparent by default so the product art is never competed with; the
+   chevron carries a soft halo so it stays legible on any frame. */
 .galleryArrow {
   position: absolute;
   top: 50%;
@@ -144,12 +146,19 @@
   height: 2.25rem;
   place-items: center;
   transform: translateY(-50%);
-  border: 1px solid var(--bio-border);
+  border: none;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--bio-white) 88%, transparent);
+  background: none;
   color: var(--bio-navy);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
   cursor: pointer;
-  transition: background-color 0.18s ease;
+  opacity: 0.55;
+  transition: opacity 0.18s ease;
+}
+
+.galleryArrow:disabled {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .galleryPrev {
@@ -179,6 +188,23 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.2;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--bio-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.ratingStars {
+  color: #f5a524;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
 }
 
 .productLine {
@@ -408,8 +434,8 @@
     background: color-mix(in srgb, var(--bio-navy) 86%, #fff);
   }
 
-  .galleryArrow:hover {
-    background: var(--bio-white);
+  .galleryArrow:hover:not(:disabled) {
+    opacity: 1;
   }
 }
 

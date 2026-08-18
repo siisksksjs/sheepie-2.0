@@ -137,6 +137,19 @@ export function BioPage({ config }: BioPageProps) {
                   <div className={styles.productBuy}>
                     <div className={styles.productCopy}>
                       <h3 className={styles.productName}>{product.name}</h3>
+                      {product.rating ? (
+                        <p
+                          className={styles.rating}
+                          aria-label={`Rating ${product.rating.score} dari 5, ${product.rating.count} ulasan`}
+                        >
+                          <span className={styles.ratingStars} aria-hidden="true">
+                            {"\u2605\u2605\u2605\u2605\u2605"}
+                          </span>
+                          <span aria-hidden="true">
+                            {product.rating.score} ({product.rating.count})
+                          </span>
+                        </p>
+                      ) : null}
                       <p className={styles.productLine}>{product.headline}</p>
                     </div>
                     <MarketplaceButton
