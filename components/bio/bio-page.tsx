@@ -16,6 +16,7 @@ import {
 
 import type { BioAction, BioConfig } from "@/data/bio";
 
+import { BioPostHog } from "./bio-posthog";
 import { BioTracker } from "./bio-tracker";
 import { MarketplaceButton } from "./marketplace-button";
 import { ShareButton } from "./share-button";
@@ -44,6 +45,7 @@ const trustPoints = [
 export function BioPage({ config }: BioPageProps) {
   return (
     <main className={styles.page}>
+      <BioPostHog />
       <BioTracker />
 
       <nav

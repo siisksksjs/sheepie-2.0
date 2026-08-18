@@ -161,15 +161,17 @@ export function BioTracker() {
 
       if (details.event_name === "bio_outbound_click") {
         try {
-          window.umami?.track("bio_outbound_click", {
-            cta_id: details.cta_id,
-            cta_position: details.cta_position,
-            section_id: details.section_id,
-            destination: details.destination,
-            product_slug: details.product_slug,
+          void import("posthog-js").then(({ default: posthog }) => {
+            posthog.capture("bio_outbound_click", {
+              cta_id: details.cta_id,
+              cta_position: details.cta_position,
+              section_id: details.section_id,
+              destination: details.destination,
+              product_slug: details.product_slug,
+            });
           });
         } catch {
-          // Umami is an optional mirror for aggregate correlation.
+          // PostHog is an optional mirror for aggregate correlation.
         }
       }
     };
