@@ -28,11 +28,11 @@ export type BioProduct = {
   /** Every listing image, browsable one frame at a time. */
   gallery: string[];
   /**
-   * Marketplace rating. Left undefined until the real figures are supplied:
-   * a rating is a factual claim to shoppers, so it is never estimated.
-   * Fill from Shopee/Tokopedia Seller Centre, e.g. { score: 4.9, count: "5,2 rb" }.
+   * Marketplace rating, supplied by the store owner. A rating is a factual
+   * claim to shoppers, so it is only ever set from real figures — never
+   * estimated. `count` is optional until review totals are confirmed.
    */
-  rating?: { score: number; count: string };
+  rating?: { score: number; count?: string };
   actions: [BioAction, BioAction];
 };
 
@@ -213,6 +213,7 @@ const productStories: Array<Omit<BioProduct, "price" | "gallery" | "actions">> =
   {
     id: "bio-product-alignment",
     slug: "cervicloud",
+    rating: { score: 4.9 },
     name: "CerviCloud Pillow",
     eyebrow: "Penyelarasan",
     headline: "Leher lebih ditopang, pagi terasa lebih ringan.",
@@ -226,6 +227,7 @@ const productStories: Array<Omit<BioProduct, "price" | "gallery" | "actions">> =
   {
     id: "bio-product-darkness",
     slug: "lumicloud",
+    rating: { score: 5 },
     name: "LumiCloud EyeMask",
     eyebrow: "Kegelapan",
     headline: "Redupkan dunia tanpa menekan mata.",
@@ -239,6 +241,7 @@ const productStories: Array<Omit<BioProduct, "price" | "gallery" | "actions">> =
   {
     id: "bio-product-silence",
     slug: "calmicloud",
+    rating: { score: 4.9 },
     name: "CalmiCloud Earplug",
     eyebrow: "Keheningan",
     headline: "Bentuk ruang tenangmu sendiri.",

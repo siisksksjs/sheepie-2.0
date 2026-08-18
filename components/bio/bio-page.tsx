@@ -140,13 +140,16 @@ export function BioPage({ config }: BioPageProps) {
                       {product.rating ? (
                         <p
                           className={styles.rating}
-                          aria-label={`Rating ${product.rating.score} dari 5, ${product.rating.count} ulasan`}
+                          aria-label={`Rating ${product.rating.score} dari 5${
+                            product.rating.count ? `, ${product.rating.count} ulasan` : ""
+                          }`}
                         >
                           <span className={styles.ratingStars} aria-hidden="true">
                             {"\u2605\u2605\u2605\u2605\u2605"}
                           </span>
                           <span aria-hidden="true">
-                            {product.rating.score} ({product.rating.count})
+                            {product.rating.score}/5
+                            {product.rating.count ? ` (${product.rating.count})` : ""}
                           </span>
                         </p>
                       ) : null}
