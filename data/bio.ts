@@ -73,10 +73,8 @@ export function maskAuthor(handle: string): string {
  * rather than repetition: an objection answered, the core benefit, and a signal
  * of repeat trust.
  *
- * Each screenshot is a phone capture, cropped above the star row so the
- * reviewer's avatar and handle are removed from the image itself; the card shows
- * a masked handle instead. `quote` carries the visible text for assistive
- * technology and search engines.
+ * Screenshots are the untouched marketplace captures. `quote` carries their
+ * visible text for assistive technology and search engines.
  */
 const rawTestimonials: BioTestimonial[] = [
   // CerviCloud Pillow — the shape looks odd at first, so lead with that objection.
@@ -87,7 +85,7 @@ const rawTestimonials: BioTestimonial[] = [
     marketplace: "tokopedia",
     quote:
       "Awalnya agak aneh karena bentuknya beda dari bantal biasa, tapi setelah 2 minggu mulai kerasa bedanya. Leher jadi gak gampang pegal, dan bangun tidur gak kaku lagi. Postur badan lebih terjaga pas tidur.",
-    screenshot: { src: "/images/bio/testimonials/cervicloud-1.jpg", width: 1170, height: 806 },
+    screenshot: { src: "/images/bio/testimonials/cervicloud-1.jpg", width: 1170, height: 975 },
   },
   {
     id: "cervicloud-2",
@@ -96,7 +94,7 @@ const rawTestimonials: BioTestimonial[] = [
     marketplace: "tokopedia",
     quote:
       "Pertama kali pakai rasanya beda banget, tapi adminnya sempat bilang memang perlu waktu untuk adaptasi. Memory foam nya mantap banget, real ngesupport. Sekarang malah gak bisa tidur pake bantal lain.",
-    screenshot: { src: "/images/bio/testimonials/cervicloud-2.jpg", width: 1170, height: 824 },
+    screenshot: { src: "/images/bio/testimonials/cervicloud-2.jpg", width: 1170, height: 982 },
   },
   {
     id: "cervicloud-3",
@@ -105,7 +103,7 @@ const rawTestimonials: BioTestimonial[] = [
     marketplace: "tokopedia",
     quote:
       "Udah beli 2 kali disini. Sama-sama tidur miring, suka banget sama desain ergonomiknya, cerdas! Ada bagian khusus buat tangan pas tidur miring, gak kerasa kesemutan lagi.",
-    screenshot: { src: "/images/bio/testimonials/cervicloud-3.jpg", width: 1170, height: 866 },
+    screenshot: { src: "/images/bio/testimonials/cervicloud-3.jpg", width: 1170, height: 1013 },
   },
 
   // LumiCloud EyeMask — blackout is the promise; strap and comfort are the doubts.
@@ -116,7 +114,7 @@ const rawTestimonials: BioTestimonial[] = [
     marketplace: "shopee",
     quote:
       "Bahan berkualitas, lembut, cahaya tidak tembus. Bahan lembut tidak buat sakit atau pegal bagian belakang kepala, sangat recomended.",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-1.jpg", width: 1170, height: 1116 },
+    screenshot: { src: "/images/bio/testimonials/lumicloud-1.jpg", width: 1170, height: 1278 },
   },
   {
     id: "lumicloud-2",
@@ -125,7 +123,7 @@ const rawTestimonials: BioTestimonial[] = [
     marketplace: "shopee",
     quote:
       "Bagus halus banget bahannya, tebel empuk dan nyaman dipakai lama. Yang paling oke adalah fitur silent velcro nya.",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-2.jpg", width: 1170, height: 1324 },
+    screenshot: { src: "/images/bio/testimonials/lumicloud-2.jpg", width: 1170, height: 1467 },
   },
   {
     id: "lumicloud-3",
@@ -134,7 +132,7 @@ const rawTestimonials: BioTestimonial[] = [
     marketplace: "shopee",
     quote:
       "Aku udah coba pake dan beneran halus dan gak ngerusak bulu mata palsuku! Tidur juga jadi makin pules soalnya aku gampang kebangun tengah malem.",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-3.jpg", width: 1168, height: 1052 },
+    screenshot: { src: "/images/bio/testimonials/lumicloud-3.jpg", width: 1169, height: 1199 },
   },
 
   // CalmiCloud Earplug — noise is the problem; lead with the most concrete outcome.
@@ -145,7 +143,7 @@ const rawTestimonials: BioTestimonial[] = [
     marketplace: "shopee",
     quote:
       "Aku tipe orang light sleeper, ada suara dikit kebangun dan susah buat balik tidur lagi. Tapi pertama kali pake ini aku malemnya tidur 12 jam. Cukup banget bahkan buat aku yang sensitif.",
-    screenshot: { src: "/images/bio/testimonials/calmicloud-1.jpg", width: 1170, height: 1700 },
+    screenshot: { src: "/images/bio/testimonials/calmicloud-1.jpg", width: 1170, height: 1829 },
   },
   {
     id: "calmicloud-2",
@@ -154,7 +152,7 @@ const rawTestimonials: BioTestimonial[] = [
     marketplace: "shopee",
     quote:
       "Sesuai judulnya, Moldable jadi bisa ditempel langsung di sekitar lubang telinga sesuai dengan bentuk yang kamu inginkan. Sangat bantu untuk redam suara dari luar.",
-    screenshot: { src: "/images/bio/testimonials/calmicloud-2.jpg", width: 1170, height: 1442 },
+    screenshot: { src: "/images/bio/testimonials/calmicloud-2.jpg", width: 1170, height: 1598 },
   },
   {
     id: "calmicloud-3",
@@ -163,7 +161,7 @@ const rawTestimonials: BioTestimonial[] = [
     marketplace: "shopee",
     quote:
       "Barang sesuai, pengiriman cepat. Kosan berisik, pake ini jadi lebih kebantu buat tidur. Rekomended.",
-    screenshot: { src: "/images/bio/testimonials/calmicloud-3.jpg", width: 1170, height: 1118 },
+    screenshot: { src: "/images/bio/testimonials/calmicloud-3.jpg", width: 1170, height: 1273 },
   },
 ];
 
@@ -213,8 +211,8 @@ const productStories: Array<Omit<BioProduct, "price" | "actions">> = [
     description:
       "Kontur ergonomis 4D memeluk leher dan membantu menjaga posisi tidur alami, dengan permukaan Ice-Silk yang terasa sejuk.",
     image: {
-      src: "/images/edited/DSC01139.JPG",
-      alt: "Bantal ergonomis CerviCloud berwarna putih dengan kontur penyangga leher",
+      src: "/images/products/cervicloud/listing-01.png",
+      alt: "Bantal ergonomis CerviCloud dengan kontur penyangga leher di latar biru muda",
     },
   },
   {
@@ -226,8 +224,8 @@ const productStories: Array<Omit<BioProduct, "price" | "actions">> = [
     description:
       "Ruang mata 3D dan kain katun lembut menciptakan gelap menyeluruh dengan rasa ringan, sejuk, dan nyaman.",
     image: {
-      src: "/images/edited/DSC01058.JPG",
-      alt: "Masker tidur LumiCloud biru muda dengan ruang mata tiga dimensi",
+      src: "/images/products/lumicloud/listing-01.png",
+      alt: "Masker tidur LumiCloud biru muda dengan ruang mata tiga dimensi di latar biru muda",
     },
   },
   {
@@ -239,8 +237,8 @@ const productStories: Array<Omit<BioProduct, "price" | "actions">> = [
     description:
       "Silikon kelas medis yang dapat dibentuk menutup bagian luar telinga dengan nyaman untuk membantu meredam suara sekitar.",
     image: {
-      src: "/images/edited/DSC01313.JPG",
-      alt: "Earplug silikon CalmiCloud dalam wadah penyimpanan transparan",
+      src: "/images/products/calmicloud/listing-01.png",
+      alt: "Earplug silikon CalmiCloud dalam wadah transparan di latar biru muda",
     },
   },
 ];

@@ -5,7 +5,6 @@
   --bio-white: #fff;
   --bio-text-secondary: #4b5878;
   --bio-border: color-mix(in srgb, var(--bio-navy) 12%, transparent);
-  --bio-shopee: #ee4d2d;
   min-height: 100vh;
   padding-left: max(0px, env(safe-area-inset-left));
   padding-right: max(0px, env(safe-area-inset-right));
@@ -164,9 +163,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
-  border: 1px solid var(--bio-shopee);
+  border: 1px solid var(--bio-navy);
   border-radius: 0.7rem;
-  background: var(--bio-shopee);
+  background: var(--bio-navy);
   color: var(--bio-white);
   font-size: 0.82rem;
   font-weight: 600;
@@ -181,6 +180,13 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.5rem;
+}
+
+.ctaLogo {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
+  border-radius: 0.22rem;
 }
 
 .hubLogo {
@@ -273,70 +279,12 @@
   border-radius: 0.2rem;
 }
 
-.testimonialShot {
-  display: block;
-  width: 100%;
-  margin-top: 0.5rem;
-  padding: 0;
-  border: none;
-  border-radius: 0.6rem;
-  background: none;
-  cursor: zoom-in;
-  overflow: hidden;
-}
-
 .testimonialImage {
   display: block;
   width: 100%;
   height: auto;
-}
-
-.previewDialog {
-  width: min(100vw - 1.5rem, 40rem);
-  max-height: 85vh;
-  /* Modal dialogs centre via auto margins; padding:0 alone leaves them top-left. */
-  margin: auto;
-  padding: 0;
-  border: none;
-  border-radius: 1rem;
-  background: transparent;
-  overflow: visible;
-}
-
-.previewDialog::backdrop {
-  background: rgba(15, 24, 51, 0.72);
-}
-
-.previewBody {
-  position: relative;
-  max-height: 85vh;
-  overflow: auto;
-  border-radius: 1rem;
-  background: var(--bio-white);
-}
-
-/* Shown at full size and panned, since these captures are desktop-width and
-   shrinking them to the dialog would make the review text unreadable again. */
-.previewImage {
-  display: block;
-  width: auto;
-  max-width: none;
-  height: auto;
-}
-
-.previewClose {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  display: grid;
-  width: 2.25rem;
-  height: 2.25rem;
-  place-items: center;
-  border: 1px solid var(--bio-border);
-  border-radius: 999px;
-  background: var(--bio-white);
-  color: var(--bio-navy);
-  cursor: pointer;
+  margin-top: 0.5rem;
+  border-radius: 0.6rem;
 }
 
 /* ---------- share + footer ---------- */
@@ -377,11 +325,11 @@
   }
 
   .primaryButton:hover {
-    background: color-mix(in srgb, var(--bio-shopee) 88%, #000);
+    background: color-mix(in srgb, var(--bio-navy) 88%, #fff);
   }
 }
 
-:is(.primaryButton, .hubLink, .testimonialShot, .reviewTab):focus-visible {
+:is(.primaryButton, .hubLink, .reviewTab):focus-visible {
   outline: 2px solid var(--bio-navy);
   outline-offset: 2px;
 }

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {
-  ArrowUpRight,
   Globe2,
   Instagram,
   Mail,
@@ -140,8 +139,14 @@ export function BioPage({ config }: BioPageProps) {
                       position="product-primary"
                       className={styles.primaryButton}
                     >
+                      <Image
+                        src={brandLogos.shopee!}
+                        alt=""
+                        width={17}
+                        height={17}
+                        className={styles.ctaLogo}
+                      />
                       <span>Beli di Shopee</span>
-                      <ArrowUpRight size={14} aria-hidden="true" />
                     </MarketplaceButton>
                   </div>
                 </article>
