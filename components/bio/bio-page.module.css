@@ -2,7 +2,7 @@
   --bio-navy: #213368;
   --bio-ice: #eaf2f8;
   --bio-cream: #fffdf5;
-  --bio-white: #fff;
+  --bio-white: #fff; /* reserved for text on navy, never a surface */
   --bio-text-secondary: #4b5878;
   --bio-border: color-mix(in srgb, var(--bio-navy) 12%, transparent);
   --bio-blue-rule: #a8bdd8;
@@ -281,7 +281,7 @@
   padding: 0 0.4rem;
   border: 1px solid var(--bio-border);
   border-radius: 999px;
-  background: var(--bio-white);
+  background: var(--bio-cream);
   color: var(--bio-navy);
   font-size: 0.72rem;
   font-weight: 600;
@@ -344,7 +344,7 @@
   padding: 0 0.4rem;
   border: 1px solid var(--bio-border);
   border-radius: 0.7rem;
-  background: var(--bio-white);
+  background: var(--bio-cream);
   color: var(--bio-text-secondary);
   font-size: 0.78rem;
   font-weight: 600;
@@ -368,7 +368,7 @@
 .testimonialCard {
   border: 1px solid var(--bio-border);
   border-radius: 0.25rem;
-  background: var(--bio-white);
+  background: var(--bio-cream);
   overflow: hidden;
 }
 
