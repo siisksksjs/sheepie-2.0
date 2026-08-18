@@ -34,3 +34,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Bio analytics ingestion security
+
+The `/api/bio-events` Origin and user-agent checks are browser hygiene, not authentication.
+Non-browser clients can omit or spoof those headers. Abuse control is enforced by the database's
+atomic rate limit using a daily HMAC-derived address key; the application never stores the raw IP
+address.
+
+`x-vercel-forwarded-for` is trusted only when the Vercel deployment environment is present.
+`x-forwarded-for` and `x-real-ip` are ignored unless
+`BIO_ANALYTICS_TRUST_PROXY_HEADERS=true`, which should only be enabled behind a proxy that removes
+client-supplied forwarding headers and sets its own trusted values.

@@ -12,6 +12,7 @@ export const config = {
   // Match all pathnames except for
   // - API routes
   // - Next.js internals
+  // - Standalone /bio page (outside next-intl)
   // - Static files
-  matcher: ['/((?!api|_next|.*\\..*).*)']
+  matcher: ['/((?!api|_next|bio(?:/|$)|.*\\..*).*)']
 };

@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const sitemapEntries: MetadataRoute.Sitemap = []
 
+  sitemapEntries.push({
+    url: `${baseUrl}/bio`,
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  })
+
   // Helper to generate alternate languages for a specific path
   // path should start with / (e.g. /about)
   const getAlternates = (path: string) => {
