@@ -187,6 +187,16 @@ function getSourceProduct(slug: ProductSlug) {
   return product;
 }
 
+/**
+ * Short canonical Shopee links used by the bio page. The main site keeps the
+ * long listing URLs, which preselect a variant via `extraParams`.
+ */
+const BIO_SHOPEE_URLS: Record<ProductSlug, string> = {
+  cervicloud: "https://shopee.co.id/product/669518207/25697801158/",
+  lumicloud: "https://shopee.co.id/product/669518207/55952823103/",
+  calmicloud: "https://shopee.co.id/product/669518207/40426532493/",
+};
+
 function productActions(slug: ProductSlug): [BioAction, BioAction] {
   const product = getSourceProduct(slug);
   const name = product.name.replace(/ (Pillow|Eye Mask|Earplugs)$/, "");
@@ -195,7 +205,7 @@ function productActions(slug: ProductSlug): [BioAction, BioAction] {
     {
       id: `bio-${slug}-shopee`,
       label: "Beli di Shopee",
-      href: product.shopeeUrl,
+      href: BIO_SHOPEE_URLS[slug],
       destination: "shopee",
       accessibleLabel: `Beli ${name} di Shopee (buka tab baru)`,
     },
