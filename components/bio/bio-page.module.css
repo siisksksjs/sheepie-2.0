@@ -21,8 +21,7 @@
   z-index: 20;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: center;
   width: min(100% - 2rem, 30rem);
   margin-inline: auto;
   padding-top: max(0.7rem, env(safe-area-inset-top));
@@ -33,7 +32,7 @@
 
 .logo {
   width: auto;
-  height: 2.4rem;
+  height: 3.75rem;
 }
 
 /* One narrow column at every width: this is a link hub, not a landing page. */
@@ -184,6 +183,13 @@
   gap: 0.5rem;
 }
 
+.hubLogo {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 0.3rem;
+  object-fit: contain;
+}
+
 .hubLink {
   display: flex;
   min-height: 2.9rem;
@@ -233,22 +239,6 @@
 
 /* ---------- share + footer ---------- */
 
-.shareButton {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-  gap: 0.4rem;
-  padding-inline: 0.85rem;
-  border: 1px solid var(--bio-border);
-  border-radius: 999px;
-  background: var(--bio-white);
-  color: var(--bio-navy);
-  font-size: 0.82rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.18s ease, border-color 0.18s ease;
-}
-
 .footer {
   margin-top: 1.75rem;
   text-align: center;
@@ -279,8 +269,7 @@
 /* ---------- refinements ---------- */
 
 @media (hover: hover) {
-  .hubLink:hover,
-  .shareButton:hover {
+  .hubLink:hover {
     border-color: color-mix(in srgb, var(--bio-navy) 32%, transparent);
     background: var(--bio-ice);
   }
@@ -290,7 +279,7 @@
   }
 }
 
-:is(.primaryButton, .hubLink, .shareButton):focus-visible {
+:is(.primaryButton, .hubLink):focus-visible {
   outline: 2px solid var(--bio-navy);
   outline-offset: 2px;
 }

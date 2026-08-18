@@ -1,10 +1,9 @@
 import { readFileSync } from "node:fs";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { BioPage } from "@/components/bio/bio-page";
-import { executeShare } from "@/components/bio/share-button";
 import { createBioConfig } from "@/data/bio";
 
 function attributes(markup: string, name: string) {
@@ -17,11 +16,10 @@ describe("bio page rendered contract", () => {
   it("renders a unique placement ID for every CTA", () => {
     const ctaIds = attributes(markup, "data-bio-cta");
 
-    expect(ctaIds).toHaveLength(10);
+    expect(ctaIds).toHaveLength(9);
     expect(new Set(ctaIds).size).toBe(ctaIds.length);
     expect(ctaIds).toEqual(
       expect.arrayContaining([
-        "header_share",
         "bio-cervicloud-shopee",
         "bio-lumicloud-shopee",
         "bio-calmicloud-shopee",
@@ -38,10 +36,7 @@ describe("bio page rendered contract", () => {
     expect(ctaIds).not.toContain("final_tokopedia");
   });
 
-  it("marks the share destination and all meaningful page sections", () => {
-    expect(markup).toContain('data-bio-cta="header_share"');
-    expect(markup).toContain('data-bio-destination="share"');
-
+  it("marks every meaningful page section", () => {
     for (const section of [
       "bio-header",
       "bio-banner",
@@ -136,7 +131,7 @@ describe("standalone bio routing contract", () => {
     expect(layoutSource).toContain('import "../globals.css"');
   });
 
-  it("hydrates only the share control", () => {
+  it("keeps the public markup server-rendered", () => {
     const bioPageSource = readFileSync(
       new URL("../../components/bio/bio-page.tsx", import.meta.url),
       "utf8",
@@ -145,15 +140,9 @@ describe("standalone bio routing contract", () => {
       new URL("../../components/bio/marketplace-button.tsx", import.meta.url),
       "utf8",
     );
-    const shareSource = readFileSync(
-      new URL("../../components/bio/share-button.tsx", import.meta.url),
-      "utf8",
-    );
 
     expect(bioPageSource).not.toContain('"use client"');
     expect(marketplaceSource).not.toContain('"use client"');
-    expect(shareSource).toContain('"use client"');
-    expect(shareSource).toContain('data-bio-destination="share"');
   });
 
   it("renders one narrow column and keeps the mobile safety contracts", () => {
@@ -181,53 +170,12 @@ describe("standalone bio routing contract", () => {
       new URL("../../components/bio/bio-page.module.css", import.meta.url),
       "utf8",
     );
-    const tapTargets = [".primaryButton {", ".hubLink {", ".shareButton {"];
+    const tapTargets = [".primaryButton {", ".hubLink {"];
 
     for (const selector of tapTargets) {
       const block = cssSource.slice(cssSource.indexOf(selector));
       const minHeight = block.match(/min-height:\s*([\d.]+)rem/)?.[1];
       expect(Number(minHeight)).toBeGreaterThanOrEqual(2.75);
     }
-  });
-});
-
-describe("share fallback contract", () => {
-  it("uses native sharing first", async () => {
-    const share = vi.fn().mockResolvedValue(undefined);
-    const writeClipboard = vi.fn();
-
-    await expect(executeShare("https://sheepiesleep.com/bio", { share, writeClipboard })).resolves.toBe(
-      "shared",
-    );
-    expect(writeClipboard).not.toHaveBeenCalled();
-  });
-
-  it("falls back from failed sharing to the clipboard and then document copy", async () => {
-    const share = vi.fn().mockRejectedValue(new Error("share failed"));
-    const writeClipboard = vi.fn().mockRejectedValue(new Error("clipboard failed"));
-    const copyWithDocument = vi.fn().mockReturnValue(true);
-
-    await expect(
-      executeShare("https://sheepiesleep.com/bio", { share, writeClipboard, copyWithDocument }),
-    ).resolves.toBe("copied");
-    expect(copyWithDocument).toHaveBeenCalledWith("https://sheepiesleep.com/bio");
-  });
-
-  it("returns explicit outcomes for cancellation and unsupported environments", async () => {
-    const cancelled = Object.assign(new Error("cancelled"), { name: "AbortError" });
-
-    await expect(
-      executeShare("https://sheepiesleep.com/bio", {
-        share: vi.fn().mockRejectedValue(cancelled),
-      }),
-    ).resolves.toBe("cancelled");
-    await expect(executeShare("https://sheepiesleep.com/bio", {})).resolves.toBe("unsupported");
-  });
-
-  it("renders an accessible live status region", () => {
-    const markup = renderToStaticMarkup(createElement(BioPage, { config: createBioConfig() }));
-
-    expect(markup).toContain('role="status"');
-    expect(markup).toContain('aria-live="polite"');
   });
 });

@@ -18,7 +18,6 @@ import type { BioAction, BioConfig } from "@/data/bio";
 import { BioPostHog } from "./bio-posthog";
 import { BioTracker } from "./bio-tracker";
 import { MarketplaceButton } from "./marketplace-button";
-import { ShareButton } from "./share-button";
 import styles from "./bio-page.module.css";
 
 type BioPageProps = {
@@ -35,10 +34,13 @@ const destinationIcons: Record<BioAction["destination"], typeof Globe2> = {
   email: Mail,
 };
 
-/** Official marketplace brand colors, so each CTA reads as the right store. */
-const brandColors: Partial<Record<BioAction["destination"], string>> = {
-  shopee: "#ee4d2d",
-  tokopedia: "#42b549",
+/**
+ * Official marketplace marks, taken from each store's own published app icon,
+ * so a shopper recognises the destination before reading the label.
+ */
+const brandLogos: Partial<Record<BioAction["destination"], string>> = {
+  shopee: "/images/bio/shopee-logo.png",
+  tokopedia: "/images/bio/tokopedia-logo.png",
 };
 
 const trustPoints = [
@@ -67,7 +69,6 @@ export function BioPage({ config }: BioPageProps) {
           priority
           className={styles.logo}
         />
-        <ShareButton />
       </nav>
 
       <div className={styles.shell}>
@@ -161,6 +162,7 @@ export function BioPage({ config }: BioPageProps) {
           <div className={styles.hubGrid}>
             {config.hubActions.map((action, index) => {
               const Icon = destinationIcons[action.destination];
+              const logo = brandLogos[action.destination];
               return (
                 <MarketplaceButton
                   key={action.id}
@@ -170,11 +172,11 @@ export function BioPage({ config }: BioPageProps) {
                   position={`hub-${index + 1}`}
                   className={styles.hubLink}
                 >
-                  <Icon
-                    size={17}
-                    aria-hidden="true"
-                    style={{ color: brandColors[action.destination] }}
-                  />
+                  {logo ? (
+                    <Image src={logo} alt="" width={22} height={22} className={styles.hubLogo} />
+                  ) : (
+                    <Icon size={17} aria-hidden="true" />
+                  )}
                   <span>{action.label}</span>
                 </MarketplaceButton>
               );
