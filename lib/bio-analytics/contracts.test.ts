@@ -62,6 +62,7 @@ describe("bio analytics allowlists", () => {
       "whatsapp",
       "instagram",
       "tiktok",
+      "email",
       "share",
     ]);
     expect(MAX_BIO_EVENT_BODY_BYTES).toBe(8192);

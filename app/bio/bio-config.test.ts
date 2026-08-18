@@ -60,7 +60,12 @@ describe("bio page configuration", () => {
       ...config.hubActions.map((action) => action.href),
     ];
 
-    expect(urls.every((url) => url.startsWith("https://"))).toBe(true);
+    const emailAction = config.hubActions.find((action) => action.destination === "email")!;
+    expect(emailAction.href).toBe("mailto:hello@sheepiesleep.com");
+    // Everything that is not the contact address must still be an https destination.
+    expect(
+      urls.filter((url) => url !== emailAction.href).every((url) => url.startsWith("https://")),
+    ).toBe(true);
     expect(config.hubActions).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ destination: "instagram", href: siteSource.socials.instagram }),

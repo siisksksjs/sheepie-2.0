@@ -28,14 +28,34 @@ export type BioProduct = {
   actions: [BioAction, BioAction];
 };
 
+export type BioTestimonial = {
+  id: string;
+  src: string;
+  alt: string;
+};
+
 export type BioConfig = {
   heroImage: {
     src: string;
     alt: string;
   };
+  bannerImage: {
+    src: string;
+    alt: string;
+  };
   products: BioProduct[];
   hubActions: BioAction[];
+  /** Shopee review screenshots. The section is hidden while this is empty. */
+  testimonials: BioTestimonial[];
 };
+
+export const SHEEPIE_EMAIL = "hello@sheepiesleep.com";
+
+/**
+ * Screenshots of real Shopee reviews. Drop the files into
+ * `public/images/bio/testimonials/` and list them here to publish the section.
+ */
+const testimonials: BioTestimonial[] = [];
 
 type ProductSlug = BioProduct["slug"];
 
@@ -158,32 +178,18 @@ export function isValidWhatsAppUrl(value: string | undefined): value is string {
 export function createBioConfig(whatsAppUrl?: string): BioConfig {
   const hubActions: BioAction[] = [
     {
-      id: "bio-hub-website",
-      label: "Kunjungi website",
-      href: "https://sheepiesleep.com/id",
-      destination: "website",
-      accessibleLabel: "Kunjungi website Sheepie (buka tab baru)",
-    },
-    {
-      id: "bio-hub-shopee",
-      label: "Toko Resmi Shopee",
-      href: "https://shopee.co.id/sheepie.sleep",
-      destination: "shopee",
-      accessibleLabel: "Kunjungi toko resmi Sheepie di Shopee (buka tab baru)",
-    },
-    {
       id: "bio-hub-tokopedia",
-      label: "Tokopedia Sheepie",
+      label: "Tokopedia",
       href: "https://www.tokopedia.com/sheepie",
       destination: "tokopedia",
       accessibleLabel: "Kunjungi toko Sheepie di Tokopedia (buka tab baru)",
     },
     {
-      id: "bio-hub-instagram",
-      label: "Instagram",
-      href: siteSource.socials.instagram,
-      destination: "instagram",
-      accessibleLabel: "Ikuti Sheepie di Instagram (buka tab baru)",
+      id: "bio-hub-shopee",
+      label: "Shopee",
+      href: "https://shopee.co.id/sheepie.sleep",
+      destination: "shopee",
+      accessibleLabel: "Kunjungi toko resmi Sheepie di Shopee (buka tab baru)",
     },
     {
       id: "bio-hub-tiktok",
@@ -192,7 +198,30 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
       destination: "tiktok",
       accessibleLabel: "Ikuti Sheepie di TikTok (buka tab baru)",
     },
+    {
+      id: "bio-hub-instagram",
+      label: "Instagram",
+      href: siteSource.socials.instagram,
+      destination: "instagram",
+      accessibleLabel: "Ikuti Sheepie di Instagram (buka tab baru)",
+    },
   ];
+
+  hubActions.push({
+    id: "bio-hub-email",
+    label: "Email",
+    href: `mailto:${SHEEPIE_EMAIL}`,
+    destination: "email",
+    accessibleLabel: `Kirim email ke Sheepie di ${SHEEPIE_EMAIL}`,
+  });
+
+  hubActions.push({
+    id: "bio-hub-website",
+    label: "Website",
+    href: "https://sheepiesleep.com/id",
+    destination: "website",
+    accessibleLabel: "Kunjungi website Sheepie (buka tab baru)",
+  });
 
   if (isValidWhatsAppUrl(whatsAppUrl)) {
     hubActions.push({
@@ -209,12 +238,17 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
       src: "/images/bio/sheepie-sleep-system.jpg",
       alt: "Seseorang beristirahat menggunakan CerviCloud dan LumiCloud dari Sheepie",
     },
+    bannerImage: {
+      src: "/images/bio/sheepie-banner.png",
+      alt: "Tiga produk Sheepie berjajar: LumiCloud Sleep Mask, CerviCloud Ergonomic Pillow, dan CalmiCloud Moldable Earplug, dengan tulisan Better Sleep Starts Here",
+    },
     products: productStories.map((story) => ({
       ...story,
       price: getSourceProduct(story.slug).price,
       actions: productActions(story.slug),
     })),
     hubActions,
+    testimonials,
   };
 }
 

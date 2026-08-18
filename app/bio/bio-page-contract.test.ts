@@ -17,17 +17,20 @@ describe("bio page rendered contract", () => {
   it("renders a unique placement ID for every CTA", () => {
     const ctaIds = attributes(markup, "data-bio-cta");
 
-    expect(ctaIds).toHaveLength(14);
+    expect(ctaIds).toHaveLength(10);
     expect(new Set(ctaIds).size).toBe(ctaIds.length);
     expect(ctaIds).toEqual(
       expect.arrayContaining([
-        "header_instagram",
-        "header_tiktok",
         "header_share",
         "bio-cervicloud-shopee",
-        "bio-cervicloud-tokopedia",
-        "hub_instagram",
+        "bio-lumicloud-shopee",
+        "bio-calmicloud-shopee",
+        "hub_tokopedia",
+        "hub_shopee",
         "hub_tiktok",
+        "hub_instagram",
+        "hub_email",
+        "hub_website",
       ]),
     );
     // The closing CTA block duplicated the link hub and was removed.
@@ -41,6 +44,7 @@ describe("bio page rendered contract", () => {
 
     for (const section of [
       "bio-header",
+      "bio-banner",
       "bio-trust",
       "bio-product-alignment",
       "bio-product-darkness",
@@ -55,11 +59,12 @@ describe("bio page rendered contract", () => {
   it("exposes unique observer targets without tracking CTAs", () => {
     const trackedSections = attributes(markup, "data-bio-track-section");
 
-    expect(trackedSections).toHaveLength(7);
+    expect(trackedSections).toHaveLength(8);
     expect(new Set(trackedSections).size).toBe(trackedSections.length);
     expect(markup).not.toMatch(/<(?:a|button) [^>]*data-bio-track-section=/);
     expect(trackedSections).toEqual([
       "bio-header",
+      "bio-banner",
       "bio-trust",
       "bio-product-alignment",
       "bio-product-darkness",
@@ -72,21 +77,26 @@ describe("bio page rendered contract", () => {
   it("renders every outbound CTA as a safe normal anchor", () => {
     const outboundAnchors = markup.match(/<a [^>]*data-bio-cta="[^"]+"[^>]*>/g) ?? [];
 
-    expect(outboundAnchors).toHaveLength(13);
+    expect(outboundAnchors).toHaveLength(9);
     for (const anchor of outboundAnchors) {
+      // mailto: hands off to a mail app, so it must not leave a blank tab behind.
+      if (anchor.includes('href="mailto:')) {
+        expect(anchor).not.toContain("target=");
+        continue;
+      }
       expect(anchor).toContain('target="_blank"');
       expect(anchor).toContain('rel="noopener noreferrer"');
     }
+    expect(outboundAnchors.filter((anchor) => anchor.includes('href="mailto:'))).toHaveLength(1);
   });
 
-  it("puts a price and both marketplace buttons inside every product card", () => {
+  it("puts a price and a Shopee CTA inside every product card", () => {
     const cards = markup.match(/<article [^>]*data-bio-product="[^"]+"[\s\S]*?<\/article>/g) ?? [];
 
     expect(cards).toHaveLength(3);
     for (const card of cards) {
       expect(card).toMatch(/(?:Rp|IDR)\s*[\d.]+/);
       expect(card).toContain('data-bio-destination="shopee"');
-      expect(card).toContain('data-bio-destination="tokopedia"');
     }
   });
 });
@@ -154,7 +164,7 @@ describe("standalone bio routing contract", () => {
 
     // A link hub is a single column at every width; no multi-column editorial grid.
     expect(cssSource).toMatch(/\.shell\s*\{[\s\S]*?width:\s*min\(100% - 2rem, 30rem\)/);
-    for (const removed of [".hero", ".trustGrid", ".finalCta", ".productStories", ".ambientCloud"]) {
+    for (const removed of [".hero", ".trustGrid", ".finalCta", ".productStories", ".ambientCloud", ".secondaryButton"]) {
       expect(cssSource).not.toContain(`${removed} {`);
     }
 
@@ -171,7 +181,7 @@ describe("standalone bio routing contract", () => {
       new URL("../../components/bio/bio-page.module.css", import.meta.url),
       "utf8",
     );
-    const tapTargets = [".iconButton,\n.shareButton", ".primaryButton,\n.secondaryButton", ".hubLink"];
+    const tapTargets = [".primaryButton {", ".hubLink {", ".shareButton {"];
 
     for (const selector of tapTargets) {
       const block = cssSource.slice(cssSource.indexOf(selector));

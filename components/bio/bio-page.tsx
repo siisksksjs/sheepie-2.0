@@ -4,12 +4,14 @@ import {
   CloudMoon,
   Globe2,
   Instagram,
+  Mail,
   MapPin,
   MessageCircle,
   Music2,
   PackageCheck,
   ShieldCheck,
   ShoppingBag,
+  Star,
 } from "lucide-react";
 
 import type { BioAction, BioConfig } from "@/data/bio";
@@ -30,6 +32,7 @@ const destinationIcons: Record<BioAction["destination"], typeof Globe2> = {
   instagram: Instagram,
   tiktok: Music2,
   whatsapp: MessageCircle,
+  email: Mail,
 };
 
 const trustPoints = [
@@ -39,46 +42,40 @@ const trustPoints = [
 ];
 
 export function BioPage({ config }: BioPageProps) {
-  const instagram = config.hubActions.find((action) => action.destination === "instagram")!;
-  const tiktok = config.hubActions.find((action) => action.destination === "tiktok")!;
-
   return (
     <main className={styles.page}>
       <BioTracker />
 
-      <div className={styles.shell}>
-        <header
-          className={styles.header}
-          data-bio-section="bio-header"
-          data-bio-track-section="bio-header"
-        >
+      <nav
+        className={styles.nav}
+        aria-label="Sheepie"
+        data-bio-section="bio-header"
+        data-bio-track-section="bio-header"
+      >
+        <span className={styles.navBrand}>
           <span className={styles.mark} aria-hidden="true">
-            <CloudMoon size={30} strokeWidth={1.6} />
+            <CloudMoon size={20} strokeWidth={1.7} />
           </span>
-          <h1 className={styles.wordmark}>Sheepie.</h1>
-          <p className={styles.tagline}>
-            Perlengkapan tidur premium — tiga lapisan istirahat untuk malam yang lebih utuh.
-          </p>
+          <span className={styles.wordmark}>Sheepie.</span>
+        </span>
+        <ShareButton />
+      </nav>
 
-          <div className={styles.socialRow}>
-            {[instagram, tiktok].map((action) => {
-              const Icon = destinationIcons[action.destination];
-              return (
-                <MarketplaceButton
-                  key={action.id}
-                  action={action}
-                  ctaId={`header_${action.destination}`}
-                  section="bio-header"
-                  position="header-social"
-                  className={styles.iconButton}
-                >
-                  <Icon size={18} aria-hidden="true" />
-                </MarketplaceButton>
-              );
-            })}
-            <ShareButton />
-          </div>
-        </header>
+      <div className={styles.shell}>
+        <section
+          className={styles.banner}
+          data-bio-section="bio-banner"
+          data-bio-track-section="bio-banner"
+        >
+          <Image
+            src={config.bannerImage.src}
+            alt={config.bannerImage.alt}
+            fill
+            priority
+            sizes="(max-width: 480px) 100vw, 30rem"
+            className={styles.bannerImage}
+          />
+        </section>
 
         <ul
           className={styles.trustStrip}
@@ -87,7 +84,7 @@ export function BioPage({ config }: BioPageProps) {
         >
           {trustPoints.map((point) => (
             <li key={point.label}>
-              <point.icon size={14} aria-hidden="true" />
+              <point.icon size={13} aria-hidden="true" />
               <span>{point.label}</span>
             </li>
           ))}
@@ -98,50 +95,48 @@ export function BioPage({ config }: BioPageProps) {
             Produk
           </h2>
 
-          {config.products.map((product) => (
-            <article
-              key={product.id}
-              id={product.id}
-              className={styles.productCard}
-              data-bio-section={product.id}
-              data-bio-track-section={product.id}
-              data-bio-product={product.slug}
-            >
-              <div className={styles.productTop}>
-                <Image
-                  src={product.image.src}
-                  alt={product.image.alt}
-                  width={96}
-                  height={96}
-                  sizes="96px"
-                  className={styles.productImage}
-                />
-                <div className={styles.productCopy}>
-                  <p className={styles.productEyebrow}>{product.eyebrow}</p>
-                  <h3 className={styles.productName}>{product.name}</h3>
-                  <p className={styles.productLine}>{product.headline}</p>
-                  <p className={styles.productPrice}>{product.price}</p>
-                </div>
-              </div>
+          <div className={styles.productGrid}>
+            {config.products.map((product) => {
+              const shopee = product.actions.find((action) => action.destination === "shopee")!;
 
-              <div className={styles.productActions}>
-                {product.actions.map((action, actionIndex) => (
-                  <MarketplaceButton
-                    key={action.id}
-                    action={action}
-                    ctaId={action.id}
-                    product={product.slug}
-                    section={product.id}
-                    position={actionIndex === 0 ? "product-primary" : "product-secondary"}
-                    className={actionIndex === 0 ? styles.primaryButton : styles.secondaryButton}
-                  >
-                    <span>{action.destination === "shopee" ? "Shopee" : "Tokopedia"}</span>
-                    <ArrowUpRight size={15} aria-hidden="true" />
-                  </MarketplaceButton>
-                ))}
-              </div>
-            </article>
-          ))}
+              return (
+                <article
+                  key={product.id}
+                  id={product.id}
+                  className={styles.productCard}
+                  data-bio-section={product.id}
+                  data-bio-track-section={product.id}
+                  data-bio-product={product.slug}
+                >
+                  <div className={styles.productMedia}>
+                    <Image
+                      src={product.image.src}
+                      alt={product.image.alt}
+                      fill
+                      sizes="(max-width: 480px) 45vw, 14rem"
+                      className={styles.productImage}
+                    />
+                  </div>
+                  <div className={styles.productBody}>
+                    <h3 className={styles.productName}>{product.name}</h3>
+                    <p className={styles.productEyebrow}>{product.eyebrow}</p>
+                    <p className={styles.productPrice}>{product.price}</p>
+                    <MarketplaceButton
+                      action={shopee}
+                      ctaId={shopee.id}
+                      product={product.slug}
+                      section={product.id}
+                      position="product-primary"
+                      className={styles.primaryButton}
+                    >
+                      <span>Beli di Shopee</span>
+                      <ArrowUpRight size={14} aria-hidden="true" />
+                    </MarketplaceButton>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </section>
 
         <section
@@ -151,29 +146,56 @@ export function BioPage({ config }: BioPageProps) {
           data-bio-track-section="bio-hub"
         >
           <h2 id="bio-hub-heading" className={styles.groupHeading}>
-            Tautan lain
+            Kunjungi kami
           </h2>
 
-          {config.hubActions.map((action, index) => {
-            const Icon = destinationIcons[action.destination];
-            return (
-              <MarketplaceButton
-                key={action.id}
-                action={action}
-                ctaId={`hub_${action.destination}`}
-                section="bio-hub"
-                position={`hub-${index + 1}`}
-                className={styles.hubLink}
-              >
-                <span className={styles.hubIcon} aria-hidden="true">
-                  <Icon size={18} />
-                </span>
-                <span className={styles.hubLabel}>{action.label}</span>
-                <ArrowUpRight size={16} aria-hidden="true" className={styles.hubArrow} />
-              </MarketplaceButton>
-            );
-          })}
+          <div className={styles.hubGrid}>
+            {config.hubActions.map((action, index) => {
+              const Icon = destinationIcons[action.destination];
+              return (
+                <MarketplaceButton
+                  key={action.id}
+                  action={action}
+                  ctaId={`hub_${action.destination}`}
+                  section="bio-hub"
+                  position={`hub-${index + 1}`}
+                  className={styles.hubLink}
+                >
+                  <Icon size={17} aria-hidden="true" />
+                  <span>{action.label}</span>
+                </MarketplaceButton>
+              );
+            })}
+          </div>
         </section>
+
+        {config.testimonials.length > 0 ? (
+          <section
+            aria-labelledby="bio-testimonials-heading"
+            className={styles.group}
+            data-bio-section="bio-testimonials"
+            data-bio-track-section="bio-testimonials"
+          >
+            <h2 id="bio-testimonials-heading" className={styles.groupHeading}>
+              <Star size={13} aria-hidden="true" /> Ulasan pembeli Shopee
+            </h2>
+
+            <ul className={styles.testimonialRow}>
+              {config.testimonials.map((testimonial) => (
+                <li key={testimonial.id} className={styles.testimonialCard}>
+                  <Image
+                    src={testimonial.src}
+                    alt={testimonial.alt}
+                    width={480}
+                    height={640}
+                    sizes="(max-width: 480px) 70vw, 18rem"
+                    className={styles.testimonialImage}
+                  />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         <footer
           className={styles.footer}

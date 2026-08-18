@@ -16,6 +16,7 @@ export const DESTINATIONS = [
   "whatsapp",
   "instagram",
   "tiktok",
+  "email",
   "share",
 ] as const;
 

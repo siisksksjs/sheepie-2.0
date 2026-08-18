@@ -21,11 +21,14 @@ export function MarketplaceButton({
   className,
   children,
 }: MarketplaceButtonProps) {
+  // mailto: and tel: hand off to another app; a blank tab would be left behind.
+  const opensNewTab = /^https?:/i.test(action.href);
+
   return (
     <a
       href={action.href}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={opensNewTab ? "_blank" : undefined}
+      rel={opensNewTab ? "noopener noreferrer" : undefined}
       aria-label={action.accessibleLabel}
       className={className}
       data-bio-cta={ctaId}
