@@ -13,27 +13,11 @@
   color: var(--bio-navy);
 }
 
-/* ---------- logo nav ---------- */
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: min(100% - 2rem, 30rem);
-  margin-inline: auto;
-  padding-top: max(0.7rem, env(safe-area-inset-top));
-  padding-bottom: 0.7rem;
-}
-
-.logo {
-  width: auto;
-  height: 4.25rem;
-}
-
 /* One narrow column at every width: this is a link hub, not a landing page. */
 .shell {
   width: min(100% - 2rem, 30rem);
   margin-inline: auto;
+  padding-top: max(1rem, env(safe-area-inset-top));
   padding-bottom: max(2rem, env(safe-area-inset-bottom));
 }
 
@@ -43,7 +27,7 @@
    shown whole rather than cropped under an overlay. */
 .banner {
   position: relative;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 0.5rem;
   background: var(--bio-cream);

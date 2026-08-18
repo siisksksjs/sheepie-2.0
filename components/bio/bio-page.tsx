@@ -60,22 +60,6 @@ export function BioPage({ config }: BioPageProps) {
       <BioPostHog />
       <BioTracker />
 
-      <nav
-        className={styles.nav}
-        aria-label="Sheepie"
-        data-bio-section="bio-header"
-        data-bio-track-section="bio-header"
-      >
-        <Image
-          src="/images/bio/sheepie-logo.png"
-          alt="Sheepie"
-          width={400}
-          height={265}
-          priority
-          className={styles.logo}
-        />
-      </nav>
-
       <div className={styles.shell}>
         <section
           className={styles.banner}

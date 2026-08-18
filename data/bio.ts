@@ -372,8 +372,8 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
       alt: "Seseorang beristirahat menggunakan CerviCloud dan LumiCloud dari Sheepie",
     },
     bannerImage: {
-      src: "/images/bio/sheepie-banner-hero.jpg",
-      alt: "Seseorang tidur nyenyak mengenakan LumiCloud Sleep Mask di atas bantal CerviCloud, dengan tulisan Better Sleep Starts Here",
+      src: "/images/bio/sheepie-hero-v2.jpg",
+      alt: "Sheepie — Better Sleep Starts Here. Seseorang tidur nyenyak mengenakan LumiCloud Sleep Mask dan earplug CalmiCloud di atas bantal CerviCloud",
     },
     products: productStories.map((story) => ({
       ...story,

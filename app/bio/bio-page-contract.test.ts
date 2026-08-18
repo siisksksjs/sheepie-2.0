@@ -39,7 +39,6 @@ describe("bio page rendered contract", () => {
 
   it("marks every meaningful page section", () => {
     for (const section of [
-      "bio-header",
       "bio-banner",
       "bio-trust",
       "bio-product-alignment",
@@ -56,11 +55,11 @@ describe("bio page rendered contract", () => {
   it("exposes unique observer targets without tracking CTAs", () => {
     const trackedSections = attributes(markup, "data-bio-track-section");
 
-    expect(trackedSections).toHaveLength(9);
+    expect(trackedSections).toHaveLength(8);
     expect(new Set(trackedSections).size).toBe(trackedSections.length);
     expect(markup).not.toMatch(/<(?:a|button) [^>]*data-bio-track-section=/);
+    // The banner carries the wordmark, so there is no separate header band.
     expect(trackedSections).toEqual([
-      "bio-header",
       "bio-banner",
       "bio-trust",
       "bio-product-alignment",
