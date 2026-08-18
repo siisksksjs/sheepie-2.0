@@ -87,10 +87,25 @@ describe("bio page rendered contract", () => {
     expect(outboundAnchors.filter((anchor) => anchor.includes('href="mailto:'))).toHaveLength(1);
   });
 
+  it("shows two to three reviews for every product", () => {
+    const config = createBioConfig();
+
+    for (const slug of ["cervicloud", "lumicloud", "calmicloud"] as const) {
+      const reviews = config.testimonials.filter((review) => review.product === slug);
+      expect(reviews.length).toBeGreaterThanOrEqual(2);
+      expect(reviews.length).toBeLessThanOrEqual(3);
+    }
+    // Each product heading appears once inside the review section.
+    // CSS module class names carry a build hash, so match loosely.
+    for (const name of ["CerviCloud", "LumiCloud", "CalmiCloud"]) {
+      expect(markup).toMatch(new RegExp(`reviewGroupHeading[^"]*">${name}<`));
+    }
+  });
+
   it("renders each review as readable text with a link to the original screenshot", () => {
     const cards = markup.match(/<li class="[^"]*testimonialCard[^"]*"[\s\S]*?<\/li>/g) ?? [];
 
-    expect(cards.length).toBeGreaterThanOrEqual(12);
+    expect(cards.length).toBeGreaterThanOrEqual(9);
     for (const card of cards) {
       // The quote must be real text, not a downscaled screenshot nobody can read.
       expect(card).toMatch(/testimonialQuote[^>]*>[^<]{40,}/);

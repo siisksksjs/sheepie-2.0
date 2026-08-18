@@ -195,34 +195,50 @@ export function BioPage({ config }: BioPageProps) {
               <Star size={13} aria-hidden="true" /> Kata pembeli
             </h2>
 
-            <ul className={styles.testimonialList}>
-              {config.testimonials.map((testimonial) => (
-                <li key={testimonial.id} className={styles.testimonialCard}>
-                  <div className={styles.testimonialHead}>
-                    <span className={styles.testimonialStars} aria-label="Lima dari lima bintang">
-                      {"★★★★★"}
-                    </span>
-                    <span className={styles.testimonialAuthor}>{testimonial.author}</span>
-                    <Image
-                      src={brandLogos[testimonial.marketplace]!}
-                      alt={testimonial.marketplace === "shopee" ? "Shopee" : "Tokopedia"}
-                      width={16}
-                      height={16}
-                      className={styles.testimonialSource}
-                    />
-                  </div>
-                  <p className={styles.testimonialQuote}>{testimonial.quote}</p>
-                  <a
-                    href={testimonial.screenshot.src}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.testimonialProof}
-                  >
-                    Lihat tangkapan layar ulasan
-                  </a>
-                </li>
-              ))}
-            </ul>
+            {config.products.map((product) => {
+              const reviews = config.testimonials.filter(
+                (testimonial) => testimonial.product === product.slug,
+              );
+              if (reviews.length === 0) return null;
+
+              return (
+                <div key={`reviews-${product.slug}`} className={styles.reviewGroup}>
+                  <h3 className={styles.reviewGroupHeading}>{product.name}</h3>
+
+                  <ul className={styles.testimonialList}>
+                    {reviews.map((testimonial) => (
+                      <li key={testimonial.id} className={styles.testimonialCard}>
+                        <div className={styles.testimonialHead}>
+                          <span
+                            className={styles.testimonialStars}
+                            aria-label="Lima dari lima bintang"
+                          >
+                            {"\u2605\u2605\u2605\u2605\u2605"}
+                          </span>
+                          <span className={styles.testimonialAuthor}>{testimonial.author}</span>
+                          <Image
+                            src={brandLogos[testimonial.marketplace]!}
+                            alt={testimonial.marketplace === "shopee" ? "Shopee" : "Tokopedia"}
+                            width={16}
+                            height={16}
+                            className={styles.testimonialSource}
+                          />
+                        </div>
+                        <p className={styles.testimonialQuote}>{testimonial.quote}</p>
+                        <a
+                          href={testimonial.screenshot.src}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.testimonialProof}
+                        >
+                          Lihat tangkapan layar ulasan
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
           </section>
         ) : null}
 

@@ -30,6 +30,7 @@ export type BioProduct = {
 
 export type BioTestimonial = {
   id: string;
+  product: ProductSlug;
   author: string;
   marketplace: "shopee" | "tokopedia";
   quote: string;
@@ -55,62 +56,17 @@ export type BioConfig = {
 export const SHEEPIE_EMAIL = "hello@sheepiesleep.com";
 
 /**
- * Real five-star reviews from Shopee and Tokopedia, transcribed so they are
- * legible on a phone. The original screenshot is linked from each card as proof;
- * rendering those screenshots inline puts their text at roughly 5px on mobile.
- * Ordered so all three products appear early.
+ * The strongest three five-star reviews per product, chosen for distinct angles
+ * rather than repetition: an objection answered, the core benefit, and a signal
+ * of repeat trust. Quotes are transcribed because the original screenshots are
+ * desktop-width and render at roughly 5px of text on a phone; each card links to
+ * its screenshot as proof.
  */
 const testimonials: BioTestimonial[] = [
-  {
-    id: "cervicloud-tokopedia-1",
-    author: "s***i",
-    marketplace: "tokopedia",
-    quote:
-      "Udah beli 2 kali disini. Sama-sama tidur miring, suka banget sama desain ergonomiknya, cerdas! Ada bagian khusus buat tangan pas tidur miring, gak kerasa kesemutan lagi.",
-    screenshot: { src: "/images/bio/testimonials/cervicloud-tokopedia-1.png", width: 609, height: 225 },
-  },
-  {
-    id: "lumicloud-shopee-1",
-    author: "indoshop_lokal",
-    marketplace: "shopee",
-    quote:
-      "Ringan dan enak. Strap nya kenceng dan ga nyangkut di rambut. Seller respon cepet, kirim juga sat set. Mantep poll",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-shopee-1.png", width: 957, height: 313 },
-  },
-  {
-    id: "calmicloud-shopee-1",
-    author: "saalsabilaadinda",
-    marketplace: "shopee",
-    quote:
-      "Aku tipe orang light sleeper, ada suara dikit kebangun dan susah buat balik tidur lagi. Tapi pertama kali pake ini aku malemnya tidur 12 jam. Ini 100% ngeblock suara, cukup banget bahkan buat aku yang sensitif.",
-    screenshot: { src: "/images/bio/testimonials/calmicloud-shopee-1.png", width: 952, height: 423 },
-  },
-  {
-    id: "cervicloud-tokopedia-2",
-    author: "Jiwon",
-    marketplace: "tokopedia",
-    quote:
-      "Pertama kali pakai rasanya beda banget, tapi adminnya sempat bilang memang perlu waktu untuk adaptasi. Memory foam nya mantap banget, real ngesupport. Sekarang malah gak bisa tidur pake bantal lain.",
-    screenshot: { src: "/images/bio/testimonials/cervicloud-tokopedia-2.png", width: 608, height: 197 },
-  },
-  {
-    id: "lumicloud-tokopedia-1",
-    author: "Q***d",
-    marketplace: "tokopedia",
-    quote:
-      "Bahannya alus banget, katun halus gitu enak dipake, gak panas, dan full blackout. Tidur siang jadi pulesss. Strap nya juga high quality, gak nyangkut di rambut.",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-tokopedia-1.png", width: 611, height: 229 },
-  },
-  {
-    id: "calmicloud-shopee-2",
-    author: "bluenavy89",
-    marketplace: "shopee",
-    quote:
-      "Sesuai judulnya, Moldable jadi bisa ditempel langsung di sekitar lubang telinga sesuai bentuk yang kamu inginkan. Sangat bantu untuk redam suara dari luar.",
-    screenshot: { src: "/images/bio/testimonials/calmicloud-shopee-2.png", width: 959, height: 310 },
-  },
+  // CerviCloud — the shape looks odd at first, so lead with that objection.
   {
     id: "cervicloud-tokopedia-3",
+    product: "cervicloud",
     author: "H***y",
     marketplace: "tokopedia",
     quote:
@@ -118,15 +74,66 @@ const testimonials: BioTestimonial[] = [
     screenshot: { src: "/images/bio/testimonials/cervicloud-tokopedia-3.png", width: 596, height: 205 },
   },
   {
+    id: "cervicloud-tokopedia-2",
+    product: "cervicloud",
+    author: "Jiwon",
+    marketplace: "tokopedia",
+    quote:
+      "Memory foam nya mantap banget, real ngesupport. Sekarang malah gak bisa tidur pake bantal lain.",
+    screenshot: { src: "/images/bio/testimonials/cervicloud-tokopedia-2.png", width: 608, height: 197 },
+  },
+  {
+    id: "cervicloud-tokopedia-1",
+    product: "cervicloud",
+    author: "s***i",
+    marketplace: "tokopedia",
+    quote:
+      "Udah beli 2 kali disini. Sama-sama tidur miring, suka banget sama desain ergonomiknya. Ada bagian khusus buat tangan pas tidur miring, gak kerasa kesemutan lagi.",
+    screenshot: { src: "/images/bio/testimonials/cervicloud-tokopedia-1.png", width: 609, height: 225 },
+  },
+
+  // LumiCloud — blackout is the promise; strap and comfort are the usual doubts.
+  {
+    id: "lumicloud-shopee-3",
+    product: "lumicloud",
+    author: "steve969",
+    marketplace: "shopee",
+    quote:
+      "Bahan berkualitas, lembut, cahaya tidak tembus. Bahan lembut tidak buat sakit atau pegal bagian belakang kepala.",
+    screenshot: { src: "/images/bio/testimonials/lumicloud-shopee-3.png", width: 951, height: 310 },
+  },
+  {
+    id: "lumicloud-shopee-1",
+    product: "lumicloud",
+    author: "indoshop_lokal",
+    marketplace: "shopee",
+    quote:
+      "Ringan dan enak. Strap nya kenceng dan ga nyangkut di rambut. Seller respon cepet, kirim juga sat set.",
+    screenshot: { src: "/images/bio/testimonials/lumicloud-shopee-1.png", width: 957, height: 313 },
+  },
+  {
     id: "lumicloud-shopee-2",
+    product: "lumicloud",
     author: "c*****9",
     marketplace: "shopee",
     quote:
-      "Aku udah coba pake dan beneran halus dan gak ngerusak bulu mata palsuku! Tidur juga jadi makin pules soalnya aku gampang kebangun tengah malem.",
+      "Beneran halus dan gak ngerusak bulu mata palsuku! Tidur juga jadi makin pules soalnya aku gampang kebangun tengah malem.",
     screenshot: { src: "/images/bio/testimonials/lumicloud-shopee-2.png", width: 955, height: 227 },
+  },
+
+  // CalmiCloud — noise is the problem; lead with the most concrete outcome.
+  {
+    id: "calmicloud-shopee-1",
+    product: "calmicloud",
+    author: "saalsabilaadinda",
+    marketplace: "shopee",
+    quote:
+      "Aku tipe orang light sleeper, ada suara dikit kebangun dan susah buat balik tidur lagi. Tapi pertama kali pake ini aku malemnya tidur 12 jam. Ini 100% ngeblock suara.",
+    screenshot: { src: "/images/bio/testimonials/calmicloud-shopee-1.png", width: 952, height: 423 },
   },
   {
     id: "calmicloud-shopee-3",
+    product: "calmicloud",
     author: "bennettonlin",
     marketplace: "shopee",
     quote:
@@ -134,28 +141,13 @@ const testimonials: BioTestimonial[] = [
     screenshot: { src: "/images/bio/testimonials/calmicloud-shopee-3.png", width: 967, height: 238 },
   },
   {
-    id: "cervicloud-tokopedia-4",
-    author: "Lie",
-    marketplace: "tokopedia",
-    quote:
-      "Unik banget bentuknya, ada cekungan buat kepala dan space buat tidur miring. Ergonomisnya berasa, posisi badan jadi jauh lebih stabil waktu tidur.",
-    screenshot: { src: "/images/bio/testimonials/cervicloud-tokopedia-4.png", width: 609, height: 195 },
-  },
-  {
-    id: "lumicloud-tokopedia-2",
-    author: "U***q",
-    marketplace: "tokopedia",
-    quote:
-      "Soft puffy gitu eye mask nya, lucu ada logo sheep nya. Enak buat jalan-jalan travel, dapet pouch nya pula. Tempelannya halus, gak nyangkut di rambut.",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-tokopedia-2.png", width: 615, height: 258 },
-  },
-  {
-    id: "lumicloud-shopee-3",
-    author: "steve969",
+    id: "calmicloud-shopee-2",
+    product: "calmicloud",
+    author: "bluenavy89",
     marketplace: "shopee",
     quote:
-      "Bahan berkualitas, lembut, cahaya tidak tembus. Bahan lembut tidak buat sakit atau pegal bagian belakang kepala. Sangat recomended",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-shopee-3.png", width: 951, height: 310 },
+      "Sesuai judulnya, Moldable jadi bisa ditempel langsung di sekitar lubang telinga sesuai bentuk yang kamu inginkan. Sangat bantu untuk redam suara dari luar.",
+    screenshot: { src: "/images/bio/testimonials/calmicloud-shopee-2.png", width: 959, height: 310 },
   },
 ];
 

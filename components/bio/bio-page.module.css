@@ -209,6 +209,18 @@
 
 /* ---------- testimonials ---------- */
 
+.reviewGroup + .reviewGroup {
+  margin-top: 1.1rem;
+}
+
+.reviewGroupHeading {
+  margin-bottom: 0.45rem;
+  font-family: var(--font-display), serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
 .testimonialList {
   display: flex;
   flex-direction: column;
