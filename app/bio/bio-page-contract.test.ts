@@ -201,7 +201,7 @@ describe("standalone bio routing contract", () => {
 
     // A link hub is a single column at every width; no multi-column editorial grid.
     expect(cssSource).toMatch(/\.shell\s*\{[\s\S]*?width:\s*min\(100% - 2rem, 30rem\)/);
-    for (const removed of [".hero", ".trustGrid", ".finalCta", ".productStories", ".ambientCloud", ".secondaryButton", ".hubGrid"]) {
+    for (const removed of [".hero", ".trustGrid", ".finalCta", ".productStories", ".ambientCloud", ".secondaryButton", ".hubGrid", ".productCard"]) {
       expect(cssSource).not.toContain(`${removed} {`);
     }
 
@@ -218,7 +218,7 @@ describe("standalone bio routing contract", () => {
       new URL("../../components/bio/bio-page.module.css", import.meta.url),
       "utf8",
     );
-    const tapTargets = [".primaryButton {", ".shopLink {", ".connectLink {"];
+    const tapTargets = [".buyButton {", ".shopLink {", ".connectLink {"];
 
     for (const selector of tapTargets) {
       const block = cssSource.slice(cssSource.indexOf(selector));

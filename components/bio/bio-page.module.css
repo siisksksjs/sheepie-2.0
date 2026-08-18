@@ -49,8 +49,7 @@
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border: 1px solid var(--bio-border);
-  border-radius: 1.1rem;
+  border-radius: 0.5rem;
   background: var(--bio-cream);
 }
 
@@ -58,27 +57,26 @@
   object-fit: contain;
 }
 
-/* ---------- trust strip ---------- */
+/* ---------- trust line ---------- */
 
-.trustStrip {
+/* A quiet line rather than a boxed pill: it reassures without competing
+   with the hero directly above it. */
+.trustLine {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.35rem 0.85rem;
-  margin-top: 0.75rem;
-  padding: 0.55rem 0.7rem;
-  border: 1px solid var(--bio-border);
-  border-radius: 0.8rem;
-  background: var(--bio-ice);
+  gap: 0.2rem 0.5rem;
+  margin-top: 0.9rem;
   list-style: none;
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--bio-text-secondary);
 }
 
-.trustStrip li {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.72rem;
-  font-weight: 600;
+.trustLine li + li::before {
+  content: "·";
+  margin-right: 0.5rem;
   color: var(--bio-text-secondary);
 }
 
@@ -105,23 +103,34 @@
 .productList {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
 }
 
-/* One product per row: image left, everything that sells it on the right. */
-.productCard {
-  display: grid;
-  grid-template-columns: 38% 1fr;
-  align-items: center;
-  overflow: hidden;
-  border: 1px solid var(--bio-border);
-  border-radius: 1rem;
-  background: var(--bio-white);
+/* Bands separated by a hairline instead of stacked cards: the listing art is
+   the only thing that needs a frame, so nothing else gets one. */
+.productBand {
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--bio-border);
 }
 
-.productMedia {
+.productBand:first-child {
+  border-top: none;
+  padding-top: 0.2rem;
+}
+
+.layerLabel {
+  margin-bottom: 0.6rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--bio-text-secondary);
+}
+
+.productArt {
   position: relative;
   aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 0.5rem;
   background: var(--bio-ice);
 }
 
@@ -130,47 +139,50 @@
   object-fit: contain;
 }
 
-.productBody {
-  display: flex;
-  flex-direction: column;
-  padding: 0.8rem;
-}
-
 .productName {
+  margin-top: 0.85rem;
   font-family: var(--font-display), serif;
-  font-size: 1.05rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
 }
 
 .productLine {
-  margin-top: 0.2rem;
-  font-size: 0.78rem;
-  line-height: 1.4;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
   color: var(--bio-text-secondary);
 }
 
-.productPrice {
-  margin-top: 0.35rem;
-  margin-bottom: 0.6rem;
-  font-size: 0.95rem;
-  font-weight: 700;
+.productBuy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
 }
 
-.primaryButton {
+.productPrice {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.buyButton {
   display: inline-flex;
   min-height: 2.75rem;
-  margin-top: auto;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
+  padding-inline: 1.5rem;
   border: 1px solid var(--bio-navy);
-  border-radius: 0.7rem;
+  border-radius: 999px;
   background: var(--bio-navy);
   color: var(--bio-white);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  text-align: center;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
   text-decoration: none;
   transition: background-color 0.18s ease;
 }
@@ -267,7 +279,7 @@
 }
 
 .reviewTab {
-  min-height: 2.5rem;
+  min-height: 2.6rem;
   padding: 0 0.4rem;
   border: 1px solid var(--bio-border);
   border-radius: 0.7rem;
@@ -288,15 +300,15 @@
 .testimonialList {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.7rem;
   list-style: none;
 }
 
 .testimonialCard {
-  padding: 0.85rem;
   border: 1px solid var(--bio-border);
-  border-radius: 0.9rem;
+  border-radius: 0.25rem;
   background: var(--bio-white);
+  overflow: hidden;
 }
 
 .testimonialHead {
@@ -323,12 +335,11 @@
   border-radius: 0.2rem;
 }
 
+/* The capture fills its panel edge to edge and is never cropped. */
 .testimonialImage {
   display: block;
   width: 100%;
   height: auto;
-  margin-top: 0.5rem;
-  border-radius: 0.6rem;
 }
 
 /* ---------- share + footer ---------- */
@@ -369,12 +380,12 @@
     background: var(--bio-ice);
   }
 
-  .primaryButton:hover {
-    background: color-mix(in srgb, var(--bio-navy) 88%, #fff);
+  .buyButton:hover {
+    background: color-mix(in srgb, var(--bio-navy) 86%, #fff);
   }
 }
 
-:is(.primaryButton, .shopLink, .connectLink, .reviewTab):focus-visible {
+:is(.buyButton, .shopLink, .connectLink, .reviewTab):focus-visible {
   outline: 2px solid var(--bio-navy);
   outline-offset: 2px;
 }

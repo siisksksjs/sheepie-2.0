@@ -92,15 +92,12 @@ export function BioPage({ config }: BioPageProps) {
         </section>
 
         <ul
-          className={styles.trustStrip}
+          className={styles.trustLine}
           data-bio-section="bio-trust"
           data-bio-track-section="bio-trust"
         >
           {trustPoints.map((point) => (
-            <li key={point.label}>
-              <point.icon size={13} aria-hidden="true" />
-              <span>{point.label}</span>
-            </li>
+            <li key={point.label}>{point.label}</li>
           ))}
         </ul>
 
@@ -117,41 +114,39 @@ export function BioPage({ config }: BioPageProps) {
                 <article
                   key={product.id}
                   id={product.id}
-                  className={styles.productCard}
+                  className={styles.productBand}
                   data-bio-section={product.id}
                   data-bio-track-section={product.id}
                   data-bio-product={product.slug}
                 >
-                  <div className={styles.productMedia}>
+                  {/* The eyebrow is the brand's own taxonomy: each product is one
+                      layer of rest, so it labels rather than decorates. */}
+                  <p className={styles.layerLabel}>{product.eyebrow}</p>
+
+                  <div className={styles.productArt}>
                     <Image
                       src={product.image.src}
                       alt={product.image.alt}
                       fill
-                      sizes="(max-width: 480px) 40vw, 12rem"
+                      sizes="(max-width: 480px) 92vw, 28rem"
                       className={styles.productImage}
                     />
                   </div>
-                  <div className={styles.productBody}>
-                    <h3 className={styles.productName}>{product.name}</h3>
-                    <p className={styles.productLine}>{product.headline}</p>
-                    <p className={styles.productPrice}>{product.price}</p>
+
+                  <h3 className={styles.productName}>{product.name}</h3>
+                  <p className={styles.productLine}>{product.headline}</p>
+
+                  <div className={styles.productBuy}>
+                    <span className={styles.productPrice}>{product.price}</span>
                     <MarketplaceButton
                       action={shopee}
                       ctaId={shopee.id}
                       product={product.slug}
                       section={product.id}
                       position="product-primary"
-                      className={styles.primaryButton}
+                      className={styles.buyButton}
                     >
-                      <Image
-                        src={brandLogos.shopee!}
-                        alt=""
-                        width={17}
-                        height={17}
-                        unoptimized
-                        className={styles.ctaLogo}
-                      />
-                      <span>Beli di Shopee</span>
+                      Buy now
                     </MarketplaceButton>
                   </div>
                 </article>
