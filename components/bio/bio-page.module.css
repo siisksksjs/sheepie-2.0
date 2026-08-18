@@ -55,7 +55,7 @@
   margin-top: 0.9rem;
   padding: 0.85rem 0.5rem;
   border-radius: 0.6rem;
-  background: var(--bio-ice);
+  background: var(--bio-cream);
   list-style: none;
 }
 
@@ -140,7 +140,7 @@
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 0.5rem;
-  background: var(--bio-ice);
+  background: var(--bio-cream);
 }
 
 .galleryImage {
