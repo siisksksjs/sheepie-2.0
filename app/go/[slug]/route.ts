@@ -5,6 +5,7 @@ import { bioConfig } from "@/data/bio";
 import {
   BIO_EVENT_TEXT_LIMITS,
   normalizeText,
+  type BioDestination,
   type BioEventInput,
   type BioProductSlug,
 } from "@/lib/bio-analytics/contracts";
@@ -22,14 +23,41 @@ export const dynamic = "force-dynamic";
  * reaches the listing, even if analytics is down.
  */
 
-function shopeeUrlFor(slug: string): { slug: BioProductSlug; href: string } | null {
+/** Storefront and profile links, addressable by a short readable slug. */
+const HUB_TARGETS: Record<string, string> = {
+  shopee: "bio-hub-shopee",
+  tokopedia: "bio-hub-tokopedia",
+  tiktok: "bio-hub-tiktok",
+  instagram: "bio-hub-instagram",
+  website: "bio-hub-website",
+};
+
+type Target = {
+  href: string;
+  productSlug: BioProductSlug | null;
+  destination: Exclude<BioDestination, "share">;
+};
+
+/**
+ * A slug is either a product, which goes to that product's Shopee listing, or
+ * one of the storefront/profile links.
+ */
+function targetFor(slug: string): Target | null {
   const product = bioConfig.products.find((entry) => entry.slug === slug);
-  if (!product) return null;
+  if (product) {
+    const shopee = product.actions.find((action) => action.destination === "shopee");
+    if (shopee) {
+      return { href: shopee.href, productSlug: product.slug, destination: "shopee" };
+    }
+  }
 
-  const shopee = product.actions.find((action) => action.destination === "shopee");
-  if (!shopee) return null;
+  const hubId = HUB_TARGETS[slug];
+  const hub = hubId ? bioConfig.hubActions.find((entry) => entry.id === hubId) : undefined;
+  if (hub) {
+    return { href: hub.href, productSlug: null, destination: hub.destination };
+  }
 
-  return { slug: product.slug, href: shopee.href };
+  return null;
 }
 
 function clientAddress(headers: Headers): string {
@@ -53,7 +81,7 @@ function campaignFrom(url: URL) {
 
 export async function GET(request: Request, context: { params: Promise<{ slug: string }> }) {
   const { slug } = await context.params;
-  const target = shopeeUrlFor(slug);
+  const target = targetFor(slug);
 
   // An unknown slug should still land somewhere useful rather than erroring.
   if (!target) {
@@ -72,10 +100,10 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
     session_id: randomUUID(),
     sequence_no: 1,
     section_id: "story-link",
-    product_slug: target.slug,
-    cta_id: `story_${target.slug}`,
+    product_slug: target.productSlug,
+    cta_id: `story_${slug}`,
     cta_position: "ig-story",
-    destination: "shopee",
+    destination: target.destination,
     landing_path: "/go",
     referrer_category: null,
     ...campaignFrom(url),

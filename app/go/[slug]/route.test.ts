@@ -20,6 +20,24 @@ describe("tracked story redirect", () => {
     }
   });
 
+  it("sends storefront and profile slugs to their own destinations", async () => {
+    const expected: Array<[string, string]> = [
+      ["shopee", "bio-hub-shopee"],
+      ["tokopedia", "bio-hub-tokopedia"],
+      ["tiktok", "bio-hub-tiktok"],
+      ["instagram", "bio-hub-instagram"],
+      ["website", "bio-hub-website"],
+    ];
+
+    for (const [slug, id] of expected) {
+      const response = await GET(request(`/go/${slug}`), params(slug));
+      const hub = bioConfig.hubActions.find((action) => action.id === id)!;
+
+      expect(response.status).toBe(307);
+      expect(response.headers.get("location")).toBe(hub.href);
+    }
+  });
+
   it("redirects an unknown slug to the bio page instead of erroring", async () => {
     const response = await GET(request("/go/nonsense"), params("nonsense"));
 
