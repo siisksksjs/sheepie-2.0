@@ -57,6 +57,8 @@
     ],
     "images": [
       "/images/products/lumicloud/listing-01.png",
+      "/images/products/lumicloud/variant-blue.webp",
+      "/images/products/lumicloud/variant-apricot.webp",
       "/images/products/lumicloud/listing-02.png",
       "/images/products/lumicloud/listing-03.png",
       "/images/products/lumicloud/listing-04.png",
@@ -65,6 +67,18 @@
       "/images/products/lumicloud/listing-07.png",
       "/images/products/lumicloud/listing-08.png",
       "/images/products/lumicloud/listing-09.png"
+    ],
+    "colors": [
+      {
+        "name": "Blue",
+        "swatch": "#a9c6e3",
+        "image": "/images/products/lumicloud/variant-blue.webp"
+      },
+      {
+        "name": "Apricot",
+        "swatch": "#d8cbb4",
+        "image": "/images/products/lumicloud/variant-apricot.webp"
+      }
     ],
     "shopeeUrl": "https://shopee.co.id/product/669518207/55952823103/",
     "tokopediaUrl": "https://www.tokopedia.com/sheepie/sheepie-lumicloud-sleep-mask-penutup-mata-tidur-premium-katun-100-blackout-lembut-empuk-nyaman-tanpa-gerah-1733526459631896089"

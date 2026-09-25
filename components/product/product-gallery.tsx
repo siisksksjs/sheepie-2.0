@@ -11,9 +11,15 @@ import { Button } from "@/components/ui/button"
 interface ProductGalleryProps {
   images: string[];
   productName: string;
+  /**
+   * Slide to jump to, e.g. after a colour is picked. A fresh object each time
+   * so picking the same colour again still jumps back. Stops autoplay.
+   */
+  jumpTo?: { index: number };
+  onIndexChange?: (index: number) => void;
 }
 
-export function ProductGallery({ images, productName }: ProductGalleryProps) {
+export function ProductGallery({ images, productName, jumpTo, onIndexChange }: ProductGalleryProps) {
   // Add Autoplay plugin with 4s delay and stop on user interaction
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })
@@ -32,8 +38,10 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-  }, [emblaApi])
+    const index = emblaApi.selectedScrollSnap()
+    setSelectedIndex(index)
+    onIndexChange?.(index)
+  }, [emblaApi, onIndexChange])
 
   useEffect(() => {
     if (!emblaApi) return
@@ -41,7 +49,17 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
     setScrollSnaps(emblaApi.scrollSnapList())
     emblaApi.on('select', onSelect)
     emblaApi.on('reInit', onSelect)
+    return () => {
+      emblaApi.off('select', onSelect)
+      emblaApi.off('reInit', onSelect)
+    }
   }, [emblaApi, onSelect])
+
+  useEffect(() => {
+    if (!emblaApi || !jumpTo) return
+    emblaApi.plugins().autoplay?.stop()
+    emblaApi.scrollTo(jumpTo.index)
+  }, [emblaApi, jumpTo])
 
   return (
     <div className="space-y-4 relative group w-full max-w-full min-w-0">

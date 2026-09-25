@@ -24,6 +24,12 @@ interface ProductVariant {
   tokopediaUrl: string;
 }
 
+export interface ProductColor {
+  name: string;
+  swatch: string;
+  image: string;
+}
+
 interface Product {
   slug: string;
   name: string;
@@ -35,11 +41,14 @@ interface Product {
   shopeeUrl: string;
   tokopediaUrl: string;
   variants?: ProductVariant[];
+  colors?: ProductColor[];
 }
 
 interface ProductDetailsProps {
   product: Product;
   locale: string;
+  selectedColor?: string | null;
+  onColorSelect?: (color: ProductColor) => void;
 }
 
 function parsePrice(value?: string) {
@@ -48,7 +57,7 @@ function parsePrice(value?: string) {
   return digits ? Number(digits) : null;
 }
 
-export function ProductDetails({ product, locale }: ProductDetailsProps) {
+export function ProductDetails({ product, locale, selectedColor, onColorSelect }: ProductDetailsProps) {
   const tProd = useTranslations("Products");
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     product.variants ? product.variants[0] : null
@@ -174,6 +183,50 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
         </div>
 
         <div className="space-y-5 p-6 md:p-8">
+          {product.colors && product.colors.length > 0 && (
+            <div className="space-y-3">
+              <span className="text-sm font-medium text-primary/60">
+                {isId ? "Pilih warna" : "Choose colour"}
+                {selectedColor && (
+                  <span className="text-foreground/80">: {selectedColor}</span>
+                )}
+              </span>
+              <div className="flex flex-wrap gap-3" role="radiogroup" aria-label={isId ? "Warna" : "Colour"}>
+                {product.colors.map((color) => {
+                  const isSelected = selectedColor === color.name;
+
+                  return (
+                    <button
+                      key={color.name}
+                      type="button"
+                      role="radio"
+                      aria-checked={isSelected}
+                      onClick={() => onColorSelect?.(color)}
+                      className={cn(
+                        "inline-flex items-center gap-2.5 rounded-full border py-2 pl-2 pr-4 text-sm font-medium transition-colors duration-200",
+                        isSelected
+                          ? "border-primary bg-primary/[0.06] text-primary ring-2 ring-primary/15"
+                          : "border-border bg-white text-foreground/70 hover:border-primary/50"
+                      )}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="h-6 w-6 rounded-full border border-black/10"
+                        style={{ backgroundColor: color.swatch }}
+                      />
+                      {color.name}
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="text-xs leading-6 text-muted-foreground">
+                {isId
+                  ? "Pilih warna yang sama saat checkout di Shopee atau Tokopedia."
+                  : "Pick the same colour at checkout on Shopee or Tokopedia."}
+              </p>
+            </div>
+          )}
+
           {product.variants && (
             <div className="space-y-3">
               <span className="text-sm font-medium text-primary/60">
