@@ -12,7 +12,8 @@ import { PriceLine } from "./price-line";
 function renderBuyBox(slug: "cervicloud" | "lumicloud" | "calmicloud", locale: "id" | "en" = "id") {
   const product = getProduct(slug, locale);
   return renderToStaticMarkup(
-    createElement(OptionProvider, { product }, createElement(BuyBox, { product, locale })),
+    // eslint-disable-next-line react/no-children-prop -- OptionProvider requires children in its props type
+    createElement(OptionProvider, { product, children: createElement(BuyBox, { product, locale }) }),
   );
 }
 
