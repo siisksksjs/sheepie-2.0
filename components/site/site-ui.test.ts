@@ -66,5 +66,12 @@ describe("shared site UI", () => {
     expect(html).toContain('href="/id/products/cervicloud"');
     expect(html).toContain("Rp838.000");
     expect(html).toContain("Rp1.399.000");
+    expect(html).toContain("data-fade");
+  });
+
+  it("renders an eager product card without the fade-in wrapper", () => {
+    const html = renderToStaticMarkup(createElement(ProductCard, { product: getProduct("cervicloud", "id"), locale: "id", eager: true }));
+    expect(html).toContain('data-product-card="cervicloud"');
+    expect(html).not.toContain("data-fade");
   });
 });

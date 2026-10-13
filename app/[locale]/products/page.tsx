@@ -34,7 +34,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
         </h1>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 340px), 1fr))", gap: 24 }}>
           {getProducts(locale).map((product, i) => (
-            <ProductCard key={product.slug} product={product} locale={locale} index={i} />
+            <ProductCard key={product.slug} product={product} locale={locale} index={i} eager={i < 3} />
           ))}
         </div>
       </main>

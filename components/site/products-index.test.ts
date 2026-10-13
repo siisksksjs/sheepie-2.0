@@ -11,4 +11,9 @@ describe("products index", () => {
     }
     expect(html).toContain("<h1");
   });
+
+  it("renders the first row of cards without waiting on the fade-in script", async () => {
+    const html = renderToStaticMarkup(await ProductsPage({ params: Promise.resolve({ locale: "id" }) }));
+    expect(html).not.toContain("data-fade");
+  });
 });
