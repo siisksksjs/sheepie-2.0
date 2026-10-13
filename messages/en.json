@@ -17,87 +17,6 @@
     "writtenBy": "Written by",
     "publishedOn": "Published on"
   },
-  "Hero": {
-    "subtitle": "The New Standard of Rest",
-    "title": "Sleep is <br></br><span1>The Foundation.</span1>",
-    "description": "We don't just sell pillows. We engineer silence, darkness, and alignment. <br></br><span1>Prepare for a clearer tomorrow.</span1>",
-    "ctaPrimary": "Explore the Collection",
-    "ctaSecondary": "Our Philosophy",
-    "testimonial": "\"The only pillow that actually stopped my neck pain.\"",
-    "nowTrending": "Now Trending",
-    "scroll": "Scroll to Dream",
-    "bgText": "DEEP SLEEP · RESTORE · DREAM · DEEP SLEEP · RESTORE · DREAM ·"
-  },
-  "TrustBar": {
-    "betterSleep": { "title": "Better Sleep", "desc": "Ergonomically designed for deep rest." },
-    "quality": { "title": "Quality Guarantee", "desc": "Premium materials, built to last." },
-    "shipping": { "title": "Fast Shipping", "desc": "Delivered across Indonesia in days." },
-    "community": { "title": "Loved by Thousands", "desc": "Join our community of sleepers." }
-  },
-  "ScienceScroll": {
-    "method": "Method 0{index}",
-    "explore": "Explore {product}",
-    "steps": {
-      "alignment": {
-        "subtitle": "The Science of Alignment",
-        "description": "Misalignment compresses nerves and restricts blood flow. Our ergonomic contours maintain the natural C-curve of your spine, ensuring zero-gravity support.",
-        "productName": "CerviCloud Pillow"
-      },
-      "darkness": {
-        "subtitle": "The Science of Darkness",
-        "description": "Light from lamps and windows can make sleep feel shallower. A mask that blocks light for most sleepers helps the room feel like night.",
-        "productName": "LumiCloud Eye Mask"
-      },
-      "silence": {
-        "subtitle": "The Science of Silence",
-        "description": "Snoring, AC hum and traffic can wake light sleepers. Soft earplugs help the room feel quieter without blocking every sound.",
-        "productName": "CalmiCloud"
-      }
-    }
-  },
-  "ProductShowcase": {
-    "title": "The <br></br> Trinity <br></br> of Sleep.",
-    "subtitle": "Three essentials designed to conquer the three enemies of rest: Noise, Light, and Discomfort.",
-    "scroll": "Scroll to Explore",
-    "ctaTitle": "Ready to upgrade your night?",
-    "ctaButton": "Shop All Essentials",
-    "category": {
-      "cervicloud": "Comfort",
-      "lumicloud": "Darkness",
-      "calmicloud": "Silence"
-    }
-  },
-  "SleepAcademy": {
-    "label": "The Sleep Academy",
-    "title": "Rituals for <br></br> <span1>Restoration.</span1>",
-    "description": "Great sleep isn't just about what you buy. It's about what you do. Adopt these simple evidence-based habits to elevate your night.",
-    "rituals": {
-      "digital": {
-        "title": "The Digital Sunset",
-        "desc": "Blue light suppresses melatonin. 60 minutes before bed, switch to 'Night Shift' mode or, better yet, total darkness.",
-        "action": "Pair with LumiCloud for 100% optical isolation."
-      },
-      "caffeine": {
-        "title": "The Caffeine Cutoff",
-        "desc": "Caffeine has a half-life of 5-6 hours. Your last cup should be at 2 PM to ensure your adenosine receptors are ready for sleep.",
-        "action": "If you're sensitive, CalmiCloud helps block the 'noise' of a racing heart."
-      },
-      "breath": {
-        "title": "The 4-7-8 Breath",
-        "desc": "Inhale for 4, hold for 7, exhale for 8. This signals your parasympathetic nervous system to downregulate cortisol.",
-        "action": "CerviCloud opens your airways for deeper, unobstructed breathing."
-      }
-    }
-  },
-  "UGCStrip": {
-    "title": "Life with Sheepie",
-    "subtitle": "Join thousands of well-rested sleepers. #SleepWithSheepie"
-  },
-  "FAQPreview": {
-    "label": "Common Questions",
-    "title": "Curious about better sleep?",
-    "viewAll": "View all FAQs"
-  },
   "Footer": {
     "description": "Premium sleep essentials for a clearer tomorrow.",
     "explore": "Explore",
@@ -124,14 +43,6 @@
     "title": "Essentials.",
     "subtitle": "Engineered for the three pillars of deep rest.",
     "viewDetails": "View Details"
-  },
-  "ProductDetails": {
-    "collection": "Essential Collection",
-    "selectOption": "Select Option",
-    "keyBenefits": "Key Benefits",
-    "secureCheckout": "Secure checkout via your favorite marketplace",
-    "includesCalmiCloud": "Includes CalmiCloud Earplugs",
-    "includesCalmiCloudSubtext": "Included for a limited period"
   },
   "FAQPage": {
     "metaTitle": "Support Center | Sheepie.",
@@ -178,36 +89,63 @@
     },
     "submit": "Send Message"
   },
-  "LanguageModal": {
-    "title": "Welcome to Sheepie",
-    "subtitle": "Please select your preferred language.",
-    "english": "English",
-    "indonesian": "Bahasa Indonesia"
-  },
   "FAQs": {
     "calmi": {
-      "reusable": { "q": "Are they reusable? How do I clean them?", "a": "Yes, CalmiCloud is designed for repeated use. Simply wash gently with mild soap and warm water, let them air-dry completely, and store in the provided clean case. With proper care, they outlast disposable foam plugs significantly." },
-      "sizes": { "q": "Do they come in different sizes?", "a": "CalmiCloud features a universal moldable design. Instead of forcing a specific size into your ear canal, you shape the silicone to seal your outer ear, providing a custom, pressure-free fit for any ear size." },
-      "alarm": { "q": "Will I still hear my alarm clock?", "a": "CalmiCloud reduces background noise such as snoring, AC hum or traffic, but it does not block every sound. Keep your alarm at a volume you can still hear." }
+      "reusable": {
+        "q": "Are they reusable? How do I clean them?",
+        "a": "Yes, CalmiCloud is designed for repeated use. Simply wash gently with mild soap and warm water, let them air-dry completely, and store in the provided clean case. With proper care, they outlast disposable foam plugs significantly."
+      },
+      "sizes": {
+        "q": "Do they come in different sizes?",
+        "a": "CalmiCloud features a universal moldable design. Instead of forcing a specific size into your ear canal, you shape the silicone to seal your outer ear, providing a custom, pressure-free fit for any ear size."
+      },
+      "alarm": {
+        "q": "Will I still hear my alarm clock?",
+        "a": "CalmiCloud reduces background noise such as snoring, AC hum or traffic, but it does not block every sound. Keep your alarm at a volume you can still hear."
+      }
     },
     "lumi": {
-      "eyelashes": { "q": "Does it press on my eyelashes or eyelids?", "a": "No. LumiCloud is shaped to block light without pressing on your eyelids, so it stays comfortable all night." },
-      "strap": { "q": "Is the strap hair-friendly?", "a": "Yes. We use a smooth, snag-free adjustable strap designed specifically to prevent tangling, unlike the rough elastic bands found on standard masks." },
-      "washable": { "q": "Is it machine washable?", "a": "We recommend hand washing to maximize the lifespan of the memory foam. If you must use a machine, place the mask in a laundry bag and use a delicate cycle with cold water." }
+      "eyelashes": {
+        "q": "Does it press on my eyelashes or eyelids?",
+        "a": "No. LumiCloud is shaped to block light without pressing on your eyelids, so it stays comfortable all night."
+      },
+      "strap": {
+        "q": "Is the strap hair-friendly?",
+        "a": "Yes. We use a smooth, snag-free adjustable strap designed specifically to prevent tangling, unlike the rough elastic bands found on standard masks."
+      },
+      "washable": {
+        "q": "Is it machine washable?",
+        "a": "We recommend hand washing to maximize the lifespan of the memory foam. If you must use a machine, place the mask in a laundry bag and use a delicate cycle with cold water."
+      }
     },
     "cervi": {
-      "firmness": { "q": "Is the pillow hard or soft?", "a": "CerviCloud utilizes medium-firm memory foam. It is engineered to be supportive enough to hold your cervical spine in neutral alignment, yet compliant enough to feel comfortable, never stiff." },
-      "adjustment": { "q": "Is there an adjustment period?", "a": "Yes, typically 7-14 nights. If you are switching from a traditional pillow, your neck muscles and spine may need time to relax into their correct natural alignment." },
-      "cover": { "q": "Is the cover washable?", "a": "Yes. The cooling ice-silk cover is removable and washable. Please do not wash the inner memory foam core." }
+      "firmness": {
+        "q": "Is the pillow hard or soft?",
+        "a": "CerviCloud utilizes medium-firm memory foam. It is engineered to be supportive enough to hold your cervical spine in neutral alignment, yet compliant enough to feel comfortable, never stiff."
+      },
+      "adjustment": {
+        "q": "Is there an adjustment period?",
+        "a": "Yes, typically 7-14 nights. If you are switching from a traditional pillow, your neck muscles and spine may need time to relax into their correct natural alignment."
+      },
+      "cover": {
+        "q": "Is the cover washable?",
+        "a": "Yes. The cooling ice-silk cover is removable and washable. Please do not wash the inner memory foam core."
+      }
     },
     "shipping": {
-      "returns": { "q": "What is your return policy?", "a": "We accept returns or exchanges for manufacturing defects or incorrect items received. Due to strict hygiene standards, we cannot accept returns on used sleep products unless they are defective." },
-      "duration": { "q": "How long does shipping take?", "a": "Orders are typically processed within 24 hours. Standard delivery takes 2–5 working days, depending on your location." }
+      "returns": {
+        "q": "What is your return policy?",
+        "a": "We accept returns or exchanges for manufacturing defects or incorrect items received. Due to strict hygiene standards, we cannot accept returns on used sleep products unless they are defective."
+      },
+      "duration": {
+        "q": "How long does shipping take?",
+        "a": "Orders are typically processed within 24 hours. Standard delivery takes 2–5 working days, depending on your location."
+      }
     }
   },
   "Products": {
-    "cervicloud": { 
-      "name": "CerviCloud Pillow", 
+    "cervicloud": {
+      "name": "CerviCloud Pillow",
       "tagline": "Spine alignment, perfected.",
       "description": "Transform your rest with the CerviCloud Pillow. Its 4D Butterfly shape cradles your neck to maintain natural cervical alignment, relieving persistent pressure points. Infused with thermal diffusion particles and wrapped in Ice-Silk fabric, it offers expansive, cooling support that adapts to your every move.",
       "benefits": {
@@ -217,8 +155,8 @@
         "3": "Expansive 64cm wide support"
       }
     },
-    "lumicloud": { 
-      "name": "LumiCloud Eye Mask", 
+    "lumicloud": {
+      "name": "LumiCloud Eye Mask",
       "tagline": "The weightless blackout experience.",
       "description": "LumiCloud is a light, soft cotton eye mask shaped to block light for most sleepers without pressing on the eyes. Breathable, adjustable and easy to pack for nights, naps and travel.",
       "benefits": {
@@ -228,8 +166,8 @@
         "3": "Breathable & sweat-resistant"
       }
     },
-    "calmicloud": { 
-      "name": "CalmiCloud Earplugs", 
+    "calmicloud": {
+      "name": "CalmiCloud Earplugs",
       "tagline": "Moldable silence for a chaotic world.",
       "description": "CalmiCloud earplugs are made from soft, moldable silicone that covers the outer ear instead of pushing in. Reusable and comfortable for side sleepers, they help quiet snoring, AC hum and traffic.",
       "benefits": {
