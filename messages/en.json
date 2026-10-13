@@ -45,12 +45,12 @@
       },
       "darkness": {
         "subtitle": "The Science of Darkness",
-        "description": "Light pollution triggers micro-arousals that fragment your REM cycles. Our 100% blackout engineering signals your pineal gland to produce melatonin instantly.",
+        "description": "Light from lamps and windows can make sleep feel shallower. A mask that blocks light for most sleepers helps the room feel like night.",
         "productName": "LumiCloud Eye Mask"
       },
       "silence": {
         "subtitle": "The Science of Silence",
-        "description": "Your brain processes sound even while asleep. We dampen ambient noise by 28dB, smoothing the sonic landscape to prevent cortisol spikes during the night.",
+        "description": "Snoring, AC hum and traffic can wake light sleepers. Soft earplugs help the room feel quieter without blocking every sound.",
         "productName": "CalmiCloud"
       }
     }
@@ -114,7 +114,7 @@
     "title": "Rest is not a Luxury.<br></br><span1>It's a Foundation.</span1>",
     "intro": "We believe that a clearer tomorrow starts with the night before. Sheepie was born to bridge the gap between ergonomic science and the gentle comfort you crave.",
     "sectionTitle": "Designed for Every Sleeper",
-    "p1": "We spent months obsessed with density, rebound rates, and fabric breathability. Whether you need the cervical precision of the <strong1>CerviCloud Pillow</strong1>, the silence of our <strong2>CalmiCloud</strong2> earplugs, or the total darkness of the <strong3>LumiCloud Eye Mask</strong3>, every curve is intentional.",
+    "p1": "We spent months obsessed with density, rebound rates, and fabric breathability. Whether you need the cervical precision of the <strong1>CerviCloud Pillow</strong1>, the silence of our <strong2>CalmiCloud</strong2> earplugs, or the darkness of the <strong3>LumiCloud Eye Mask</strong3>, every curve is intentional.",
     "p2": "We don't just sell sleep products. We sell the feeling of waking up ready."
   },
   "ProductsPage": {
@@ -188,17 +188,17 @@
     "calmi": {
       "reusable": { "q": "Are they reusable? How do I clean them?", "a": "Yes, CalmiCloud is designed for repeated use. Simply wash gently with mild soap and warm water, let them air-dry completely, and store in the provided clean case. With proper care, they outlast disposable foam plugs significantly." },
       "sizes": { "q": "Do they come in different sizes?", "a": "CalmiCloud features a universal moldable design. Instead of forcing a specific size into your ear canal, you shape the silicone to seal your outer ear, providing a custom, pressure-free fit for any ear size." },
-      "alarm": { "q": "Will I still hear my alarm clock?", "a": "Yes. CalmiCloud is engineered to reduce background noise (like snoring or traffic) by approximately 28dB. Important alert sounds, such as alarms or phone ringtones, remain audible for your safety." }
+      "alarm": { "q": "Will I still hear my alarm clock?", "a": "CalmiCloud reduces background noise such as snoring, AC hum or traffic, but it does not block every sound. Keep your alarm at a volume you can still hear." }
     },
     "lumi": {
-      "eyelashes": { "q": "Does it press on my eyelashes or eyelids?", "a": "Not at all. The mask features deep 3D contoured eye cavities that allow you to blink freely. It provides total blackout isolation without any pressure on your eyes." },
+      "eyelashes": { "q": "Does it press on my eyelashes or eyelids?", "a": "No. LumiCloud is shaped to block light without pressing on your eyelids, so it stays comfortable all night." },
       "strap": { "q": "Is the strap hair-friendly?", "a": "Yes. We use a smooth, snag-free adjustable strap designed specifically to prevent tangling, unlike the rough elastic bands found on standard masks." },
       "washable": { "q": "Is it machine washable?", "a": "We recommend hand washing to maximize the lifespan of the memory foam. If you must use a machine, place the mask in a laundry bag and use a delicate cycle with cold water." }
     },
     "cervi": {
       "firmness": { "q": "Is the pillow hard or soft?", "a": "CerviCloud utilizes medium-firm memory foam. It is engineered to be supportive enough to hold your cervical spine in neutral alignment, yet compliant enough to feel comfortable, never stiff." },
       "adjustment": { "q": "Is there an adjustment period?", "a": "Yes, typically 7-14 nights. If you are switching from a traditional pillow, your neck muscles and spine may need time to relax into their correct natural alignment." },
-      "cover": { "q": "Is the cover washable?", "a": "Yes. The cooling bamboo outer cover is removable and machine washable. Please do not wash the inner memory foam core." }
+      "cover": { "q": "Is the cover washable?", "a": "Yes. The cooling ice-silk cover is removable and washable. Please do not wash the inner memory foam core." }
     },
     "shipping": {
       "returns": { "q": "What is your return policy?", "a": "We accept returns or exchanges for manufacturing defects or incorrect items received. Due to strict hygiene standards, we cannot accept returns on used sleep products unless they are defective." },
@@ -220,18 +220,18 @@
     "lumicloud": { 
       "name": "LumiCloud Eye Mask", 
       "tagline": "The weightless blackout experience.",
-      "description": "Engineered for the heat, crafted for the soul. LumiCloud combines premium Soft Cotton Fabric with 3D contoured eye cavities to deliver 100% blackout isolation without pressure. Breathable, adjustable, and featherlight—it's not just a mask, it's a signal to your brain that it's time to rest.",
+      "description": "LumiCloud is a light, soft cotton eye mask shaped to block light for most sleepers without pressing on the eyes. Breathable, adjustable and easy to pack for nights, naps and travel.",
       "benefits": {
         "0": "Soft Cotton Fabric",
-        "1": "100% Blackout engineering",
-        "2": "Zero-pressure 3D eye cavities",
+        "1": "Blackout for most sleepers",
+        "2": "No pressure on the eyelids",
         "3": "Breathable & sweat-resistant"
       }
     },
     "calmicloud": { 
       "name": "CalmiCloud Earplugs", 
       "tagline": "Moldable silence for a chaotic world.",
-      "description": "Achieve profound silence without the invasive pressure. CalmiCloud is crafted from medical-grade, moldable silicone that seals your outer ear canal perfectly. Water-resistant and reusable, it blocks out snoring, traffic, and distraction—whether you're sleeping, swimming, or seeking deep focus.",
+      "description": "CalmiCloud earplugs are made from soft, moldable silicone that covers the outer ear instead of pushing in. Reusable and comfortable for side sleepers, they help quiet snoring, AC hum and traffic.",
       "benefits": {
         "0": "Custom-fit moldable silicone",
         "1": "Pressure-free outer seal",
