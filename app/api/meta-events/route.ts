@@ -8,6 +8,9 @@ export const dynamic = "force-dynamic";
 const MAX_BODY = 4096;
 
 export async function POST(request: Request) {
+  const declared = Number(request.headers.get("content-length"));
+  if (Number.isFinite(declared) && declared > MAX_BODY) return Response.json({ ok: false }, { status: 400 });
+
   const text = await request.text();
   if (text.length > MAX_BODY) return Response.json({ ok: false }, { status: 400 });
 

@@ -93,6 +93,31 @@ describe("POST /api/meta-events", () => {
     expect(await response.json()).toEqual({ ok: true, forwarded: false });
   });
 
+  it("still forwards when a tracking cookie is malformed", async () => {
+    vi.stubEnv("META_PIXEL_ID", "123456");
+    vi.stubEnv("META_CAPI_TOKEN", "secret-token");
+    const fetchMock = vi.fn(async () => new Response("{}", { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const response = await POST(post(JSON.stringify(event()), { cookie: "_fbp=%E0%A4%A" }));
+
+    expect(response.status).toBe(202);
+    expect(await response.json()).toEqual({ ok: true, forwarded: true });
+    expect(fetchMock).toHaveBeenCalledOnce();
+  });
+
+  it("rejects an oversized declared content-length without reading or forwarding", async () => {
+    vi.stubEnv("META_PIXEL_ID", "123456");
+    vi.stubEnv("META_CAPI_TOKEN", "secret-token");
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+
+    const response = await POST(post(JSON.stringify(event()), { "content-length": "100000" }));
+
+    expect(response.status).toBe(400);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
   it.each([
     ["not JSON", "{oops"],
     ["unknown event", JSON.stringify({ event_name: "Purchase", event_id: "abcdefgh12", custom_data: {} })],
