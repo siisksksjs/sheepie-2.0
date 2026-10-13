@@ -17,6 +17,7 @@ export function CookieNotice({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reads browser-only state after mount to keep SSR markup stable
       if (!localStorage.getItem(KEY)) setOpen(true);
     } catch {
       // Storage blocked: stay quiet rather than nag on every page.
