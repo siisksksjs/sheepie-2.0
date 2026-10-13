@@ -71,6 +71,8 @@ export interface ProductOption {
   originalPrice: number | null;
   shopeeUrl: string;
   tokopediaUrl: string;
+  /** Colour options only: the swatch hex from data/products.json. */
+  swatch?: string;
 }
 
 export interface Product {

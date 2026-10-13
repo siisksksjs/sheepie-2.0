@@ -1,7 +1,9 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
-import Home from "@/app/[locale]/page";
+import Home, { generateMetadata } from "@/app/[locale]/page";
+import { getProduct } from "@/lib/catalog";
+import { homeCopy } from "@/lib/site/home-copy";
 
 async function render(locale: "id" | "en") {
   const element = await Home({ params: Promise.resolve({ locale }) });
@@ -47,9 +49,27 @@ describe("home page", () => {
     for (const layer of ["sky", "far", "near", "content"]) expect(html).toContain(`data-lights="${layer}"`);
   });
 
+  it("takes the LumiCloud swatch colours from the catalog", async () => {
+    const html = await render("id");
+    const swatches = getProduct("lumicloud", "id").options.map((o) => o.swatch);
+    expect(swatches).toEqual(["#a9c6e3", "#d8cbb4"]);
+    for (const swatch of swatches) expect(html).toContain(`background:${swatch}`);
+    expect(html).not.toContain("#f3c8a8");
+  });
+
   it("renders English copy on /en", async () => {
     const html = await render("en");
     expect(html).toContain("Neck supported, eyes kept dark.");
     expect(html).toContain('href="/en/products/lumicloud"');
+  });
+
+  it.each([
+    ["id", "Sheepie. | Bantal ergonomis & masker mata blackout"],
+    ["en", "Sheepie. | Ergonomic pillows & blackout eye masks"],
+  ] as const)("has localized metadata on /%s", async (locale, title) => {
+    const meta = await generateMetadata({ params: Promise.resolve({ locale }) });
+    expect(meta.title).toBe(title);
+    expect(meta.description).toBe(homeCopy[locale].hero.sub);
+    expect(meta.openGraph?.url).toBe(`https://sheepiesleep.com/${locale}`);
   });
 });

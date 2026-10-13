@@ -29,7 +29,7 @@ interface SourceProduct {
   shopeeUrl: string;
   tokopediaUrl: string;
   variants?: SourceVariant[];
-  colors?: { name: string }[];
+  colors?: { name: string; swatch?: string }[];
 }
 
 const sources = products as SourceProduct[];
@@ -50,6 +50,7 @@ function resolveOption(slug: ProductSlug, option: OptionSource, locale: Locale):
   const base = source(slug);
   let pricing = priced(base.price, base.originalPrice);
   let urls = { shopeeUrl: base.shopeeUrl, tokopediaUrl: base.tokopediaUrl };
+  let swatch: string | undefined;
 
   if (option.source.kind === "variant") {
     const name = option.source.name;
@@ -59,7 +60,9 @@ function resolveOption(slug: ProductSlug, option: OptionSource, locale: Locale):
     urls = { shopeeUrl: variant.shopeeUrl, tokopediaUrl: variant.tokopediaUrl };
   } else if (option.source.kind === "color") {
     const name = option.source.name;
-    if (!base.colors?.some((c) => c.name === name)) throw new Error(`Missing colour "${name}" for ${slug}`);
+    const color = base.colors?.find((c) => c.name === name);
+    if (!color) throw new Error(`Missing colour "${name}" for ${slug}`);
+    swatch = color.swatch;
   }
 
   return {
@@ -69,6 +72,7 @@ function resolveOption(slug: ProductSlug, option: OptionSource, locale: Locale):
     image: option.image,
     ...pricing,
     ...urls,
+    ...(swatch ? { swatch } : {}),
   };
 }
 
