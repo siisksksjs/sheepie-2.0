@@ -1,0 +1,420 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 620px;
+  max-height: 960px;
+  overflow: hidden;
+  color: var(--sp-cream);
+}
+
+.heroImg {
+  object-fit: cover;
+  object-position: 50% 32%;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(17, 27, 44, 0.62) 0%, rgba(17, 27, 44, 0.22) 42%, rgba(17, 27, 44, 0) 62%),
+    linear-gradient(180deg, rgba(17, 27, 44, 0.28) 0%, rgba(17, 27, 44, 0) 18%);
+}
+
+.heroCopy {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 64px;
+}
+
+.heroCopy h1 {
+  max-width: 720px;
+  font: 700 76px/1 var(--font-display), serif;
+  letter-spacing: -0.02em;
+}
+
+.heroCopy p {
+  max-width: 470px;
+  margin: 20px 0 30px;
+  font-size: 19px;
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.collection {
+  padding: 110px 0 40px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.head h2,
+.reviews h2 {
+  font: 700 46px/1.05 var(--font-display), serif;
+  letter-spacing: -0.015em;
+}
+
+.link {
+  color: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 2px;
+}
+
+.duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.companions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.mini {
+  display: grid;
+  grid-template-columns: 132px 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 14px 24px 14px 14px;
+  border-radius: 22px;
+  background: var(--sp-linen);
+  color: inherit;
+  text-decoration: none;
+}
+
+.miniImg {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.miniTag {
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.55;
+}
+
+.mini h3 {
+  font: 700 21px var(--font-display), serif;
+}
+
+.mini p {
+  margin-top: 4px;
+  font-size: 14.5px;
+  line-height: 1.45;
+  opacity: 0.75;
+}
+
+.miniPrice {
+  font-weight: 700;
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+.cervi {
+  position: relative;
+  margin-top: 100px;
+  overflow: hidden;
+  background: var(--sp-sky-soft);
+}
+
+.bandIn {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding-top: 110px;
+  padding-bottom: 110px;
+}
+
+.stack {
+  position: relative;
+  aspect-ratio: 1 / 1.08;
+}
+
+.stackBig {
+  position: absolute;
+  inset: 0 14% 12% 0;
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+.stackSmall {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 6px solid var(--sp-sky-soft);
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.feature h2 {
+  font: 700 56px/1.03 var(--font-display), serif;
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  max-width: 470px;
+  margin: 20px 0 32px;
+  font-size: 18.5px;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.feat {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 30px;
+  max-width: 480px;
+  margin-bottom: 38px;
+}
+
+.feat div {
+  padding-top: 14px;
+  border-top: 1px solid var(--sp-line);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.feat b {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.reviews {
+  padding: 110px 0 120px;
+}
+
+.reviews h2 {
+  margin-bottom: 40px;
+}
+
+.rvGrid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 24px;
+}
+
+.rvCol {
+  display: grid;
+  gap: 24px;
+}
+
+.rv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  height: 100%;
+  margin: 0;
+  padding: 30px 32px;
+  border-radius: 24px;
+  background: var(--sp-linen);
+}
+
+.rv blockquote {
+  margin: 0;
+  font: 600 21px/1.4 var(--font-display), serif;
+}
+
+.rvBig {
+  padding: 44px 46px;
+}
+
+.rvBig blockquote {
+  font: 700 36px/1.2 var(--font-display), serif;
+  letter-spacing: -0.01em;
+}
+
+.rv figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.rv figcaption a {
+  margin-left: auto;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.night {
+  background: var(--sp-night);
+  color: var(--sp-cream);
+  padding-top: 40px;
+}
+
+.night .rv {
+  background: rgba(255, 253, 245, 0.06);
+  border: 1px solid rgba(255, 253, 245, 0.1);
+}
+
+/* Lights out */
+.lights {
+  position: relative;
+  height: 180vh;
+}
+
+.stick {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+  background: var(--sp-night);
+  opacity: 0;
+  will-change: opacity;
+}
+
+.layer {
+  position: absolute;
+  inset: -20% 0;
+  background: url(/brand/mendung-sky.png) repeat;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.layerFar {
+  background-size: 760px auto;
+}
+
+.lightsIn {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 64px;
+  align-items: center;
+  color: var(--sp-cream);
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.lightsIn .feat div {
+  border-color: rgba(255, 253, 245, 0.18);
+}
+
+.lightsPh {
+  position: relative;
+  aspect-ratio: 1 / 1.05;
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+.swatches {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 30px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.swatches i {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 253, 245, 0.8);
+}
+
+@media (max-width: 760px) {
+  .heroImg { object-position: 58% 30%; }
+  .hero::after {
+    background:
+      linear-gradient(0deg, rgba(17, 27, 44, 0.72) 0%, rgba(17, 27, 44, 0.3) 45%, rgba(17, 27, 44, 0) 65%),
+      linear-gradient(180deg, rgba(17, 27, 44, 0.3) 0%, rgba(17, 27, 44, 0) 20%);
+  }
+  .heroCopy { bottom: 28px; }
+  .heroCopy h1 { font-size: 42px; }
+  .heroCopy p { margin: 14px 0 22px; font-size: 16px; }
+  .ctas { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ctas a { padding: 0 10px; font-size: 14px; }
+
+  .collection { padding: 64px 0 20px; }
+  .head { margin-bottom: 22px; }
+  .head h2, .reviews h2 { font-size: 30px; }
+  .duo { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--sp-gutter) * -1); padding: 0 var(--sp-gutter) 4px; scrollbar-width: none; }
+  .duo::-webkit-scrollbar { display: none; }
+  .duo > * { flex: 0 0 82%; scroll-snap-align: start; }
+  .companions { grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
+  .mini { grid-template-columns: 76px 1fr; gap: 14px; padding: 10px 14px 10px 10px; }
+  .miniImg { width: 76px; height: 76px; border-radius: 12px; }
+  .miniPrice { grid-column: 2; font-size: 14px; }
+  .mini h3 { font-size: 18px; }
+  .mini p { font-size: 13px; }
+
+  .cervi { margin-top: 64px; }
+  .bandIn { grid-template-columns: 1fr; gap: 34px; padding-top: 64px; padding-bottom: 64px; }
+  .feature h2 { font-size: 34px; }
+  .lead { margin: 14px 0 24px; font-size: 16px; }
+  .feat { gap: 16px 18px; margin-bottom: 28px; }
+  .feat div { font-size: 13.5px; }
+  .feat b { font-size: 14.5px; }
+  .feature a { width: 100%; }
+
+  .reviews { padding: 64px 0 70px; }
+  .rvGrid { grid-template-columns: 1fr; gap: 12px; }
+  .rvCol { gap: 12px; }
+  .rv, .rvBig { padding: 22px; border-radius: 20px; }
+  .rvBig blockquote { font-size: 24px; }
+  .rv blockquote { font-size: 17px; }
+  .night { padding-top: 20px; }
+
+  /* Phones: no pinning; the panel dims in as it arrives. */
+  .lights { height: auto; }
+  .stick { position: relative; height: auto; display: block; padding: 70px 0 30px; }
+  .lightsIn { grid-template-columns: 1fr; gap: 30px; }
+  .lightsPh { order: -1; aspect-ratio: 4 / 4.2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lights { height: auto; }
+  .stick { position: relative; height: auto; padding: 100px 0; }
+  .sky, .layer, .lightsIn { opacity: 1 !important; transform: none !important; }
+}
