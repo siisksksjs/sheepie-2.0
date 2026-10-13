@@ -53,7 +53,7 @@ export function BuyBox({ product, locale }: { product: Product; locale: Locale }
         </MarketplaceLink>
       </div>
 
-      <VoucherLine code={WEBSITE_VOUCHER_CODE} label={t.voucher} copy={t.copy} copied={t.copied} />
+      {WEBSITE_VOUCHER_CODE && <VoucherLine code={WEBSITE_VOUCHER_CODE} label={t.voucher} copy={t.copy} copied={t.copied} />}
 
       <div className={styles.assure}>
         <div>

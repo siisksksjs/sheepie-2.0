@@ -1,7 +1,7 @@
 // components/pdp/buy-box.test.ts
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { findOption, getProduct } from "@/lib/catalog";
 
@@ -49,7 +49,39 @@ describe("product buy box", () => {
     expect(html).toContain('aria-pressed="true"');
   });
 
-  it("shows the website voucher", () => {
-    expect(renderBuyBox("calmicloud")).toContain("SHEEPIEWEB");
+});
+
+describe("website voucher", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  });
+
+  // The code is read from the environment at module load, so re-import per case.
+  async function renderWithVoucherEnv(value: string) {
+    vi.stubEnv("NEXT_PUBLIC_WEBSITE_VOUCHER_CODE", value);
+    vi.resetModules();
+    const [{ BuyBox: FreshBuyBox }, { OptionProvider: FreshProvider }, catalog] = await Promise.all([
+      import("./buy-box"),
+      import("./option-context"),
+      import("@/lib/catalog"),
+    ]);
+    const product = catalog.getProduct("calmicloud", "id");
+    return renderToStaticMarkup(
+      // eslint-disable-next-line react/no-children-prop -- OptionProvider requires children in its props type
+      createElement(FreshProvider, { product, children: createElement(FreshBuyBox, { product, locale: "id" }) }),
+    );
+  }
+
+  it("shows the website voucher when one is configured", async () => {
+    const html = await renderWithVoucherEnv("SHEEPIEWEB");
+    expect(html).toContain("Kode khusus website:");
+    expect(html).toContain("<code>SHEEPIEWEB</code>");
+  });
+
+  it("shows no voucher when none is configured", async () => {
+    const html = await renderWithVoucherEnv("   ");
+    expect(html).not.toContain("Kode khusus website:");
+    expect(html).not.toContain("SHEEPIEWEB");
   });
 });
