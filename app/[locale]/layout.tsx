@@ -8,6 +8,8 @@ import { notFound } from 'next/navigation';
 import { isLocale } from "@/i18n/config";
 import { UmamiAnalytics } from "@/components/analytics/umami-analytics";
 import { MotionProvider } from "@/components/providers/motion-provider";
+import { CookieNotice } from "@/components/site/cookie-notice";
+import { MetaPixel } from "@/components/site/meta-pixel";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -52,7 +54,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.dataset.js='1'" }} />
       </head>
@@ -60,6 +62,8 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <MotionProvider>
             {children}
+            <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID} />
+            <CookieNotice locale={locale} />
             <UmamiAnalytics />
             <Analytics />
           </MotionProvider>
