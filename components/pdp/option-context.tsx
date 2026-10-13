@@ -35,7 +35,11 @@ export function OptionProvider({ product, children }: { product: ProductRef; chi
   useEffect(() => {
     if (key === null) return;
     const current = pick(product.options, key);
-    sendMetaEvent(viewContent({ slug: product.slug, optionKey: current.key, value: current.price }));
+    try {
+      sendMetaEvent(viewContent({ slug: product.slug, optionKey: current.key, value: current.price }));
+    } catch {
+      // Tracking never interrupts the page.
+    }
   }, [key, product.slug, product.options]);
 
   const select = useCallback((next: string) => setKey(pick(product.options, next).key), [product.options]);

@@ -16,6 +16,22 @@ export function readMetaEnv(env: NodeJS.ProcessEnv = process.env): MetaEnv | nul
   return { pixelId, token, testEventCode };
 }
 
+/**
+ * Only the site's own pages may post events. Browsers send Sec-Fetch-Site;
+ * without it, fall back to comparing the Origin host with the request host.
+ */
+export function isSameOrigin(request: Request): boolean {
+  const site = request.headers.get("sec-fetch-site");
+  if (site !== null) return site === "same-origin";
+  const origin = request.headers.get("origin");
+  if (!origin) return false;
+  try {
+    return new URL(origin).host === new URL(request.url).host;
+  } catch {
+    return false;
+  }
+}
+
 function cookie(request: Request, name: string): string | undefined {
   const header = request.headers.get("cookie") ?? "";
   for (const part of header.split(";")) {
@@ -86,6 +102,7 @@ export async function forwardToMeta(
       body: JSON.stringify({ data: [serverEvent], ...(env.testEventCode ? { test_event_code: env.testEventCode } : {}) }),
       signal: AbortSignal.timeout(3000),
     });
+    if (!response.ok) console.warn(`[meta-capi] Meta rejected the event: HTTP ${response.status}`);
     return response.ok;
   } catch {
     return false;

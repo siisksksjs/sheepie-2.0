@@ -1,6 +1,6 @@
 // app/api/meta-events/route.ts
 import { isMetaEvent } from "@/lib/meta/events";
-import { buildServerEvent, forwardToMeta, readMetaEnv } from "@/lib/meta/server";
+import { buildServerEvent, forwardToMeta, isSameOrigin, readMetaEnv } from "@/lib/meta/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -8,6 +8,8 @@ export const dynamic = "force-dynamic";
 const MAX_BODY = 4096;
 
 export async function POST(request: Request) {
+  if (!isSameOrigin(request)) return Response.json({ ok: false }, { status: 403 });
+
   const declared = Number(request.headers.get("content-length"));
   if (Number.isFinite(declared) && declared > MAX_BODY) return Response.json({ ok: false }, { status: 400 });
 

@@ -29,9 +29,18 @@ export function MarketplaceLink({
   children: ReactNode;
 }) {
   const onClick = () => {
-    // Fire-and-forget; the browser follows the link regardless.
-    sendMetaEvent(initiateCheckout({ slug, optionKey, value, marketplace, placement }));
-    trackMarketplaceClick({ product_slug: slug, marketplace, page_path: window.location.pathname });
+    // Fire-and-forget; never preventDefault, and a tracking error must not stop the
+    // browser following the link, so each tracker is isolated.
+    try {
+      sendMetaEvent(initiateCheckout({ slug, optionKey, value, marketplace, placement }));
+    } catch {
+      // ignore
+    }
+    try {
+      trackMarketplaceClick({ product_slug: slug, marketplace, page_path: window.location.pathname });
+    } catch {
+      // ignore
+    }
   };
 
   return (

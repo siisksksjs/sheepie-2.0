@@ -1,7 +1,7 @@
 /* eslint-disable react/no-children-prop -- createElement props are type-checked, children is required */
-import { createElement } from "react";
+import { createElement, type ReactElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { getProduct } from "@/lib/catalog";
 import { siteCopy } from "@/lib/site/copy";
@@ -47,6 +47,22 @@ describe("shared site UI", () => {
     expect(html).toContain('data-marketplace="shopee"');
     expect(html).toContain('data-placement="buy-box"');
     expect(html).toContain("utm_campaign=buy-box");
+  });
+
+  it("never throws or blocks navigation when tracking fails", () => {
+    const link = MarketplaceLink({
+      slug: "cervicloud",
+      optionKey: "pillow",
+      value: 838000,
+      marketplace: "shopee",
+      href: "https://shopee.co.id/product/1/2/",
+      placement: "buy-box",
+      children: "Beli di Shopee",
+    }) as ReactElement<{ onClick: (event: { preventDefault: () => void }) => void }>;
+    const preventDefault = vi.fn();
+    // Under Node there is no window, so every tracker throws inside the handler.
+    expect(() => link.props.onClick({ preventDefault })).not.toThrow();
+    expect(preventDefault).not.toHaveBeenCalled();
   });
 
   it("renders button links and decorative patterns", () => {

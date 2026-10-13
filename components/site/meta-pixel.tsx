@@ -11,11 +11,19 @@ export function MetaPixel({ pixelId }: { pixelId?: string }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (pixelId) initPixel(pixelId);
+    try {
+      if (pixelId) initPixel(pixelId);
+    } catch {
+      // A broken pixel must never break the page.
+    }
   }, [pixelId]);
 
   useEffect(() => {
-    sendMetaEvent(pageView());
+    try {
+      sendMetaEvent(pageView());
+    } catch {
+      // Tracking never interrupts the page.
+    }
   }, [pathname]);
 
   return null;
