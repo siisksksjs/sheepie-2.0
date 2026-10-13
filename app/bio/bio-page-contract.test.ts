@@ -155,7 +155,7 @@ describe("bio page rendered contract", () => {
 describe("standalone bio routing contract", () => {
   it("excludes only the exact /bio boundary while retaining middleware elsewhere", () => {
     const middlewareSource = readFileSync(new URL("../../middleware.ts", import.meta.url), "utf8");
-    const matcherLiteral = middlewareSource.match(/matcher:\s*\[\s*'([^']+)'\s*\]/)?.[1];
+    const matcherLiteral = middlewareSource.match(/matcher:\s*\[\s*["']([^"']+)["']\s*\]/)?.[1];
     expect(matcherLiteral).toBeDefined();
     const matcher = matcherLiteral!.replaceAll("\\\\", "\\");
     const routeMatcher = new RegExp(`^${matcher}$`);

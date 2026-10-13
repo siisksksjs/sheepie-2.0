@@ -124,3 +124,30 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Sheepie brand site tokens (Phase 1 redesign) ---------- */
+:root {
+  --sp-cream: #fffdf5;
+  --sp-linen: #f3eee4;
+  --sp-sky: #a3c1e0;
+  --sp-sky-soft: #e4edf5;
+  --sp-peach: #f6cdb8;
+  --sp-ink: #1d2b44;
+  --sp-night: #111b2c;
+  --sp-line: rgba(29, 43, 68, 0.12);
+  --sp-logo: #7f9fc6;
+  --sp-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --sp-gutter: 28px;
+  --sp-max: 1320px;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --sp-gutter: 20px;
+  }
+}
+
+html,
+body {
+  overflow-x: clip;
+}
