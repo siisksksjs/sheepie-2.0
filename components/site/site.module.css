@@ -1,0 +1,157 @@
+.page {
+  background: var(--sp-cream);
+  color: var(--sp-ink);
+  font-family: var(--font-body), sans-serif;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+}
+
+.shell {
+  max-width: var(--sp-max);
+  margin: 0 auto;
+  padding: 0 var(--sp-gutter);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border-radius: 999px;
+  font: 700 15.5px var(--font-body), sans-serif;
+  text-decoration: none;
+  transition: transform 0.16s var(--sp-ease-out), background-color 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.ink { background: var(--sp-ink); color: var(--sp-cream); }
+.cream { background: var(--sp-cream); color: var(--sp-ink); }
+.line { border: 1.5px solid var(--sp-ink); color: var(--sp-ink); }
+.lineLight { border: 1.5px solid rgba(255, 253, 245, 0.7); color: var(--sp-cream); }
+
+.wide {
+  width: 100%;
+  min-height: 56px;
+  font-size: 16px;
+}
+
+.chip {
+  position: absolute;
+  z-index: 1;
+  left: 16px;
+  top: 16px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--sp-cream);
+  color: var(--sp-ink);
+  font: 700 12px var(--font-body), sans-serif;
+}
+
+.mendung {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: repeat;
+}
+
+.mendungWhite { background-image: url(/brand/mendung-white.png); }
+.mendungSky { background-image: url(/brand/mendung-sky.png); }
+.mendungInk { background-image: url(/brand/mendung-ink.png); }
+
+.breathe {
+  transform-origin: 50% 85%;
+  animation: breathe 5.2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  45% { transform: scale(1.04, 1.06); }
+}
+
+/* Hidden only when JS is running (html[data-js]) and the element has not entered yet. */
+:global(html[data-js="1"]) .fade:not([data-visible="true"]) {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.fade {
+  transition: opacity 0.7s var(--sp-ease-out), transform 0.7s var(--sp-ease-out);
+  transition-delay: var(--fade-delay, 0ms);
+}
+
+/* Product card */
+.card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardPh {
+  position: relative;
+  aspect-ratio: 5 / 5.4;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--sp-linen);
+}
+
+.cardImg {
+  object-fit: cover;
+  transition: opacity 0.5s var(--sp-ease-out);
+}
+
+.cardAlt {
+  opacity: 0;
+}
+
+@media (hover: hover) {
+  .card:hover .cardAlt { opacity: 1; }
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.cardName {
+  font: 700 30px var(--font-display), serif;
+  letter-spacing: -0.015em;
+}
+
+.cardLine {
+  margin-top: 6px;
+  max-width: 440px;
+  font-size: 16px;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.price {
+  font: 700 17px var(--font-body), sans-serif;
+  white-space: nowrap;
+}
+
+.price s {
+  margin-left: 8px;
+  font-weight: 500;
+  opacity: 0.45;
+}
+
+@media (max-width: 760px) {
+  .cardRow { flex-direction: column; gap: 4px; align-items: flex-start; }
+  .cardName { font-size: 24px; }
+  .cardLine { font-size: 14.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breathe { animation: none; }
+  .fade { transition: none; }
+  :global(html[data-js="1"]) .fade:not([data-visible="true"]) { opacity: 1; transform: none; }
+}
