@@ -1,0 +1,75 @@
+/* components/site/footer.module.css */
+.footer {
+  position: relative;
+  overflow: hidden;
+  background: var(--sp-night);
+  color: var(--sp-cream);
+  font-family: var(--font-body), sans-serif;
+}
+
+.footer > [aria-hidden] {
+  opacity: 0.55;
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding: 90px 0 60px;
+}
+
+.say {
+  margin-top: 22px;
+  max-width: 360px;
+  font: 700 40px/1.08 var(--font-display), serif;
+  letter-spacing: -0.015em;
+}
+
+.grid h4 {
+  margin-bottom: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  opacity: 0.55;
+}
+
+.grid ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid li a {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  color: inherit;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.legal {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 22px 0 30px;
+  border-top: 1px solid rgba(255, 253, 245, 0.12);
+  font-size: 13px;
+}
+
+.legal a {
+  color: inherit;
+}
+
+.white {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+@media (max-width: 760px) {
+  .grid { grid-template-columns: 1fr 1fr; gap: 30px 20px; padding: 64px 0 40px; }
+  .grid > div:first-child { grid-column: 1 / -1; }
+  .say { font-size: 32px; }
+  .legal { flex-direction: column; }
+}
