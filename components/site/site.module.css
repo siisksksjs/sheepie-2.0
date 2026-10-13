@@ -59,9 +59,9 @@
   background-repeat: repeat;
 }
 
-.mendungWhite { background-image: url(/brand/mendung-white.png); }
-.mendungSky { background-image: url(/brand/mendung-sky.png); }
-.mendungInk { background-image: url(/brand/mendung-ink.png); }
+.mendungWhite { background-image: url(/brand/mendung-white.webp); }
+.mendungSky { background-image: url(/brand/mendung-sky.webp); }
+.mendungInk { background-image: url(/brand/mendung-ink.webp); }
 
 .breathe {
   transform-origin: 50% 85%;
@@ -105,10 +105,13 @@
 }
 
 .cardAlt {
+  display: none;
   opacity: 0;
 }
 
+/* Phones never fetch the hover photo: display:none images are not loaded. */
 @media (hover: hover) {
+  .cardAlt { display: block; }
   .card:hover .cardAlt { opacity: 1; }
 }
 

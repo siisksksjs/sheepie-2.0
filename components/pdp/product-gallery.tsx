@@ -24,12 +24,12 @@ export function ProductGallery({ images, name }: { images: { src: string; alt: s
         ))}
       </div>
       <div className={styles.main}>
-        <Image key={images[index].src} src={images[index].src} alt={images[index].alt} fill priority={index === 0} sizes="(max-width: 760px) 100vw, 640px" className={styles.cover} />
+        <Image key={images[index].src} src={images[index].src} alt={images[index].alt} fill preload={index === 0} fetchPriority={index === 0 ? "high" : undefined} sizes="(max-width: 760px) 100vw, 640px" className={styles.cover} />
       </div>
       <div className={styles.track} onScroll={onScroll}>
         {images.map((image, i) => (
           <div key={image.src} className={styles.slide}>
-            <Image src={image.src} alt={image.alt} fill loading={i === 0 ? "eager" : undefined} sizes="100vw" className={styles.cover} />
+            <Image src={image.src} alt={image.alt} fill loading={i === 0 ? "eager" : undefined} fetchPriority={i === 0 ? "high" : undefined} sizes="(max-width: 760px) 100vw, 640px" className={styles.cover} />
           </div>
         ))}
       </div>

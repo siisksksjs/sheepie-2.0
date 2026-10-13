@@ -81,7 +81,7 @@ export function UmamiAnalytics() {
     <Script
       src={UMAMI_SCRIPT_URL}
       data-website-id={UMAMI_WEBSITE_ID}
-      strategy="afterInteractive"
+      strategy="lazyOnload"
     />
   );
 }

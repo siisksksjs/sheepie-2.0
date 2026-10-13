@@ -5,6 +5,8 @@
   background: var(--sp-night);
   color: var(--sp-cream);
   font-family: var(--font-body), sans-serif;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 .footer > [aria-hidden] {

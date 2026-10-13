@@ -7,7 +7,7 @@
 //   node scripts/extract-brand-assets.mjs ~/Downloads/Sheepie_MTS.pdf
 //   node scripts/extract-brand-assets.mjs /path/to/brand-book-images
 import { execFileSync } from "node:child_process";
-import { copyFileSync, existsSync, mkdirSync, mkdtempSync, rmSync, statSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import sharp from "sharp";
@@ -72,9 +72,10 @@ async function patternTiles() {
       px[i * 4 + 2] = b;
       px[i * 4 + 3] = Math.round(alpha[i] * a);
     }
-    await sharp(px, { raw: { width: info.width, height: info.height, channels: 4 } })
-      .png({ palette: true, quality: 70, compressionLevel: 9 })
-      .toFile(join(out, `${name}.png`));
+    await sharp(px, { raw: { width: info.width, height: info.height, channels: 4 } }).png({ palette: true, quality: 70, compressionLevel: 9 }).toFile(join(out, `${name}.png`));
+    // WebP is what the CSS loads. Encoding the palette-quantised PNG losslessly
+    // keeps identical pixels and is smaller than a lossy encode of fine linework.
+    await sharp(join(out, `${name}.png`)).webp({ lossless: true, effort: 6 }).toFile(join(out, `${name}.webp`));
   }
 }
 

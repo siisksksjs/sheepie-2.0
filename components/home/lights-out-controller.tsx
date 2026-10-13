@@ -11,13 +11,14 @@ const ease = (a: number, b: number, x: number) => {
 /**
  * Dims #lights as it scrolls in. The scroll listener exists only while the band
  * is near the viewport, writes once per animation frame, and touches only
- * opacity and transform.
+ * opacity and transform. The band's pattern tile is only requested once the
+ * band first comes near (data-near), including under reduced motion.
  */
 export function LightsOutController() {
   useEffect(() => {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const band = document.getElementById("lights");
     if (!band) return;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const layer = (name: string) => band.querySelector<HTMLElement>(`[data-lights="${name}"]`)!;
     const sky = layer("sky");
     const far = layer("far");
@@ -50,6 +51,12 @@ export function LightsOutController() {
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          // First approach: let CSS fetch the pattern tile (see .lights[data-near]).
+          band.dataset.near = "true";
+          if (reduced) {
+            io.disconnect();
+            return;
+          }
           window.addEventListener("scroll", onScroll, { passive: true });
           update();
         } else {

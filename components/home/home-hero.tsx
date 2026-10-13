@@ -13,7 +13,7 @@ export function HomeHero({ locale }: { locale: Locale }) {
 
   return (
     <section id="hero" className={styles.hero} data-section="hero">
-      <Image src="/images/edited/DSC01316.JPG" alt={t.alt} fill priority sizes="100vw" className={styles.heroImg} />
+      <Image src="/images/edited/DSC01316.JPG" alt={t.alt} fill preload fetchPriority="high" sizes="100vw" className={styles.heroImg} />
       <div className={styles.heroCopy}>
         <div className={site.shell}>
           <h1>{t.title}</h1>

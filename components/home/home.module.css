@@ -142,6 +142,8 @@
   margin-top: 100px;
   overflow: hidden;
   background: var(--sp-sky-soft);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 .bandIn {
@@ -218,6 +220,8 @@
 
 .reviews {
   padding: 110px 0 120px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 .reviews h2 {
@@ -317,9 +321,14 @@
 .layer {
   position: absolute;
   inset: -20% 0;
-  background: url(/brand/mendung-sky.png) repeat;
+  background-repeat: repeat;
   opacity: 0;
   will-change: opacity, transform;
+}
+
+/* The tile is only fetched once the band is close to the viewport. */
+.lights[data-near="true"] .layer {
+  background-image: url(/brand/mendung-sky.webp);
 }
 
 .layerFar {
