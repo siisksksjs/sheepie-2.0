@@ -23,4 +23,13 @@ describe("site header", () => {
     expect(html).toContain('data-over="true"');
     expect(html).toContain(">Shop<");
   });
+
+  it("marks both panel triggers as collapsed dialog openers", () => {
+    const html = renderToStaticMarkup(createElement(SiteHeader, { locale: "id" }));
+    for (const name of ["menu", "shop"]) {
+      const tag = html.match(new RegExp(`<button[^>]*data-panel-trigger="${name}"[^>]*>`))?.[0] ?? "";
+      expect(tag).toContain('aria-haspopup="dialog"');
+      expect(tag).toContain('aria-expanded="false"');
+    }
+  });
 });

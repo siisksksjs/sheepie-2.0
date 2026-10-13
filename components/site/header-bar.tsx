@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 
 import type { Locale } from "@/i18n/config";
 import type { ProductSlug } from "@/lib/catalog/types";
@@ -31,11 +31,37 @@ type Panel = "menu" | "shop" | null;
 export function HeaderBar({ locale, shopItems }: { locale: Locale; shopItems: ShopItem[] }) {
   const t = siteCopy[locale];
   const [panel, setPanel] = useState<Panel>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  const openPanel = (next: Exclude<Panel, null>) => (event: MouseEvent<HTMLButtonElement>) => {
+    triggerRef.current = event.currentTarget;
+    setPanel(next);
+  };
 
   useEffect(() => {
     if (!panel) return;
+    const trigger = triggerRef.current;
+    closeRef.current?.focus();
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setPanel(null);
+      if (event.key === "Escape") {
+        setPanel(null);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = sheetRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])");
+      if (!focusable || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      if (event.shiftKey && (active === first || !sheetRef.current?.contains(active))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (active === last || !sheetRef.current?.contains(active))) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -43,6 +69,7 @@ export function HeaderBar({ locale, shopItems }: { locale: Locale; shopItems: Sh
     return () => {
       document.body.style.overflow = previous;
       window.removeEventListener("keydown", onKey);
+      trigger?.focus();
     };
   }, [panel]);
 
@@ -59,7 +86,7 @@ export function HeaderBar({ locale, shopItems }: { locale: Locale; shopItems: Sh
   return (
     <>
       <div className={styles.bar}>
-        <button type="button" className={styles.menuBtn} aria-label={t.nav.menu} data-panel-trigger="menu" onClick={() => setPanel("menu")}>
+        <button type="button" className={styles.menuBtn} aria-label={t.nav.menu} data-panel-trigger="menu" aria-haspopup="dialog" aria-expanded={panel === "menu"} onClick={openPanel("menu")}>
           <span />
         </button>
         <nav className={`${styles.nav} ${styles.navLeft}`}>
@@ -75,7 +102,7 @@ export function HeaderBar({ locale, shopItems }: { locale: Locale; shopItems: Sh
           {secondary.map((link) => (
             <Link key={link.href} href={link.href}>{link.label}</Link>
           ))}
-          <button type="button" className={styles.shopBtn} data-panel-trigger="shop" onClick={() => setPanel("shop")}>
+          <button type="button" className={styles.shopBtn} data-panel-trigger="shop" aria-haspopup="dialog" aria-expanded={panel === "shop"} onClick={openPanel("shop")}>
             {t.nav.shop}
           </button>
         </nav>
@@ -84,10 +111,10 @@ export function HeaderBar({ locale, shopItems }: { locale: Locale; shopItems: Sh
       {panel && (
         <>
           <div className={styles.scrim} onClick={() => setPanel(null)} />
-          <div className={styles.sheet} role="dialog" aria-modal="true" aria-label={panel === "shop" ? t.shopPanel.title : t.nav.menu}>
+          <div ref={sheetRef} className={styles.sheet} role="dialog" aria-modal="true" aria-label={panel === "shop" ? t.shopPanel.title : t.nav.menu}>
             <div className={styles.sheetHead}>
               <h2>{panel === "shop" ? t.shopPanel.title : t.nav.menu}</h2>
-              <button type="button" className={styles.close} onClick={() => setPanel(null)}>{t.nav.close}</button>
+              <button ref={closeRef} type="button" className={styles.close} onClick={() => setPanel(null)}>{t.nav.close}</button>
             </div>
 
             {panel === "shop" ? (
