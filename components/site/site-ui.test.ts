@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop -- createElement props are type-checked, children is required */
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
@@ -38,9 +39,8 @@ describe("shared site UI", () => {
         marketplace: "shopee",
         href: "https://shopee.co.id/product/1/2/",
         placement: "buy-box",
-        },
-        "Beli di Shopee",
-      ),
+        children: "Beli di Shopee",
+      }),
     );
     expect(html).toContain('target="_blank"');
     expect(html).toContain('rel="noopener noreferrer"');
@@ -50,12 +50,12 @@ describe("shared site UI", () => {
   });
 
   it("renders button links and decorative patterns", () => {
-    expect(renderToStaticMarkup(createElement(ButtonLink, { href: "/id", variant: "ink" }, "Go"))).toContain('href="/id"');
+    expect(renderToStaticMarkup(createElement(ButtonLink, { href: "/id", variant: "ink", children: "Go" }))).toContain('href="/id"');
     expect(renderToStaticMarkup(createElement(Mendung, { tone: "sky" }))).toContain('aria-hidden="true"');
   });
 
   it("marks fade-in content so it can be revealed once", () => {
-    const html = renderToStaticMarkup(createElement(FadeIn, { section: "products" }, "x"));
+    const html = renderToStaticMarkup(createElement(FadeIn, { section: "products", children: "x" }));
     expect(html).toContain("data-fade");
     expect(html).toContain('data-section="products"');
   });
