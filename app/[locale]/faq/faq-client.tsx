@@ -1,7 +1,6 @@
 "use client";
 
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Link as ScrollLink } from "react-scroll";
@@ -26,13 +25,14 @@ const faqStructure = [
   }
 ];
 
-export function FAQClient() {
+/** `header` and `footer` are rendered by the server page so the catalog stays out of the client bundle. */
+export function FAQClient({ header, footer }: { header: ReactNode; footer: ReactNode }) {
   const t = useTranslations('FAQPage');
   const tFAQ = useTranslations('FAQs');
 
   return (
     <main className="min-h-screen flex flex-col bg-white selection:bg-primary/20">
-      <Navbar />
+      {header}
       
       {/* Header */}
       <section className="pt-32 pb-20 text-center bg-[#F8FAFC]">
@@ -73,7 +73,7 @@ export function FAQClient() {
                    activeClass="bg-primary/5 text-primary font-bold"
                    spy={true}
                  >
-                   {t(`cats.${cat.id}` as any)}
+                   {t(`cats.${cat.id}`)}
                  </ScrollLink>
                ))}
              </div>
@@ -84,7 +84,7 @@ export function FAQClient() {
             {faqStructure.map((cat, i) => (
               <div key={i} id={`cat-${i}`} className="scroll-mt-32">
                 <h2 className="text-2xl font-display font-medium text-primary mb-6 flex items-center gap-4">
-                  {t(`cats.${cat.id}` as any)}
+                  {t(`cats.${cat.id}`)}
                   <div className="h-px flex-1 bg-border/50" />
                 </h2>
                 
@@ -92,10 +92,10 @@ export function FAQClient() {
                   {cat.items.map((itemKey, j) => (
                     <AccordionItem key={j} value={`${cat.id}-${j}`} className="border-border/40">
                       <AccordionTrigger className="text-lg font-medium text-foreground/80 hover:text-primary hover:no-underline py-6 text-left">
-                        {tFAQ(`${cat.id}.${itemKey}.q` as any)}
+                        {tFAQ(`${cat.id}.${itemKey}.q`)}
                       </AccordionTrigger>
                       <AccordionContent className="text-muted-foreground font-light leading-relaxed text-base pb-6 pr-8">
-                        {tFAQ(`${cat.id}.${itemKey}.a` as any)}
+                        {tFAQ(`${cat.id}.${itemKey}.a`)}
                       </AccordionContent>
                     </AccordionItem>
                   ))}
@@ -121,7 +121,7 @@ export function FAQClient() {
         </div>
       </div>
 
-      <Footer />
+      {footer}
     </main>
   );
 }

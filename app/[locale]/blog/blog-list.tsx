@@ -1,16 +1,15 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
 import blogData from "@/data/blog.json";
 import { ArrowRight, Clock } from "lucide-react";
-import { cn } from "@/lib/utils";
 
-export function BlogList() {
+/** `header` and `footer` are rendered by the server page so the catalog stays out of the client bundle. */
+export function BlogList({ header, footer }: { header: ReactNode; footer: ReactNode }) {
   const t = useTranslations('Blog');
   const locale = useLocale();
   const getPath = (path: string) => `/${locale}${path}`;
@@ -21,7 +20,7 @@ export function BlogList() {
 
   return (
     <main className="min-h-screen flex flex-col bg-white selection:bg-primary/20">
-      <Navbar />
+      {header}
       
       {/* Editorial Header */}
       <section className="relative pt-32 pb-24 text-center overflow-hidden">
@@ -135,7 +134,7 @@ export function BlogList() {
         </div>
       </div>
 
-      <Footer />
+      {footer}
     </main>
   );
 }

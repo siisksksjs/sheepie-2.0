@@ -1,7 +1,6 @@
 "use client";
 
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,12 +8,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, MessageCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-export function ContactClient() {
+/** `header` and `footer` are rendered by the server page so the catalog stays out of the client bundle. */
+export function ContactClient({ header, footer }: { header: ReactNode; footer: ReactNode }) {
   const t = useTranslations('ContactPage');
 
   return (
     <main className="min-h-screen flex flex-col bg-white selection:bg-primary/20">
-      <Navbar />
+      {header}
       
       {/* Header */}
       <section className="pt-32 pb-20 text-center bg-[#F8FAFC]">
@@ -124,7 +124,7 @@ export function ContactClient() {
         </div>
       </div>
 
-      <Footer />
+      {footer}
     </main>
   );
 }
