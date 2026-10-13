@@ -19,6 +19,7 @@ const BANNED: Array<[string, RegExp]> = [
   ["decibel claim", /\b\d+\s?dB\b/i],
   ["medical-grade", /medical[- ]grade|kelas medis/i],
   ["absolute blackout", /100% ?blackout|blackout 100%|total blackout|kegelapan total/i],
+  ["absolute blackout (wording)", /menutup rapat|closes off light/i],
   ["3D eye cavities", /eye cavit|rongga mata/i],
   ["bamboo cover", /\bbamboo\b|\bbambu\b/i],
 ];

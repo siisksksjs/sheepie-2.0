@@ -255,7 +255,7 @@ const lumicloud: ProductCopy = {
     title: { id: "Bedanya dengan masker mata biasa", en: "How it differs from a regular eye mask" },
     theirs: { id: "Masker biasa", en: "Regular mask" },
     rows: [
-      { label: { id: "Cahaya", en: "Light" }, ours: { id: "Menutup rapat", en: "Closes off light" }, theirs: { id: "Sering bocor di tepi", en: "Often leaks at the edges" } },
+      { label: { id: "Cahaya", en: "Light" }, ours: { id: "Menutup cahaya untuk kebanyakan orang", en: "Blocks light for most sleepers" }, theirs: { id: "Sering bocor di tepi", en: "Often leaks at the edges" } },
       { label: { id: "Di mata", en: "On the eyes" }, ours: { id: "Tidak menekan kelopak", en: "No pressure on the eyelids" }, theirs: { id: "Menempel di mata", en: "Sits on the eyes" } },
       { label: { id: "Tali", en: "Strap" }, ours: { id: "Velcro halus", en: "Soft velcro" }, theirs: { id: "Karet yang menarik rambut", en: "Elastic that pulls hair" } },
       { label: { id: "Dipakai lama", en: "Worn all night" }, ours: { id: "Ringan & lembut", en: "Light and soft" }, theirs: { id: "Bikin pegal belakang kepala", en: "Aches at the back of the head" } },
