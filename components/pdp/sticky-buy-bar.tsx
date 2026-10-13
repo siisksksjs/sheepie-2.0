@@ -20,10 +20,19 @@ export function StickyBuyBar({ locale }: { locale: Locale }) {
   useEffect(() => {
     const target = document.getElementById("buy-ctas");
     if (!target) return;
-    const io = new IntersectionObserver(([entry]) => setShow(!entry.isIntersecting && entry.boundingClientRect.top < 0));
+    // Extend the root downward so an element below the viewport counts as intersecting;
+    // only crossing the top edge flips the state, even on a one-jump flick past it.
+    const io = new IntersectionObserver(([entry]) => setShow(!entry.isIntersecting), { rootMargin: "0px 0px 100000px 0px" });
     io.observe(target);
     return () => io.disconnect();
   }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.stickyBar = show ? "true" : "false";
+    return () => {
+      delete document.documentElement.dataset.stickyBar;
+    };
+  }, [show]);
 
   return (
     <div className={styles.sticky} data-show={show} aria-hidden={!show} inert={!show}>

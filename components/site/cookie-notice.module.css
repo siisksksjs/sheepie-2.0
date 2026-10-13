@@ -36,4 +36,7 @@
     bottom: 12px;
     max-width: none;
   }
+  :global(html[data-sticky-bar="true"]) .notice {
+    bottom: calc(84px + env(safe-area-inset-bottom));
+  }
 }
