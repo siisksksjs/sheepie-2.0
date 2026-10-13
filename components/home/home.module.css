@@ -69,6 +69,9 @@
 }
 
 .link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: inherit;
   font-weight: 700;
   font-size: 15px;
@@ -332,8 +335,12 @@
   gap: 64px;
   align-items: center;
   color: var(--sp-cream);
-  opacity: 0;
   will-change: opacity, transform;
+}
+
+/* Hidden only when JS is running, so the copy stays readable without it. */
+:global(html[data-js="1"]) .lightsIn {
+  opacity: 0;
 }
 
 .lightsIn .feat div {

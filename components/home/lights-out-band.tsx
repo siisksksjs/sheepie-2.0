@@ -30,8 +30,8 @@ export function LightsOutBand({ locale }: { locale: Locale }) {
               ))}
             </div>
             <div className={styles.swatches}>
-              <i style={{ background: "#a3c1e0" }} />
-              <i style={{ background: "#f3c8a8" }} />
+              <i aria-hidden="true" style={{ background: "#a3c1e0" }} />
+              <i aria-hidden="true" style={{ background: "#f3c8a8" }} />
               {t.swatches}
             </div>
             <Link className={buttonClass("cream")} href={productPath(locale, "lumicloud")}>{t.cta}</Link>

@@ -16,12 +16,22 @@ export function CookieNotice({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    let dismissed = true;
     try {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- reads browser-only state after mount to keep SSR markup stable
-      if (!localStorage.getItem(KEY)) setOpen(true);
+      dismissed = !!localStorage.getItem(KEY);
     } catch {
       // Storage blocked: stay quiet rather than nag on every page.
     }
+    if (dismissed) return;
+
+    // Wait for a little scrolling so the notice never covers the landing view.
+    const onScroll = () => {
+      if (window.scrollY < 200) return;
+      window.removeEventListener("scroll", onScroll);
+      setOpen(true);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   if (!open) return null;
