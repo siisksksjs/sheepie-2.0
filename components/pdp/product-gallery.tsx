@@ -29,7 +29,7 @@ export function ProductGallery({ images, name }: { images: { src: string; alt: s
       <div className={styles.track} onScroll={onScroll}>
         {images.map((image, i) => (
           <div key={image.src} className={styles.slide}>
-            <Image src={image.src} alt={image.alt} fill priority={i === 0} sizes="100vw" className={styles.cover} />
+            <Image src={image.src} alt={image.alt} fill loading={i === 0 ? "eager" : undefined} sizes="100vw" className={styles.cover} />
           </div>
         ))}
       </div>

@@ -26,7 +26,7 @@ export function StickyBuyBar({ locale }: { locale: Locale }) {
   }, []);
 
   return (
-    <div className={styles.sticky} data-show={show} aria-hidden={!show}>
+    <div className={styles.sticky} data-show={show} aria-hidden={!show} inert={!show}>
       <div><b>{formatIdr(option.price)}</b>{name}</div>
       <MarketplaceLink slug={slug} optionKey={option.key} value={option.price} marketplace="shopee" href={option.shopeeUrl} placement="sticky-bar" className={buttonClass("ink")}>
         {siteCopy[locale].buy.shopee}

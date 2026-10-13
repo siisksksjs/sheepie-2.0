@@ -1,64 +1,72 @@
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { ProductHero } from "@/components/product/product-hero";
-import { ProductSalesSections } from "@/components/product/product-sales-sections";
-import products from "@/data/products.json";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
 
-// This is required for SSG with dynamic routes
+import { BuyBox } from "@/components/pdp/buy-box";
+import { AnatomyPanel, CompareTable, FitGrid } from "@/components/pdp/details";
+import { OptionProvider } from "@/components/pdp/option-context";
+import styles from "@/components/pdp/pdp.module.css";
+import { ProductGallery } from "@/components/pdp/product-gallery";
+import { FaqList, PairWith, ReviewGrid } from "@/components/pdp/social";
+import { StickyBuyBar } from "@/components/pdp/sticky-buy-bar";
+import { SiteFooter } from "@/components/site/site-footer";
+import { SiteHeader } from "@/components/site/site-header";
+import site from "@/components/site/site.module.css";
+import { isLocale, locales } from "@/i18n/config";
+import { getProduct, isProductSlug } from "@/lib/catalog";
+import { PRODUCT_SLUGS } from "@/lib/catalog/types";
+import { localeHref } from "@/lib/site/copy";
+import { pdpCopy } from "@/lib/site/pdp-copy";
+
+type Params = { params: Promise<{ locale: string; slug: string }> };
+
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
-  const locales = ['en', 'id'];
-  return locales.flatMap((locale) =>
-    products.map((product) => ({
-      locale,
-      slug: product.slug,
-    }))
-  );
+  return locales.flatMap((locale) => PRODUCT_SLUGS.map((slug) => ({ locale, slug })));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string, locale: string }> }) {
-  const { slug, locale } = await params;
-  const product = products.find((p) => p.slug === slug);
-  if (!product) return {};
-
-  const t = await getTranslations({locale, namespace: 'Products'});
-
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { locale, slug } = await params;
+  if (!isLocale(locale) || !isProductSlug(slug)) return {};
+  const product = getProduct(slug, locale);
   return {
-    title: `${t(`${slug}.name` as any)} | Sheepie.`,
-    description: t(`${slug}.tagline` as any),
-    openGraph: {
-      images: [product.images[0]],
-    },
+    title: `${product.name} | Sheepie.`,
+    description: product.sub,
+    openGraph: { images: [product.gallery[0].src] },
   };
 }
 
-export default async function ProductPage({ params }: { params: Promise<{ slug: string, locale: string }> }) {
-  const { slug, locale } = await params;
-  const product = products.find((p) => p.slug === slug);
+export default async function ProductPage({ params }: Params) {
+  const { locale, slug } = await params;
+  if (!isLocale(locale) || !isProductSlug(slug)) notFound();
 
-  if (!product) {
-    notFound();
-  }
-
-  const t = await getTranslations({locale, namespace: 'Products'});
-  const translatedName = t(`${slug}.name` as any);
+  const product = getProduct(slug, locale);
+  const t = pdpCopy[locale];
 
   return (
-    <main className="min-h-screen bg-white w-full max-w-[100vw]">
-      <Navbar />
-
-      <div className="container mx-auto px-4 py-12 lg:py-20">
-        <section className="relative rounded-3xl border border-border/60 bg-white p-4 shadow-[0_24px_70px_-50px_rgba(33,51,104,0.3)] lg:p-8">
-          <ProductHero product={product} productName={translatedName} locale={locale} />
-        </section>
-
-        <div className="mt-12 lg:mt-20">
-          <ProductSalesSections product={product} locale={locale} />
-        </div>
-      </div>
-
-      <Footer />
-    </main>
+    <div className={site.page}>
+      <SiteHeader locale={locale} />
+      <OptionProvider product={{ slug: product.slug, name: product.name, options: product.options }}>
+        <main className={site.shell}>
+          <nav className={styles.crumbs} aria-label="Breadcrumb">
+            <Link href={localeHref(locale, "/")}>{t.home}</Link> / <Link href={localeHref(locale, "/products")}>{t.products}</Link> / {product.name}
+          </nav>
+          <section className={styles.top} data-section="buy">
+            <ProductGallery images={product.gallery} name={t.gallery} />
+            <BuyBox product={product} locale={locale} />
+          </section>
+          <AnatomyPanel product={product} locale={locale} />
+          <FitGrid product={product} locale={locale} />
+          <CompareTable product={product} locale={locale} />
+          <ReviewGrid product={product} locale={locale} />
+          <FaqList product={product} locale={locale} />
+          <PairWith product={product} locale={locale} />
+          <div className={styles.end} />
+        </main>
+        <StickyBuyBar locale={locale} />
+      </OptionProvider>
+      <SiteFooter locale={locale} />
+    </div>
   );
 }
