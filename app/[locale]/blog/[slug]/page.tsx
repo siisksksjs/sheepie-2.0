@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import blogData from "@/data/blog.json";
@@ -42,6 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string, locale: string }> }) {
   const { slug, locale } = await params;
+  setRequestLocale(locale);
   const post = blogData.find((p) => p.slug === slug);
 
   if (!post) {
@@ -91,7 +92,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* Content */}
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="prose prose-lg prose-headings:font-display prose-headings:font-medium prose-p:font-light prose-p:text-muted-foreground prose-a:text-primary max-w-none">
-            {post.content.map((block: any, i: number) => {
+            {post.content.map((block, i: number) => {
               if (block.type === 'h2') {
                 return <h2 key={i} className="text-3xl text-primary mt-12 mb-6">{block.text}</h2>;
               }
@@ -99,12 +100,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 return <h3 key={i} className="text-2xl text-primary mt-8 mb-4">{block.text}</h3>;
               }
               if (block.type === 'p') {
-                return <p key={i} className="leading-relaxed mb-6" dangerouslySetInnerHTML={{ __html: block.text }} />;
+                return <p key={i} className="leading-relaxed mb-6" dangerouslySetInnerHTML={{ __html: block.text ?? "" }} />;
               }
               if (block.type === 'ul') {
                 return (
                   <ul key={i} className="list-disc pl-6 mb-6 space-y-2">
-                    {block.items.map((item: string, j: number) => (
+                    {(block.items ?? []).map((item: string, j: number) => (
                       <li key={j} className="text-muted-foreground font-light" dangerouslySetInnerHTML={{ __html: item }} />
                     ))}
                   </ul>

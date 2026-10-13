@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { ProductCard } from "@/components/site/product-card";
@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ProductsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+  setRequestLocale(locale);
 
   return (
     <div className={site.page}>

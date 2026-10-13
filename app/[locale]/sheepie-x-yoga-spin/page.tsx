@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { SpinWheel } from "./spin-wheel";
 
 export const metadata: Metadata = {
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function SheepieYogaSpinPage() {
+export default async function SheepieYogaSpinPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return <SpinWheel />;
 }

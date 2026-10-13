@@ -1,5 +1,5 @@
 import { BlogList } from "./blog-list";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 const baseUrl = "https://sheepiesleep.com";
 
@@ -22,6 +22,8 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
   };
 }
 
-export default function BlogListingPage() {
+export default async function BlogListingPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return <BlogList />;
 }

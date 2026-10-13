@@ -2,7 +2,8 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { use } from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 // Pick a few distinct images for the grid to tell a story
 const aboutImages = [
@@ -24,7 +25,9 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
   };
 }
 
-export default function AboutPage() {
+export default function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = use(params);
+  setRequestLocale(locale);
   const t = useTranslations('AboutPage');
 
   return (

@@ -9,10 +9,12 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import site from "@/components/site/site.module.css";
 import { isLocale } from "@/i18n/config";
+import { setRequestLocale } from "next-intl/server";
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+  setRequestLocale(locale);
 
   return (
     <div className={site.page}>

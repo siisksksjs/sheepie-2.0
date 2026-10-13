@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 
 import { BuyBox } from "@/components/pdp/buy-box";
 import { AnatomyPanel, CompareTable, FitGrid } from "@/components/pdp/details";
@@ -40,6 +41,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function ProductPage({ params }: Params) {
   const { locale, slug } = await params;
   if (!isLocale(locale) || !isProductSlug(slug)) notFound();
+  setRequestLocale(locale);
 
   const product = getProduct(slug, locale);
   const t = pdpCopy[locale];

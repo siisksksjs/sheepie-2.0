@@ -1,5 +1,5 @@
 import { FAQClient } from "./faq-client";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({params}: {params: Promise<{locale: string}>}) {
   const { locale } = await params;
@@ -11,6 +11,8 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
   };
 }
 
-export default function FAQPage() {
+export default async function FAQPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return <FAQClient />;
 }

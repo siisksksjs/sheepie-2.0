@@ -3,9 +3,9 @@ import { Playfair_Display, Quicksand } from "next/font/google";
 import "../globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { isLocale } from "@/i18n/config";
+import { isLocale, locales } from "@/i18n/config";
 import { UmamiAnalytics } from "@/components/analytics/umami-analytics";
 import { MotionProvider } from "@/components/providers/motion-provider";
 import { CookieNotice } from "@/components/site/cookie-notice";
@@ -30,12 +30,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://sheepie.co.id",
+    url: "https://sheepiesleep.com",
     title: "Sheepie | Premium Sleep Essentials",
     description: "Experience the cloud-like comfort of Sheepie.",
     siteName: "Sheepie",
   },
 };
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 export default async function RootLayout({
   children,
@@ -50,6 +54,8 @@ export default async function RootLayout({
   if (!isLocale(locale)) {
     notFound();
   }
+
+  setRequestLocale(locale);
 
   const messages = await getMessages();
 
