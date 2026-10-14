@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 
+import { ArticleBody } from "@/components/pages/article-body";
 import styles from "@/components/pages/pages.module.css";
 import { PostCard } from "@/components/pages/post-card";
 import { FadeIn } from "@/components/site/fade-in";
@@ -13,10 +14,8 @@ import site from "@/components/site/site.module.css";
 import { isLocale } from "@/i18n/config";
 import { getProduct, productPath } from "@/lib/catalog";
 import { localeHref } from "@/lib/site/copy";
-import { findPost, journalPosts, postProduct, relatedPosts } from "@/lib/site/journal";
+import { findPost, formatPostDate, journalPosts, postHeadings, postJsonLd, postProduct, readMinutes, relatedPosts, SITE_URL } from "@/lib/site/journal";
 import { pagesCopy } from "@/lib/site/pages-copy";
-
-const baseUrl = "https://sheepiesleep.com";
 
 export function generateStaticParams() {
   return journalPosts.map((post) => ({ slug: post.slug }));
@@ -26,12 +25,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug, locale } = await params;
   const post = findPost(slug);
   if (!post) return {};
+  const url = `${SITE_URL}/id/blog/${post.slug}`;
   return {
-    title: `${post.title} | Sheepie Blog`,
-    description: post.excerpt,
-    alternates: { canonical: `${baseUrl}/id/blog/${post.slug}` },
+    title: post.seoTitle ?? `${post.title} | Sheepie`,
+    description: post.description ?? post.excerpt,
+    alternates: { canonical: url },
     robots: locale === "id" ? undefined : { index: false, follow: true },
-    openGraph: { type: "article", url: `${baseUrl}/id/blog/${post.slug}`, images: [post.image] },
+    openGraph: {
+      type: "article",
+      url,
+      title: post.title,
+      description: post.description ?? post.excerpt,
+      images: [{ url: post.image, alt: post.imageAlt ?? post.title }],
+      publishedTime: post.date,
+      modifiedTime: post.updated ?? post.date,
+      locale: "id_ID",
+    },
   };
 }
 
@@ -44,6 +53,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const t = pagesCopy[locale].journal;
   const productSlug = postProduct(post);
   const product = productSlug ? getProduct(productSlug, locale) : null;
+  const headings = postHeadings(post);
+  const hasFaq = post.content.some((b) => b.type === "faq");
+  const toc = [...headings, ...(hasFaq ? [{ id: "faq", text: t.faqTitle }] : [])];
+  const related = relatedPosts(post);
 
   return (
     <div className={site.page}>
@@ -52,29 +65,31 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <article className={`${site.shell} ${styles.article}`} data-section="article">
           <Link className={styles.back} href={localeHref(locale, "/blog")}>← {t.back}</Link>
           <header className={styles.articleHead}>
-            <span className={styles.meta}>{post.date} · {post.readTime}</span>
+            <span className={styles.meta}>
+              <time dateTime={post.date}>{formatPostDate(post.date, locale)}</time> · {readMinutes(post)} {t.minRead}
+            </span>
             <h1>{post.title}</h1>
-            <span className={styles.meta}>{t.by} {post.author}</span>
+            <span className={styles.meta}>
+              {t.by} {post.author}
+              {post.updated && post.updated !== post.date && (
+                <> · {t.updated} <time dateTime={post.updated}>{formatPostDate(post.updated, locale)}</time></>
+              )}
+            </span>
           </header>
           <div className={styles.articleImg}>
-            <Image src={post.image} alt="" fill preload fetchPriority="high" sizes="(max-width: 760px) 100vw, 1080px" className={styles.cover} />
+            <Image src={post.image} alt={post.imageAlt ?? ""} fill preload fetchPriority="high" sizes="(max-width: 760px) 100vw, 1080px" className={styles.cover} />
           </div>
 
-          <div className={styles.prose}>
-            {post.content.map((block, i) => {
-              // Article copy is authored in this repo (data/blog.json) and may carry inline links.
-              if (block.type === "ul") {
-                return (
-                  <ul key={i}>
-                    {block.items.map((item) => <li key={item} dangerouslySetInnerHTML={{ __html: item }} />)}
-                  </ul>
-                );
-              }
-              if (block.type === "h2") return <h2 key={i}>{block.text}</h2>;
-              if (block.type === "h3") return <h3 key={i}>{block.text}</h3>;
-              return <p key={i} dangerouslySetInnerHTML={{ __html: block.text }} />;
-            })}
-          </div>
+          {toc.length >= 4 && (
+            <nav className={styles.toc} aria-label={t.toc} data-block="toc">
+              <details>
+                <summary>{t.toc}</summary>
+                <ol>{toc.map((h) => <li key={h.id}><a href={`#${h.id}`}>{h.text}</a></li>)}</ol>
+              </details>
+            </nav>
+          )}
+
+          <ArticleBody blocks={post.content} labels={{ answer: t.answer, faqTitle: t.faqTitle }} />
 
           {product && (
             <Link className={styles.productCard} href={productPath(locale, product.slug)} data-article-product={product.slug}>
@@ -90,17 +105,22 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           )}
         </article>
 
+        {related.length > 0 && (
         <section className={`${site.shell} ${styles.block}`} data-section="more">
           <FadeIn><h2 className={styles.h2}>{t.more}</h2></FadeIn>
           <div className={`${styles.posts} ${styles.morePosts}`}>
-            {relatedPosts(post).map((p, i) => (
+            {related.map((p, i) => (
               <FadeIn key={p.slug} index={i}>
                 <PostCard post={p} locale={locale} />
               </FadeIn>
             ))}
           </div>
         </section>
+        )}
       </main>
+      {postJsonLd(post).map((data, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }} />
+      ))}
       <SiteFooter locale={locale} />
     </div>
   );

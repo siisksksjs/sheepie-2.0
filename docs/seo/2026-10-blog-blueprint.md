@@ -7,7 +7,7 @@ Metode: skill keyword-research (seed → expand → cluster → prioritas → pe
 
 ## 1. Ringkasan
 
-**Situasi:** sheepie.id adalah domain baru dengan blog yang masih kosong. Kita menjual 3 produk tidur di Shopee dan Tokopedia. Tujuan blog adalah membawa orang yang sedang mencari solusi tidur ke halaman produk, lalu ke marketplace.
+**Situasi:** sheepiesleep.com adalah domain baru dengan blog yang masih kosong. Kita menjual 3 produk tidur di Shopee dan Tokopedia. Tujuan blog adalah membawa orang yang sedang mencari solusi tidur ke halaman produk, lalu ke marketplace.
 
 **Temuan utama dari data:**
 
@@ -160,7 +160,7 @@ Semuanya kerja kecil, sekitar 1 sesi.
 
 ## 7. Pengukuran
 
-- Daftarkan sheepie.id di **Google Search Console** dan submit sitemap.
+- Daftarkan sheepiesleep.com di **Google Search Console** dan submit sitemap.
 - **KPI di bulan ke-3:**
   - 18 artikel ter-index
   - 5 artikel masuk top 20 untuk keyword utamanya

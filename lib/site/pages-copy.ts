@@ -54,6 +54,11 @@ type PagesCopy = {
     productCta: string;
     emptyTitle: string;
     emptyBody: string;
+    toc: string;
+    updated: string;
+    minRead: string;
+    answer: string;
+    faqTitle: string;
   };
 };
 
@@ -120,6 +125,11 @@ export const pagesCopy: Record<Locale, PagesCopy> = {
       productCta: "Lihat produk",
       emptyTitle: "Artikel pertama sedang ditulis.",
       emptyBody: "Sambil menunggu, lihat panduan produk kami atau tanya langsung lewat WhatsApp.",
+      toc: "Daftar isi",
+      updated: "Diperbarui",
+      minRead: "menit baca",
+      answer: "Jawaban singkat",
+      faqTitle: "Pertanyaan yang sering muncul",
     },
   },
   en: {
@@ -184,6 +194,11 @@ export const pagesCopy: Record<Locale, PagesCopy> = {
       productCta: "See the product",
       emptyTitle: "The first article is on its way.",
       emptyBody: "In the meantime, browse our products or ask us anything on WhatsApp.",
+      toc: "Contents",
+      updated: "Updated",
+      minRead: "min read",
+      answer: "Short answer",
+      faqTitle: "Frequently asked questions",
     },
   },
 };

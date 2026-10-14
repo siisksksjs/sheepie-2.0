@@ -192,3 +192,37 @@ section.notFound { padding-bottom: 120px; }
   .guideSplit { grid-template-columns: 1fr; gap: 28px; }
   .safety { padding: 22px; }
 }
+
+/* Article blocks: answer box, tip, table, FAQ, table of contents */
+.prose ol { margin: 0 0 22px; padding-left: 24px; }
+.prose h2 { scroll-margin-top: 96px; }
+.prose strong { font-weight: 700; }
+.answer { margin: 0 0 32px; padding: 22px 26px; border-radius: 20px; background: var(--sp-sky-soft); }
+.answer b { display: block; margin-bottom: 6px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+.prose .answer p { margin: 0; opacity: 1; }
+.prose .tip { margin: 0 0 22px; padding: 16px 20px; border-left: 3px solid var(--sp-sky); border-radius: 0 14px 14px 0; background: var(--sp-linen); opacity: 1; font-size: 17px; }
+.tableWrap { margin: 8px 0 28px; overflow-x: auto; border: 1px solid var(--sp-line); border-radius: 18px; }
+.tableWrap table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15.5px; line-height: 1.5; }
+.tableWrap caption { padding: 14px 18px 0; text-align: left; font-size: 13.5px; font-weight: 600; opacity: 0.6; }
+.tableWrap th, .tableWrap td { padding: 14px 18px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--sp-line); }
+.tableWrap thead th { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; background: var(--sp-linen); }
+.tableWrap tbody th { font-weight: 700; white-space: nowrap; }
+.tableWrap tbody tr:last-child th, .tableWrap tbody tr:last-child td { border-bottom: 0; }
+.articleFaq { margin-top: 44px; }
+.prose .articleFaq h2 { margin-bottom: 4px; }
+.prose .articleFaq .qa p { opacity: 0.85; }
+.toc { max-width: 680px; margin: 40px auto 0; border: 1px solid var(--sp-line); border-radius: 18px; }
+.toc summary { padding: 16px 22px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
+.toc summary::-webkit-details-marker { display: none; }
+.toc summary::after { content: "+"; font-weight: 400; font-size: 22px; line-height: 1; transition: transform 0.2s; }
+.toc details[open] summary::after { transform: rotate(45deg); }
+.toc ol { margin: 0; padding: 0 22px 18px 44px; display: grid; gap: 8px; font-size: 16px; }
+.toc a { color: inherit; text-decoration: none; opacity: 0.8; }
+.toc a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .toc { margin-top: 28px; }
+  .answer { padding: 18px 20px; }
+  .tableWrap { margin-left: calc(var(--sp-gutter) * -1); margin-right: calc(var(--sp-gutter) * -1); border-radius: 0; border-left: 0; border-right: 0; }
+  .tableWrap table { font-size: 14.5px; }
+}

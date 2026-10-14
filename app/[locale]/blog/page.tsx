@@ -14,7 +14,7 @@ import site from "@/components/site/site.module.css";
 import { isLocale } from "@/i18n/config";
 import { localeHref } from "@/lib/site/copy";
 import { getProducts, productPath } from "@/lib/catalog";
-import { journalPosts } from "@/lib/site/journal";
+import { formatPostDate, journalPosts, readMinutes } from "@/lib/site/journal";
 import { pagesCopy } from "@/lib/site/pages-copy";
 
 const baseUrl = "https://sheepiesleep.com";
@@ -77,7 +77,7 @@ export default async function JournalPage({ params }: { params: Promise<{ locale
                   <span className={styles.chip}>{t.featured}</span>
                   <h2>{featured.title}</h2>
                   <p>{featured.excerpt}</p>
-                  <span className={`${styles.meta} ${styles.featuredMeta}`}>{featured.author} · {featured.date} · {featured.readTime}</span>
+                  <span className={`${styles.meta} ${styles.featuredMeta}`}>{featured.author} · {formatPostDate(featured.date, locale)} · {readMinutes(featured)} {t.minRead}</span>
                   <span className={styles.readMore}>{t.read} →</span>
                 </span>
               </Link>

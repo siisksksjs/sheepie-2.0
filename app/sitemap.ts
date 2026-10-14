@@ -70,7 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         const path = `/blog/${post.slug}`
         sitemapEntries.push({
           url: `${baseUrl}/${blogLocale}${path}`,
-          lastModified: new Date(), // Could parse post.date if formatted strictly
+          lastModified: new Date(post.updated ?? post.date),
           changeFrequency: 'weekly',
           priority: 0.75,
           alternates: {
