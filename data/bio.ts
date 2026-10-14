@@ -131,7 +131,7 @@ const rawTestimonials: BioTestimonial[] = [
     marketplace: "shopee",
     quote:
       "Bagus halus banget bahannya, tebel empuk dan nyaman dipakai lama. Yang paling oke adalah fitur silent velcro nya.",
-    screenshot: { src: "/images/bio/testimonials/lumicloud-2-review.jpg", width: 1170, height: 1467 },
+    screenshot: { src: "/images/bio/testimonials/lumicloud-2-review-crop.jpg", width: 1170, height: 1333 },
   },
   {
     id: "lumicloud-3",

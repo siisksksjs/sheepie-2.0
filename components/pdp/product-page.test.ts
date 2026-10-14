@@ -31,7 +31,7 @@ describe("product page", () => {
 
   it("shows the three real review screenshots, each linking to the full image", async () => {
     const html = await render("id", "lumicloud");
-    for (const n of [1, 2, 3]) expect(html).toContain(`href="/images/bio/testimonials/lumicloud-${n}-review.jpg"`);
+    for (const n of ["1", "2", "3"]) expect(html).toMatch(new RegExp(`href="/images/bio/testimonials/lumicloud-${n}-review(-crop)?\\.jpg"`));
     expect((html.match(/aria-label="Lihat ulasan asli:/g) ?? []).length).toBe(3);
   });
 
