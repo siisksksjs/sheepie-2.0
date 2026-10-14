@@ -18,13 +18,14 @@ describe("home page", () => {
     expect(html.indexOf('data-section="lumicloud-reviews"')).toBeLessThan(html.indexOf('data-section="footer"'));
   });
 
-  it("leads with both hero products", async () => {
+  it("opens on the editorial hero that leads into the collection", async () => {
     const html = await render("id");
     expect(html).toContain('id="hero"');
-    expect(html).toContain("Leher tertopang, mata tetap gelap.");
-    expect(html).toContain('href="/id/products/cervicloud"');
-    expect(html).toContain('href="/id/products/lumicloud"');
-    expect(html).toContain('data-overlay="true"');
+    expect(html).toContain("Tidur adalah<em>Pondasi.</em>");
+    expect(html).toContain('href="#products"');
+    expect(html).toContain('id="products"');
+    expect(html).toContain('href="/id/about"');
+    expect(html).toContain('data-overlay="false"');
   });
 
   it("shows CerviCloud and LumiCloud as equal cards and CalmiCloud as a companion", async () => {
@@ -60,7 +61,7 @@ describe("home page", () => {
 
   it("renders English copy on /en", async () => {
     const html = await render("en");
-    expect(html).toContain("Neck supported, eyes kept dark.");
+    expect(html).toContain("Sleep is<em>The Foundation.</em>");
     expect(html).toContain('href="/en/products/lumicloud"');
   });
 

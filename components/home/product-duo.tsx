@@ -16,7 +16,7 @@ export function ProductDuo({ locale }: { locale: Locale }) {
   const heroes = getProducts(locale).filter((p) => p.role === "hero");
 
   return (
-    <section className={`${site.shell} ${styles.collection}`} data-section="products">
+    <section id="products" className={`${site.shell} ${styles.collection}`} data-section="products">
       <FadeIn className={styles.head}>
         <h2>{t.title}</h2>
         <Link className={styles.link} href={localeHref(locale, "/products")}>{t.all}</Link>

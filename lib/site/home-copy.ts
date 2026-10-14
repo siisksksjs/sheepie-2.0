@@ -1,7 +1,18 @@
 import type { Locale } from "@/i18n/config";
 
 export interface HomeCopy {
-  hero: { title: string; sub: string; cervi: string; lumi: string; alt: string };
+  hero: {
+    eyebrow: string;
+    /** Rendered as two lines; the second is set in italic. */
+    title: [string, string];
+    /** Meta description and the hero paragraph; `subStrong` follows it in bold. */
+    sub: string;
+    subStrong: string;
+    explore: string;
+    story: string;
+    scroll: string;
+    alt: string;
+  };
   products: { title: string; all: string; companion: string; coverName: string; coverLine: string };
   cervi: { title: string; lead: string; features: [string, string][]; cta: string };
   lumi: { title: string; lead: string; features: [string, string][]; swatches: string; cta: string };
@@ -11,11 +22,14 @@ export interface HomeCopy {
 export const homeCopy: Record<Locale, HomeCopy> = {
   id: {
     hero: {
-      title: "Leher tertopang, mata tetap gelap.",
-      sub: "CerviCloud dan LumiCloud: bantal ergonomis dan masker mata blackout untuk malam Indonesia yang gerah.",
-      cervi: "Lihat CerviCloud",
-      lumi: "Lihat LumiCloud",
-      alt: "Tidur dengan CerviCloud, LumiCloud, dan CalmiCloud",
+      eyebrow: "Standar Baru Istirahat",
+      title: ["Tidur adalah", "Pondasi."],
+      sub: "Kami tidak sekadar menjual bantal. Kami merancang keheningan, kegelapan, dan topangan untuk tidurmu.",
+      subStrong: "Bersiaplah untuk esok yang lebih segar.",
+      explore: "Jelajahi Koleksi",
+      story: "Filosofi Kami",
+      scroll: "Gulir",
+      alt: "Perempuan tidur nyenyak memakai LumiCloud di atas bantal CerviCloud",
     },
     products: {
       title: "Koleksi utama",
@@ -51,11 +65,14 @@ export const homeCopy: Record<Locale, HomeCopy> = {
   },
   en: {
     hero: {
-      title: "Neck supported, eyes kept dark.",
-      sub: "CerviCloud and LumiCloud: an ergonomic pillow and a blackout eye mask for warm Indonesian nights.",
-      cervi: "See CerviCloud",
-      lumi: "See LumiCloud",
-      alt: "Sleeping with CerviCloud, LumiCloud and CalmiCloud",
+      eyebrow: "The New Standard of Rest",
+      title: ["Sleep is", "The Foundation."],
+      sub: "We don't just sell pillows. We design for silence, darkness and a supported neck.",
+      subStrong: "Prepare for a clearer tomorrow.",
+      explore: "Explore the Collection",
+      story: "Our Philosophy",
+      scroll: "Scroll",
+      alt: "A woman sleeping soundly in LumiCloud on a CerviCloud pillow",
     },
     products: {
       title: "The core collection",
