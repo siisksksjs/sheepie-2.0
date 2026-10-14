@@ -78,23 +78,21 @@ describe("tracked story redirect", () => {
       expect(html).toContain(`href="${shopeeHref("cervicloud").replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`);
     });
 
-    it("bounces iOS in-app browsers to Safari with the second hop flagged", async () => {
-      const response = await GET(request("/go/lumicloud?utm_campaign=okt", IG_IOS), params("lumicloud"));
-      const html = await response.text();
+    it("gives iPhones a single tap-to-open Shopee button and no auto-redirect", async () => {
+      for (const ua of [IG_IOS, SAFARI_IOS]) {
+        const response = await GET(request("/go/lumicloud?utm_campaign=okt", ua), params("lumicloud"));
+        const html = await response.text();
+        const href = shopeeHref("lumicloud").replace(/&/g, "&amp;").replace(/"/g, "&quot;");
 
-      expect(response.status).toBe(200);
-      expect(html).toContain("x-safari-https://sheepiesleep.com/go/lumicloud?utm_campaign=okt&amp;s=1");
+        expect(response.status).toBe(200);
+        expect(html).toContain(`class="primary" href="${href}"`);
+        expect(html).not.toContain("Lanjut di browser");
+        expect(html).toContain("var openHref = null;");
+        expect(html).toContain('"event_name":"PageView"');
+      }
     });
 
-    it("sends iOS Safari straight to the Shopee link", async () => {
-      const response = await GET(request("/go/calmicloud", SAFARI_IOS), params("calmicloud"));
-      const html = await response.text();
-
-      expect(html).toContain(JSON.stringify(shopeeHref("calmicloud")));
-      expect(html).not.toContain("x-safari-");
-    });
-
-    it("only redirects on the Safari hop", async () => {
+    it("plain-redirects when ?s=1 is set", async () => {
       const response = await GET(request("/go/lumicloud?s=1", SAFARI_IOS), params("lumicloud"));
 
       expect(response.status).toBe(307);

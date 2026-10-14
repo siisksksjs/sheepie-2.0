@@ -10,7 +10,7 @@ import {
   type BioProductSlug,
 } from "@/lib/bio-analytics/contracts";
 import { createDailyRateKey, ingestBioEvent } from "@/lib/bio-analytics/server";
-import { androidIntent, isInAppBrowser, isShopeeUrl, platformOf, safariUrl } from "@/lib/go/app-link";
+import { androidIntent, isShopeeUrl, platformOf } from "@/lib/go/app-link";
 import { openerPageHtml } from "@/lib/go/opener-page";
 import { pageView } from "@/lib/meta/events";
 
@@ -29,7 +29,7 @@ export const dynamic = "force-dynamic";
  * sends a Meta PageView (for retargeting audiences; InitiateCheckout is kept
  * for real buy-button taps on product pages) and opens the Shopee app (see
  * lib/go/app-link.ts), because Shopee's web page asks in-app browsers to log in.
- * `?s=1` is the second hop of the iOS Safari bounce: redirect only, no recording.
+ * `?s=1` skips the page and recording: a plain redirect.
  */
 
 /** Storefront and profile links, addressable by a short readable slug. */
@@ -145,16 +145,11 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
     return Response.redirect(target.href, 307);
   }
 
-  let openHref = target.href;
-  if (platform === "android") {
-    openHref = androidIntent(target.href);
-  } else if (isInAppBrowser(userAgent)) {
-    const bounce = new URL(url);
-    bounce.searchParams.set("s", "1");
-    openHref = safariUrl(bounce.toString());
-  }
+  // Android: an intent opens the app straight away. iOS: only a real tap on the
+  // https link opens the app (tested in Instagram), so show one button.
+  const openHref = platform === "android" ? androidIntent(target.href) : target.href;
 
-  return new Response(openerPageHtml({ openHref, webHref: target.href, event: pageView() }), {
+  return new Response(openerPageHtml({ openHref, webHref: target.href, event: pageView(), tapOnly: platform === "ios" }), {
     headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
   });
 }

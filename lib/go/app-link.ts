@@ -2,11 +2,10 @@
 /**
  * Opening the Shopee app from a link tapped inside Instagram/Facebook.
  *
- * Their in-app browsers load shopee.co.id as a signed-out web page. Android can
- * hand an https URL straight to the Shopee app with an intent: link. iOS in-app
- * browsers block that hand-off, so we bounce the visitor into Safari first
- * (x-safari-https://), where a cross-site redirect to shopee.co.id lets iOS
- * open the app through its universal link.
+ * Their in-app browsers load shopee.co.id as a signed-out web page when the
+ * page navigates there by itself. Android can hand the URL straight to the
+ * Shopee app with an intent: link. On iOS a real tap on the https link opens
+ * the app (its universal link), so iOS gets a button instead.
  */
 
 export const SHOPEE_ANDROID_PACKAGE = "com.shopee.id";
@@ -20,10 +19,6 @@ export function platformOf(userAgent: string | null): Platform {
   return "other";
 }
 
-/** Instagram, Facebook, Messenger, Threads, TikTok and LINE embedded browsers. */
-export function isInAppBrowser(userAgent: string | null): boolean {
-  return /instagram|FBAN|FBAV|FB_IAB|FBIOS|Messenger|Barcelona|musical_ly|BytedanceWebview|Line\//i.test(userAgent ?? "");
-}
 
 export function isShopeeUrl(href: string): boolean {
   try {
@@ -42,10 +37,4 @@ export function androidIntent(href: string): string {
     `#Intent;scheme=https;package=${SHOPEE_ANDROID_PACKAGE};` +
     `S.browser_fallback_url=${encodeURIComponent(href)};end`
   );
-}
-
-/** Reopen an https URL in Safari from an iOS in-app browser (iOS 17+). */
-export function safariUrl(href: string): string {
-  const url = new URL(href);
-  return `x-safari-${url.protocol === "http:" ? "http" : "https"}://${url.host}${url.pathname}${url.search}`;
 }

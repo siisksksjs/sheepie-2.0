@@ -6,7 +6,13 @@ import type { MetaEvent } from "@/lib/meta/events";
  * immediately moves the visitor on to `openHref`. The buttons are the fallback
  * when the browser refuses to leave on its own.
  */
-export function openerPageHtml(input: { openHref: string; webHref: string; event: MetaEvent | null }): string {
+export function openerPageHtml(input: {
+  openHref: string;
+  webHref: string;
+  event: MetaEvent | null;
+  /** iOS only opens the Shopee app from a real tap on its https link, so it gets one button and no auto-redirect. */
+  tapOnly?: boolean;
+}): string {
   const attr = (value: string) => value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   const json = (value: unknown) => JSON.stringify(value).replace(/</g, "\\u003c");
 
@@ -32,14 +38,14 @@ export function openerPageHtml(input: { openHref: string; webHref: string; event
 <body>
 <main>
   <div class="logo">Sheepie.</div>
-  <p>Membuka aplikasi Shopee…</p>
+  <p>${input.tapOnly ? "Ketuk tombol di bawah untuk membuka aplikasi Shopee." : "Membuka aplikasi Shopee…"}</p>
   <a class="primary" href="${attr(input.openHref)}">Buka di aplikasi Shopee</a>
-  <a class="secondary" href="${attr(input.webHref)}">Lanjut di browser</a>
+  ${input.tapOnly ? "" : `<a class="secondary" href="${attr(input.webHref)}">Lanjut di browser</a>`}
 </main>
 <script>
 (function () {
   var event = ${json(input.event)};
-  var openHref = ${json(input.openHref)};
+  var openHref = ${json(input.tapOnly ? null : input.openHref)};
   try {
     if (event) {
       var now = Date.now();
@@ -58,7 +64,7 @@ export function openerPageHtml(input: { openHref: string; webHref: string; event
       if (!sent) fetch("/api/meta-events", { method: "POST", headers: { "Content-Type": "application/json" }, body: body, keepalive: true }).catch(function () {});
     }
   } catch (e) {}
-  location.replace(openHref);
+  if (openHref) location.replace(openHref);
 })();
 </script>
 </body>
