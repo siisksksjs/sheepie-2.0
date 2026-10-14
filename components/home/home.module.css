@@ -50,14 +50,27 @@
   gap: 10px;
 }
 
-.collection {
-  padding: 140px 0 40px;
+/* section.x / div.x outrank .shell's `padding: 0 gutter`, whatever order the
+   stylesheets load in, so the vertical padding always applies. */
+section.collection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: calc(var(--sp-header-h, 110px) + 32px);
+  padding-bottom: 32px;
 }
 
-/* Home cards are capped by screen height so the collection fits one view. */
+/* Home cards are sized from the screen height so the whole collection fits one view. */
 .duo :global([data-product-card]) > div:first-child {
   aspect-ratio: auto;
-  height: min(46svh, 520px);
+  height: clamp(240px, calc(100svh - var(--sp-header-h, 110px) - 420px), 520px);
+}
+
+/* Centre the CerviCloud shot on the pillow so neither edge is cut in the short home card. */
+.duo :global([data-product-card="cervicloud"]) img {
+  object-position: 50% 48%;
 }
 
 .head {
@@ -65,7 +78,7 @@
   justify-content: space-between;
   align-items: end;
   gap: 24px;
-  margin-bottom: 36px;
+  margin-bottom: 28px;
 }
 
 .head h2,
@@ -168,7 +181,7 @@
   contain-intrinsic-size: auto 900px;
 }
 
-.bandIn {
+div.bandIn {
   position: relative;
   width: 100%;
   display: grid;
@@ -344,7 +357,7 @@
   pointer-events: none;
 }
 
-.lightsIn {
+div.lightsIn {
   position: relative;
   z-index: 1;
   width: 100%;
@@ -399,7 +412,7 @@
   .ctas { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .ctas a { padding: 0 10px; font-size: 14px; }
 
-  .collection { padding: 84px 0 20px; }
+  section.collection { min-height: 0; padding-top: 84px; padding-bottom: 20px; }
   .head { margin-bottom: 22px; }
   .head h2, .reviews h2 { font-size: 30px; }
   .duo { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--sp-gutter) * -1); padding: 0 var(--sp-gutter) 4px; scrollbar-width: none; }
@@ -415,7 +428,7 @@
 
   .cervi { margin-top: 64px; min-height: 0; }
   .stack, .lightsPh { width: 100%; }
-  .bandIn { grid-template-columns: 1fr; gap: 34px; padding-top: 64px; padding-bottom: 64px; }
+  div.bandIn { grid-template-columns: 1fr; gap: 34px; padding-top: 64px; padding-bottom: 64px; }
   .feature h2 { font-size: 34px; }
   .lead { margin: 14px 0 24px; font-size: 16px; }
   .feat { gap: 16px 18px; margin-bottom: 28px; }
@@ -432,7 +445,7 @@
   .night { padding-top: 20px; }
 
   .lights { min-height: 0; }
-  .lightsIn { grid-template-columns: 1fr; gap: 30px; padding-top: 64px; padding-bottom: 48px; }
+  div.lightsIn { grid-template-columns: 1fr; gap: 30px; padding-top: 64px; padding-bottom: 48px; }
   .lightsPh { order: -1; aspect-ratio: 4 / 4.2; }
 }
 

@@ -16,6 +16,8 @@ type OptionContext = {
   select: (key: string) => void;
   bundle: ProductBundle | null;
   selectBundle: (key: string) => void;
+  /** True once the shopper has picked a pack themselves (the default doesn't count). */
+  bundlePicked: boolean;
   /** What the shopper pays for the current choice: the bundle price when there are bundles. */
   price: Price;
 };
@@ -36,6 +38,7 @@ function pick(options: ProductOption[], key: string | null): ProductOption {
 export function OptionProvider({ product, children }: { product: ProductRef; children: ReactNode }) {
   const [key, setKey] = useState<string | null>(null);
   const [bundleKey, setBundleKey] = useState<string | null>(null);
+  const [bundlePicked, setBundlePicked] = useState(false);
   const option = pick(product.options, key);
   const bundle = product.bundles.find((b) => b.key === bundleKey) ?? product.bundles[0] ?? null;
   const price: Price = bundle ?? option;
@@ -58,10 +61,13 @@ export function OptionProvider({ product, children }: { product: ProductRef; chi
   }, [key, bundleKey, product.slug, product.options, product.bundles]);
 
   const select = useCallback((next: string) => setKey(pick(product.options, next).key), [product.options]);
-  const selectBundle = useCallback((next: string) => setBundleKey(next), []);
+  const selectBundle = useCallback((next: string) => {
+    setBundleKey(next);
+    setBundlePicked(true);
+  }, []);
 
   return (
-    <Context.Provider value={{ slug: product.slug, name: product.name, option, select, bundle, selectBundle, price }}>
+    <Context.Provider value={{ slug: product.slug, name: product.name, option, select, bundle, selectBundle, bundlePicked, price }}>
       {children}
     </Context.Provider>
   );

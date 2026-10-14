@@ -70,6 +70,8 @@ export interface ProductBundle {
   originalPrice: number | null;
   /** The pack's listing photo (e.g. "Bundle of 2"), shown first in the gallery when picked. */
   image: string | null;
+  /** Per-option pack photos (LumiCloud colours), keyed by option key; wins over `image`. */
+  imageByOption: Record<string, string>;
 }
 
 export interface ProductOption {

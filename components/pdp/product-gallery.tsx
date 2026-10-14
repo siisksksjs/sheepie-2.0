@@ -11,22 +11,24 @@ import styles from "./pdp.module.css";
  * One swipeable strip (scroll-snap) at every width, with arrow buttons and a
  * thumbnail row, so every photo is reachable by touch, mouse or keyboard.
  */
-export function ProductGallery({ images: base, name }: { images: { src: string; alt: string }[]; name: string }) {
-  const { bundle } = useSelectedOption();
-  // A picked pack with its own photo leads the gallery.
-  const images = bundle?.image ? [{ src: bundle.image, alt: `${name} · ${bundle.label}` }, ...base] : base;
+export function ProductGallery({ images, name }: { images: { src: string; alt: string }[]; name: string }) {
+  const { bundle, bundlePicked, option } = useSelectedOption();
+  // Once the shopper picks a pack, its photo (per colour for LumiCloud) covers the
+  // main image. It never joins the thumbnails; browsing the gallery dismisses it.
+  const packImage = bundlePicked && bundle ? (bundle.imageByOption[option.key] ?? bundle.image) : null;
+  const [showPack, setShowPack] = useState(false);
   const [index, setIndex] = useState(0);
   const track = useRef<HTMLDivElement>(null);
 
-  // Show the pack photo as soon as the shopper picks a pack.
+  // A new pick (or colour) brings the pack photo back.
   useEffect(() => {
-    track.current?.scrollTo({ left: 0 });
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset the counter when the photo set changes
-    setIndex(0);
-  }, [bundle?.key]);
+    setShowPack(packImage !== null);
+  }, [packImage]);
+
   const last = images.length - 1;
 
   const go = (next: number) => {
+    setShowPack(false);
     const el = track.current;
     if (!el) return;
     const i = Math.max(0, Math.min(last, next));
@@ -58,22 +60,27 @@ export function ProductGallery({ images: base, name }: { images: { src: string; 
             </div>
           ))}
         </div>
+        {showPack && packImage && (
+          <div className={styles.pack}>
+            <Image src={packImage} alt={`${name} · ${bundle?.label}`} fill sizes="(max-width: 760px) 100vw, 640px" className={styles.cover} />
+          </div>
+        )}
         {images.length > 1 && (
           <>
             <button type="button" className={`${styles.arrow} ${styles.arrowPrev}`} onClick={() => go(index - 1)} disabled={index === 0} aria-label="Previous photo">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
             </button>
-            <button type="button" className={`${styles.arrow} ${styles.arrowNext}`} onClick={() => go(index + 1)} disabled={index === last} aria-label="Next photo">
+            <button type="button" className={`${styles.arrow} ${styles.arrowNext}`} onClick={() => (showPack ? setShowPack(false) : go(index + 1))} disabled={!showPack && index === last} aria-label="Next photo">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
             </button>
-            <span className={styles.count} aria-live="polite">{index + 1} / {images.length}</span>
+            {!showPack && <span className={styles.count} aria-live="polite">{index + 1} / {images.length}</span>}
           </>
         )}
       </div>
       {images.length > 1 && (
         <div className={styles.thumbs}>
           {images.map((image, i) => (
-            <button key={image.src} type="button" className={styles.thumb} aria-current={i === index} aria-label={image.alt} onClick={() => go(i)}>
+            <button key={image.src} type="button" className={styles.thumb} aria-current={!showPack && i === index} aria-label={image.alt} onClick={() => go(i)}>
               <Image src={image.src} alt="" fill sizes="72px" className={styles.cover} />
             </button>
           ))}

@@ -8,7 +8,15 @@ import styles from "./footer.module.css";
 import { LambMark } from "./lamb-mark";
 import { LanguageSwitch } from "./language-switch";
 import { Mendung } from "./mendung";
+import { SocialIcon, type Social } from "./social-icon";
 import site from "./site.module.css";
+
+const SOCIALS: [Social, string][] = [
+  ["shopee", "Shopee"],
+  ["tokopedia", "Tokopedia"],
+  ["instagram", "Instagram"],
+  ["tiktok", "TikTok"],
+];
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const t = siteCopy[locale];
@@ -41,11 +49,14 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
         <div>
           <h4>{t.footer.find}</h4>
-          <ul>
-            <li><a href={storeLinks.shopee} target="_blank" rel="noopener noreferrer">Shopee</a></li>
-            <li><a href={storeLinks.tokopedia} target="_blank" rel="noopener noreferrer">Tokopedia</a></li>
-            <li><a href={storeLinks.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            <li><a href={storeLinks.tiktok} target="_blank" rel="noopener noreferrer">TikTok</a></li>
+          <ul className={styles.socials}>
+            {SOCIALS.map(([name, label]) => (
+              <li key={name}>
+                <a href={storeLinks[name]} target="_blank" rel="noopener noreferrer" aria-label={label} title={label} data-social={name}>
+                  <SocialIcon name={name} />
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

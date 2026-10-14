@@ -32,7 +32,7 @@ interface SourceProduct {
   tokopediaUrl: string;
   variants?: SourceVariant[];
   colors?: { name: string; swatch?: string }[];
-  bundles?: { qty: number; price: string; originalPrice: string; image?: string }[];
+  bundles?: { qty: number; price: string; originalPrice: string; image?: string; images?: Record<string, string> }[];
 }
 
 const sources = products as SourceProduct[];
@@ -91,6 +91,7 @@ function resolveBundles(slug: ProductSlug, locale: Locale): ProductBundle[] {
     label: bundleLabel(b.qty, locale),
     ...priced(b.price, b.originalPrice),
     image: b.image ?? null,
+    imageByOption: b.images ?? {},
   }));
 }
 

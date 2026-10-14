@@ -46,22 +46,26 @@
       {
         "qty": 1,
         "price": "IDR 838.000",
-        "originalPrice": "IDR 1.399.000"
+        "originalPrice": "IDR 1.399.000",
+        "image": "/images/products/cervicloud/bundle-single.webp"
       },
       {
         "qty": 2,
         "price": "IDR 1.656.000",
-        "originalPrice": "IDR 2.798.000"
+        "originalPrice": "IDR 2.798.000",
+        "image": "/images/products/cervicloud/bundle-x2.webp"
       },
       {
         "qty": 3,
         "price": "IDR 2.489.000",
-        "originalPrice": "IDR 4.197.000"
+        "originalPrice": "IDR 4.197.000",
+        "image": "/images/products/cervicloud/bundle-x3.webp"
       },
       {
         "qty": 4,
         "price": "IDR 3.322.000",
-        "originalPrice": "IDR 5.596.000"
+        "originalPrice": "IDR 5.596.000",
+        "image": "/images/products/cervicloud/bundle-x4.webp"
       }
     ]
   },
@@ -109,22 +113,38 @@
       {
         "qty": 1,
         "price": "IDR 218.000",
-        "originalPrice": "IDR 299.000"
+        "originalPrice": "IDR 299.000",
+        "images": {
+          "blue": "/images/products/lumicloud/bundle-blue-single.webp",
+          "apricot": "/images/products/lumicloud/bundle-apricot-single.webp"
+        }
       },
       {
         "qty": 2,
         "price": "IDR 426.000",
-        "originalPrice": "IDR 578.000"
+        "originalPrice": "IDR 578.000",
+        "images": {
+          "blue": "/images/products/lumicloud/bundle-blue-x2.webp",
+          "apricot": "/images/products/lumicloud/bundle-apricot-x2.webp"
+        }
       },
       {
         "qty": 3,
         "price": "IDR 639.000",
-        "originalPrice": "IDR 867.000"
+        "originalPrice": "IDR 867.000",
+        "images": {
+          "blue": "/images/products/lumicloud/bundle-blue-x3.webp",
+          "apricot": "/images/products/lumicloud/bundle-apricot-x3.webp"
+        }
       },
       {
         "qty": 4,
         "price": "IDR 852.000",
-        "originalPrice": "IDR 1.156.000"
+        "originalPrice": "IDR 1.156.000",
+        "images": {
+          "blue": "/images/products/lumicloud/bundle-blue-x4.webp",
+          "apricot": "/images/products/lumicloud/bundle-apricot-x4.webp"
+        }
       }
     ]
   },
@@ -158,22 +178,26 @@
       {
         "qty": 1,
         "price": "IDR 88.000",
-        "originalPrice": "IDR 108.000"
+        "originalPrice": "IDR 108.000",
+        "image": "/images/products/calmicloud/bundle-single.webp"
       },
       {
         "qty": 2,
         "price": "IDR 166.000",
-        "originalPrice": "IDR 216.000"
+        "originalPrice": "IDR 216.000",
+        "image": "/images/products/calmicloud/bundle-x2.webp"
       },
       {
         "qty": 3,
         "price": "IDR 254.000",
-        "originalPrice": "IDR 324.000"
+        "originalPrice": "IDR 324.000",
+        "image": "/images/products/calmicloud/bundle-x3.webp"
       },
       {
         "qty": 4,
         "price": "IDR 342.000",
-        "originalPrice": "IDR 432.000"
+        "originalPrice": "IDR 432.000",
+        "image": "/images/products/calmicloud/bundle-x4.webp"
       }
     ]
   }
