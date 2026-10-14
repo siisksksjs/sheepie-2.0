@@ -23,8 +23,8 @@ export interface HomeCopy {
 export const homeCopy: Record<Locale, HomeCopy> = {
   id: {
     hero: {
-      eyebrow: "Standar Baru Istirahat",
-      title: ["Tidur adalah", "Fondasi."],
+      eyebrow: "The New Standard of Rest",
+      title: ["Sleep is", "The Foundation."],
       sub: "Kami tidak sekadar menjual bantal. Kami merancang keheningan, kegelapan, dan topangan untuk tidurmu.",
       subStrong: "Sambut esok dengan lebih segar.",
       explore: "Jelajahi Koleksi",
