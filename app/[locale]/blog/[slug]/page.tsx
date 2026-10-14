@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = findPost(slug);
   if (!post) return {};
   return {
-    title: `${post.title} | Sheepie Journal`,
+    title: `${post.title} | Sheepie Blog`,
     description: post.excerpt,
     alternates: { canonical: `${baseUrl}/id/blog/${post.slug}` },
     robots: locale === "id" ? undefined : { index: false, follow: true },

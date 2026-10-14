@@ -12,7 +12,7 @@ export interface SiteCopy {
 export const siteCopy: Record<Locale, SiteCopy> = {
   id: {
     notice: "Belanja resmi Sheepie di Shopee & Tokopedia",
-    nav: { pillow: "Bantal", mask: "Masker Mata", earplug: "Earplug", story: "Cerita Kami", journal: "Jurnal", faq: "FAQ", contact: "Kontak", shop: "Belanja", menu: "Menu", close: "Tutup", allProducts: "Semua produk" },
+    nav: { pillow: "Bantal", mask: "Masker Mata", earplug: "Earplug", story: "Cerita Kami", journal: "Blog", faq: "FAQ", contact: "Kontak", shop: "Belanja", menu: "Menu", close: "Tutup", allProducts: "Semua produk" },
     shopPanel: { title: "Belanja Sheepie", note: "Pilih produk, lalu toko favoritmu." },
     buy: { shopee: "Beli di Shopee", tokopedia: "Beli di Tokopedia" },
     footer: { goodnight: "Selamat tidur, sampai besok pagi.", shop: "Belanja", brand: "Sheepie", find: "Temukan kami", rights: "© 2026 Sheepie", cover: "Sarung CerviCloud", soldOut: "Habis" },
@@ -20,7 +20,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
   },
   en: {
     notice: "Shop official Sheepie on Shopee & Tokopedia",
-    nav: { pillow: "Pillow", mask: "Eye Mask", earplug: "Earplugs", story: "Our Story", journal: "Journal", faq: "FAQ", contact: "Contact", shop: "Shop", menu: "Menu", close: "Close", allProducts: "All products" },
+    nav: { pillow: "Pillow", mask: "Eye Mask", earplug: "Earplugs", story: "Our Story", journal: "Blog", faq: "FAQ", contact: "Contact", shop: "Shop", menu: "Menu", close: "Close", allProducts: "All products" },
     shopPanel: { title: "Shop Sheepie", note: "Pick a product, then your favourite store." },
     buy: { shopee: "Buy on Shopee", tokopedia: "Buy on Tokopedia" },
     footer: { goodnight: "Sleep well, see you in the morning.", shop: "Shop", brand: "Sheepie", find: "Find us", rights: "© 2026 Sheepie", cover: "CerviCloud cover", soldOut: "Sold out" },

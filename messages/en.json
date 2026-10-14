@@ -3,17 +3,17 @@
     "home": "Home",
     "collection": "Collection",
     "about": "About",
-    "journal": "Journal",
+    "journal": "Blog",
     "shopNow": "Shop Now",
     "shopAll": "Shop All Essentials"
   },
   "Blog": {
-    "metaTitle": "The Journal | Sheepie.",
+    "metaTitle": "Blog | Sheepie.",
     "metaDescription": "Insights on sleep science, wellness, and the art of rest.",
-    "title": "The Journal.",
+    "title": "Blog.",
     "subtitle": "Notes on sleep, science, and stillness.",
     "readMore": "Read Article",
-    "back": "Back to Journal",
+    "back": "Back to Blog",
     "writtenBy": "Written by",
     "publishedOn": "Published on"
   },

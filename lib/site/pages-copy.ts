@@ -106,7 +106,7 @@ export const pagesCopy: Record<Locale, PagesCopy> = {
       asideCta: "Chat di WhatsApp",
     },
     journal: {
-      eyebrow: "Jurnal",
+      eyebrow: "Blog",
       title: ["Catatan tentang", "tidur yang lebih baik."],
       intro: "Panduan praktis soal bantal, cahaya, suara, dan kebiasaan tidur sehari-hari.",
       featured: "Pilihan",
@@ -168,7 +168,7 @@ export const pagesCopy: Record<Locale, PagesCopy> = {
       asideCta: "Chat on WhatsApp",
     },
     journal: {
-      eyebrow: "Journal",
+      eyebrow: "Blog",
       title: ["Notes on", "sleeping better."],
       intro: "Practical guides on pillows, light, noise and everyday sleep habits. Articles are in Bahasa Indonesia.",
       featured: "Featured",

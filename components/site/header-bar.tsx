@@ -12,7 +12,7 @@ import { localeHref, siteCopy } from "@/lib/site/copy";
 import { buttonClass } from "./button";
 import styles from "./header.module.css";
 import { LambMark } from "./lamb-mark";
-import { LanguageSwitch } from "./language-switch";
+import { LanguageToggle } from "./language-toggle";
 import { MarketplaceLink } from "./marketplace-link";
 
 export type ShopItem = {
@@ -73,45 +73,37 @@ export function HeaderBar({ locale, shopItems }: { locale: Locale; shopItems: Sh
     };
   }, [panel]);
 
-  const links = [
-    { href: localeHref(locale, "/products/cervicloud"), label: t.nav.pillow },
-    { href: localeHref(locale, "/products/lumicloud"), label: t.nav.mask },
-    { href: localeHref(locale, "/products/calmicloud"), label: t.nav.earplug },
-  ];
-  const secondary = [
+  const pages = [
     { href: localeHref(locale, "/about"), label: t.nav.story },
     { href: localeHref(locale, "/blog"), label: t.nav.journal },
+    { href: localeHref(locale, "/faq"), label: t.nav.faq },
+    { href: localeHref(locale, "/contact"), label: t.nav.contact },
   ];
 
   return (
     <>
+      {/* Menu on the left, the logo centred, language and shop on the right, at every width. */}
       <div className={styles.bar}>
         <button type="button" className={styles.menuBtn} aria-label={t.nav.menu} data-panel-trigger="menu" aria-haspopup="dialog" aria-expanded={panel === "menu"} onClick={openPanel("menu")}>
           <span />
+          <b>{t.nav.menu}</b>
         </button>
-        <nav className={`${styles.nav} ${styles.navLeft}`}>
-          {links.map((link) => (
-            <Link key={link.href} href={link.href}>{link.label}</Link>
-          ))}
-        </nav>
         <Link href={localeHref(locale, "/")} className={styles.brand} aria-label="Sheepie">
           <LambMark size={46} breathe />
           <span>Sheepie.</span>
         </Link>
-        <nav className={`${styles.nav} ${styles.navRight}`}>
-          {secondary.map((link) => (
-            <Link key={link.href} href={link.href}>{link.label}</Link>
-          ))}
+        <div className={styles.actions}>
+          <LanguageToggle locale={locale} className={styles.toggle} />
           <button type="button" className={styles.shopBtn} data-panel-trigger="shop" aria-haspopup="dialog" aria-expanded={panel === "shop"} onClick={openPanel("shop")}>
             {t.nav.shop}
           </button>
-        </nav>
+        </div>
       </div>
 
       {panel && (
         <>
           <div className={styles.scrim} onClick={() => setPanel(null)} />
-          <div ref={sheetRef} className={styles.sheet} role="dialog" aria-modal="true" aria-label={panel === "shop" ? t.shopPanel.title : t.nav.menu}>
+          <div ref={sheetRef} className={styles.sheet} data-side={panel === "menu" ? "left" : "right"} role="dialog" aria-modal="true" aria-label={panel === "shop" ? t.shopPanel.title : t.nav.menu}>
             <div className={styles.sheetHead}>
               <h2>{panel === "shop" ? t.shopPanel.title : t.nav.menu}</h2>
               <button ref={closeRef} type="button" className={styles.close} onClick={() => setPanel(null)}>{t.nav.close}</button>
@@ -142,12 +134,26 @@ export function HeaderBar({ locale, shopItems }: { locale: Locale; shopItems: Sh
               </>
             ) : (
               <>
+                <nav className={styles.menuProducts} aria-label={t.nav.allProducts}>
+                  {shopItems.map((item) => (
+                    <Link key={item.slug} href={localeHref(locale, `/products/${item.slug}`)} onClick={() => setPanel(null)}>
+                      <span className={styles.menuThumb}>
+                        <Image src={item.image} alt="" fill sizes="64px" style={{ objectFit: "cover" }} />
+                      </span>
+                      <span>
+                        <b>{item.name}</b>
+                        <small>{item.price}</small>
+                      </span>
+                    </Link>
+                  ))}
+                  <Link className={styles.menuAll} href={localeHref(locale, "/products")} onClick={() => setPanel(null)}>{t.nav.allProducts} →</Link>
+                </nav>
                 <nav className={styles.menuLinks}>
-                  {[...links, ...secondary, { href: localeHref(locale, "/faq"), label: t.nav.faq }, { href: localeHref(locale, "/contact"), label: t.nav.contact }].map((link) => (
+                  {pages.map((link) => (
                     <Link key={link.href} href={link.href} onClick={() => setPanel(null)}>{link.label}</Link>
                   ))}
                 </nav>
-                <LanguageSwitch locale={locale} className={styles.lang} />
+                <LanguageToggle locale={locale} className={`${styles.toggle} ${styles.toggleLarge}`} />
               </>
             )}
           </div>

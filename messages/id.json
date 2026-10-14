@@ -3,17 +3,17 @@
     "home": "Beranda",
     "collection": "Koleksi",
     "about": "Tentang Kami",
-    "journal": "Jurnal",
+    "journal": "Blog",
     "shopNow": "Belanja Sekarang",
     "shopAll": "Belanja Semua Produk"
   },
   "Blog": {
-    "metaTitle": "Jurnal | Sheepie.",
+    "metaTitle": "Blog | Sheepie.",
     "metaDescription": "Wawasan tentang ilmu tidur, kesehatan, dan seni beristirahat.",
-    "title": "Jurnal.",
+    "title": "Blog.",
     "subtitle": "Catatan tentang tidur, sains, dan keheningan.",
     "readMore": "Baca Artikel",
-    "back": "Kembali ke Jurnal",
+    "back": "Kembali ke Blog",
     "writtenBy": "Ditulis oleh",
     "publishedOn": "Diterbitkan pada"
   },

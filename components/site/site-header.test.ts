@@ -5,16 +5,18 @@ import { describe, expect, it } from "vitest";
 import { SiteHeader } from "./site-header";
 
 describe("site header", () => {
-  it("links each product and section in Indonesian", () => {
+  it("keeps the bar to menu, logo, language and shop", () => {
     const html = renderToStaticMarkup(createElement(SiteHeader, { locale: "id" }));
     expect(html).toContain('id="site-header"');
     expect(html).toContain('data-overlay="false"');
     expect(html).toContain("Belanja resmi Sheepie di Shopee &amp; Tokopedia");
-    for (const href of ["/id/products/cervicloud", "/id/products/lumicloud", "/id/products/calmicloud", "/id/about", "/id/blog"]) {
-      expect(html).toContain(`href="${href}"`);
-    }
-    expect(html).toContain('data-panel-trigger="shop"');
     expect(html).toContain('data-panel-trigger="menu"');
+    expect(html).toContain('href="/id"');
+    expect(html).toContain('aria-current="true" data-language-switch="id"');
+    expect(html).toContain('data-language-switch="en"');
+    expect(html).toContain('data-panel-trigger="shop"');
+    // Section links live in the menu now, not the bar.
+    expect(html).not.toContain('href="/id/about"');
   });
 
   it("starts transparent over the hero on the home page", () => {
