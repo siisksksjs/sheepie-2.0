@@ -10,17 +10,26 @@ import {
   type BioProductSlug,
 } from "@/lib/bio-analytics/contracts";
 import { createDailyRateKey, ingestBioEvent } from "@/lib/bio-analytics/server";
+import { androidIntent, isShopeeUrl, platformOf } from "@/lib/go/app-link";
+import { openerPageHtml, type OpenerProduct } from "@/lib/go/opener-page";
+import { pageView } from "@/lib/meta/events";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Tracked redirect for Instagram Story links.
+ * Tracked redirect for Instagram Story links and Meta ads.
  *
  * A story tap goes straight to the Shopee listing, so it never touches /bio and
  * would otherwise be invisible. This records the outbound click first, then
  * redirects. Recording never blocks or fails the redirect: a shopper always
  * reaches the listing, even if analytics is down.
+ *
+ * On phones, Shopee links get a tiny opener page instead of a bare redirect: it
+ * sends a Meta PageView (for retargeting audiences; InitiateCheckout is kept
+ * for real buy-button taps on product pages) and opens the Shopee app (see
+ * lib/go/app-link.ts), because Shopee's web page asks in-app browsers to log in.
+ * `?s=1` skips the page and recording: a plain redirect.
  */
 
 /** Storefront and profile links, addressable by a short readable slug. */
@@ -89,6 +98,11 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
   }
 
   const url = new URL(request.url);
+
+  if (url.searchParams.get("s") === "1") {
+    return Response.redirect(target.href, 307);
+  }
+
   const now = new Date();
 
   const event: BioEventInput = {
@@ -125,5 +139,39 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
     // Analytics must never stand between a shopper and the listing.
   }
 
-  return Response.redirect(target.href, 307);
+  const userAgent = request.headers.get("user-agent");
+  const platform = platformOf(userAgent);
+  if (platform === "other" || !isShopeeUrl(target.href)) {
+    return Response.redirect(target.href, 307);
+  }
+
+  // iOS opens the Shopee app (universal link) only from the shopper's own tap
+  // on a Shopee link; any automatic redirect opens Shopee inside Instagram.
+  // So iPhones get a product card with one button; Android gets an intent.
+  const ios = platform === "ios";
+  const openHref = ios ? target.href : androidIntent(target.href);
+
+  const html = openerPageHtml({
+    mode: ios ? "tap" : "auto",
+    openHref,
+    webHref: target.href,
+    event: pageView(),
+    product: ios ? openerProductFor(target) : null,
+  });
+
+  return new Response(html, {
+    headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
+  });
+}
+
+function openerProductFor(target: Target): OpenerProduct | null {
+  const product = bioConfig.products.find((entry) => entry.slug === target.productSlug);
+  if (!product) return null;
+  return {
+    name: product.name,
+    headline: product.headline,
+    price: product.price.replace(/^IDR\s*/, "Rp"),
+    imageSrc: product.image.src,
+    rating: product.rating?.score,
+  };
 }
