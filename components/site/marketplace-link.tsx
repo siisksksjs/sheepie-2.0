@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-import { trackMarketplaceClick } from "@/lib/analytics";
+import { trackBeginCheckout, trackMarketplaceClick } from "@/lib/analytics";
 import type { Marketplace, ProductSlug } from "@/lib/catalog/types";
 import { sendMetaEvent } from "@/lib/meta/client";
 import { initiateCheckout } from "@/lib/meta/events";
@@ -38,6 +38,11 @@ export function MarketplaceLink({
     }
     try {
       trackMarketplaceClick({ product_slug: slug, marketplace, page_path: window.location.pathname });
+    } catch {
+      // ignore
+    }
+    try {
+      trackBeginCheckout({ slug, optionKey, value, marketplace, placement });
     } catch {
       // ignore
     }

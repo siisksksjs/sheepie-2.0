@@ -4,6 +4,7 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 
 import type { ProductBundle, ProductOption, ProductSlug } from "@/lib/catalog/types";
+import { trackViewItem } from "@/lib/analytics";
 import { sendMetaEvent } from "@/lib/meta/client";
 import { viewContent } from "@/lib/meta/events";
 
@@ -55,6 +56,11 @@ export function OptionProvider({ product, children }: { product: ProductRef; chi
     const value = (product.bundles.find((b) => b.key === bundleKey) ?? product.bundles[0] ?? current).price;
     try {
       sendMetaEvent(viewContent({ slug: product.slug, optionKey: current.key, value }));
+    } catch {
+      // Tracking never interrupts the page.
+    }
+    try {
+      trackViewItem({ slug: product.slug, optionKey: current.key, value });
     } catch {
       // Tracking never interrupts the page.
     }
