@@ -13,6 +13,7 @@ import { siteCopy } from "@/lib/site/copy";
 import { formatIdr } from "@/lib/catalog/price";
 import { pdpCopy } from "@/lib/site/pdp-copy";
 
+import { AskWhatsApp } from "./ask-whatsapp";
 import { ProductIcon } from "./icons";
 import { useSelectedOption } from "./option-context";
 import styles from "./pdp.module.css";
@@ -82,6 +83,8 @@ export function BuyBox({ product, locale }: { product: Product; locale: Locale }
         <div>
           {t.assurances[0]}
         </div>
+
+      <AskWhatsApp locale={locale} showOption={product.options.length > 1} />
         <div>
           {t.assurances[1]}
         </div>

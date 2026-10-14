@@ -10,6 +10,7 @@ import { UmamiAnalytics } from "@/components/analytics/umami-analytics";
 import { MotionProvider } from "@/components/providers/motion-provider";
 import { CookieNotice } from "@/components/site/cookie-notice";
 import { MetaPixel } from "@/components/site/meta-pixel";
+import { WhatsAppButton } from "@/components/site/whatsapp-button";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -70,6 +71,7 @@ export default async function RootLayout({
             {children}
             <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID} />
             <CookieNotice locale={locale} />
+            <WhatsAppButton locale={locale} />
             <UmamiAnalytics />
             <Analytics />
           </MotionProvider>

@@ -11,7 +11,9 @@
   color: var(--sp-ink);
 }
 
-/* Giant, faint words drifting behind the type, as on the original hero. */
+/* Faint words drifting behind the type, as on the original hero. The phrase is
+   sized to about one screen wide so it reads whole, and moves slowly enough to go
+   unnoticed (~10px a second). */
 .marquee {
   position: absolute;
   top: 6%;
@@ -25,14 +27,16 @@
 .marqueeTrack {
   display: flex;
   width: max-content;
-  animation: marquee 150s linear infinite;
+  animation: marquee 140s linear infinite;
 }
 
 .marqueeTrack span {
-  font: 900 20vw/1 var(--font-display), serif;
+  padding-right: 4vw;
+  font: 900 7vw/1 var(--font-display), serif;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   color: var(--sp-ink);
-  opacity: 0.04;
+  opacity: 0.05;
 }
 
 @keyframes marquee {
@@ -498,7 +502,7 @@ div.lightsIn {
   .hero { display: block; height: auto; min-height: 0; }
   .heroMedia { position: relative; top: auto; width: 100%; height: 58svh; }
   .marquee { top: calc(58svh + 4px); }
-  .marqueeTrack span { font-size: 28vw; }
+  .marqueeTrack span { font-size: 9.5vw; }
   .heroMedia::after { background: linear-gradient(rgba(255, 253, 245, 0) 70%, var(--sp-cream)); }
   .heroCopy { max-width: none; }
   .heroIn { padding-top: 8px; padding-bottom: 56px; }

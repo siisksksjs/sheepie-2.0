@@ -55,6 +55,10 @@
 .voucher button { min-height: 44px; border: 0; background: none; color: inherit; font: 700 13px var(--font-body), sans-serif; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .assure { display: grid; gap: 6px; margin: 20px 0 6px; font-size: 14px; opacity: 0.75; }
 .assure div { display: flex; gap: 10px; align-items: center; }
+.ask { display: flex; gap: 12px; align-items: center; margin: 18px 0 8px; padding: 14px 18px; border-radius: 16px; background: var(--sp-linen); color: inherit; font-size: 14.5px; text-decoration: none; transition: background-color 0.2s; }
+.ask svg { flex: none; color: #1fa855; }
+.ask b { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.ask:hover { background: var(--sp-sky-soft); }
 
 
 .acc { border-bottom: 1px solid var(--sp-line); }

@@ -84,6 +84,35 @@
   transition-delay: var(--fade-delay, 0ms);
 }
 
+/* Floating WhatsApp button (all pages). Sits under the cookie notice and lifts over the PDP sticky bar. */
+.waFloat {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(17, 27, 44, 0.22);
+  transition: transform 0.2s var(--sp-ease-out), bottom 0.35s var(--sp-ease-out);
+}
+
+.waFloat:hover {
+  transform: scale(1.06);
+}
+
+:global(html[data-sticky-bar="true"]) .waFloat {
+  bottom: calc(84px + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 760px) {
+  .waFloat { right: 14px; bottom: 14px; width: 52px; height: 52px; }
+}
+
 /* Product card */
 .card {
   display: block;
