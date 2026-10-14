@@ -1,4 +1,5 @@
 import { FadeIn } from "@/components/site/fade-in";
+import { ReviewMore } from "@/components/site/review-more";
 import { ReviewShots } from "@/components/site/review-shots";
 import site from "@/components/site/site.module.css";
 import type { Locale } from "@/i18n/config";
@@ -17,6 +18,7 @@ export function ReviewSection({ locale, slug, tone }: { locale: Locale; slug: Pr
       <div className={site.shell}>
         <FadeIn><h2>{slug === "cervicloud" ? t.cervi : t.lumi}</h2></FadeIn>
         <ReviewShots reviews={getReviews(slug)} tone={tone} label={(r) => `${t.viewOriginal}: ${r.author}`} />
+        <ReviewMore slug={slug} locale={locale} tone={tone} />
       </div>
     </section>
   );

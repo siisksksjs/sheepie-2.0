@@ -6,6 +6,7 @@ import { FadeIn } from "@/components/site/fade-in";
 import type { Locale } from "@/i18n/config";
 import { getProduct, productPath } from "@/lib/catalog";
 import { formatIdr } from "@/lib/catalog/price";
+import { ReviewMore } from "@/components/site/review-more";
 import { ReviewShots } from "@/components/site/review-shots";
 import { getReviews } from "@/lib/catalog/reviews";
 import type { Product } from "@/lib/catalog/types";
@@ -22,6 +23,7 @@ export function ReviewGrid({ product, locale }: { product: Product; locale: Loca
       <div className={styles.shotsGap}>
         <ReviewShots reviews={getReviews(product.slug)} label={(r) => `${t.viewOriginal}: ${r.author}`} />
       </div>
+      <ReviewMore slug={product.slug} locale={locale} />
     </section>
   );
 }

@@ -179,6 +179,35 @@
   .shotWrap { flex: 0 0 78%; margin: 0; scroll-snap-align: start; }
 }
 
+.reviewMore {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(34, 51, 106, 0.12);
+}
+
+.reviewMore p {
+  margin: 0;
+  font-size: 16px;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.reviewMoreNight {
+  border-top-color: rgba(255, 255, 255, 0.16);
+}
+
+@media (max-width: 760px) {
+  .reviewMore {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+}
+
 /* Product card */
 .card {
   display: block;
