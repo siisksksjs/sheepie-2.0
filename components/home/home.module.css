@@ -2,24 +2,35 @@
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding-top: var(--sp-header-h, 110px);
+  /* The page already reserves the fixed header's height above this. */
+  height: calc(100vh - var(--sp-header-h, 110px));
+  height: calc(100svh - var(--sp-header-h, 110px));
+  min-height: 480px;
   overflow: hidden;
   background: var(--sp-cream);
   color: var(--sp-ink);
 }
 
-.heroImg {
-  object-fit: cover;
-  object-position: 75% 45%;
+/* The photo owns the right half, from under the header to the bottom edge. */
+.heroMedia {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
 }
 
-/* Cream carries the type on the left and lets the photo through on the right. */
-.heroWash {
+.heroMedia::after {
+  content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, var(--sp-cream) 0%, var(--sp-cream) 34%, rgba(255, 253, 245, 0.82) 46%, rgba(255, 253, 245, 0) 66%);
+  background: linear-gradient(90deg, var(--sp-cream) 0%, rgba(255, 253, 245, 0) 22%);
+  pointer-events: none;
+}
+
+.heroImg {
+  object-fit: cover;
+  object-position: 50% 38%;
 }
 
 .heroIn {
@@ -29,14 +40,14 @@
 }
 
 .heroCopy {
-  max-width: 600px;
+  max-width: min(600px, 46%);
 }
 
 .eyebrow {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 22px;
+  margin-bottom: clamp(12px, 2.4svh, 22px);
   font-size: 15px;
   font-weight: 600;
   opacity: 0.7;
@@ -50,7 +61,8 @@
 }
 
 .heroCopy h1 {
-  font: 600 clamp(56px, 7vw, 108px)/0.92 var(--font-display), serif;
+  /* Sized by width and height, so the block always fits one screen. */
+  font: 600 clamp(40px, min(6.4vw, 9.5svh), 104px)/0.92 var(--font-display), serif;
   letter-spacing: -0.025em;
 }
 
@@ -63,8 +75,8 @@
 
 .heroSub {
   max-width: 470px;
-  margin: 28px 0 34px;
-  font-size: 19px;
+  margin: clamp(16px, 3svh, 28px) 0 clamp(20px, 3.6svh, 34px);
+  font-size: clamp(16px, 2.1svh, 19px);
   line-height: 1.6;
   opacity: 0.85;
 }
@@ -90,29 +102,6 @@
 
 .textLink:hover {
   border-bottom-color: currentColor;
-}
-
-.scrollCue {
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-  bottom: 28px;
-  display: grid;
-  justify-items: center;
-  gap: 10px;
-  transform: translateX(-50%);
-  color: inherit;
-  text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  opacity: 0.45;
-}
-
-.scrollCue i {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(currentColor, transparent);
 }
 
 .ctas {
@@ -474,16 +463,16 @@ div.lightsIn {
 
 @media (max-width: 760px) {
   /* Phones: photo on top, type on cream below. */
-  .hero { display: block; min-height: 0; padding-top: 92px; }
-  .hero > img { position: relative !important; height: 56svh !important; }
-  .heroWash { inset: auto 0 0; top: calc(92px + 56svh - 90px); height: 90px; background: linear-gradient(rgba(255, 253, 245, 0), var(--sp-cream)); }
+  .hero { display: block; height: auto; min-height: 0; }
+  .heroMedia { position: relative; top: auto; width: 100%; height: 58svh; }
+  .heroMedia::after { background: linear-gradient(rgba(255, 253, 245, 0) 70%, var(--sp-cream)); }
+  .heroCopy { max-width: none; }
   .heroIn { padding-top: 8px; padding-bottom: 56px; }
   .eyebrow { margin-bottom: 14px; font-size: 13px; }
   .eyebrow::before { width: 32px; }
   .heroCopy h1 { font-size: 48px; }
   .heroSub { margin: 18px 0 24px; font-size: 16px; }
   .ctas { align-items: center; }
-  .scrollCue { display: none; }
 
   section.collection { min-height: 0; padding-top: 84px; padding-bottom: 20px; }
   .head { margin-bottom: 22px; }

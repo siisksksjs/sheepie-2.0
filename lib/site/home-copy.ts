@@ -10,7 +10,6 @@ export interface HomeCopy {
     subStrong: string;
     explore: string;
     story: string;
-    scroll: string;
     alt: string;
   };
   products: { title: string; all: string; companion: string; coverName: string; coverLine: string };
@@ -28,7 +27,6 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       subStrong: "Bersiaplah untuk esok yang lebih segar.",
       explore: "Jelajahi Koleksi",
       story: "Filosofi Kami",
-      scroll: "Gulir",
       alt: "Perempuan tidur nyenyak memakai LumiCloud di atas bantal CerviCloud",
     },
     products: {
@@ -71,7 +69,6 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       subStrong: "Prepare for a clearer tomorrow.",
       explore: "Explore the Collection",
       story: "Our Philosophy",
-      scroll: "Scroll",
       alt: "A woman sleeping soundly in LumiCloud on a CerviCloud pillow",
     },
     products: {
