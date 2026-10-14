@@ -3,9 +3,16 @@ import { describe, expect, it } from "vitest";
 import { GET } from "./route";
 import { bioConfig } from "@/data/bio";
 
-function request(path: string) {
-  return new Request(`https://sheepiesleep.com${path}`);
+function request(path: string, userAgent?: string) {
+  return new Request(`https://sheepiesleep.com${path}`, userAgent ? { headers: { "user-agent": userAgent } } : undefined);
 }
+
+const IG_IOS =
+  "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 350.0.0.0";
+const SAFARI_IOS =
+  "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1";
+const IG_ANDROID =
+  "Mozilla/5.0 (Linux; Android 14; SM-S918B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Mobile Safari/537.36 Instagram 350.0.0.0 Android";
 
 const params = (slug: string) => ({ params: Promise.resolve({ slug }) });
 
@@ -52,5 +59,59 @@ describe("tracked story redirect", () => {
 
     expect(response.status).toBe(307);
     expect(response.headers.get("location")).toContain("shopee.co.id");
+  });
+
+  describe("on phones", () => {
+    const shopeeHref = (slug: string) =>
+      bioConfig.products.find((p) => p.slug === slug)!.actions.find((a) => a.destination === "shopee")!.href;
+
+    it("opens the Shopee app through an Android intent and records only a PageView", async () => {
+      const response = await GET(request("/go/cervicloud", IG_ANDROID), params("cervicloud"));
+      const html = await response.text();
+
+      expect(response.status).toBe(200);
+      expect(response.headers.get("cache-control")).toBe("no-store");
+      expect(html).toContain("intent://shopee.co.id/");
+      expect(html).toContain("package=com.shopee.id");
+      expect(html).toContain('"event_name":"PageView"');
+      expect(html).not.toContain("InitiateCheckout");
+      expect(html).toContain(`href="${shopeeHref("cervicloud").replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`);
+    });
+
+    it("bounces iOS in-app browsers to Safari with the second hop flagged", async () => {
+      const response = await GET(request("/go/lumicloud?utm_campaign=okt", IG_IOS), params("lumicloud"));
+      const html = await response.text();
+
+      expect(response.status).toBe(200);
+      expect(html).toContain("x-safari-https://sheepiesleep.com/go/lumicloud?utm_campaign=okt&amp;s=1");
+    });
+
+    it("sends iOS Safari straight to the Shopee link", async () => {
+      const response = await GET(request("/go/calmicloud", SAFARI_IOS), params("calmicloud"));
+      const html = await response.text();
+
+      expect(html).toContain(JSON.stringify(shopeeHref("calmicloud")));
+      expect(html).not.toContain("x-safari-");
+    });
+
+    it("only redirects on the Safari hop", async () => {
+      const response = await GET(request("/go/lumicloud?s=1", SAFARI_IOS), params("lumicloud"));
+
+      expect(response.status).toBe(307);
+      expect(response.headers.get("location")).toBe(shopeeHref("lumicloud"));
+    });
+
+    it("keeps plain redirects for non-Shopee destinations", async () => {
+      const response = await GET(request("/go/tiktok", IG_IOS), params("tiktok"));
+
+      expect(response.status).toBe(307);
+    });
+
+    it("records a PageView for the storefront link too", async () => {
+      const response = await GET(request("/go/shopee", IG_ANDROID), params("shopee"));
+      const html = await response.text();
+
+      expect(html).toContain('"event_name":"PageView"');
+    });
   });
 });

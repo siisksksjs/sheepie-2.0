@@ -10,17 +10,26 @@ import {
   type BioProductSlug,
 } from "@/lib/bio-analytics/contracts";
 import { createDailyRateKey, ingestBioEvent } from "@/lib/bio-analytics/server";
+import { androidIntent, isInAppBrowser, isShopeeUrl, platformOf, safariUrl } from "@/lib/go/app-link";
+import { openerPageHtml } from "@/lib/go/opener-page";
+import { pageView } from "@/lib/meta/events";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Tracked redirect for Instagram Story links.
+ * Tracked redirect for Instagram Story links and Meta ads.
  *
  * A story tap goes straight to the Shopee listing, so it never touches /bio and
  * would otherwise be invisible. This records the outbound click first, then
  * redirects. Recording never blocks or fails the redirect: a shopper always
  * reaches the listing, even if analytics is down.
+ *
+ * On phones, Shopee links get a tiny opener page instead of a bare redirect: it
+ * sends a Meta PageView (for retargeting audiences; InitiateCheckout is kept
+ * for real buy-button taps on product pages) and opens the Shopee app (see
+ * lib/go/app-link.ts), because Shopee's web page asks in-app browsers to log in.
+ * `?s=1` is the second hop of the iOS Safari bounce: redirect only, no recording.
  */
 
 /** Storefront and profile links, addressable by a short readable slug. */
@@ -89,6 +98,11 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
   }
 
   const url = new URL(request.url);
+
+  if (url.searchParams.get("s") === "1") {
+    return Response.redirect(target.href, 307);
+  }
+
   const now = new Date();
 
   const event: BioEventInput = {
@@ -125,5 +139,22 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
     // Analytics must never stand between a shopper and the listing.
   }
 
-  return Response.redirect(target.href, 307);
+  const userAgent = request.headers.get("user-agent");
+  const platform = platformOf(userAgent);
+  if (platform === "other" || !isShopeeUrl(target.href)) {
+    return Response.redirect(target.href, 307);
+  }
+
+  let openHref = target.href;
+  if (platform === "android") {
+    openHref = androidIntent(target.href);
+  } else if (isInAppBrowser(userAgent)) {
+    const bounce = new URL(url);
+    bounce.searchParams.set("s", "1");
+    openHref = safariUrl(bounce.toString());
+  }
+
+  return new Response(openerPageHtml({ openHref, webHref: target.href, event: pageView() }), {
+    headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
+  });
 }
