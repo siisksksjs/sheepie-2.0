@@ -1,10 +1,11 @@
 // components/pdp/sticky-buy-bar.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { buttonClass } from "@/components/site/button";
 import { MarketplaceLink } from "@/components/site/marketplace-link";
+import { MarketplaceLogo } from "@/components/site/marketplace-logo";
 import type { Locale } from "@/i18n/config";
 import { formatIdr } from "@/lib/catalog/price";
 import { siteCopy } from "@/lib/site/copy";
@@ -12,32 +13,22 @@ import { siteCopy } from "@/lib/site/copy";
 import { useSelectedOption } from "./option-context";
 import styles from "./pdp.module.css";
 
-/** Phones only (CSS): appears once the buy-box buttons have scrolled away. */
+/** Phones only (CSS): a buy bar pinned to the bottom of the screen. */
 export function StickyBuyBar({ locale }: { locale: Locale }) {
   const { slug, name, option, price } = useSelectedOption();
-  const [show, setShow] = useState(false);
-
+  // Phones (CSS) always show the bar, so a buy button is on the first screen.
   useEffect(() => {
-    const target = document.getElementById("buy-ctas");
-    if (!target) return;
-    // Extend the root downward so an element below the viewport counts as intersecting;
-    // only crossing the top edge flips the state, even on a one-jump flick past it.
-    const io = new IntersectionObserver(([entry]) => setShow(!entry.isIntersecting), { rootMargin: "0px 0px 100000px 0px" });
-    io.observe(target);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.dataset.stickyBar = show ? "true" : "false";
+    document.documentElement.dataset.stickyBar = "true";
     return () => {
       delete document.documentElement.dataset.stickyBar;
     };
-  }, [show]);
+  }, []);
 
   return (
-    <div className={styles.sticky} data-show={show} aria-hidden={!show} inert={!show}>
+    <div className={styles.sticky} data-show="true">
       <div><b>{formatIdr(price.price)}</b>{name}</div>
       <MarketplaceLink slug={slug} optionKey={option.key} value={price.price} marketplace="shopee" href={option.shopeeUrl} placement="sticky-bar" className={buttonClass("ink")}>
+        <MarketplaceLogo marketplace="shopee" size={20} />
         {siteCopy[locale].buy.shopee}
       </MarketplaceLink>
     </div>
