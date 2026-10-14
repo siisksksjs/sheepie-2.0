@@ -105,10 +105,13 @@
   transform: scale(1.06);
 }
 
+:global(html[data-sticky-bar="true"]) .waFloat {
+  bottom: calc(92px + env(safe-area-inset-bottom));
+}
+
 @media (max-width: 760px) {
   .waFloat { right: 14px; bottom: 14px; width: 52px; height: 52px; }
-  /* The PDP buy bar is pinned on phones only. */
-  :global(html[data-sticky-bar="true"]) .waFloat { bottom: calc(84px + env(safe-area-inset-bottom)); }
+  :global(html[data-sticky-bar="true"]) .waFloat { bottom: calc(80px + env(safe-area-inset-bottom)); }
 }
 
 /* Product card */

@@ -289,7 +289,7 @@ const calmicloud: ProductCopy = {
     en: "Soft, moldable silicone earplugs that cover the outer ear and help quiet snoring, AC hum and traffic.",
   },
   gallery: [
-    { src: "/images/products/calmicloud/gallery-01.webp", alt: { id: "CalmiCloud, earplug silikon yang bisa dibentuk", en: "CalmiCloud, moldable silicone earplugs" } },
+    { src: "/images/products/calmicloud/gallery-01-open.webp", alt: { id: "CalmiCloud, earplug silikon yang bisa dibentuk", en: "CalmiCloud, moldable silicone earplugs" } },
     { src: "/images/products/calmicloud/gallery-02.webp", alt: { id: "Membentuk CalmiCloud sesuai telinga", en: "Shaping CalmiCloud to fit your ear" } },
     { src: "/images/products/calmicloud/gallery-03.webp", alt: { id: "CalmiCloud dibandingkan earplug lain", en: "CalmiCloud compared with other earplugs" } },
     { src: "/images/products/calmicloud/gallery-04.webp", alt: { id: "Suara yang diredam CalmiCloud", en: "Sounds CalmiCloud helps quiet" } },

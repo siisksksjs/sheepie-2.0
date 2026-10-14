@@ -66,7 +66,7 @@ export default async function ProductPage({ params }: Params) {
           <PairWith product={product} locale={locale} />
           <div className={styles.end} />
         </main>
-        <StickyBuyBar locale={locale} />
+        <StickyBuyBar locale={locale} showOption={product.options.length > 1} fallbackImage={product.gallery[0].src} />
       </OptionProvider>
       <SiteFooter locale={locale} />
     </div>
