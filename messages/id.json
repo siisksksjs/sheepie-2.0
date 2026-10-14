@@ -33,12 +33,12 @@
     "title": "Istirahat bukan kemewahan.<br></br><span1>Istirahat adalah fondasi.</span1>",
     "intro": "Kami percaya hari esok yang lebih cerah dimulai dari malam sebelumnya. Sheepie lahir untuk memadukan ilmu ergonomi dengan kenyamanan lembut yang kamu dambakan.",
     "sectionTitle": "Dirancang untuk Setiap Orang",
-    "p1": "Kami menghabiskan berbulan-bulan menekuni kepadatan busa, daya pantul, dan sirkulasi udara kain. Entah kamu butuh topangan leher yang presisi dari <strong1>Bantal CerviCloud</strong1>, keheningan dari earplug <strong2>CalmiCloud</strong2>, atau gelapnya <strong3>Masker Mata LumiCloud</strong3>, setiap lekukannya dibuat dengan sengaja.",
+    "p1": "Kami menghabiskan berbulan-bulan menekuni kepadatan busa, daya pantul, dan sirkulasi udara kain. Entah kamu butuh topangan leher yang presisi dari <strong1>Bantal CerviCloud</strong1>, keheningan dari earplug <strong2>CalmiCloud</strong2>, atau gelapnya <strong3>Penutup Mata Tidur LumiCloud</strong3>, setiap lekukannya dibuat dengan sengaja.",
     "p2": "Kami tidak sekadar menjual produk tidur. Kami menjual rasanya bangun dengan segar dan siap."
   },
   "ProductsPage": {
     "metaTitle": "Koleksi | Sheepie.",
-    "metaDescription": "Jelajahi tiga pilar tidur: Bantal CerviCloud, Masker Mata LumiCloud, dan CalmiCloud Earplugs. Dibuat untuk keheningan, kegelapan, dan postur tidur yang selaras.",
+    "metaDescription": "Jelajahi tiga pilar tidur: Bantal CerviCloud, Penutup Mata Tidur LumiCloud, dan CalmiCloud Earplugs. Dibuat untuk keheningan, kegelapan, dan postur tidur yang selaras.",
     "label": "Koleksi",
     "title": "Yang Esensial.",
     "subtitle": "Dirancang untuk tiga pilar tidur yang nyenyak.",
@@ -55,7 +55,7 @@
     "contactButton": "Hubungi Kami",
     "cats": {
       "calmi": "CalmiCloud Earplugs",
-      "lumi": "Masker Mata LumiCloud",
+      "lumi": "Penutup Mata Tidur LumiCloud",
       "cervi": "Bantal CerviCloud",
       "shipping": "Pengiriman & Pengembalian"
     }
@@ -111,11 +111,11 @@
       },
       "strap": {
         "q": "Apakah talinya aman untuk rambut?",
-        "a": "Ya. Talinya halus, bisa diatur, dan tidak menyangkut di rambut, jadi rambut tidak kusut seperti saat memakai masker biasa dengan karet elastis yang kasar."
+        "a": "Ya. Talinya halus, bisa diatur, dan tidak menyangkut di rambut, jadi rambut tidak kusut seperti saat memakai penutup mata biasa dengan karet elastis yang kasar."
       },
       "washable": {
         "q": "Apakah bisa dicuci dengan mesin cuci?",
-        "a": "Kami sarankan mencucinya dengan tangan agar memory foam-nya lebih awet. Kalau perlu memakai mesin cuci, masukkan masker ke kantong laundry dan pilih siklus lembut dengan air dingin."
+        "a": "Kami sarankan mencucinya dengan tangan agar kain katunnya lebih awet. Kalau perlu memakai mesin cuci, masukkan penutup mata ke kantong laundry dan pilih siklus lembut dengan air dingin."
       }
     },
     "cervi": {
@@ -156,9 +156,9 @@
       }
     },
     "lumicloud": {
-      "name": "Masker Mata LumiCloud",
+      "name": "Penutup Mata Tidur LumiCloud",
       "tagline": "Blackout yang ringan tanpa beban.",
-      "description": "LumiCloud adalah masker mata katun yang ringan dan lembut, dibentuk untuk menghalangi cahaya bagi kebanyakan orang tanpa menekan mata. Adem, talinya bisa diatur, dan mudah dibawa untuk tidur malam, tidur siang, maupun perjalanan.",
+      "description": "LumiCloud adalah penutup mata tidur berbahan katun yang ringan dan lembut, dibentuk untuk menghalangi cahaya bagi kebanyakan orang tanpa menekan mata. Adem, talinya bisa diatur, dan mudah dibawa untuk tidur malam, tidur siang, maupun perjalanan.",
       "benefits": {
         "0": "Kain katun lembut",
         "1": "Blackout untuk kebanyakan orang",

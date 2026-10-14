@@ -52,7 +52,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     },
     lumi: {
       title: "LumiCloud. Matikan lampu, tanpa menekan mata.",
-      lead: "Masker mata blackout yang ringan dan lembut. Tidak menekan kelopak mata, jadi nyaman dipakai semalaman, saat tidur siang, atau di perjalanan.",
+      lead: "Penutup mata tidur blackout yang ringan dan lembut. Tidak menekan kelopak mata, jadi nyaman dipakai semalaman, saat tidur siang, atau di perjalanan.",
       features: [
         ["Blackout", "Menghalangi cahaya bagi kebanyakan orang."],
         ["Tidak menekan mata", "Kelopak tetap bebas."],

@@ -14,7 +14,7 @@ import { isLocale, type Locale } from "@/i18n/config";
 import { homeCopy } from "@/lib/site/home-copy";
 
 const HOME_TITLE: Record<Locale, string> = {
-  id: "Sheepie. | Bantal ergonomis & masker mata blackout",
+  id: "Sheepie. | Bantal ergonomis & penutup mata tidur blackout",
   en: "Sheepie. | Ergonomic pillows & blackout eye masks",
 };
 

@@ -66,7 +66,7 @@ describe("home page", () => {
   });
 
   it.each([
-    ["id", "Sheepie. | Bantal ergonomis & masker mata blackout"],
+    ["id", "Sheepie. | Bantal ergonomis & penutup mata tidur blackout"],
     ["en", "Sheepie. | Ergonomic pillows & blackout eye masks"],
   ] as const)("has localized metadata on /%s", async (locale, title) => {
     const meta = await generateMetadata({ params: Promise.resolve({ locale }) });

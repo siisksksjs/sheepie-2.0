@@ -61,7 +61,7 @@ export const pagesCopy: Record<Locale, PagesCopy> = {
   id: {
     about: {
       metaTitle: "Filosofi Kami | Sheepie.",
-      metaDescription: "Hari yang lebih baik dimulai dari malam sebelumnya. Cerita di balik bantal, masker mata, dan earplug Sheepie.",
+      metaDescription: "Hari yang lebih baik dimulai dari malam sebelumnya. Cerita di balik bantal, penutup mata tidur, dan earplug Sheepie.",
       eyebrow: "Filosofi Kami",
       title: ["Istirahat bukan kemewahan.", "Itu fondasi."],
       intro:

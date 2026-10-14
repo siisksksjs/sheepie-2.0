@@ -12,7 +12,7 @@ export interface SiteCopy {
 export const siteCopy: Record<Locale, SiteCopy> = {
   id: {
     notice: "Belanja resmi Sheepie di Shopee & Tokopedia",
-    nav: { pillow: "Bantal", mask: "Masker Mata", earplug: "Earplug", story: "Cerita Kami", journal: "Blog", faq: "FAQ", contact: "Kontak", shop: "Belanja", menu: "Menu", close: "Tutup", allProducts: "Semua produk" },
+    nav: { pillow: "Bantal", mask: "Penutup Mata", earplug: "Earplug", story: "Cerita Kami", journal: "Blog", faq: "FAQ", contact: "Kontak", shop: "Belanja", menu: "Menu", close: "Tutup", allProducts: "Semua produk" },
     shopPanel: { title: "Belanja Sheepie", note: "Pilih produk, lalu toko favoritmu." },
     buy: { shopee: "Beli di Shopee", tokopedia: "Beli di Tokopedia" },
     footer: { goodnight: "Selamat tidur, sampai besok pagi.", shop: "Belanja", brand: "Sheepie", find: "Temukan kami", rights: "© 2026 Sheepie", cover: "Sarung CerviCloud", soldOut: "Habis" },

@@ -144,19 +144,19 @@ const lumicloud: ProductCopy = {
     hoverImage: "/images/edited/DSC01225.JPG",
     chip: { id: "Blue · Apricot", en: "Blue · Apricot" },
     line: {
-      id: "Masker mata blackout yang ringan dan tidak menekan mata, untuk tidur malam, tidur siang, dan perjalanan.",
+      id: "Penutup mata tidur blackout yang ringan dan tidak menekan mata, untuk tidur malam, tidur siang, dan perjalanan.",
       en: "A light blackout eye mask that doesn't press on your eyes, for nights, naps and travel.",
     },
   },
   sub: {
-    id: "Masker mata blackout yang ringan dan lembut, tidak menekan kelopak mata, untuk tidur malam, tidur siang, dan perjalanan.",
+    id: "Penutup mata tidur blackout yang ringan dan lembut, tidak menekan kelopak mata, untuk tidur malam, tidur siang, dan perjalanan.",
     en: "A light, soft blackout eye mask that doesn't press on your eyelids, for nights, naps and travel.",
   },
   gallery: [
-    { src: "/images/products/lumicloud/gallery-01.webp", alt: { id: "LumiCloud, masker mata tidur", en: "LumiCloud, a sleep eye mask" } },
+    { src: "/images/products/lumicloud/gallery-01.webp", alt: { id: "LumiCloud, penutup mata tidur", en: "LumiCloud, a sleep eye mask" } },
     { src: "/images/products/lumicloud/gallery-02.webp", alt: { id: "Masalah tidur yang sering dialami", en: "Common sleep problems" } },
     { src: "/images/products/lumicloud/gallery-03.webp", alt: { id: "Tidur memakai LumiCloud", en: "Sleeping in LumiCloud" } },
-    { src: "/images/products/lumicloud/gallery-04.webp", alt: { id: "LumiCloud dibandingkan masker mata lain", en: "LumiCloud compared with other eye masks" } },
+    { src: "/images/products/lumicloud/gallery-04.webp", alt: { id: "LumiCloud dibandingkan penutup mata lain", en: "LumiCloud compared with other eye masks" } },
     { src: "/images/products/lumicloud/gallery-05.webp", alt: { id: "Ruang mata dan penyangga hidung LumiCloud", en: "LumiCloud's eye space and nose support" } },
     { src: "/images/products/lumicloud/gallery-06.webp", alt: { id: "Tali LumiCloud yang bisa diatur", en: "LumiCloud's adjustable strap" } },
     { src: "/images/products/lumicloud/gallery-07.webp", alt: { id: "LumiCloud mudah dibawa bepergian", en: "LumiCloud is easy to travel with" } },
@@ -254,8 +254,8 @@ const lumicloud: ProductCopy = {
     ],
   },
   compare: {
-    title: { id: "Bedanya dengan masker mata biasa", en: "How it differs from a regular eye mask" },
-    theirs: { id: "Masker biasa", en: "Regular mask" },
+    title: { id: "Bedanya dengan penutup mata biasa", en: "How it differs from a regular eye mask" },
+    theirs: { id: "Penutup mata biasa", en: "Regular mask" },
     rows: [
       { label: { id: "Cahaya", en: "Light" }, ours: { id: "Menghalangi cahaya bagi kebanyakan orang", en: "Blocks light for most sleepers" }, theirs: { id: "Sering bocor di tepi", en: "Often leaks at the edges" } },
       { label: { id: "Di mata", en: "On the eyes" }, ours: { id: "Tidak menekan kelopak", en: "No pressure on the eyelids" }, theirs: { id: "Menempel di mata", en: "Sits on the eyes" } },

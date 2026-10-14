@@ -235,7 +235,7 @@ const productStories: Array<Omit<BioProduct, "price" | "gallery" | "actions">> =
       "Ruang mata 3D dan kain katun lembut menghadirkan gelap yang nyaman, terasa ringan dan sejuk di wajah.",
     image: {
       src: "/images/products/lumicloud/listing-01.png",
-      alt: "Masker mata LumiCloud biru muda dengan ruang mata tiga dimensi di latar biru muda",
+      alt: "Penutup mata tidur LumiCloud biru muda dengan ruang mata tiga dimensi di latar biru muda",
     },
   },
   {
@@ -373,7 +373,7 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
     },
     bannerImage: {
       src: "/images/bio/sheepie-hero-v2.jpg",
-      alt: "Sheepie — Better Sleep Starts Here. Seseorang tidur nyenyak mengenakan masker mata LumiCloud dan earplug CalmiCloud di atas bantal CerviCloud",
+      alt: "Sheepie — Better Sleep Starts Here. Seseorang tidur nyenyak mengenakan penutup mata tidur LumiCloud dan earplug CalmiCloud di atas bantal CerviCloud",
     },
     products: productStories.map((story) => ({
       ...story,
