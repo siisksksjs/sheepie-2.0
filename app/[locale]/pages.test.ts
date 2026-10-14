@@ -35,9 +35,9 @@ describe("content pages", () => {
     expect(html).toContain(`href="/id/blog/${journalPosts[0].slug}"`);
   });
 
-  it("articles render the answer box, table, FAQ, contents and structured data", async () => {
+  it("articles render takeaways, contents, table, FAQ, author box and structured data", async () => {
     const html = renderToStaticMarkup(await ArticlePage({ params: Promise.resolve({ locale: "id", slug: "posisi-tidur-yang-benar" }) }));
-    for (const block of ["answer", "table", "faq", "toc"]) expect(html).toContain(`data-block="${block}"`);
+    for (const block of ["takeaways", "table", "faq", "toc", "author"]) expect(html).toContain(`data-block="${block}"`);
     expect(html).toContain('<h2 id="tidur-miring">');
     expect(html).toContain('href="#faq"');
     expect(html).toContain("14 Oktober 2026");

@@ -8,12 +8,16 @@ import type { ProductSlug } from "@/lib/catalog/types";
  * - table: comparison table; the first column reads as the row label.
  * - faq: questions rendered as an accordion and emitted as FAQPage structured data.
  * - tip: a highlighted practical note.
+ * - takeaways: the "Poin penting" box at the top; the table of contents follows it.
+ * - figure: an inline illustration with an optional caption.
  */
 export type JournalBlock =
   | { type: "p" | "h3" | "tip"; text: string }
   | { type: "h2"; text: string; id?: string }
   | { type: "ul" | "ol"; items: string[] }
   | { type: "answer"; title?: string; text: string }
+  | { type: "takeaways"; items: string[] }
+  | { type: "figure"; src: string; alt: string; caption?: string; width: number; height: number }
   | { type: "table"; caption?: string; head: string[]; rows: string[][] }
   | { type: "faq"; items: { q: string; a: string }[] };
 
@@ -85,6 +89,7 @@ function plain(html: string): string {
 export function readMinutes(post: JournalPost): number {
   const text = post.content
     .map((b) => {
+      if (b.type === "figure") return b.caption ?? "";
       if ("items" in b && b.type !== "faq") return b.items.join(" ");
       if (b.type === "table") return [...b.head, ...b.rows.flat()].join(" ");
       if (b.type === "faq") return b.items.map((i) => `${i.q} ${i.a}`).join(" ");

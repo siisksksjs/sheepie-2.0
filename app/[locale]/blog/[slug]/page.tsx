@@ -6,6 +6,7 @@ import { setRequestLocale } from "next-intl/server";
 
 import { ArticleBody } from "@/components/pages/article-body";
 import { ArticleStickyBar } from "@/components/pages/article-sticky-bar";
+import { buttonClass } from "@/components/site/button";
 import styles from "@/components/pages/pages.module.css";
 import { PostCard } from "@/components/pages/post-card";
 import { FadeIn } from "@/components/site/fade-in";
@@ -58,7 +59,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const headings = postHeadings(post);
   const hasFaq = post.content.some((b) => b.type === "faq");
   const toc = [...headings, ...(hasFaq ? [{ id: "faq", text: t.faqTitle }] : [])];
-  const related = relatedPosts(post);
+  const related = relatedPosts(post, 4);
 
   return (
     <div className={site.page}>
@@ -66,39 +67,44 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <main>
         <article className={`${site.shell} ${styles.article}`} data-section="article">
           <Link className={styles.back} href={localeHref(locale, "/blog")}>← {t.back}</Link>
-          <header className={styles.articleHead}>
-            <span className={styles.meta}>
-              <time dateTime={post.date}>{formatPostDate(post.date, locale)}</time> · {readMinutes(post)} {t.minRead}
-            </span>
-            <h1>{post.title}</h1>
-            <span className={styles.meta}>
-              {t.by} {post.author}
-              {post.updated && post.updated !== post.date && (
-                <> · {t.updated} <time dateTime={post.updated}>{formatPostDate(post.updated, locale)}</time></>
-              )}
-            </span>
+          <header className={styles.articleHero} data-article-hero>
+            <div className={styles.articleHeroText}>
+              <span className={styles.articleHeroEyebrow}>{t.eyebrow}</span>
+              <h1>{post.title}</h1>
+              <span className={styles.articleHeroMeta}>
+                {t.by} <b>{post.author}</b> · <time dateTime={post.date}>{formatPostDate(post.date, locale)}</time> · {readMinutes(post)} {t.minRead}
+                {post.updated && post.updated !== post.date && (
+                  <> · {t.updated} <time dateTime={post.updated}>{formatPostDate(post.updated, locale)}</time></>
+                )}
+              </span>
+            </div>
+            <div className={styles.articleHeroImg}>
+              <Image src={post.image} alt={post.imageAlt ?? ""} fill preload fetchPriority="high" sizes="(max-width: 760px) 100vw, 660px" className={styles.cover} />
+            </div>
           </header>
-          <div className={styles.articleImg} data-article-hero>
-            <Image src={post.image} alt={post.imageAlt ?? ""} fill preload fetchPriority="high" sizes="(max-width: 760px) 100vw, 1080px" className={styles.cover} />
-          </div>
 
-          {toc.length >= 4 && (
-            <nav className={styles.toc} aria-label={t.toc} data-block="toc">
-              <details>
-                <summary>{t.toc}</summary>
-                <ol>{toc.map((h) => <li key={h.id}><a href={`#${h.id}`}>{h.text}</a></li>)}</ol>
-              </details>
-            </nav>
-          )}
+          <ArticleBody blocks={post.content} toc={toc} labels={{ answer: t.answer, takeaways: t.takeaways, faqTitle: t.faqTitle, toc: t.toc }} />
 
-          <ArticleBody blocks={post.content} labels={{ answer: t.answer, faqTitle: t.faqTitle }} />
-
+          <footer className={styles.articleFoot}>
+            <div className={styles.authorBox} data-block="author">
+              <span className={styles.authorMark}><Image src="/brand/lamb-blue.png" alt="" width={40} height={40} /></span>
+              <div>
+                <small>{t.by}</small>
+                <b>{post.author}</b>
+                <p>{t.authorBio}</p>
+              </div>
+            </div>
+            <p className={styles.disclaimer}><b>{t.disclaimerTitle}</b> {t.disclaimer}</p>
+          </footer>
         </article>
 
         {related.length > 0 && (
         <section className={`${site.shell} ${styles.block}`} data-section="more">
-          <FadeIn><h2 className={styles.h2}>{t.more}</h2></FadeIn>
-          <div className={`${styles.posts} ${styles.morePosts}`}>
+          <FadeIn className={styles.moreHead}>
+            <h2 className={styles.h2}>{t.more}</h2>
+            <Link className={buttonClass("ink")} href={localeHref(locale, "/blog")}>{t.back}</Link>
+          </FadeIn>
+          <div className={styles.relatedGrid}>
             {related.map((p, i) => (
               <FadeIn key={p.slug} index={i}>
                 <PostCard post={p} locale={locale} />

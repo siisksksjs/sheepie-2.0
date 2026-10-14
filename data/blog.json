@@ -5,14 +5,14 @@
     "seoTitle": "Posisi Tidur yang Benar: Telentang, Miring, atau Tengkurap? | Sheepie",
     "description": "Posisi tidur mana yang paling baik untuk leher? Kenali kelebihan tiap posisi dan tinggi bantal yang pas untuk tidur telentang, miring, dan tengkurap.",
     "excerpt": "Tidak ada satu posisi tidur yang paling benar untuk semua orang. Yang penting, kepala, leher, dan punggung tetap segaris, dan itu banyak ditentukan oleh bantalmu.",
-    "image": "/images/blog/posisi-tidur-yang-benar.webp",
-    "imageAlt": "Ilustrasi perempuan tidur miring dengan bantal ergonomis biru di kamar malam berlatar awan Mega Mendung",
+    "image": "/images/blog/posisi-tidur-yang-benar-hero.webp",
+    "imageAlt": "Ilustrasi perempuan tidur miring di atas bantal ergonomis CerviCloud, dengan awan Mega Mendung di langit malam",
     "author": "Tim Sheepie",
     "date": "2026-10-14",
     "product": "cervicloud",
     "content": [
       {
-        "type": "answer",
+        "type": "p",
         "text": "Posisi tidur yang benar adalah posisi yang menjaga kepala, leher, dan punggung tetap segaris sepanjang malam. Untuk kebanyakan orang, <strong>tidur miring</strong> dan <strong>telentang</strong> paling mudah dibuat nyaman, asal tinggi bantalnya pas: lebih tinggi untuk tidur miring, lebih rendah untuk telentang. Tidur tengkurap paling berat untuk leher karena kepala harus menoleh berjam-jam."
       },
       {
@@ -22,6 +22,15 @@
       {
         "type": "p",
         "text": "Di artikel ini kita bahas tiga posisi tidur yang paling umum, apa kelebihannya, apa yang perlu diperhatikan, dan berapa tinggi bantal yang cocok untuk masing-masing. Di bagian akhir ada cara sederhana untuk mengecek posisi lehermu sendiri di rumah."
+      },
+      {
+        "type": "takeaways",
+        "items": [
+          "Posisi tidur yang benar menjaga kepala, leher, dan punggung tetap <strong>segaris</strong> sepanjang malam.",
+          "Tidur <strong>telentang</strong> butuh bantal sedang sampai rendah. Tidur <strong>miring</strong> butuh bantal lebih tinggi untuk mengisi jarak bahu ke telinga.",
+          "Tidur <strong>tengkurap</strong> paling berat untuk leher. Kalau tetap ingin tengkurap, pakai bantal yang sangat tipis.",
+          "Kalau sering berganti posisi, pilih bantal dengan dua ketinggian: rendah di tengah, lebih tinggi di sisi."
+        ]
       },
       {
         "type": "h2",

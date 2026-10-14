@@ -59,6 +59,10 @@ type PagesCopy = {
     minRead: string;
     answer: string;
     faqTitle: string;
+    takeaways: string;
+    authorBio: string;
+    disclaimerTitle: string;
+    disclaimer: string;
   };
 };
 
@@ -129,7 +133,11 @@ export const pagesCopy: Record<Locale, PagesCopy> = {
       updated: "Diperbarui",
       minRead: "menit baca",
       answer: "Jawaban singkat",
-      faqTitle: "Pertanyaan yang sering muncul",
+      faqTitle: "Frequently Asked Questions",
+      takeaways: "Poin penting",
+      authorBio: "Tim di balik bantal, penutup mata tidur, dan earplug Sheepie. Kami menulis panduan tidur yang praktis untuk kamar dan kebiasaan sehari-hari di Indonesia.",
+      disclaimerTitle: "Catatan:",
+      disclaimer: "Informasi di artikel ini bersifat umum dan tidak menggantikan saran dokter atau tenaga kesehatan.",
     },
   },
   en: {
@@ -198,7 +206,11 @@ export const pagesCopy: Record<Locale, PagesCopy> = {
       updated: "Updated",
       minRead: "min read",
       answer: "Short answer",
-      faqTitle: "Frequently asked questions",
+      faqTitle: "Frequently Asked Questions",
+      takeaways: "Key takeaways",
+      authorBio: "The team behind Sheepie's pillow, sleep mask and earplugs. We write practical sleep guides for everyday rooms and routines in Indonesia.",
+      disclaimerTitle: "Note:",
+      disclaimer: "This article is general information and is not a substitute for advice from a doctor or healthcare professional.",
     },
   },
 };
