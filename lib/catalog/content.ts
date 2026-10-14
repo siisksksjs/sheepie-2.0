@@ -222,7 +222,7 @@ const lumicloud: ProductCopy = {
         x: 38,
         y: 20,
         title: { id: "Menutup cahaya", en: "Blocks light" },
-        body: { id: "Menutup area mata dengan rapat, pas untuk kebanyakan orang.", en: "Covers the eye area closely for most sleepers." },
+        body: { id: "Menutupi seluruh area mata dengan pas.", en: "Covers the whole eye area with a snug fit." },
       },
       {
         x: 22,
@@ -257,7 +257,7 @@ const lumicloud: ProductCopy = {
     title: { id: "Bedanya dengan penutup mata biasa", en: "How it differs from a regular eye mask" },
     theirs: { id: "Penutup mata biasa", en: "Regular mask" },
     rows: [
-      { label: { id: "Cahaya", en: "Light" }, ours: { id: "Menghalangi cahaya bagi kebanyakan orang", en: "Blocks light for most sleepers" }, theirs: { id: "Sering bocor di tepi", en: "Often leaks at the edges" } },
+      { label: { id: "Cahaya", en: "Light" }, ours: { id: "Menghalangi cahaya lampu, layar, dan matahari pagi", en: "Blocks lamp, screen and morning light" }, theirs: { id: "Sering bocor di tepi", en: "Often leaks at the edges" } },
       { label: { id: "Di mata", en: "On the eyes" }, ours: { id: "Tidak menekan kelopak", en: "No pressure on the eyelids" }, theirs: { id: "Menempel di mata", en: "Sits on the eyes" } },
       { label: { id: "Tali", en: "Strap" }, ours: { id: "Velcro halus", en: "Soft velcro" }, theirs: { id: "Karet yang menarik rambut", en: "Elastic that pulls hair" } },
       { label: { id: "Dipakai lama", en: "Worn all night" }, ours: { id: "Ringan & lembut", en: "Light and soft" }, theirs: { id: "Bikin pegal belakang kepala", en: "Aches at the back of the head" } },

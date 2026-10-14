@@ -158,10 +158,10 @@
     "lumicloud": {
       "name": "Penutup Mata Tidur LumiCloud",
       "tagline": "Blackout yang ringan tanpa beban.",
-      "description": "LumiCloud adalah penutup mata tidur berbahan katun yang ringan dan lembut, dibentuk untuk menghalangi cahaya bagi kebanyakan orang tanpa menekan mata. Adem, talinya bisa diatur, dan mudah dibawa untuk tidur malam, tidur siang, maupun perjalanan.",
+      "description": "LumiCloud adalah penutup mata tidur berbahan katun yang ringan dan lembut, dibentuk untuk menghalangi cahaya tanpa menekan mata. Adem, talinya bisa diatur, dan mudah dibawa untuk tidur malam, tidur siang, maupun perjalanan.",
       "benefits": {
         "0": "Kain katun lembut",
-        "1": "Blackout untuk kebanyakan orang",
+        "1": "Menghalangi cahaya lampu dan layar",
         "2": "Tidak menekan kelopak mata",
         "3": "Adem & tahan keringat"
       }

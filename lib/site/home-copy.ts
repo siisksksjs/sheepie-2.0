@@ -41,20 +41,20 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     },
     cervi: {
       title: "CerviCloud, bantal yang mengikuti gaya tidurmu.",
-      lead: "Bentuk butterfly menopang leher saat telentang dan miring. Ada lekukan untuk menaruh tangan, jadi main HP sebelum tidur pun tetap nyaman.",
+      lead: "Bentuk butterfly-nya menopang leher saat tidur telentang maupun miring, dengan lekukan di sisi sebagai tempat lengan bersandar.",
       features: [
         ["Miring & telentang", "Kontur berbeda untuk tiap posisi tidur."],
         ["Sarung ice-silk", "Terasa sejuk di kulit, bisa dilepas."],
-        ["Memory foam", "Mengembang perlahan, tidak cepat kempes."],
+        ["Memory foam", "Bentuknya tetap terjaga, tidak cepat kempes."],
         ["64 × 35 × 12 cm", "Cukup lebar untuk ganti posisi."],
       ],
       cta: "Lihat CerviCloud",
     },
     lumi: {
-      title: "LumiCloud. Matikan lampu, tanpa menekan mata.",
+      title: "LumiCloud. Gelap untuk matamu, walau lampu masih menyala.",
       lead: "Penutup mata tidur blackout yang ringan dan lembut. Tidak menekan kelopak mata, jadi nyaman dipakai semalaman, saat tidur siang, atau di perjalanan.",
       features: [
-        ["Blackout", "Menghalangi cahaya bagi kebanyakan orang."],
+        ["Blackout", "Menghalangi cahaya lampu, layar, dan matahari pagi."],
         ["Tidak menekan mata", "Kelopak tetap bebas."],
         ["Aman untuk rambut", "Velcro halus, tidak menyangkut."],
         ["Ringan & praktis", "Untuk tidur siang dan perjalanan."],
@@ -84,20 +84,20 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     },
     cervi: {
       title: "CerviCloud, the pillow that follows how you sleep.",
-      lead: "The butterfly shape supports your neck on your back and side. A curve for your arm keeps scrolling before bed comfortable too.",
+      lead: "The butterfly shape supports your neck whether you sleep on your back or your side, with a curved cut-out that gives your arm somewhere to rest.",
       features: [
         ["Side & back sleepers", "A different contour for each position."],
         ["Ice-silk cover", "Feels cool on the skin, removable."],
-        ["Memory foam", "Slow-rebound, doesn't go flat."],
+        ["Memory foam", "Holds its shape, doesn't go flat."],
         ["64 × 35 × 12 cm", "Wide enough to change position."],
       ],
       cta: "See CerviCloud",
     },
     lumi: {
-      title: "LumiCloud. Lights out, no pressure on your eyes.",
+      title: "LumiCloud. Darkness for your eyes, even with the lights on.",
       lead: "A light, soft blackout eye mask. It doesn't press on your eyelids, so it stays comfortable all night, for naps or on the road.",
       features: [
-        ["Blackout", "Blocks light for most sleepers."],
+        ["Blackout", "Blocks lamp, screen and morning light."],
         ["No eye pressure", "Your eyelids stay free."],
         ["Hair-friendly", "Soft velcro that doesn't snag."],
         ["Light & easy", "For naps and travel."],

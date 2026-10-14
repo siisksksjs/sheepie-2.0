@@ -158,10 +158,10 @@
     "lumicloud": {
       "name": "LumiCloud Eye Mask",
       "tagline": "The weightless blackout experience.",
-      "description": "LumiCloud is a light, soft cotton eye mask shaped to block light for most sleepers without pressing on the eyes. Breathable, adjustable and easy to pack for nights, naps and travel.",
+      "description": "LumiCloud is a light, soft cotton eye mask shaped to block light without pressing on the eyes. Breathable, adjustable and easy to pack for nights, naps and travel.",
       "benefits": {
         "0": "Soft Cotton Fabric",
-        "1": "Blackout for most sleepers",
+        "1": "Blocks lamp and screen light",
         "2": "No pressure on the eyelids",
         "3": "Breathable & sweat-resistant"
       }
