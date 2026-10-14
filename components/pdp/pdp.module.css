@@ -6,10 +6,10 @@
 
 /* Gallery */
 .gallery { position: sticky; top: 132px; display: grid; grid-template-columns: 76px 1fr; gap: 14px; }
-.thumbs { display: grid; gap: 10px; align-content: start; }
+.thumbs { display: grid; gap: 10px; align-content: start; height: 0; min-height: 100%; overflow-y: auto; scrollbar-width: none; padding: 4px; }
 .thumb { position: relative; aspect-ratio: 1; padding: 0; border: 0; border-radius: 12px; overflow: hidden; cursor: pointer; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color 0.2s; }
 .thumb[aria-current="true"] { outline-color: var(--sp-ink); }
-.main { position: relative; aspect-ratio: 4 / 4.6; border-radius: 26px; overflow: hidden; background: var(--sp-linen); }
+.main { position: relative; aspect-ratio: 1; border-radius: 26px; overflow: hidden; background: var(--sp-linen); }
 .cover { object-fit: cover; }
 .track { display: none; }
 .dots { display: none; }
@@ -107,7 +107,7 @@
   .thumbs, .main { display: none; }
   .track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .track::-webkit-scrollbar { display: none; }
-  .slide { position: relative; flex: 0 0 100%; aspect-ratio: 1 / 1.08; scroll-snap-align: start; }
+  .slide { position: relative; flex: 0 0 100%; aspect-ratio: 1; scroll-snap-align: start; }
   .dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
   .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--sp-line); transition: width 0.2s; }
   .dots i[data-on="true"] { width: 18px; border-radius: 3px; background: var(--sp-ink); }
