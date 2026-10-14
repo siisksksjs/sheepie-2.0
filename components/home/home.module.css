@@ -7,18 +7,26 @@
   height: calc(100svh - var(--sp-header-h, 110px));
   min-height: 480px;
   overflow: hidden;
+  /* Own stacking context: the marquee (z -1) paints above the cream but under the photo and type. */
+  isolation: isolate;
   background: var(--sp-cream);
   color: var(--sp-ink);
 }
 
-/* Faint words drifting behind the type, as on the original hero. The phrase is
-   sized to about one screen wide so it reads whole, and moves slowly enough to go
-   unnoticed (~10px a second). */
+/* Faint words drifting right behind the headline, as on the original hero. The
+   phrase is about one screen wide so it reads whole, and moves slowly enough to
+   go unnoticed (~10px a second). */
+.title {
+  position: relative;
+}
+
 .marquee {
   position: absolute;
-  top: 6%;
-  left: 0;
-  right: 0;
+  z-index: -1;
+  top: 50%;
+  left: -100vw;
+  width: 300vw;
+  transform: translateY(-50%);
   overflow: hidden;
   pointer-events: none;
   user-select: none;
@@ -32,7 +40,7 @@
 
 .marqueeTrack span {
   padding-right: 4vw;
-  font: 900 7vw/1 var(--font-display), serif;
+  font: 900 8vw/1 var(--font-display), serif;
   letter-spacing: 0.02em;
   white-space: nowrap;
   color: var(--sp-ink);
@@ -71,20 +79,19 @@
 
 .heroIn {
   position: relative;
-  z-index: 1;
   width: 100%;
 }
 
 .heroCopy {
-  max-width: min(600px, 46%);
+  max-width: min(700px, 50%);
 }
 
 .eyebrow {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: clamp(12px, 2.4svh, 22px);
-  font-size: 15px;
+  margin-bottom: clamp(14px, 2.6svh, 26px);
+  font-size: 16px;
   font-weight: 600;
   opacity: 0.7;
 }
@@ -98,7 +105,7 @@
 
 .heroCopy h1 {
   /* Sized by width and height, so the block always fits one screen. */
-  font: 600 clamp(40px, min(6.4vw, 9.5svh), 104px)/0.92 var(--font-display), serif;
+  font: 600 clamp(48px, min(7.6vw, 11.5svh), 128px)/0.92 var(--font-display), serif;
   letter-spacing: -0.025em;
 }
 
@@ -110,9 +117,9 @@
 }
 
 .heroSub {
-  max-width: 470px;
-  margin: clamp(16px, 3svh, 28px) 0 clamp(20px, 3.6svh, 34px);
-  font-size: clamp(16px, 2.1svh, 19px);
+  max-width: 520px;
+  margin: clamp(18px, 3.2svh, 32px) 0 clamp(22px, 4svh, 40px);
+  font-size: clamp(17px, 2.4svh, 21px);
   line-height: 1.6;
   opacity: 0.85;
 }
@@ -501,14 +508,13 @@ div.lightsIn {
   /* Phones: photo on top, type on cream below. */
   .hero { display: block; height: auto; min-height: 0; }
   .heroMedia { position: relative; top: auto; width: 100%; height: 58svh; }
-  .marquee { top: calc(58svh + 4px); }
-  .marqueeTrack span { font-size: 9.5vw; }
+  .marqueeTrack span { font-size: 14vw; }
   .heroMedia::after { background: linear-gradient(rgba(255, 253, 245, 0) 70%, var(--sp-cream)); }
   .heroCopy { max-width: none; }
   .heroIn { padding-top: 8px; padding-bottom: 56px; }
   .eyebrow { margin-bottom: 14px; font-size: 13px; }
   .eyebrow::before { width: 32px; }
-  .heroCopy h1 { font-size: 48px; }
+  .heroCopy h1 { font-size: 52px; }
   .heroSub { margin: 18px 0 24px; font-size: 16px; }
   .ctas { align-items: center; }
 

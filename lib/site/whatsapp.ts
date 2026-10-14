@@ -1,7 +1,7 @@
 import type { Locale } from "@/i18n/config";
 
-/** Sheepie customer service (0895-1718-6188), in the international form wa.me needs. */
-export const WHATSAPP_NUMBER = "6289517186188";
+/** Sheepie customer service (0851-1718-6188), in the international form wa.me needs. */
+export const WHATSAPP_NUMBER = "6285117186188";
 
 export function whatsappUrl(text: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;

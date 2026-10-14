@@ -4,8 +4,8 @@ import { WHATSAPP_NUMBER, whatsappGreeting, whatsappUrl } from "./whatsapp";
 
 describe("whatsapp", () => {
   it("links to Sheepie's number in international form with the message encoded", () => {
-    expect(WHATSAPP_NUMBER).toBe("6289517186188");
-    expect(whatsappUrl("Halo & tanya?")).toBe("https://wa.me/6289517186188?text=Halo%20%26%20tanya%3F");
+    expect(WHATSAPP_NUMBER).toBe("6285117186188");
+    expect(whatsappUrl("Halo & tanya?")).toBe("https://wa.me/6285117186188?text=Halo%20%26%20tanya%3F");
   });
 
   it("greets about the product and the shopper's choice", () => {
