@@ -178,6 +178,11 @@ section.collection {
   object-position: 50% 52%;
 }
 
+/* LumiCloud's second photo: the mask and face sit in the top fifth of the portrait shot. */
+.duo :global([data-product-card="lumicloud"]) img:nth-of-type(2) {
+  object-position: 50% 8%;
+}
+
 .head {
   display: flex;
   justify-content: space-between;
