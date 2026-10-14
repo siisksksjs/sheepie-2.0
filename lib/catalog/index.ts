@@ -119,6 +119,7 @@ export function getProduct(slug: ProductSlug, locale: Locale): Product {
       title: t(copy.anatomy.title),
       intro: t(copy.anatomy.intro),
       image: copy.anatomy.image,
+      blend: copy.anatomy.blend === true,
       points: copy.anatomy.points.map((p) => ({ x: p.x, y: p.y, title: t(p.title), body: t(p.body) })),
     },
     fit: { title: t(copy.fit.title), items: copy.fit.items.map((i) => ({ title: t(i.title), body: t(i.body), fits: i.fits })) },

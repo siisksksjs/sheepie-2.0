@@ -78,6 +78,9 @@
 .anatomy { position: relative; margin-top: 44px; border-radius: 30px; overflow: hidden; background: var(--sp-sky-soft); }
 .anatIn { position: relative; display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 24px; align-items: center; padding: 60px 48px; }
 .stage { position: relative; aspect-ratio: 1; border-radius: 22px; overflow: hidden; }
+/* Studio shots on white take the stage colour instead of a white box. */
+.stage[data-blend] { background: linear-gradient(160deg, #eef2f7 0%, #dfe7f0 100%); }
+.stage[data-blend] img { mix-blend-mode: multiply; }
 .pin { position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; display: grid; place-items: center; border-radius: 50%; background: var(--sp-cream); color: var(--sp-ink); font-size: 12px; font-weight: 700; box-shadow: 0 0 0 6px rgba(255, 253, 245, 0.3); }
 .call { display: grid; gap: 34px; margin: 0; padding: 0; list-style: none; }
 .call li { font-size: 14.5px; line-height: 1.5; }

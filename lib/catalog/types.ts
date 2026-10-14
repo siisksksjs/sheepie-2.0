@@ -53,6 +53,8 @@ export interface ProductCopy {
     title: Text;
     intro: Text;
     image: string;
+    /** White-background studio shot: multiply it onto the stage colour. */
+    blend?: boolean;
     points: { x: number; y: number; title: Text; body: Text }[];
   };
   fit: { title: Text; items: { title: Text; body: Text; fits: boolean }[] };
@@ -105,6 +107,7 @@ export interface Product {
     title: string;
     intro: string;
     image: string;
+    blend: boolean;
     points: { x: number; y: number; title: string; body: string }[];
   };
   fit: { title: string; items: { title: string; body: string; fits: boolean }[] };
