@@ -50,5 +50,15 @@ function ga(eventName: string, parameters: Record<string, unknown>) {
 export const trackViewItem = (item: GaItem) => ga('view_item', { currency: 'IDR', value: item.value, items: gaItems(item) });
 
 /** GA4 `begin_checkout`: a Shopee/Tokopedia button was tapped (pairs with Meta InitiateCheckout). */
-export const trackBeginCheckout = (item: GaItem & { marketplace: 'shopee' | 'tokopedia'; placement: string }) =>
-  ga('begin_checkout', { currency: 'IDR', value: item.value, items: gaItems(item), marketplace: item.marketplace, placement: item.placement });
+export const trackBeginCheckout = (
+  item: GaItem & { marketplace: 'shopee' | 'tokopedia'; placement: string; adSource?: string; adCampaign?: string },
+) =>
+  ga('begin_checkout', {
+    currency: 'IDR',
+    value: item.value,
+    items: gaItems(item),
+    marketplace: item.marketplace,
+    placement: item.placement,
+    ad_source: item.adSource ?? 'site',
+    ad_campaign: item.adCampaign ?? null,
+  });

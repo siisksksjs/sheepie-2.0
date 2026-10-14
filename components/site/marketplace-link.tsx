@@ -1,8 +1,9 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 
 import { trackBeginCheckout, trackMarketplaceClick } from "@/lib/analytics";
+import { readAttribution } from "@/lib/attribution";
 import type { Marketplace, ProductSlug } from "@/lib/catalog/types";
 import { sendMetaEvent } from "@/lib/meta/client";
 import { initiateCheckout } from "@/lib/meta/events";
@@ -28,7 +29,15 @@ export function MarketplaceLink({
   className?: string;
   children: ReactNode;
 }) {
-  const onClick = () => {
+  const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    // The server-rendered link carries the site's own tags; if this visit came from an ad,
+    // swap in the ad's tags just before the browser follows the link.
+    const attribution = readAttribution();
+    try {
+      if (attribution) e.currentTarget.href = marketplaceHref(href, slug, placement, attribution);
+    } catch {
+      // ignore
+    }
     // Fire-and-forget; never preventDefault, and a tracking error must not stop the
     // browser following the link, so each tracker is isolated.
     try {
@@ -42,7 +51,7 @@ export function MarketplaceLink({
       // ignore
     }
     try {
-      trackBeginCheckout({ slug, optionKey, value, marketplace, placement });
+      trackBeginCheckout({ slug, optionKey, value, marketplace, placement, adSource: attribution?.source, adCampaign: attribution?.campaign });
     } catch {
       // ignore
     }

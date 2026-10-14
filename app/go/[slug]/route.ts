@@ -13,6 +13,7 @@ import { createDailyRateKey, ingestBioEvent } from "@/lib/bio-analytics/server";
 import { androidIntent, isShopeeUrl, platformOf } from "@/lib/go/app-link";
 import { openerPageHtml, type OpenerProduct } from "@/lib/go/opener-page";
 import { pageView } from "@/lib/meta/events";
+import { forwardUtm } from "@/lib/utm";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -98,9 +99,12 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
   }
 
   const url = new URL(request.url);
+  // An ad's UTM tags travel on to the marketplace listing.
+  const destinationHref =
+    target.destination === "shopee" || target.destination === "tokopedia" ? forwardUtm(target.href, url.searchParams) : target.href;
 
   if (url.searchParams.get("s") === "1") {
-    return Response.redirect(target.href, 307);
+    return Response.redirect(destinationHref, 307);
   }
 
   const now = new Date();
@@ -142,19 +146,19 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
   const userAgent = request.headers.get("user-agent");
   const platform = platformOf(userAgent);
   if (platform === "other" || !isShopeeUrl(target.href)) {
-    return Response.redirect(target.href, 307);
+    return Response.redirect(destinationHref, 307);
   }
 
   // iOS opens the Shopee app (universal link) only from the shopper's own tap
   // on a Shopee link; any automatic redirect opens Shopee inside Instagram.
   // So iPhones get a product card with one button; Android gets an intent.
   const ios = platform === "ios";
-  const openHref = ios ? target.href : androidIntent(target.href);
+  const openHref = ios ? destinationHref : androidIntent(destinationHref);
 
   const html = openerPageHtml({
     mode: ios ? "tap" : "auto",
     openHref,
-    webHref: target.href,
+    webHref: destinationHref,
     event: pageView(),
     product: ios ? openerProductFor(target) : null,
   });

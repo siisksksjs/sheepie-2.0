@@ -82,7 +82,10 @@ describe("tracked story redirect", () => {
       for (const ua of [IG_IOS, SAFARI_IOS]) {
         const response = await GET(request("/go/lumicloud?utm_campaign=okt", ua), params("lumicloud"));
         const html = await response.text();
-        const href = shopeeHref("lumicloud").replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+        // The ad's utm_campaign travels on to the Shopee listing.
+        const tagged = new URL(shopeeHref("lumicloud"));
+        tagged.searchParams.set("utm_campaign", "okt");
+        const href = tagged.toString().replace(/&/g, "&amp;").replace(/"/g, "&quot;");
 
         expect(response.status).toBe(200);
         expect(html).toContain(`class="cta" href="${href}"`);
