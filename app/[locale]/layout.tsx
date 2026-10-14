@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { isLocale, locales } from "@/i18n/config";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { UmamiAnalytics } from "@/components/analytics/umami-analytics";
 import { MotionProvider } from "@/components/providers/motion-provider";
 import { CookieNotice } from "@/components/site/cookie-notice";
@@ -68,6 +69,7 @@ export default async function RootLayout({
             <CookieNotice locale={locale} />
             <WhatsAppButton locale={locale} />
             <UmamiAnalytics />
+            <GoogleAnalytics />
             <Analytics />
           </MotionProvider>
         </NextIntlClientProvider>

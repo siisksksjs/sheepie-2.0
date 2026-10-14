@@ -18,8 +18,6 @@ declare global {
 }
 
 export const trackMarketplaceClick = ({ product_slug, marketplace, page_path }: MarketplaceEvent) => {
-  console.log(`[Analytics] Marketplace Click: ${marketplace} for ${product_slug} on ${page_path}`);
-  
   if (typeof window !== 'undefined' && window.umami) {
     window.umami.track('marketplace_click', {
       product: product_slug,

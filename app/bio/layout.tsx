@@ -3,6 +3,8 @@ import { Playfair_Display, Quicksand } from "next/font/google";
 
 import "../globals.css";
 
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-display",
@@ -29,6 +31,7 @@ export default function BioLayout({ children }: Readonly<{ children: React.React
         style={{ backgroundColor: "#fffdf5" }}
       >
         {children}
+        <GoogleAnalytics />
       </body>
     </html>
   );
