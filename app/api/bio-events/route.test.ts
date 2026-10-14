@@ -45,7 +45,7 @@ function request(
   body: unknown = validEvent,
   options: { headers?: HeadersInit; url?: string; rawBody?: BodyInit; signal?: AbortSignal } = {},
 ) {
-  return new Request(options.url ?? "https://sheepiesleep.com/api/bio-events", {
+  return new Request(options.url ?? "https://www.sheepiesleep.com/api/bio-events", {
     method: "POST",
     headers: { "content-type": "application/json; charset=utf-8", ...options.headers },
     body: options.rawBody ?? JSON.stringify(body),
@@ -54,7 +54,7 @@ function request(
 }
 
 function streamRequest(body: ReadableStream<Uint8Array>, signal?: AbortSignal): Request {
-  return new Request("https://sheepiesleep.com/api/bio-events", {
+  return new Request("https://www.sheepiesleep.com/api/bio-events", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body,
@@ -84,7 +84,7 @@ function setup(overrides: Partial<Parameters<typeof createPostHandler>[0]> = {})
     rateKey,
     now: () => NOW,
     allowedOrigins: () =>
-      "https://sheepiesleep.com, https://www.sheepiesleep.com, javascript:ignored, not-a-url",
+      "https://www.sheepiesleep.com, https://www.sheepiesleep.com, javascript:ignored, not-a-url",
     isVercel: () => true,
     trustProxyHeaders: () => true,
     ...overrides,
@@ -169,7 +169,7 @@ describe("POST /api/bio-events", () => {
 
     expect((await handler(request(validEvent))).status).toBe(202);
     expect(
-      (await handler(request(validEvent, { headers: { origin: "https://sheepiesleep.com" } }))).status,
+      (await handler(request(validEvent, { headers: { origin: "https://www.sheepiesleep.com" } }))).status,
     ).toBe(202);
     expect(
       (
@@ -187,7 +187,7 @@ describe("POST /api/bio-events", () => {
     expect(
       (
         await handler(
-          request(validEvent, { headers: { origin: "https://sheepiesleep.com.evil.example" } }),
+          request(validEvent, { headers: { origin: "https://www.sheepiesleep.com.evil.example" } }),
         )
       ).status,
     ).toBe(403);
@@ -223,7 +223,7 @@ describe("POST /api/bio-events", () => {
         )
       ).status,
     ).toBe(400);
-    const empty = new Request("https://sheepiesleep.com/api/bio-events", {
+    const empty = new Request("https://www.sheepiesleep.com/api/bio-events", {
       method: "POST",
       headers: { "content-type": "application/json" },
     });

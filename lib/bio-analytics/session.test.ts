@@ -39,7 +39,7 @@ describe("captureCampaign", () => {
   it("captures and normalizes the five approved UTM fields", () => {
     const campaign = captureCampaign(
       new URL(
-        "https://sheepiesleep.com/bio?utm_source=%20ig%20&utm_medium=social&utm_campaign=launch&utm_content=hero&utm_term=sleep",
+        "https://www.sheepiesleep.com/bio?utm_source=%20ig%20&utm_medium=social&utm_campaign=launch&utm_content=hero&utm_term=sleep",
       ),
     );
 
@@ -54,7 +54,7 @@ describe("captureCampaign", () => {
 
   it("returns nulls for absent values and caps long values", () => {
     const campaign = captureCampaign(
-      new URL(`https://sheepiesleep.com/bio?utm_source=${"x".repeat(200)}`),
+      new URL(`https://www.sheepiesleep.com/bio?utm_source=${"x".repeat(200)}`),
     );
 
     expect(campaign.utm_source).toHaveLength(200);
@@ -126,19 +126,19 @@ describe("createBioSession", () => {
       local,
       session,
       1_000,
-      new URL("https://sheepiesleep.com/bio?utm_source=instagram&utm_campaign=launch"),
+      new URL("https://www.sheepiesleep.com/bio?utm_source=instagram&utm_campaign=launch"),
     );
     const same = createBioSession(
       local,
       session,
       2_000,
-      new URL("https://sheepiesleep.com/bio?utm_source=tiktok&utm_campaign=changed"),
+      new URL("https://www.sheepiesleep.com/bio?utm_source=tiktok&utm_campaign=changed"),
     );
     const rotated = createBioSession(
       local,
       session,
       2_000 + SESSION_TIMEOUT_MS + 1,
-      new URL("https://sheepiesleep.com/bio?utm_source=tiktok&utm_campaign=summer"),
+      new URL("https://www.sheepiesleep.com/bio?utm_source=tiktok&utm_campaign=summer"),
     );
 
     expect(first.campaign.utm_source).toBe("instagram");
@@ -257,7 +257,7 @@ describe("createBioSession", () => {
       local,
       session,
       1_000,
-      new URL("https://sheepiesleep.com/bio?utm_source=instagram"),
+      new URL("https://www.sheepiesleep.com/bio?utm_source=instagram"),
     );
     const exposed = handle.campaign as { utm_source: string | null };
 

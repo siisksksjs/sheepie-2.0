@@ -129,7 +129,7 @@ function parseStoredCampaign(value: string | null): Campaign | null {
 
 function currentUrl(): URL {
   if (typeof globalThis.location !== "undefined") return new URL(globalThis.location.href);
-  return new URL("https://sheepiesleep.com/bio");
+  return new URL("https://www.sheepiesleep.com/bio");
 }
 
 function defaultCrypto(): BioSessionCrypto | null {

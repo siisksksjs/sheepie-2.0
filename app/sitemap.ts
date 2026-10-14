@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import products from '../data/products.json'
 import { journalPosts as blogPosts } from '../lib/site/journal'
 
-const baseUrl = 'https://sheepiesleep.com'
+const baseUrl = 'https://www.sheepiesleep.com'
 const locales = ['en', 'id']
 const blogLocale = 'id'
 

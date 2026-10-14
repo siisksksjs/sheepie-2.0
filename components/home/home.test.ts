@@ -70,7 +70,7 @@ describe("home page", () => {
   ] as const)("has localized metadata on /%s", async (locale, title) => {
     const meta = await generateMetadata({ params: Promise.resolve({ locale }) });
     expect(meta.title).toBe(title);
-    expect(meta.alternates?.canonical).toBe(`https://sheepiesleep.com/${locale}`);
-    expect(meta.openGraph?.url).toBe(`https://sheepiesleep.com/${locale}`);
+    expect(meta.alternates?.canonical).toBe(`https://www.sheepiesleep.com/${locale}`);
+    expect(meta.openGraph?.url).toBe(`https://www.sheepiesleep.com/${locale}`);
   });
 });

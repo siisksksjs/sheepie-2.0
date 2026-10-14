@@ -4,7 +4,7 @@ import { GET } from "./route";
 import { bioConfig } from "@/data/bio";
 
 function request(path: string, userAgent?: string) {
-  return new Request(`https://sheepiesleep.com${path}`, userAgent ? { headers: { "user-agent": userAgent } } : undefined);
+  return new Request(`https://www.sheepiesleep.com${path}`, userAgent ? { headers: { "user-agent": userAgent } } : undefined);
 }
 
 const IG_IOS =
@@ -49,7 +49,7 @@ describe("tracked story redirect", () => {
     const response = await GET(request("/go/nonsense"), params("nonsense"));
 
     expect(response.status).toBe(307);
-    expect(response.headers.get("location")).toBe("https://sheepiesleep.com/bio");
+    expect(response.headers.get("location")).toBe("https://www.sheepiesleep.com/bio");
   });
 
   it("still redirects when analytics is unavailable", async () => {

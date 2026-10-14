@@ -55,7 +55,7 @@ describe("meta events", () => {
 
   it("accepts what the builders produce, plus a source URL", () => {
     expect(isMetaEvent(pageView())).toBe(true);
-    expect(isMetaEvent({ ...viewContent({ slug: "cervicloud", optionKey: "pillow", value: 1 }), event_source_url: "https://sheepiesleep.com/id" })).toBe(true);
+    expect(isMetaEvent({ ...viewContent({ slug: "cervicloud", optionKey: "pillow", value: 1 }), event_source_url: "https://www.sheepiesleep.com/id" })).toBe(true);
   });
 
   it.each([

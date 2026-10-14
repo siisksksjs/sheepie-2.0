@@ -26,7 +26,7 @@ const quicksand = Quicksand({
 
 // Fallback for pages without their own metadata (e.g. the 404); every page sets its own title, canonical and preview.
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sheepiesleep.com"),
+  metadataBase: new URL("https://www.sheepiesleep.com"),
   title: "Sheepie | Ergonomic Pillow, Sleep Mask & Earplugs",
   description: "Sheepie: ergonomic CerviCloud pillows, LumiCloud blackout sleep masks and CalmiCloud earplugs for calmer nights in Indonesia.",
   openGraph: { type: "website", siteName: "Sheepie", images: [{ url: "/og/sheepie.jpg", width: 1200, height: 630 }] },

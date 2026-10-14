@@ -8,10 +8,10 @@ import { POST } from "./route";
 function post(body: string, headers: Record<string, string | null> = {}) {
   const merged: Record<string, string | null> = { "content-type": "application/json", "sec-fetch-site": "same-origin", ...headers };
   const sent = Object.fromEntries(Object.entries(merged).filter((entry): entry is [string, string] => entry[1] !== null));
-  return new Request("https://sheepiesleep.com/api/meta-events", { method: "POST", headers: sent, body });
+  return new Request("https://www.sheepiesleep.com/api/meta-events", { method: "POST", headers: sent, body });
 }
 
-const event = () => ({ ...viewContent({ slug: "cervicloud", optionKey: "pillow", value: 838000 }), event_source_url: "https://sheepiesleep.com/id/products/cervicloud" });
+const event = () => ({ ...viewContent({ slug: "cervicloud", optionKey: "pillow", value: 838000 }), event_source_url: "https://www.sheepiesleep.com/id/products/cervicloud" });
 
 afterEach(() => {
   vi.unstubAllEnvs();
@@ -124,7 +124,7 @@ describe("POST /api/meta-events", () => {
     const fetchMock = vi.fn(async () => new Response("{}", { status: 200 }));
     vi.stubGlobal("fetch", fetchMock);
 
-    const response = await POST(post(JSON.stringify(event()), { "sec-fetch-site": null, origin: "https://sheepiesleep.com" }));
+    const response = await POST(post(JSON.stringify(event()), { "sec-fetch-site": null, origin: "https://www.sheepiesleep.com" }));
 
     expect(response.status).toBe(202);
     expect(fetchMock).toHaveBeenCalledOnce();
@@ -178,7 +178,7 @@ describe("POST /api/meta-events", () => {
   it.each([
     ["not JSON", "{oops"],
     ["unknown event", JSON.stringify({ event_name: "Purchase", event_id: "abcdefgh12", custom_data: {} })],
-    ["oversized body", JSON.stringify({ ...event(), event_source_url: `https://sheepiesleep.com/${"a".repeat(5000)}` })],
+    ["oversized body", JSON.stringify({ ...event(), event_source_url: `https://www.sheepiesleep.com/${"a".repeat(5000)}` })],
   ])("rejects %s without forwarding", async (_label, body) => {
     vi.stubEnv("META_PIXEL_ID", "123456");
     vi.stubEnv("META_CAPI_TOKEN", "secret-token");

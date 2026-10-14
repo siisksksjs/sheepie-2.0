@@ -138,7 +138,7 @@ describe("createBioEventFactory", () => {
       memoryStorage(),
       memoryStorage(),
       1_000,
-      new URL("https://sheepiesleep.com/bio?utm_source=instagram&utm_medium=bio"),
+      new URL("https://www.sheepiesleep.com/bio?utm_source=instagram&utm_medium=bio"),
       { randomUUID: () => fakeUuid((seed += 1)) as `${string}-${string}-${string}-${string}-${string}` },
     );
 

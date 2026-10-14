@@ -16,7 +16,7 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sheepiesleep.com"),
+  metadataBase: new URL("https://www.sheepiesleep.com"),
 };
 
 export default function BioLayout({ children }: Readonly<{ children: React.ReactNode }>) {

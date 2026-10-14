@@ -5,7 +5,7 @@ import type { Product } from "@/lib/catalog/types";
 import { storeLinks } from "@/lib/site/copy";
 import { WHATSAPP_NUMBER } from "@/lib/site/whatsapp";
 
-export const SITE_URL = "https://sheepiesleep.com";
+export const SITE_URL = "https://www.sheepiesleep.com";
 const SITE_NAME = "Sheepie";
 const OG_LOCALE: Record<Locale, string> = { id: "id_ID", en: "en_US" };
 

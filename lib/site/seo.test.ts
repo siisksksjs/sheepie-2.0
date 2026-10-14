@@ -9,7 +9,7 @@ import { journalPosts } from "@/lib/site/journal";
 import { type PageKey, pageMetadata, postOgImage, productLd, productMetadata } from "@/lib/site/seo";
 
 const PAGES: PageKey[] = ["home", "products", "about", "contact", "faq", "blog", "guide"];
-const SITE = "https://sheepiesleep.com";
+const SITE = "https://www.sheepiesleep.com";
 
 function check(meta: Metadata) {
   const title = String(meta.title);
@@ -20,7 +20,7 @@ function check(meta: Metadata) {
   const og = meta.openGraph as { url?: string; images?: { url: string }[] };
   expect(og.url).toBe(meta.alternates?.canonical);
   const image = og.images?.[0]?.url ?? "";
-  expect(image).toMatch(/^https:\/\/sheepiesleep\.com\/og\/.+\.jpg$/);
+  expect(image).toMatch(/^https:\/\/www\.sheepiesleep\.com\/og\/.+\.jpg$/);
   expect(existsSync(join(process.cwd(), "public", image.replace(SITE, "")))).toBe(true);
   return title;
 }

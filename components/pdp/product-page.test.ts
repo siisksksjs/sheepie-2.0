@@ -44,6 +44,6 @@ describe("product page", () => {
   it("titles the page with the search keyword and product name", async () => {
     const meta = await generateMetadata({ params: Promise.resolve({ locale: "id", slug: "lumicloud" }) });
     expect(meta.title).toBe("Penutup Mata Tidur Blackout LumiCloud | Sheepie");
-    expect(meta.alternates?.canonical).toBe("https://sheepiesleep.com/id/products/lumicloud");
+    expect(meta.alternates?.canonical).toBe("https://www.sheepiesleep.com/id/products/lumicloud");
   });
 });

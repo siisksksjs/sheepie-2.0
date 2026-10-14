@@ -8,7 +8,7 @@ afterEach(() => vi.unstubAllGlobals());
 function stubBrowser({ beacon = true, fbq }: { beacon?: boolean; fbq?: (...args: unknown[]) => void }) {
   const sendBeacon = vi.fn(() => beacon);
   const fetchMock = vi.fn(async () => new Response(null, { status: 202 }));
-  vi.stubGlobal("window", { fbq, location: { href: "https://sheepiesleep.com/id" } });
+  vi.stubGlobal("window", { fbq, location: { href: "https://www.sheepiesleep.com/id" } });
   vi.stubGlobal("navigator", { sendBeacon });
   vi.stubGlobal("fetch", fetchMock);
   return { sendBeacon, fetchMock };
@@ -28,7 +28,7 @@ describe("sendMetaEvent", () => {
     expect(endpoint).toBe(META_ENDPOINT);
     const sent = JSON.parse(await blob.text());
     expect(sent.event_id).toBe(event.event_id);
-    expect(sent.event_source_url).toBe("https://sheepiesleep.com/id");
+    expect(sent.event_source_url).toBe("https://www.sheepiesleep.com/id");
   });
 
   it("falls back to a keepalive fetch when the beacon is refused", () => {

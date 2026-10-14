@@ -6,7 +6,7 @@ import { bioConfig } from "@/data/bio";
 const title = "Sheepie — Temukan Sistem Tidurmu";
 const description =
   "Kenali tiga lapis istirahat Sheepie: topangan leher, gelap yang lembut, dan suasana yang lebih tenang.";
-const canonical = "https://sheepiesleep.com/bio";
+const canonical = "https://www.sheepiesleep.com/bio";
 
 export const metadata: Metadata = {
   title,

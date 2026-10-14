@@ -351,7 +351,7 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
   hubActions.push({
     id: "bio-hub-website",
     label: "Website",
-    href: "https://sheepiesleep.com/id",
+    href: "https://www.sheepiesleep.com/id",
     destination: "website",
     accessibleLabel: "Kunjungi website Sheepie (terbuka di tab baru)",
   });
