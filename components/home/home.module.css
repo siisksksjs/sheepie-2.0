@@ -58,20 +58,19 @@ section.collection {
   justify-content: center;
   min-height: 100vh;
   min-height: 100svh;
-  padding-top: calc(var(--sp-header-h, 110px) + 24px);
-  padding-bottom: 24px;
+  padding-top: calc(var(--sp-header-h, 110px) + 20px);
+  padding-bottom: 12px;
 }
 
-/* Home cards are sized from the screen height so the whole collection fits one view. */
+/* A fixed 7:5 frame: the product photos are portrait, and anything wider crops
+   the product itself. The rest of the section is kept tight to fit one screen. */
 .duo :global([data-product-card]) > div:first-child {
-  aspect-ratio: auto;
-  /* Never shorter than a 4:3-ish frame, so the whole product stays in view on short screens. */
-  height: clamp(340px, calc(100svh - var(--sp-header-h, 110px) - 364px), 600px);
+  aspect-ratio: 7 / 5;
 }
 
-/* Centre the CerviCloud shot on the pillow so neither edge is cut in the short home card. */
+/* Pillow and hand sit at 29-73% of the portrait shot; centre the frame on that band. */
 .duo :global([data-product-card="cervicloud"]) img {
-  object-position: 50% 48%;
+  object-position: 50% 52%;
 }
 
 .head {
@@ -110,7 +109,7 @@ section.collection {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .mini {
