@@ -19,6 +19,13 @@ import { localeHref } from "@/lib/site/copy";
 import { pagesCopy } from "@/lib/site/pages-copy";
 import { whatsappGreeting, whatsappUrl } from "@/lib/site/whatsapp";
 
+/** Pillar photos, each framed on the product in use. */
+const PILLAR_PHOTO = {
+  cervicloud: { src: "/images/edited/DSC01187.JPG", position: "50% 50%" },
+  lumicloud: { src: "/images/edited/DSC01334.JPG", position: "50% 0%" },
+  calmicloud: { src: "/images/edited/DSC01249.JPG", position: "50% 30%" },
+} as const;
+
 const MOSAIC = [
   "/images/hero/sleep-mask-pillow.webp",
   "/images/edited/DSC01263.JPG",
@@ -74,7 +81,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 <FadeIn key={pillar.slug} index={i}>
                   <Link className={styles.pillar} href={productPath(locale, pillar.slug)}>
                     <span className={styles.pillarImg}>
-                      <Image src={product.card.hoverImage} alt="" fill sizes="(max-width: 760px) 90vw, 30vw" className={styles.cover} />
+                      <Image src={PILLAR_PHOTO[pillar.slug].src} alt="" fill sizes="(max-width: 760px) 90vw, 30vw" className={styles.cover} style={{ objectPosition: PILLAR_PHOTO[pillar.slug].position }} />
                     </span>
                     <b>{pillar.word}</b>
                     <span>{pillar.line}</span>
