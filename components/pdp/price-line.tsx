@@ -1,10 +1,9 @@
 // components/pdp/price-line.tsx
 import { discountPercent, formatIdr } from "@/lib/catalog/price";
-import type { ProductOption } from "@/lib/catalog/types";
 
 import styles from "./pdp.module.css";
 
-export function PriceLine({ option, saveLabel }: { option: ProductOption; saveLabel: string }) {
+export function PriceLine({ option, saveLabel }: { option: { price: number; originalPrice: number | null }; saveLabel: string }) {
   const saving = discountPercent(option.price, option.originalPrice);
 
   return (

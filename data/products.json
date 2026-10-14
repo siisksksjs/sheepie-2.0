@@ -38,7 +38,30 @@
         "originalPrice": "IDR 198.000",
         "price": "IDR 198.000",
         "shopeeUrl": "https://shopee.co.id/-SARUNG-ONLY-Sheepie-CerviCloud-Cervical-Pillow-Bantal-Kesehatan-Memory-Foam-for-Leher-dan-bahu-i.669518207.43809302912?extraParams=%7B%22display_model_id%22%3A265779943937%7D",
-        "tokopediaUrl": "https://www.tokopedia.com/sheepie/sarung-only-sheepie-cervicloud-cervical-pillow-bantal-kesehatan-memory-foam-for-leher-dan-bahu-1732003397370480153"
+        "tokopediaUrl": "https://www.tokopedia.com/sheepie/sarung-only-sheepie-cervicloud-cervical-pillow-bantal-kesehatan-memory-foam-for-leher-dan-bahu-1732003397370480153",
+        "soldOut": true
+      }
+    ],
+    "bundles": [
+      {
+        "qty": 1,
+        "price": "IDR 838.000",
+        "originalPrice": "IDR 1.399.000"
+      },
+      {
+        "qty": 2,
+        "price": "IDR 1.656.000",
+        "originalPrice": "IDR 2.798.000"
+      },
+      {
+        "qty": 3,
+        "price": "IDR 2.489.000",
+        "originalPrice": "IDR 4.197.000"
+      },
+      {
+        "qty": 4,
+        "price": "IDR 3.322.000",
+        "originalPrice": "IDR 5.596.000"
       }
     ]
   },
@@ -81,7 +104,29 @@
       }
     ],
     "shopeeUrl": "https://shopee.co.id/product/669518207/55952823103/",
-    "tokopediaUrl": "https://www.tokopedia.com/sheepie/sheepie-lumicloud-sleep-mask-penutup-mata-tidur-premium-katun-100-blackout-lembut-empuk-nyaman-tanpa-gerah-1733526459631896089"
+    "tokopediaUrl": "https://www.tokopedia.com/sheepie/sheepie-lumicloud-sleep-mask-penutup-mata-tidur-premium-katun-100-blackout-lembut-empuk-nyaman-tanpa-gerah-1733526459631896089",
+    "bundles": [
+      {
+        "qty": 1,
+        "price": "IDR 218.000",
+        "originalPrice": "IDR 299.000"
+      },
+      {
+        "qty": 2,
+        "price": "IDR 426.000",
+        "originalPrice": "IDR 578.000"
+      },
+      {
+        "qty": 3,
+        "price": "IDR 639.000",
+        "originalPrice": "IDR 867.000"
+      },
+      {
+        "qty": 4,
+        "price": "IDR 852.000",
+        "originalPrice": "IDR 1.156.000"
+      }
+    ]
   },
   {
     "slug": "calmicloud",
@@ -108,6 +153,28 @@
       "/images/products/calmicloud/listing-09.png"
     ],
     "shopeeUrl": "https://shopee.co.id/product/669518207/40426532493/",
-    "tokopediaUrl": "https://www.tokopedia.com/sheepie/sheepie-calmicloud-moldable-earplug-penutup-kuping-anti-bising-anti-air-earplug-silikon-medical-grade-cocok-untuk-tidur-traveling-1733268346396313113"
+    "tokopediaUrl": "https://www.tokopedia.com/sheepie/sheepie-calmicloud-moldable-earplug-penutup-kuping-anti-bising-anti-air-earplug-silikon-medical-grade-cocok-untuk-tidur-traveling-1733268346396313113",
+    "bundles": [
+      {
+        "qty": 1,
+        "price": "IDR 88.000",
+        "originalPrice": "IDR 108.000"
+      },
+      {
+        "qty": 2,
+        "price": "IDR 166.000",
+        "originalPrice": "IDR 216.000"
+      },
+      {
+        "qty": 3,
+        "price": "IDR 254.000",
+        "originalPrice": "IDR 324.000"
+      },
+      {
+        "qty": 4,
+        "price": "IDR 342.000",
+        "originalPrice": "IDR 432.000"
+      }
+    ]
   }
 ]

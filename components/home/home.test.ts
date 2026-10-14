@@ -33,7 +33,8 @@ describe("home page", () => {
     expect(html).toContain('data-product-card="lumicloud"');
     expect(html).not.toContain('data-product-card="calmicloud"');
     expect(html).toContain('data-companion="calmicloud"');
-    expect(html).toContain('href="/id/products/cervicloud?option=case"');
+    expect(html).toContain('data-companion="cervicloud-case" data-sold-out="true"');
+    expect(html).not.toContain("option=case");
   });
 
   it("quotes masked reviewers with a link to the original screenshot", async () => {

@@ -3,15 +3,26 @@
 
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 
-import type { ProductOption, ProductSlug } from "@/lib/catalog/types";
+import type { ProductBundle, ProductOption, ProductSlug } from "@/lib/catalog/types";
 import { sendMetaEvent } from "@/lib/meta/client";
 import { viewContent } from "@/lib/meta/events";
 
-type OptionContext = { slug: ProductSlug; name: string; option: ProductOption; select: (key: string) => void };
+type Price = { price: number; originalPrice: number | null };
+
+type OptionContext = {
+  slug: ProductSlug;
+  name: string;
+  option: ProductOption;
+  select: (key: string) => void;
+  bundle: ProductBundle | null;
+  selectBundle: (key: string) => void;
+  /** What the shopper pays for the current choice: the bundle price when there are bundles. */
+  price: Price;
+};
 
 const Context = createContext<OptionContext | null>(null);
 
-type ProductRef = { slug: ProductSlug; name: string; options: ProductOption[] };
+type ProductRef = { slug: ProductSlug; name: string; options: ProductOption[]; bundles: ProductBundle[] };
 
 function pick(options: ProductOption[], key: string | null): ProductOption {
   return options.find((o) => o.key === key) ?? options[0];
@@ -24,7 +35,10 @@ function pick(options: ProductOption[], key: string | null): ProductOption {
  */
 export function OptionProvider({ product, children }: { product: ProductRef; children: ReactNode }) {
   const [key, setKey] = useState<string | null>(null);
+  const [bundleKey, setBundleKey] = useState<string | null>(null);
   const option = pick(product.options, key);
+  const bundle = product.bundles.find((b) => b.key === bundleKey) ?? product.bundles[0] ?? null;
+  const price: Price = bundle ?? option;
 
   useEffect(() => {
     const requested = new URLSearchParams(window.location.search).get("option");
@@ -35,16 +49,22 @@ export function OptionProvider({ product, children }: { product: ProductRef; chi
   useEffect(() => {
     if (key === null) return;
     const current = pick(product.options, key);
+    const value = (product.bundles.find((b) => b.key === bundleKey) ?? product.bundles[0] ?? current).price;
     try {
-      sendMetaEvent(viewContent({ slug: product.slug, optionKey: current.key, value: current.price }));
+      sendMetaEvent(viewContent({ slug: product.slug, optionKey: current.key, value }));
     } catch {
       // Tracking never interrupts the page.
     }
-  }, [key, product.slug, product.options]);
+  }, [key, bundleKey, product.slug, product.options, product.bundles]);
 
   const select = useCallback((next: string) => setKey(pick(product.options, next).key), [product.options]);
+  const selectBundle = useCallback((next: string) => setBundleKey(next), []);
 
-  return <Context.Provider value={{ slug: product.slug, name: product.name, option, select }}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={{ slug: product.slug, name: product.name, option, select, bundle, selectBundle, price }}>
+      {children}
+    </Context.Provider>
+  );
 }
 
 export function useSelectedOption(): OptionContext {

@@ -43,13 +43,6 @@ const cervicloud: ProductCopy = {
       image: "/images/etalase/22.png",
       source: { kind: "variant", name: "Pillow" },
     },
-    {
-      key: "case",
-      label: { id: "Sarung saja", en: "Cover only" },
-      note: { id: "Sarung ice-silk cadangan", en: "Spare ice-silk cover" },
-      image: "/brand/icesilk.jpg",
-      source: { kind: "variant", name: "Case Only" },
-    },
   ],
   accordions: [
     {

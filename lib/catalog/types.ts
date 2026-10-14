@@ -61,6 +61,15 @@ export interface ProductCopy {
   pairWith: ProductSlug[];
 }
 
+export interface ProductBundle {
+  key: string;
+  qty: number;
+  label: string;
+  price: number;
+  /** null when there is no saving to show. */
+  originalPrice: number | null;
+}
+
 export interface ProductOption {
   key: string;
   label: string;
@@ -85,6 +94,8 @@ export interface Product {
   icons: { icon: IconName; label: string }[];
   optionLabel: string;
   options: ProductOption[];
+  /** Multi-buy packs sold on the same marketplace listing; empty when there are none. */
+  bundles: ProductBundle[];
   accordions: { title: string; body: string[] }[];
   anatomy: {
     title: string;

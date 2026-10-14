@@ -9,7 +9,8 @@ describe("site footer", () => {
     const html = renderToStaticMarkup(createElement(SiteFooter, { locale: "id" }));
     expect(html).toContain('data-section="footer"');
     expect(html).toContain("Selamat tidur, sampai besok pagi.");
-    expect(html).toContain('href="/id/products/cervicloud?option=case"');
+    expect(html).not.toContain("option=case");
+    expect(html).toContain("Habis");
     expect(html).toContain('href="https://shopee.co.id/sheepie.sleep"');
     expect(html).toContain('href="https://www.tokopedia.com/sheepie"');
     expect(html).toContain('href="/id/faq"');

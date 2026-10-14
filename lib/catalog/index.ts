@@ -7,6 +7,7 @@ import {
   PRODUCT_SLUGS,
   type OptionSource,
   type Product,
+  type ProductBundle,
   type ProductOption,
   type ProductSlug,
   type Text,
@@ -20,6 +21,7 @@ interface SourceVariant {
   originalPrice: string;
   shopeeUrl: string;
   tokopediaUrl: string;
+  soldOut?: boolean;
 }
 
 interface SourceProduct {
@@ -30,6 +32,7 @@ interface SourceProduct {
   tokopediaUrl: string;
   variants?: SourceVariant[];
   colors?: { name: string; swatch?: string }[];
+  bundles?: { qty: number; price: string; originalPrice: string }[];
 }
 
 const sources = products as SourceProduct[];
@@ -76,6 +79,20 @@ function resolveOption(slug: ProductSlug, option: OptionSource, locale: Locale):
   };
 }
 
+function bundleLabel(qty: number, locale: Locale): string {
+  if (qty === 1) return locale === "id" ? "Satuan" : "Single";
+  return locale === "id" ? `Paket isi ${qty}` : `Bundle of ${qty}`;
+}
+
+function resolveBundles(slug: ProductSlug, locale: Locale): ProductBundle[] {
+  return (source(slug).bundles ?? []).map((b) => ({
+    key: b.qty === 1 ? "single" : `x${b.qty}`,
+    qty: b.qty,
+    label: bundleLabel(b.qty, locale),
+    ...priced(b.price, b.originalPrice),
+  }));
+}
+
 export function isProductSlug(value: string): value is ProductSlug {
   return (PRODUCT_SLUGS as readonly string[]).includes(value);
 }
@@ -94,6 +111,7 @@ export function getProduct(slug: ProductSlug, locale: Locale): Product {
     icons: copy.icons.map((i) => ({ icon: i.icon, label: t(i.label) })),
     optionLabel: t(copy.optionLabel),
     options: copy.options.map((o) => resolveOption(slug, o, locale)),
+    bundles: resolveBundles(slug, locale),
     accordions: copy.accordions.map((a) => ({ title: t(a.title), body: a.body.map(t) })),
     anatomy: {
       title: t(copy.anatomy.title),
@@ -118,6 +136,22 @@ export function getProducts(locale: Locale): Product[] {
 
 export function findOption(product: Product, key: string | null | undefined): ProductOption {
   return product.options.find((o) => o.key === key) ?? product.options[0];
+}
+
+export function findBundle(product: Product, key: string | null | undefined): ProductBundle | null {
+  return product.bundles.find((b) => b.key === key) ?? product.bundles[0] ?? null;
+}
+
+/** The spare CerviCloud cover, sold on its own listing (currently out of stock). */
+export function cerviCover() {
+  const variant = source("cervicloud").variants?.find((v) => v.name === "Case Only");
+  if (!variant) throw new Error('data/products.json has no CerviCloud "Case Only" variant');
+  return {
+    ...priced(variant.price, variant.originalPrice),
+    shopeeUrl: variant.shopeeUrl,
+    image: "/brand/icesilk.jpg",
+    soldOut: variant.soldOut === true,
+  };
 }
 
 export function productPath(locale: Locale, slug: ProductSlug, optionKey?: string): string {

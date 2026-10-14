@@ -18,7 +18,8 @@
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: 40px;
-  padding: 90px 0 60px;
+  /* Block padding only: the shell's side gutter must survive. */
+  padding-block: 90px 60px;
 }
 
 .say {
@@ -41,6 +42,26 @@
   list-style: none;
 }
 
+.soldOut {
+  display: inline-flex;
+  flex-wrap: wrap;
+  min-height: 44px;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 16px;
+  opacity: 0.55;
+}
+
+.soldOut small {
+  flex: none;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-size: 11px;
+  font-weight: 700;
+}
+
 .grid li a {
   display: inline-flex;
   min-height: 44px;
@@ -55,7 +76,7 @@
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  padding: 22px 0 30px;
+  padding-block: 22px 30px;
   border-top: 1px solid rgba(255, 253, 245, 0.12);
   font-size: 13px;
 }
@@ -73,7 +94,7 @@
 }
 
 @media (max-width: 760px) {
-  .grid { grid-template-columns: 1fr 1fr; gap: 30px 20px; padding: 64px 0 40px; }
+  .grid { grid-template-columns: 1fr 1fr; gap: 30px 20px; padding-block: 64px 40px; }
   .grid > div:first-child { grid-column: 1 / -1; }
   .say { font-size: 32px; }
   .legal { flex-direction: column; }

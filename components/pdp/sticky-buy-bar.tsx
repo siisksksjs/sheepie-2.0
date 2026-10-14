@@ -14,7 +14,7 @@ import styles from "./pdp.module.css";
 
 /** Phones only (CSS): appears once the buy-box buttons have scrolled away. */
 export function StickyBuyBar({ locale }: { locale: Locale }) {
-  const { slug, name, option } = useSelectedOption();
+  const { slug, name, option, price } = useSelectedOption();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -36,8 +36,8 @@ export function StickyBuyBar({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.sticky} data-show={show} aria-hidden={!show} inert={!show}>
-      <div><b>{formatIdr(option.price)}</b>{name}</div>
-      <MarketplaceLink slug={slug} optionKey={option.key} value={option.price} marketplace="shopee" href={option.shopeeUrl} placement="sticky-bar" className={buttonClass("ink")}>
+      <div><b>{formatIdr(price.price)}</b>{name}</div>
+      <MarketplaceLink slug={slug} optionKey={option.key} value={price.price} marketplace="shopee" href={option.shopeeUrl} placement="sticky-bar" className={buttonClass("ink")}>
         {siteCopy[locale].buy.shopee}
       </MarketplaceLink>
     </div>

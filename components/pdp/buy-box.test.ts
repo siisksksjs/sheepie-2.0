@@ -3,7 +3,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { findOption, getProduct } from "@/lib/catalog";
+import { getProduct } from "@/lib/catalog";
 
 import { BuyBox } from "./buy-box";
 import { OptionProvider } from "./option-context";
@@ -27,8 +27,7 @@ describe("product buy box", () => {
   });
 
   it("shows no strikethrough or 0% chip when there is nothing to save", () => {
-    const cover = findOption(getProduct("cervicloud", "id"), "case");
-    const html = renderToStaticMarkup(createElement(PriceLine, { option: cover, saveLabel: "Hemat {n}%" }));
+    const html = renderToStaticMarkup(createElement(PriceLine, { option: { price: 198000, originalPrice: null }, saveLabel: "Hemat {n}%" }));
     expect(html).toContain("Rp198.000");
     expect(html).not.toContain("<s>");
     expect(html).not.toContain("Hemat");

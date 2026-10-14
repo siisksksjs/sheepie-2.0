@@ -49,7 +49,7 @@ export default async function ProductPage({ params }: Params) {
   return (
     <div className={site.page}>
       <SiteHeader locale={locale} />
-      <OptionProvider product={{ slug: product.slug, name: product.name, options: product.options }}>
+      <OptionProvider product={{ slug: product.slug, name: product.name, options: product.options, bundles: product.bundles }}>
         <main className={site.shell}>
           <nav className={styles.crumbs} aria-label="Breadcrumb">
             <Link href={localeHref(locale, "/")}>{t.home}</Link> / <Link href={localeHref(locale, "/products")}>{t.products}</Link> / {product.name}

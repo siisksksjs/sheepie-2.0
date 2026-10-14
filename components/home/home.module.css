@@ -137,6 +137,18 @@
   opacity: 0.75;
 }
 
+.miniOff .miniImg { filter: grayscale(0.6); opacity: 0.7; }
+
+.miniSoldOut {
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0.6;
+}
+
 .miniPrice {
   font-weight: 700;
   font-size: 17px;
@@ -397,7 +409,7 @@
   .companions { grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
   .mini { grid-template-columns: 76px 1fr; gap: 14px; padding: 10px 14px 10px 10px; }
   .miniImg { width: 76px; height: 76px; border-radius: 12px; }
-  .miniPrice { grid-column: 2; font-size: 14px; }
+  .miniPrice, .miniSoldOut { grid-column: 2; justify-self: start; font-size: 14px; }
   .mini h3 { font-size: 18px; }
   .mini p { font-size: 13px; }
 
