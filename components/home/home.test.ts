@@ -43,10 +43,10 @@ describe("home page", () => {
     expect(html).not.toContain("steve969");
   });
 
-  it("renders the lights-out band with its animated layers", async () => {
+  it("renders the LumiCloud night band without the scroll effect", async () => {
     const html = await render("id");
     expect(html).toContain('id="lights"');
-    for (const layer of ["sky", "far", "near", "content"]) expect(html).toContain(`data-lights="${layer}"`);
+    expect(html).not.toContain("data-lights=");
   });
 
   it("takes the LumiCloud swatch colours from the catalog", async () => {

@@ -51,7 +51,13 @@
 }
 
 .collection {
-  padding: 110px 0 40px;
+  padding: 140px 0 40px;
+}
+
+/* Home cards are capped by screen height so the collection fits one view. */
+.duo :global([data-product-card]) > div:first-child {
+  aspect-ratio: auto;
+  height: min(46svh, 520px);
 }
 
 .head {
@@ -90,12 +96,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .mini {
   display: grid;
-  grid-template-columns: 132px 1fr auto;
+  grid-template-columns: 96px 1fr auto;
   gap: 20px;
   align-items: center;
   padding: 14px 24px 14px 14px;
@@ -107,8 +113,8 @@
 
 .miniImg {
   position: relative;
-  width: 132px;
-  height: 132px;
+  width: 96px;
+  height: 96px;
   border-radius: 16px;
   overflow: hidden;
 }
@@ -139,6 +145,10 @@
 
 .cervi {
   position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
   margin-top: 100px;
   overflow: hidden;
   background: var(--sp-sky-soft);
@@ -148,17 +158,22 @@
 
 .bandIn {
   position: relative;
+  width: 100%;
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   gap: 64px;
   align-items: center;
-  padding-top: 110px;
-  padding-bottom: 110px;
+  /* Clear the fixed header so the photo never sits under it. */
+  padding-top: calc(var(--sp-header-h, 110px) + 40px);
+  padding-bottom: 56px;
 }
 
 .stack {
   position: relative;
   aspect-ratio: 1 / 1.08;
+  /* Never taller than the screen, so the band reads as one view. */
+  width: min(100%, calc((100svh - var(--sp-header-h, 110px) - 96px) / 1.08));
+  justify-self: center;
 }
 
 .stackBig {
@@ -219,7 +234,7 @@
 }
 
 .reviews {
-  padding: 110px 0 120px;
+  padding: 72px 0 72px;
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;
 }
@@ -261,7 +276,7 @@
 }
 
 .rvBig blockquote {
-  font: 700 36px/1.2 var(--font-display), serif;
+  font: 700 30px/1.2 var(--font-display), serif;
   letter-spacing: -0.01em;
 }
 
@@ -295,44 +310,26 @@
   border: 1px solid rgba(255, 253, 245, 0.1);
 }
 
-/* Lights out */
+/* LumiCloud: a static night band, one screen tall. */
 .lights {
   position: relative;
-  height: 180vh;
-}
-
-.stick {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
   display: flex;
   align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--sp-night);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
-.sky {
+.lights::before {
+  content: "";
   position: absolute;
   inset: 0;
-  background: var(--sp-night);
-  opacity: 0;
-  will-change: opacity;
-}
-
-.layer {
-  position: absolute;
-  inset: -20% 0;
-  background-repeat: repeat;
-  opacity: 0;
-  will-change: opacity, transform;
-}
-
-/* The tile is only fetched once the band is close to the viewport. */
-.lights[data-near="true"] .layer {
-  background-image: url(/brand/mendung-sky.webp);
-}
-
-.layerFar {
-  background-size: 760px auto;
+  background: url(/brand/mendung-sky.webp) repeat;
+  opacity: 0.9;
+  pointer-events: none;
 }
 
 .lightsIn {
@@ -343,13 +340,9 @@
   grid-template-columns: 1fr 1.05fr;
   gap: 64px;
   align-items: center;
+  padding-top: calc(var(--sp-header-h, 110px) + 40px);
+  padding-bottom: 56px;
   color: var(--sp-cream);
-  will-change: opacity, transform;
-}
-
-/* Hidden only when JS is running, so the copy stays readable without it. */
-:global(html[data-js="1"]) .lightsIn {
-  opacity: 0;
 }
 
 .lightsIn .feat div {
@@ -359,6 +352,8 @@
 .lightsPh {
   position: relative;
   aspect-ratio: 1 / 1.05;
+  width: min(100%, calc((100svh - var(--sp-header-h, 110px) - 96px) / 1.05));
+  justify-self: center;
   border-radius: 26px;
   overflow: hidden;
 }
@@ -392,12 +387,13 @@
   .ctas { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .ctas a { padding: 0 10px; font-size: 14px; }
 
-  .collection { padding: 64px 0 20px; }
+  .collection { padding: 84px 0 20px; }
   .head { margin-bottom: 22px; }
   .head h2, .reviews h2 { font-size: 30px; }
   .duo { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--sp-gutter) * -1); padding: 0 var(--sp-gutter) 4px; scrollbar-width: none; }
   .duo::-webkit-scrollbar { display: none; }
   .duo > * { flex: 0 0 82%; scroll-snap-align: start; }
+  .duo :global([data-product-card]) > div:first-child { aspect-ratio: 5 / 5.4; height: auto; }
   .companions { grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
   .mini { grid-template-columns: 76px 1fr; gap: 14px; padding: 10px 14px 10px 10px; }
   .miniImg { width: 76px; height: 76px; border-radius: 12px; }
@@ -405,7 +401,8 @@
   .mini h3 { font-size: 18px; }
   .mini p { font-size: 13px; }
 
-  .cervi { margin-top: 64px; }
+  .cervi { margin-top: 64px; min-height: 0; }
+  .stack, .lightsPh { width: 100%; }
   .bandIn { grid-template-columns: 1fr; gap: 34px; padding-top: 64px; padding-bottom: 64px; }
   .feature h2 { font-size: 34px; }
   .lead { margin: 14px 0 24px; font-size: 16px; }
@@ -422,15 +419,8 @@
   .rv blockquote { font-size: 17px; }
   .night { padding-top: 20px; }
 
-  /* Phones: no pinning; the panel dims in as it arrives. */
-  .lights { height: auto; }
-  .stick { position: relative; height: auto; display: block; padding: 70px 0 30px; }
-  .lightsIn { grid-template-columns: 1fr; gap: 30px; }
+  .lights { min-height: 0; }
+  .lightsIn { grid-template-columns: 1fr; gap: 30px; padding-top: 64px; padding-bottom: 48px; }
   .lightsPh { order: -1; aspect-ratio: 4 / 4.2; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .lights { height: auto; }
-  .stick { position: relative; height: auto; padding: 100px 0; }
-  .sky, .layer, .lightsIn { opacity: 1 !important; transform: none !important; }
-}

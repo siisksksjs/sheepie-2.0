@@ -44,6 +44,6 @@ describe("product page", () => {
 
   it("titles the page after the product", async () => {
     const meta = await generateMetadata({ params: Promise.resolve({ locale: "id", slug: "lumicloud" }) });
-    expect(meta.title).toBe("LumiCloud | Sheepie.");
+    expect(meta.title).toBe("LumiCloud Eye Mask | Sheepie.");
   });
 });

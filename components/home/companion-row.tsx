@@ -25,7 +25,7 @@ export function CompanionRow({ locale }: { locale: Locale }) {
         <FadeIn key={tile.key} index={i + 2}>
           <Link href={tile.href} className={styles.mini} data-companion={tile.key}>
             <div className={styles.miniImg}>
-              <Image src={tile.image} alt="" fill sizes="132px" className={styles.cover} />
+              <Image src={tile.image} alt="" fill sizes="96px" className={styles.cover} />
             </div>
             <div>
               <div className={styles.miniTag}>{t.companion}</div>

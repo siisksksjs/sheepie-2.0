@@ -2,11 +2,11 @@ import type { ProductCopy, ProductSlug } from "./types";
 
 const cervicloud: ProductCopy = {
   slug: "cervicloud",
-  name: "CerviCloud",
+  name: "CerviCloud Pillow",
   role: "hero",
   card: {
-    image: "/images/edited/DSC01187.JPG",
-    hoverImage: "/images/etalase/22.png",
+    image: "/images/photoshoot/DSC01110.JPG",
+    hoverImage: "/images/edited/DSC01187.JPG",
     chip: { id: "Sarung ice-silk", en: "Ice-silk cover" },
     line: {
       id: "Bantal ergonomis bentuk butterfly yang menopang leher, untuk side & back sleeper.",
@@ -143,11 +143,11 @@ const cervicloud: ProductCopy = {
 
 const lumicloud: ProductCopy = {
   slug: "lumicloud",
-  name: "LumiCloud",
+  name: "LumiCloud Eye Mask",
   role: "hero",
   card: {
-    image: "/images/edited/DSC01225.JPG",
-    hoverImage: "/images/products/lumicloud/variant-blue.webp",
+    image: "/images/edited/DSC01278.JPG",
+    hoverImage: "/images/edited/DSC01225.JPG",
     chip: { id: "Blue · Apricot", en: "Blue · Apricot" },
     line: {
       id: "Masker mata blackout yang ringan dan tidak menekan mata, untuk tidur malam, siang, dan perjalanan.",
@@ -280,11 +280,11 @@ const lumicloud: ProductCopy = {
 
 const calmicloud: ProductCopy = {
   slug: "calmicloud",
-  name: "CalmiCloud",
+  name: "CalmiCloud Earplugs",
   role: "companion",
   card: {
-    image: "/images/edited/DSC01249.JPG",
-    hoverImage: "/images/edited/DSC01313.JPG",
+    image: "/images/edited/DSC01313.JPG",
+    hoverImage: "/images/edited/DSC01249.JPG",
     chip: { id: "Isi 3 pasang", en: "3 pairs" },
     line: {
       id: "Earplug silikon lembut untuk dengkuran, AC, dan suara jalan.",

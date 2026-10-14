@@ -11,7 +11,6 @@ import { WEBSITE_VOUCHER_CODE } from "@/lib/site/config";
 import { siteCopy } from "@/lib/site/copy";
 import { pdpCopy } from "@/lib/site/pdp-copy";
 
-import { ProductIcon } from "./icons";
 import { useSelectedOption } from "./option-context";
 import styles from "./pdp.module.css";
 import { PriceLine } from "./price-line";
@@ -28,11 +27,11 @@ export function BuyBox({ product, locale }: { product: Product; locale: Locale }
       <p className={styles.sub}>{product.sub}</p>
       <PriceLine option={option} saveLabel={t.save} />
 
-      <div className={styles.icons}>
+      <ul className={styles.tags}>
         {product.icons.map((item) => (
-          <div key={item.label}><ProductIcon name={item.icon} />{item.label}</div>
+          <li key={item.label}>{item.label}</li>
         ))}
-      </div>
+      </ul>
 
       <div className={styles.optLabel}>{product.optionLabel}</div>
       <div className={styles.options}>
@@ -46,10 +45,10 @@ export function BuyBox({ product, locale }: { product: Product; locale: Locale }
 
       <div id="buy-ctas" className={styles.ctas}>
         <MarketplaceLink slug={product.slug} optionKey={option.key} value={option.price} marketplace="shopee" href={option.shopeeUrl} placement="buy-box" className={buttonClass("ink", true)}>
-          <span className={`${styles.mark} ${styles.markShopee}`}>S</span>{buy.shopee}
+          <Image className={styles.mark} src="/images/bio/shopee-logo.png" alt="" width={22} height={22} />{buy.shopee}
         </MarketplaceLink>
         <MarketplaceLink slug={product.slug} optionKey={option.key} value={option.price} marketplace="tokopedia" href={option.tokopediaUrl} placement="buy-box" className={buttonClass("line", true)}>
-          <span className={`${styles.mark} ${styles.markTokopedia}`}>T</span>{buy.tokopedia}
+          <Image className={styles.mark} src="/images/bio/tokopedia-logo.png" alt="" width={22} height={22} />{buy.tokopedia}
         </MarketplaceLink>
       </div>
 
@@ -57,11 +56,9 @@ export function BuyBox({ product, locale }: { product: Product; locale: Locale }
 
       <div className={styles.assure}>
         <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" /><circle cx="7" cy="17.5" r="1.6" /><circle cx="17.5" cy="17.5" r="1.6" /></svg>
           {t.assurances[0]}
         </div>
         <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z" /><path d="M9 12l2 2 4-4" /></svg>
           {t.assurances[1]}
         </div>
       </div>

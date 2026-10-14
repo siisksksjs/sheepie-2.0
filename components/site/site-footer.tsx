@@ -24,9 +24,9 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <div>
           <h4>{t.footer.shop}</h4>
           <ul>
-            <li><Link href={productPath(locale, "cervicloud")}>CerviCloud</Link></li>
-            <li><Link href={productPath(locale, "lumicloud")}>LumiCloud</Link></li>
-            <li><Link href={productPath(locale, "calmicloud")}>CalmiCloud</Link></li>
+            <li><Link href={productPath(locale, "cervicloud")}>CerviCloud Pillow</Link></li>
+            <li><Link href={productPath(locale, "lumicloud")}>LumiCloud Eye Mask</Link></li>
+            <li><Link href={productPath(locale, "calmicloud")}>CalmiCloud Earplugs</Link></li>
             <li><Link href={productPath(locale, "cervicloud", "case")}>{t.footer.cover}</Link></li>
           </ul>
         </div>
