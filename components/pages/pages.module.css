@@ -1,0 +1,144 @@
+/* components/pages/pages.module.css — About, Contact, FAQ, Journal.
+   `section.x` / `div.x` outrank `.shell`'s padding reset whatever order the
+   stylesheets load in, so vertical padding always applies. */
+
+/* Shared intro */
+section.intro { padding-top: 96px; padding-bottom: 56px; }
+.eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; font-size: 15px; font-weight: 600; opacity: 0.7; }
+.eyebrow::before { content: ""; width: 48px; height: 1px; background: currentColor; }
+.title { max-width: 900px; font: 600 clamp(48px, 6.4vw, 92px)/0.95 var(--font-display), serif; letter-spacing: -0.025em; }
+.title em { display: block; font-style: italic; font-weight: 500; color: #5f6b8f; }
+.lede { max-width: 600px; margin-top: 26px; font-size: 19px; line-height: 1.6; opacity: 0.85; }
+
+.h2 { font: 700 clamp(32px, 3.6vw, 46px)/1.05 var(--font-display), serif; letter-spacing: -0.015em; }
+section.block { padding-top: 72px; padding-bottom: 72px; }
+
+/* About */
+.mosaic { display: grid; grid-template-columns: 1.2fr 1fr 1fr; grid-template-rows: 260px 260px; gap: 16px; }
+.mosaic > div { position: relative; border-radius: 22px; overflow: hidden; background: var(--sp-linen); }
+.mosaic > div:first-child { grid-row: span 2; }
+.cover { object-fit: cover; }
+.story { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
+.story p { font-size: 18px; line-height: 1.7; opacity: 0.85; }
+.story p + p { margin-top: 18px; }
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
+.pillar { display: grid; gap: 14px; padding: 28px; border-radius: 24px; background: var(--sp-linen); color: inherit; text-decoration: none; transition: background-color 0.2s, transform 0.2s var(--sp-ease-out); }
+.pillar:hover { background: var(--sp-sky-soft); transform: translateY(-2px); }
+.pillarImg { position: relative; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; }
+.pillar b { font: 700 34px/1 var(--font-display), serif; }
+.pillar span { font-size: 16px; line-height: 1.5; opacity: 0.8; }
+.pillar small { font-size: 13px; font-weight: 700; opacity: 0.6; }
+.closing { position: relative; overflow: hidden; display: grid; justify-items: center; gap: 24px; padding: 88px 24px; border-radius: 28px; background: var(--sp-night); color: var(--sp-cream); text-align: center; }
+.closing > [aria-hidden] { opacity: 0.5; }
+.closing h2 { position: relative; font: 700 clamp(36px, 4.4vw, 60px)/1.05 var(--font-display), serif; }
+.closingCtas { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+/* Contact */
+section.channels { padding-bottom: 88px; }
+.cardSub { margin-top: 12px; }
+.contactGrid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
+.card { display: grid; align-content: start; gap: 12px; padding: 32px; border-radius: 24px; background: var(--sp-linen); }
+.card h2 { font: 700 26px/1.15 var(--font-display), serif; }
+.card p { font-size: 16px; line-height: 1.6; opacity: 0.8; }
+.cardWa { grid-row: span 2; align-content: space-between; background: var(--sp-night); color: var(--sp-cream); }
+.waMark { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; background: #25d366; color: #fff; }
+.card .waNumber { margin: 6px 0 10px; opacity: 1; font: 700 clamp(28px, 3vw, 40px)/1.1 var(--font-display), serif; letter-spacing: -0.01em; }
+.btnRow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.btnRow a { gap: 8px; }
+.textLink { color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.socials { display: flex; gap: 12px; margin-top: 4px; }
+.socials a { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; background: var(--sp-cream); color: var(--sp-ink); box-shadow: inset 0 0 0 1px var(--sp-line); }
+.faqNote { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; padding: 24px 32px; border-radius: 24px; border: 1.5px solid var(--sp-line); font-size: 17px; }
+
+/* FAQ */
+.faqLayout { display: grid; grid-template-columns: 220px 1fr 300px; gap: 48px; align-items: start; }
+.faqNav { position: sticky; top: 140px; display: grid; gap: 4px; }
+.faqNav a { padding: 10px 14px; border-radius: 12px; color: inherit; font-weight: 600; font-size: 15px; text-decoration: none; opacity: 0.75; }
+.faqNav a:hover { background: var(--sp-linen); opacity: 1; }
+.faqGroup + .faqGroup { margin-top: 56px; }
+.faqGroup h2 { margin-bottom: 12px; font: 700 28px/1.15 var(--font-display), serif; scroll-margin-top: 140px; }
+.qa { border-bottom: 1px solid var(--sp-line); }
+.qa summary { display: flex; justify-content: space-between; gap: 16px; padding: 22px 0; font-size: 18px; font-weight: 700; cursor: pointer; list-style: none; }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary::after { content: "+"; flex: none; font-size: 24px; font-weight: 400; line-height: 1; transition: transform 0.2s; }
+.qa[open] summary::after { transform: rotate(45deg); }
+.qa p { padding-bottom: 22px; max-width: 640px; font-size: 16.5px; line-height: 1.7; opacity: 0.85; }
+.faqAside { position: sticky; top: 140px; }
+
+/* Journal */
+.featured { display: grid; grid-template-columns: 1.25fr 1fr; gap: 40px; align-items: center; color: inherit; text-decoration: none; }
+.featuredImg { position: relative; aspect-ratio: 4 / 3; border-radius: 26px; overflow: hidden; background: var(--sp-linen); }
+.featured h2 { margin: 10px 0 14px; font: 700 clamp(30px, 3.4vw, 44px)/1.1 var(--font-display), serif; letter-spacing: -0.015em; }
+.featured p { font-size: 17.5px; line-height: 1.6; opacity: 0.8; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 13.5px; font-weight: 600; opacity: 0.6; }
+.chip { display: inline-block; padding: 4px 12px; border-radius: 999px; background: var(--sp-peach); font-size: 12.5px; font-weight: 700; }
+.readMore { display: inline-flex; margin-top: 18px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 24px; }
+.post { display: grid; align-content: start; gap: 12px; color: inherit; text-decoration: none; }
+.postImg { position: relative; aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden; background: var(--sp-linen); }
+.postImg img, .featuredImg img { transition: transform 0.5s var(--sp-ease-out); }
+.post:hover .postImg img, .featured:hover .featuredImg img { transform: scale(1.03); }
+.post h3 { font: 700 22px/1.2 var(--font-display), serif; }
+.post p { font-size: 15.5px; line-height: 1.55; opacity: 0.75; }
+
+/* Article */
+article.article { padding-top: 56px; padding-bottom: 32px; }
+.back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: inherit; font-weight: 700; text-decoration: none; opacity: 0.7; }
+.back:hover { opacity: 1; }
+.articleHead { max-width: 860px; margin: 18px auto 0; text-align: center; }
+.articleHead h1 { margin: 14px 0 16px; font: 700 clamp(36px, 4.6vw, 64px)/1.05 var(--font-display), serif; letter-spacing: -0.02em; }
+.articleHead .meta { justify-content: center; }
+.articleImg { position: relative; max-width: 1080px; aspect-ratio: 16 / 9; margin: 40px auto 0; border-radius: 28px; overflow: hidden; background: var(--sp-linen); }
+.prose { max-width: 680px; margin: 48px auto 0; font-size: 18.5px; line-height: 1.75; }
+.prose p { margin: 0 0 22px; opacity: 0.88; }
+.prose h2 { margin: 44px 0 14px; font: 700 30px/1.2 var(--font-display), serif; letter-spacing: -0.01em; }
+.prose h3 { margin: 32px 0 10px; font: 700 23px/1.25 var(--font-display), serif; }
+.prose ul { margin: 0 0 22px; padding-left: 22px; }
+.prose li { margin-bottom: 8px; opacity: 0.88; }
+.prose a { color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.byline { max-width: 680px; margin: 40px auto 0; padding-top: 22px; border-top: 1px solid var(--sp-line); font-size: 15px; }
+.byline span { opacity: 0.6; }
+.productCard { max-width: 680px; margin: 40px auto 0; display: grid; grid-template-columns: 96px 1fr auto; gap: 18px; align-items: center; padding: 14px 22px 14px 14px; border-radius: 22px; background: var(--sp-linen); color: inherit; text-decoration: none; }
+.productCard .postImg { aspect-ratio: 1; border-radius: 14px; }
+.productCard small { font-size: 12.5px; font-weight: 700; opacity: 0.55; }
+.productCard b { display: block; font: 700 21px var(--font-display), serif; }
+.productCard em { font-style: normal; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+
+@media (max-width: 1020px) {
+  .faqLayout { grid-template-columns: 1fr; gap: 32px; }
+  .faqNav { position: static; display: flex; flex-wrap: wrap; gap: 8px; }
+  .faqNav a { background: var(--sp-linen); padding: 8px 14px; border-radius: 999px; font-size: 14px; opacity: 1; }
+  .faqAside { position: static; }
+}
+
+@media (max-width: 760px) {
+  section.intro { padding-top: 48px; padding-bottom: 32px; }
+  .eyebrow { margin-bottom: 14px; font-size: 13px; }
+  .eyebrow::before { width: 32px; }
+  .lede { margin-top: 18px; font-size: 16.5px; }
+  section.block { padding-top: 48px; padding-bottom: 48px; }
+  .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 150px 150px; gap: 10px; }
+  .mosaic > div:first-child { grid-column: span 2; grid-row: auto; }
+  .story { grid-template-columns: 1fr; gap: 20px; }
+  .story p { font-size: 16.5px; }
+  .pillars { grid-template-columns: 1fr; gap: 12px; margin-top: 24px; }
+  .pillar { padding: 18px; }
+  .pillar b { font-size: 28px; }
+  .closing { padding: 56px 20px; border-radius: 22px; }
+  .contactGrid { grid-template-columns: 1fr; gap: 12px; }
+  .cardWa { grid-row: auto; gap: 20px; }
+  .card { padding: 24px; }
+  .faqNote { padding: 20px 24px; }
+  .qa summary { font-size: 16.5px; padding: 18px 0; }
+  .qa p { font-size: 15.5px; }
+  .featured { grid-template-columns: 1fr; gap: 18px; }
+  .posts { grid-template-columns: 1fr; gap: 28px; }
+  article.article { padding-top: 24px; }
+  .articleImg { border-radius: 0; margin: 28px calc(var(--sp-gutter) * -1) 0; }
+  .prose { margin-top: 32px; font-size: 17px; }
+  .prose h2 { font-size: 25px; }
+  .productCard { grid-template-columns: 72px 1fr; padding: 12px; }
+  .productCard em { grid-column: 2; }
+}
+.featuredMeta { margin-top: 16px; }
+.morePosts { margin-top: 28px; }

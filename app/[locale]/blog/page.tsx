@@ -1,35 +1,76 @@
-import { BlogList } from "./blog-list";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { PageIntro } from "@/components/pages/page-intro";
+import styles from "@/components/pages/pages.module.css";
+import { PostCard } from "@/components/pages/post-card";
+import { FadeIn } from "@/components/site/fade-in";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
+import site from "@/components/site/site.module.css";
 import { isLocale } from "@/i18n/config";
+import { localeHref } from "@/lib/site/copy";
+import { journalPosts } from "@/lib/site/journal";
+import { pagesCopy } from "@/lib/site/pages-copy";
 
 const baseUrl = "https://sheepiesleep.com";
 
-export async function generateMetadata({params}: {params: Promise<{locale: string}>}) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({locale, namespace: 'Blog'});
- 
+  const t = await getTranslations({ locale, namespace: "Blog" });
   return {
-    title: t('metaTitle'),
-    description: t('metaDescription'),
-    alternates: {
-      canonical: `${baseUrl}/id/blog`,
-    },
-    robots: locale === 'id'
-      ? undefined
-      : {
-          index: false,
-          follow: true,
-        },
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: { canonical: `${baseUrl}/id/blog` },
+    // Articles are written in Indonesian; the English listing points search engines there.
+    robots: locale === "id" ? undefined : { index: false, follow: true },
   };
 }
 
-export default async function BlogListingPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function JournalPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   setRequestLocale(locale);
-  return <BlogList header={<SiteHeader locale={locale} />} footer={<SiteFooter locale={locale} />} />;
+  const t = pagesCopy[locale].journal;
+  const [featured, ...rest] = journalPosts;
+
+  return (
+    <div className={site.page}>
+      <SiteHeader locale={locale} />
+      <main>
+        <PageIntro eyebrow={t.eyebrow} title={t.title} intro={t.intro} />
+
+        <section className={site.shell} data-section="featured">
+          <FadeIn>
+            <Link className={styles.featured} href={localeHref(locale, `/blog/${featured.slug}`)}>
+              <span className={styles.featuredImg}>
+                <Image src={featured.image} alt="" fill preload sizes="(max-width: 760px) 100vw, 55vw" className={styles.cover} />
+              </span>
+              <span>
+                <span className={styles.chip}>{t.featured}</span>
+                <h2>{featured.title}</h2>
+                <p>{featured.excerpt}</p>
+                <span className={`${styles.meta} ${styles.featuredMeta}`}>{featured.author} · {featured.date} · {featured.readTime}</span>
+                <span className={styles.readMore}>{t.read} →</span>
+              </span>
+            </Link>
+          </FadeIn>
+        </section>
+
+        <section className={`${site.shell} ${styles.block}`} data-section="posts">
+          <div className={styles.posts}>
+            {rest.map((post, i) => (
+              <FadeIn key={post.slug} index={i % 3}>
+                <PostCard post={post} locale={locale} />
+              </FadeIn>
+            ))}
+          </div>
+        </section>
+      </main>
+      <SiteFooter locale={locale} />
+    </div>
+  );
 }

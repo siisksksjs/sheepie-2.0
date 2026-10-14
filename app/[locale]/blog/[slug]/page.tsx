@@ -1,130 +1,107 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import blogData from "@/data/blog.json";
-import { ArrowLeft } from "lucide-react";
+import { setRequestLocale } from "next-intl/server";
+
+import styles from "@/components/pages/pages.module.css";
+import { PostCard } from "@/components/pages/post-card";
+import { FadeIn } from "@/components/site/fade-in";
+import { SiteFooter } from "@/components/site/site-footer";
+import { SiteHeader } from "@/components/site/site-header";
+import site from "@/components/site/site.module.css";
+import { isLocale } from "@/i18n/config";
+import { getProduct, productPath } from "@/lib/catalog";
+import { localeHref } from "@/lib/site/copy";
+import { findPost, journalPosts, postProduct, relatedPosts } from "@/lib/site/journal";
+import { pagesCopy } from "@/lib/site/pages-copy";
 
 const baseUrl = "https://sheepiesleep.com";
 
-export async function generateStaticParams() {
-  return blogData.map((post) => ({
-    slug: post.slug,
-  }));
+export function generateStaticParams() {
+  return journalPosts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string, locale: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
   const { slug, locale } = await params;
-  const post = blogData.find((p) => p.slug === slug);
-  
+  const post = findPost(slug);
   if (!post) return {};
-  
   return {
     title: `${post.title} | Sheepie Journal`,
     description: post.excerpt,
-    alternates: {
-      canonical: `${baseUrl}/id/blog/${post.slug}`,
-    },
-    robots: locale === 'id'
-      ? undefined
-      : {
-          index: false,
-          follow: true,
-        },
-    openGraph: {
-      url: `${baseUrl}/id/blog/${post.slug}`,
-      images: [post.image],
-    },
+    alternates: { canonical: `${baseUrl}/id/blog/${post.slug}` },
+    robots: locale === "id" ? undefined : { index: false, follow: true },
+    openGraph: { type: "article", url: `${baseUrl}/id/blog/${post.slug}`, images: [post.image] },
   };
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string, locale: string }> }) {
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
   const { slug, locale } = await params;
+  if (!isLocale(locale)) notFound();
   setRequestLocale(locale);
-  const post = blogData.find((p) => p.slug === slug);
-
-  if (!post) {
-    notFound();
-  }
-
-  const t = await getTranslations({locale, namespace: 'Blog'});
+  const post = findPost(slug);
+  if (!post) notFound();
+  const t = pagesCopy[locale].journal;
+  const productSlug = postProduct(post);
+  const product = productSlug ? getProduct(productSlug, locale) : null;
 
   return (
-    <main className="min-h-screen flex flex-col bg-white selection:bg-primary/20">
-      <Navbar />
-      
-      <article className="pt-32 pb-24">
-        {/* Header */}
-        <div className="container mx-auto px-4 max-w-3xl text-center space-y-6 mb-12">
-           <Link 
-             href={`/${locale}/blog`} 
-             className="inline-flex items-center text-sm font-bold tracking-widest uppercase text-primary/40 hover:text-primary transition-colors mb-4"
-           >
-             <ArrowLeft className="mr-2 w-4 h-4" /> {t('back')}
-           </Link>
-           
-           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-primary leading-tight">
-             {post.title}
-           </h1>
-           
-           <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground font-light">
-             <span>{post.date}</span>
-             <span className="w-1 h-1 bg-border rounded-full" />
-             <span>{post.readTime}</span>
-           </div>
-        </div>
-
-        {/* Featured Image */}
-        <div className="container mx-auto px-4 max-w-5xl mb-16">
-          <div className="relative aspect-video rounded-3xl overflow-hidden shadow-sm">
-            <Image 
-              src={post.image} 
-              alt={post.title} 
-              fill 
-              className="object-cover"
-              priority
-            />
+    <div className={site.page}>
+      <SiteHeader locale={locale} />
+      <main>
+        <article className={`${site.shell} ${styles.article}`} data-section="article">
+          <Link className={styles.back} href={localeHref(locale, "/blog")}>← {t.back}</Link>
+          <header className={styles.articleHead}>
+            <span className={styles.meta}>{post.date} · {post.readTime}</span>
+            <h1>{post.title}</h1>
+            <span className={styles.meta}>{t.by} {post.author}</span>
+          </header>
+          <div className={styles.articleImg}>
+            <Image src={post.image} alt="" fill preload fetchPriority="high" sizes="(max-width: 760px) 100vw, 1080px" className={styles.cover} />
           </div>
-        </div>
 
-        {/* Content */}
-        <div className="container mx-auto px-4 max-w-3xl">
-          <div className="prose prose-lg prose-headings:font-display prose-headings:font-medium prose-p:font-light prose-p:text-muted-foreground prose-a:text-primary max-w-none">
-            {post.content.map((block, i: number) => {
-              if (block.type === 'h2') {
-                return <h2 key={i} className="text-3xl text-primary mt-12 mb-6">{block.text}</h2>;
-              }
-              if (block.type === 'h3') {
-                return <h3 key={i} className="text-2xl text-primary mt-8 mb-4">{block.text}</h3>;
-              }
-              if (block.type === 'p') {
-                return <p key={i} className="leading-relaxed mb-6" dangerouslySetInnerHTML={{ __html: block.text ?? "" }} />;
-              }
-              if (block.type === 'ul') {
+          <div className={styles.prose}>
+            {post.content.map((block, i) => {
+              // Article copy is authored in this repo (data/blog.json) and may carry inline links.
+              if (block.type === "ul") {
                 return (
-                  <ul key={i} className="list-disc pl-6 mb-6 space-y-2">
-                    {(block.items ?? []).map((item: string, j: number) => (
-                      <li key={j} className="text-muted-foreground font-light" dangerouslySetInnerHTML={{ __html: item }} />
-                    ))}
+                  <ul key={i}>
+                    {block.items.map((item) => <li key={item} dangerouslySetInnerHTML={{ __html: item }} />)}
                   </ul>
                 );
               }
-              return null;
+              if (block.type === "h2") return <h2 key={i}>{block.text}</h2>;
+              if (block.type === "h3") return <h3 key={i}>{block.text}</h3>;
+              return <p key={i} dangerouslySetInnerHTML={{ __html: block.text }} />;
             })}
           </div>
-          
-          <div className="border-t border-border/40 mt-16 pt-8 flex justify-between items-center text-sm text-muted-foreground">
-             <div className="flex items-center gap-2">
-               <span className="font-bold text-primary/40 uppercase tracking-widest">{t('writtenBy')}</span>
-               <span className="text-primary font-medium">{post.author}</span>
-             </div>
-          </div>
-        </div>
-      </article>
 
-      <Footer />
-    </main>
+          {product && (
+            <Link className={styles.productCard} href={productPath(locale, product.slug)} data-article-product={product.slug}>
+              <span className={styles.postImg}>
+                <Image src={product.card.image} alt="" fill sizes="96px" className={styles.cover} />
+              </span>
+              <span>
+                <small>{t.productTitle}</small>
+                <b>{product.name}</b>
+              </span>
+              <em>{t.productCta} →</em>
+            </Link>
+          )}
+        </article>
+
+        <section className={`${site.shell} ${styles.block}`} data-section="more">
+          <FadeIn><h2 className={styles.h2}>{t.more}</h2></FadeIn>
+          <div className={`${styles.posts} ${styles.morePosts}`}>
+            {relatedPosts(post).map((p, i) => (
+              <FadeIn key={p.slug} index={i}>
+                <PostCard post={p} locale={locale} />
+              </FadeIn>
+            ))}
+          </div>
+        </section>
+      </main>
+      <SiteFooter locale={locale} />
+    </div>
   );
 }
