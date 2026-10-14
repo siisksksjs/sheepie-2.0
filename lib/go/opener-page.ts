@@ -10,9 +10,8 @@ export function openerPageHtml(input: {
   openHref: string;
   webHref: string;
   event: MetaEvent | null;
-  /** iOS only opens the Shopee app from a real tap on its https link, so it gets one button and no auto-redirect. */
-  tapOnly?: boolean;
 }): string {
+  const sameTarget = input.openHref === input.webHref;
   const attr = (value: string) => value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   const json = (value: unknown) => JSON.stringify(value).replace(/</g, "\\u003c");
 
@@ -38,14 +37,14 @@ export function openerPageHtml(input: {
 <body>
 <main>
   <div class="logo">Sheepie.</div>
-  <p>${input.tapOnly ? "Ketuk tombol di bawah untuk membuka aplikasi Shopee." : "Membuka aplikasi Shopee…"}</p>
+  <p>Membuka Shopee…</p>
   <a class="primary" href="${attr(input.openHref)}">Buka di aplikasi Shopee</a>
-  ${input.tapOnly ? "" : `<a class="secondary" href="${attr(input.webHref)}">Lanjut di browser</a>`}
+  ${sameTarget ? "" : `<a class="secondary" href="${attr(input.webHref)}">Lanjut di browser</a>`}
 </main>
 <script>
 (function () {
   var event = ${json(input.event)};
-  var openHref = ${json(input.tapOnly ? null : input.openHref)};
+  var openHref = ${json(input.openHref)};
   try {
     if (event) {
       var now = Date.now();
@@ -64,7 +63,7 @@ export function openerPageHtml(input: {
       if (!sent) fetch("/api/meta-events", { method: "POST", headers: { "Content-Type": "application/json" }, body: body, keepalive: true }).catch(function () {});
     }
   } catch (e) {}
-  if (openHref) location.replace(openHref);
+  location.replace(openHref);
 })();
 </script>
 </body>

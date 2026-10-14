@@ -145,11 +145,11 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
     return Response.redirect(target.href, 307);
   }
 
-  // Android: an intent opens the app straight away. iOS: only a real tap on the
-  // https link opens the app (tested in Instagram), so show one button.
+  // Android: an intent opens the app straight away. iOS: go straight to the
+  // Shopee link (the owner chose no extra tap over a tap-to-open button).
   const openHref = platform === "android" ? androidIntent(target.href) : target.href;
 
-  return new Response(openerPageHtml({ openHref, webHref: target.href, event: pageView(), tapOnly: platform === "ios" }), {
+  return new Response(openerPageHtml({ openHref, webHref: target.href, event: pageView() }), {
     headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
   });
 }

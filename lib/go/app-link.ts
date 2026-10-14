@@ -4,8 +4,8 @@
  *
  * Their in-app browsers load shopee.co.id as a signed-out web page when the
  * page navigates there by itself. Android can hand the URL straight to the
- * Shopee app with an intent: link. On iOS a real tap on the https link opens
- * the app (its universal link), so iOS gets a button instead.
+ * Shopee app with an intent: link. iOS has no equivalent from an in-app
+ * browser, so it is sent straight to the Shopee link.
  */
 
 export const SHOPEE_ANDROID_PACKAGE = "com.shopee.id";
