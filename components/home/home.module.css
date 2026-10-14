@@ -11,6 +11,38 @@
   color: var(--sp-ink);
 }
 
+/* Giant, faint words drifting behind the type, as on the original hero. */
+.marquee {
+  position: absolute;
+  top: 6%;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: marquee 60s linear infinite;
+}
+
+.marqueeTrack span {
+  font: 900 20vw/1 var(--font-display), serif;
+  white-space: nowrap;
+  color: var(--sp-ink);
+  opacity: 0.04;
+}
+
+@keyframes marquee {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack { animation: none; }
+}
+
 /* The photo owns the right half, from under the header to the bottom edge. */
 .heroMedia {
   position: absolute;
@@ -465,6 +497,8 @@ div.lightsIn {
   /* Phones: photo on top, type on cream below. */
   .hero { display: block; height: auto; min-height: 0; }
   .heroMedia { position: relative; top: auto; width: 100%; height: 58svh; }
+  .marquee { top: calc(58svh + 4px); }
+  .marqueeTrack span { font-size: 28vw; }
   .heroMedia::after { background: linear-gradient(rgba(255, 253, 245, 0) 70%, var(--sp-cream)); }
   .heroCopy { max-width: none; }
   .heroIn { padding-top: 8px; padding-bottom: 56px; }

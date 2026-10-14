@@ -19,6 +19,12 @@ export function HomeHero({ locale }: { locale: Locale }) {
 
   return (
     <section id="hero" className={styles.hero} data-section="hero">
+      <div className={styles.marquee} aria-hidden="true">
+        <div className={styles.marqueeTrack}>
+          <span>{t.marquee}&nbsp;</span>
+          <span>{t.marquee}&nbsp;</span>
+        </div>
+      </div>
       <div className={styles.heroMedia}>
         <Image src="/images/hero/sleep-mask-pillow.webp" alt={t.alt} fill preload fetchPriority="high" sizes="(max-width: 760px) 100vw, 50vw" className={styles.heroImg} />
       </div>
