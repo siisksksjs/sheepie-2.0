@@ -78,8 +78,8 @@ const cervicloud: ProductCopy = {
       id: "Bentuk butterfly dibuat untuk dua posisi tidur sekaligus, ditambah ruang untuk tangan.",
       en: "The butterfly shape is made for two sleeping positions at once, plus room for your arm.",
     },
-    image: "/images/products/cervicloud/anatomy.webp",
-    blend: true,
+    image: "/images/products/cervicloud/anatomy-cutout.webp",
+    cutout: true,
     points: [
       {
         x: 55,
@@ -219,26 +219,26 @@ const lumicloud: ProductCopy = {
     image: "/images/edited/DSC01334.JPG",
     points: [
       {
-        x: 44,
-        y: 26,
+        x: 38,
+        y: 20,
         title: { id: "Menutup cahaya", en: "Blocks light" },
         body: { id: "Menutup area mata dengan rapat untuk kebanyakan orang.", en: "Covers the eye area closely for most sleepers." },
       },
       {
-        x: 34,
-        y: 34,
+        x: 22,
+        y: 27,
         title: { id: "Tidak menekan", en: "No pressure" },
         body: { id: "Kelopak mata tetap bebas, tidak terasa tertekan.", en: "Your eyelids stay free, with no pressing." },
       },
       {
-        x: 64,
-        y: 20,
+        x: 61,
+        y: 47,
         title: { id: "Velcro halus", en: "Soft velcro" },
         body: { id: "Mudah diatur dan tidak menyangkut rambut.", en: "Easy to adjust and doesn't catch hair." },
       },
       {
-        x: 53,
-        y: 15,
+        x: 55,
+        y: 38,
         title: { id: "Ringan", en: "Light" },
         body: { id: "Gampang dilipat dan dibawa saat bepergian.", en: "Easy to fold and take when you travel." },
       },

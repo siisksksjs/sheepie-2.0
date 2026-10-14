@@ -28,7 +28,7 @@ export function AnatomyPanel({ product }: { product: Product; locale: Locale }) 
               <li key={point.title}><b><i>{i + 1}</i>{point.title}</b>{point.body}</li>
             ))}
           </ol>
-          <div className={styles.stage} data-blend={anatomy.blend || undefined}>
+          <div className={styles.stage} data-cutout={anatomy.cutout || undefined}>
             <Image src={anatomy.image} alt={product.name} fill sizes="(max-width: 760px) 90vw, 460px" className={styles.cover} />
             {anatomy.points.map((point, i) => (
               <span key={point.title} className={styles.pin} style={{ left: `${point.x}%`, top: `${point.y}%` }} aria-hidden="true">{i + 1}</span>
