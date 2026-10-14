@@ -16,6 +16,8 @@ import styles from "./home.module.css";
  */
 export function HomeHero({ locale }: { locale: Locale }) {
   const t = homeCopy[locale].hero;
+  // One short word is repeated so each half of the loop is wider than the marquee box.
+  const phrase = `${Array(4).fill(t.marquee).join("\u00a0")}\u00a0`;
 
   return (
     <section id="hero" className={styles.hero} data-section="hero">
@@ -28,8 +30,8 @@ export function HomeHero({ locale }: { locale: Locale }) {
           <div className={styles.title}>
             <div className={styles.marquee} aria-hidden="true">
               <div className={styles.marqueeTrack}>
-                <span>{t.marquee}&nbsp;</span>
-                <span>{t.marquee}&nbsp;</span>
+                <span>{phrase}</span>
+                <span>{phrase}</span>
               </div>
             </div>
             <h1>
