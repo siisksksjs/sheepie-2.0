@@ -68,6 +68,8 @@ export interface ProductBundle {
   price: number;
   /** null when there is no saving to show. */
   originalPrice: number | null;
+  /** The pack's listing photo (e.g. "Bundle of 2"), shown first in the gallery when picked. */
+  image: string | null;
 }
 
 export interface ProductOption {

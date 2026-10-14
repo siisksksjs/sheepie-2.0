@@ -112,7 +112,7 @@ const cervicloud: ProductCopy = {
       { title: { id: "Tidur miring", en: "Side sleepers" }, body: { id: "Sayap samping mengisi jarak bahu ke kepala.", en: "The side wings fill the gap from shoulder to head." }, fits: true },
       { title: { id: "Tidur telentang", en: "Back sleepers" }, body: { id: "Cekungan tengah menjaga leher tetap tertopang.", en: "The center cradle keeps the neck supported." }, fits: true },
       { title: { id: "Sering ganti posisi", en: "Combination sleepers" }, body: { id: "Lebar 64 cm, cukup ruang untuk berguling.", en: "64 cm wide, room to roll over." }, fits: true },
-      { title: { id: "Tidur tengkurap", en: "Stomach sleepers" }, body: { id: "Bentuknya terlalu tinggi untuk posisi ini.", en: "The shape is too high for this position." }, fits: false },
+      { title: { id: "Tidur tengkurap", en: "Stomach sleepers" }, body: { id: "Bagian tengah yang landai menjaga kepala tidak terlalu terangkat.", en: "The low centre keeps your head from tilting up too far." }, fits: true },
     ],
   },
   compare: {

@@ -23,10 +23,10 @@ describe("product page", () => {
     expect(order).toEqual(["buy", "anatomy", "fit", "compare", "reviews", "faq", "pair"]);
   });
 
-  it("is honest about who CerviCloud is not for", async () => {
+  it("lists stomach sleepers as a good fit for CerviCloud", async () => {
     const html = await render("id", "cervicloud");
     expect(html).toContain("Tidur tengkurap");
-    expect(html).toContain('data-fits="false"');
+    expect(html).not.toContain('data-fits="false"');
   });
 
   it("shows three full-text reviews with screenshot links", async () => {

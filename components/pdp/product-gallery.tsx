@@ -2,17 +2,28 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
+import { useSelectedOption } from "./option-context";
 import styles from "./pdp.module.css";
 
 /**
  * One swipeable strip (scroll-snap) at every width, with arrow buttons and a
  * thumbnail row, so every photo is reachable by touch, mouse or keyboard.
  */
-export function ProductGallery({ images, name }: { images: { src: string; alt: string }[]; name: string }) {
+export function ProductGallery({ images: base, name }: { images: { src: string; alt: string }[]; name: string }) {
+  const { bundle } = useSelectedOption();
+  // A picked pack with its own photo leads the gallery.
+  const images = bundle?.image ? [{ src: bundle.image, alt: `${name} · ${bundle.label}` }, ...base] : base;
   const [index, setIndex] = useState(0);
   const track = useRef<HTMLDivElement>(null);
+
+  // Show the pack photo as soon as the shopper picks a pack.
+  useEffect(() => {
+    track.current?.scrollTo({ left: 0 });
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset the counter when the photo set changes
+    setIndex(0);
+  }, [bundle?.key]);
   const last = images.length - 1;
 
   const go = (next: number) => {
