@@ -23,7 +23,7 @@ import { whatsappGreeting, whatsappUrl } from "@/lib/site/whatsapp";
 const PILLAR_PHOTO = {
   cervicloud: { src: "/images/edited/DSC01187.JPG", position: "50% 50%" },
   lumicloud: { src: "/images/edited/DSC01334.JPG", position: "50% 0%" },
-  calmicloud: { src: "/images/edited/DSC01249.JPG", position: "50% 30%" },
+  calmicloud: { src: "/images/about/calmi-pillar.webp", position: "50% 50%" },
 } as const;
 
 const MOSAIC = [
