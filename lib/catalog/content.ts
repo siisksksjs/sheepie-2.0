@@ -9,12 +9,12 @@ const cervicloud: ProductCopy = {
     hoverImage: "/images/edited/DSC01187.JPG",
     chip: { id: "Sarung ice-silk", en: "Ice-silk cover" },
     line: {
-      id: "Bantal ergonomis bentuk butterfly yang menopang leher, untuk side & back sleeper.",
+      id: "Bantal ergonomis berbentuk butterfly yang menopang leher, untuk tidur telentang dan miring.",
       en: "A butterfly-shaped ergonomic pillow that supports the neck, for side and back sleepers.",
     },
   },
   sub: {
-    id: "Bantal ergonomis bentuk butterfly yang menopang leher saat telentang dan miring, dengan sarung ice-silk yang terasa sejuk.",
+    id: "Bantal ergonomis berbentuk butterfly yang menopang leher saat tidur telentang maupun miring, dengan sarung ice-silk yang terasa sejuk.",
     en: "A butterfly-shaped ergonomic pillow that supports your neck on your back and side, with an ice-silk cover that feels cool.",
   },
   gallery: [
@@ -57,7 +57,7 @@ const cervicloud: ProductCopy = {
       title: { id: "Perawatan", en: "Care" },
       body: [
         {
-          id: "Lepas sarung dan cuci dengan air dingin. Jangan mencuci inti memory foam; cukup diangin-anginkan.",
+          id: "Lepas sarungnya, lalu cuci dengan air dingin. Inti memory foam jangan dicuci, cukup diangin-anginkan.",
           en: "Remove the cover and wash it in cold water. Don't wash the memory foam core; just air it out.",
         },
       ],
@@ -75,7 +75,7 @@ const cervicloud: ProductCopy = {
   anatomy: {
     title: { id: "Setiap lekuk punya tugasnya.", en: "Every curve has a job." },
     intro: {
-      id: "Bentuk butterfly dibuat untuk dua posisi tidur sekaligus, ditambah ruang untuk tangan.",
+      id: "Bentuk butterfly-nya dirancang untuk dua posisi tidur sekaligus, plus ruang untuk lengan.",
       en: "The butterfly shape is made for two sleeping positions at once, plus room for your arm.",
     },
     image: "/images/products/cervicloud/anatomy-cutout.webp",
@@ -112,24 +112,24 @@ const cervicloud: ProductCopy = {
     items: [
       { title: { id: "Tidur miring", en: "Side sleepers" }, body: { id: "Sayap samping mengisi jarak bahu ke kepala.", en: "The side wings fill the gap from shoulder to head." }, fits: true },
       { title: { id: "Tidur telentang", en: "Back sleepers" }, body: { id: "Cekungan tengah menjaga leher tetap tertopang.", en: "The center cradle keeps the neck supported." }, fits: true },
-      { title: { id: "Sering ganti posisi", en: "Combination sleepers" }, body: { id: "Lebar 64 cm, cukup ruang untuk berguling.", en: "64 cm wide, room to roll over." }, fits: true },
-      { title: { id: "Tidur tengkurap", en: "Stomach sleepers" }, body: { id: "Bagian tengah yang landai menjaga kepala tidak terlalu terangkat.", en: "The low centre keeps your head from tilting up too far." }, fits: true },
+      { title: { id: "Sering ganti posisi", en: "Combination sleepers" }, body: { id: "Lebarnya 64 cm, cukup leluasa untuk berguling.", en: "64 cm wide, room to roll over." }, fits: true },
+      { title: { id: "Tidur tengkurap", en: "Stomach sleepers" }, body: { id: "Bagian tengah yang lebih rendah menjaga kepala agar tidak terlalu terangkat.", en: "The low centre keeps your head from tilting up too far." }, fits: true },
     ],
   },
   compare: {
     title: { id: "Bedanya dengan bantal biasa", en: "How it differs from a regular pillow" },
     theirs: { id: "Bantal biasa", en: "Regular pillow" },
     rows: [
-      { label: { id: "Topangan leher", en: "Neck support" }, ours: { id: "Kontur mengikuti leher", en: "Contour follows the neck" }, theirs: { id: "Rata, sering terlalu tinggi", en: "Flat, often too high" } },
-      { label: { id: "Setelah dipakai lama", en: "After months of use" }, ours: { id: "Memory foam kembali ke bentuk", en: "Memory foam returns to shape" }, theirs: { id: "Mudah kempes", en: "Goes flat" } },
+      { label: { id: "Topangan leher", en: "Neck support" }, ours: { id: "Konturnya mengikuti leher", en: "Contour follows the neck" }, theirs: { id: "Rata, sering terlalu tinggi", en: "Flat, often too high" } },
+      { label: { id: "Setelah dipakai lama", en: "After months of use" }, ours: { id: "Memory foam kembali ke bentuk semula", en: "Memory foam returns to shape" }, theirs: { id: "Mudah kempes", en: "Goes flat" } },
       { label: { id: "Rasa di kulit", en: "On the skin" }, ours: { id: "Sarung ice-silk sejuk", en: "Cool ice-silk cover" }, theirs: { id: "Kain biasa, cepat hangat", en: "Regular fabric, warms up fast" } },
-      { label: { id: "Tidur miring", en: "Side sleeping" }, ours: { id: "Ada ruang tangan", en: "Has arm space" }, theirs: { id: "Tangan sering kesemutan", en: "Arm often goes numb" } },
+      { label: { id: "Tidur miring", en: "Side sleeping" }, ours: { id: "Ada ruang untuk tangan", en: "Has arm space" }, theirs: { id: "Tangan sering kesemutan", en: "Arm often goes numb" } },
     ],
   },
   faq: [
     { q: { id: "Bantalnya keras atau empuk?", en: "Is it firm or soft?" }, a: { id: "Medium-firm. Cukup menopang leher, tapi tetap nyaman dan tidak kaku.", en: "Medium-firm. Supportive enough for the neck, yet comfortable and never stiff." } },
     { q: { id: "Perlu waktu adaptasi?", en: "Is there an adjustment period?" }, a: { id: "Ya, umumnya sekitar 7–14 malam kalau sebelumnya pakai bantal biasa.", en: "Yes, usually about 7–14 nights if you're used to a regular pillow." } },
-    { q: { id: "Sarungnya bisa dicuci?", en: "Is the cover washable?" }, a: { id: "Bisa. Sarung ice-silk bisa dilepas dan dicuci. Inti memory foam jangan dicuci.", en: "Yes. The ice-silk cover comes off and can be washed. Don't wash the memory foam core." } },
+    { q: { id: "Sarungnya bisa dicuci?", en: "Is the cover washable?" }, a: { id: "Bisa. Sarung ice-silk-nya bisa dilepas dan dicuci, tapi inti memory foam jangan dicuci.", en: "Yes. The ice-silk cover comes off and can be washed. Don't wash the memory foam core." } },
     { q: { id: "Bisa beli sarung cadangan?", en: "Can I buy a spare cover?" }, a: { id: "Bisa, sarung CerviCloud dijual terpisah.", en: "Yes, the CerviCloud cover is sold separately." } },
   ],
   pairWith: ["lumicloud", "calmicloud"],
@@ -144,7 +144,7 @@ const lumicloud: ProductCopy = {
     hoverImage: "/images/edited/DSC01225.JPG",
     chip: { id: "Blue · Apricot", en: "Blue · Apricot" },
     line: {
-      id: "Masker mata blackout yang ringan dan tidak menekan mata, untuk tidur malam, siang, dan perjalanan.",
+      id: "Masker mata blackout yang ringan dan tidak menekan mata, untuk tidur malam, tidur siang, dan perjalanan.",
       en: "A light blackout eye mask that doesn't press on your eyes, for nights, naps and travel.",
     },
   },
@@ -167,7 +167,7 @@ const lumicloud: ProductCopy = {
     { icon: "dark", label: { id: "Blackout", en: "Blackout" } },
     { icon: "eye", label: { id: "Tidak menekan mata", en: "No pressure on the eyes" } },
     { icon: "hair", label: { id: "Velcro halus, aman untuk rambut", en: "Soft velcro, hair-friendly" } },
-    { icon: "travel", label: { id: "Ringan untuk dibawa", en: "Light to carry" } },
+    { icon: "travel", label: { id: "Ringan, mudah dibawa", en: "Light to carry" } },
   ],
   optionLabel: { id: "Warna", en: "Colour" },
   options: [
@@ -190,7 +190,7 @@ const lumicloud: ProductCopy = {
     {
       title: { id: "Bahan", en: "Materials" },
       body: [
-        { id: "Kain lembut yang ringan di wajah", en: "Soft fabric that feels light on the face" },
+        { id: "Kain lembut yang terasa ringan di wajah", en: "Soft fabric that feels light on the face" },
         { id: "Tali dengan velcro halus yang tidak menyangkut rambut", en: "Strap with soft velcro that doesn't catch hair" },
       ],
     },
@@ -213,7 +213,7 @@ const lumicloud: ProductCopy = {
   anatomy: {
     title: { id: "Gelap, tanpa terasa berat.", en: "Dark, without feeling heavy." },
     intro: {
-      id: "Dibuat supaya cahaya tertutup, tapi wajah tetap nyaman dipakai semalaman.",
+      id: "Dibuat untuk menghalangi cahaya, tapi tetap nyaman di wajah sepanjang malam.",
       en: "Made to block light while staying comfortable on your face all night.",
     },
     image: "/images/edited/DSC01334.JPG",
@@ -222,7 +222,7 @@ const lumicloud: ProductCopy = {
         x: 38,
         y: 20,
         title: { id: "Menutup cahaya", en: "Blocks light" },
-        body: { id: "Menutup area mata dengan rapat untuk kebanyakan orang.", en: "Covers the eye area closely for most sleepers." },
+        body: { id: "Menutup area mata dengan rapat, pas untuk kebanyakan orang.", en: "Covers the eye area closely for most sleepers." },
       },
       {
         x: 22,
@@ -245,7 +245,7 @@ const lumicloud: ProductCopy = {
     ],
   },
   fit: {
-    title: { id: "Kapan LumiCloud paling terasa?", en: "When does LumiCloud help most?" },
+    title: { id: "Kapan LumiCloud paling membantu?", en: "When does LumiCloud help most?" },
     items: [
       { title: { id: "Kamar kurang gelap", en: "A room that isn't dark" }, body: { id: "Lampu jalan atau cahaya dari ventilasi.", en: "Street lights or light through the vents." }, fits: true },
       { title: { id: "Tidur siang", en: "Afternoon naps" }, body: { id: "Siang terang, tetap bisa terlelap.", en: "Bright afternoons, still easy to drift off." }, fits: true },
@@ -257,7 +257,7 @@ const lumicloud: ProductCopy = {
     title: { id: "Bedanya dengan masker mata biasa", en: "How it differs from a regular eye mask" },
     theirs: { id: "Masker biasa", en: "Regular mask" },
     rows: [
-      { label: { id: "Cahaya", en: "Light" }, ours: { id: "Menutup cahaya untuk kebanyakan orang", en: "Blocks light for most sleepers" }, theirs: { id: "Sering bocor di tepi", en: "Often leaks at the edges" } },
+      { label: { id: "Cahaya", en: "Light" }, ours: { id: "Menghalangi cahaya bagi kebanyakan orang", en: "Blocks light for most sleepers" }, theirs: { id: "Sering bocor di tepi", en: "Often leaks at the edges" } },
       { label: { id: "Di mata", en: "On the eyes" }, ours: { id: "Tidak menekan kelopak", en: "No pressure on the eyelids" }, theirs: { id: "Menempel di mata", en: "Sits on the eyes" } },
       { label: { id: "Tali", en: "Strap" }, ours: { id: "Velcro halus", en: "Soft velcro" }, theirs: { id: "Karet yang menarik rambut", en: "Elastic that pulls hair" } },
       { label: { id: "Dipakai lama", en: "Worn all night" }, ours: { id: "Ringan & lembut", en: "Light and soft" }, theirs: { id: "Bikin pegal belakang kepala", en: "Aches at the back of the head" } },
@@ -266,7 +266,7 @@ const lumicloud: ProductCopy = {
   faq: [
     { q: { id: "Apakah menekan mata atau bulu mata?", en: "Does it press on my eyes or lashes?" }, a: { id: "Tidak. LumiCloud dibuat supaya kelopak mata tetap bebas.", en: "No. LumiCloud is made so your eyelids stay free." } },
     { q: { id: "Talinya aman untuk rambut?", en: "Is the strap hair-friendly?" }, a: { id: "Ya, velcro-nya halus dan tidak menyangkut rambut.", en: "Yes, the velcro is soft and doesn't catch hair." } },
-    { q: { id: "Bisa dicuci?", en: "Can I wash it?" }, a: { id: "Sebaiknya cuci tangan. Kalau pakai mesin, gunakan kantong laundry dan siklus lembut.", en: "Hand washing is best. In a machine, use a laundry bag and a gentle cycle." } },
+    { q: { id: "Bisa dicuci?", en: "Can I wash it?" }, a: { id: "Sebaiknya dicuci dengan tangan. Kalau pakai mesin, gunakan kantong laundry dan siklus lembut.", en: "Hand washing is best. In a machine, use a laundry bag and a gentle cycle." } },
     { q: { id: "Ada pilihan warna?", en: "Which colours are there?" }, a: { id: "Ada dua: Blue dan Apricot.", en: "Two: Blue and Apricot." } },
   ],
   pairWith: ["cervicloud", "calmicloud"],
@@ -281,12 +281,12 @@ const calmicloud: ProductCopy = {
     hoverImage: "/images/edited/DSC01249.JPG",
     chip: { id: "Isi 3 pasang", en: "3 pairs" },
     line: {
-      id: "Earplug silikon lembut untuk dengkuran, AC, dan suara jalan.",
+      id: "Earplug silikon lembut untuk meredam dengkuran, dengung AC, dan suara jalan.",
       en: "Soft silicone earplugs for snoring, AC hum and street noise.",
     },
   },
   sub: {
-    id: "Earplug silikon lembut yang bisa dibentuk menutup bagian luar telinga, membantu mengurangi suara dengkuran, AC, dan jalan.",
+    id: "Earplug silikon lembut yang bisa dibentuk untuk menutup bagian luar telinga, membantu meredam dengkuran, dengung AC, dan suara jalan.",
     en: "Soft, moldable silicone earplugs that cover the outer ear and help quiet snoring, AC hum and traffic.",
   },
   gallery: [
@@ -304,7 +304,7 @@ const calmicloud: ProductCopy = {
     { icon: "ear", label: { id: "Mengurangi suara sekitar", en: "Quiets the room" } },
     { icon: "mold", label: { id: "Silikon bisa dibentuk", en: "Moldable silicone" } },
     { icon: "reuse", label: { id: "Bisa dipakai ulang", en: "Reusable" } },
-    { icon: "case", label: { id: "Dengan case", en: "Comes with a case" } },
+    { icon: "case", label: { id: "Lengkap dengan case", en: "Comes with a case" } },
   ],
   optionLabel: { id: "Isi", en: "Contents" },
   options: [
@@ -321,14 +321,14 @@ const calmicloud: ProductCopy = {
       title: { id: "Isi & bahan", en: "Contents & material" },
       body: [
         { id: "3 pasang earplug silikon lembut", en: "3 pairs of soft silicone earplugs" },
-        { id: "Case untuk menyimpan", en: "A storage case" },
+        { id: "Case penyimpanan", en: "A storage case" },
       ],
     },
     {
       title: { id: "Cara pakai", en: "How to use" },
       body: [
         {
-          id: "Bentuk silikon dengan jari, lalu tempelkan menutup lubang telinga dari luar. Jangan didorong masuk ke dalam.",
+          id: "Bentuk silikon dengan jari, lalu tempelkan untuk menutup lubang telinga dari luar. Jangan didorong masuk ke liang telinga.",
           en: "Shape the silicone with your fingers, then press it over the ear opening from the outside. Don't push it into the ear canal.",
         },
       ],
@@ -344,9 +344,9 @@ const calmicloud: ProductCopy = {
     },
   ],
   anatomy: {
-    title: { id: "Lembut, dan mengikuti telingamu.", en: "Soft, and shaped to your ear." },
+    title: { id: "Lembut, mengikuti bentuk telingamu.", en: "Soft, and shaped to your ear." },
     intro: {
-      id: "Bukan dimasukkan ke dalam, tapi menutup dari luar.",
+      id: "Tidak dimasukkan ke dalam telinga, tapi menutup dari luar.",
       en: "It doesn't go inside your ear; it seals from the outside.",
     },
     image: "/images/edited/DSC01313.JPG",
@@ -367,7 +367,7 @@ const calmicloud: ProductCopy = {
         x: 52,
         y: 40,
         title: { id: "Case", en: "Case" },
-        body: { id: "Tempat menyimpan supaya tetap bersih.", en: "Keeps them clean between nights." },
+        body: { id: "Tempat menyimpan agar earplug tetap bersih.", en: "Keeps them clean between nights." },
       },
       {
         x: 62,
@@ -398,8 +398,8 @@ const calmicloud: ProductCopy = {
   },
   faq: [
     { q: { id: "Bisa dipakai ulang?", en: "Are they reusable?" }, a: { id: "Bisa. Cuci perlahan dengan sabun lembut, keringkan, lalu simpan di case.", en: "Yes. Wash gently with mild soap, let dry and store in the case." } },
-    { q: { id: "Ada ukurannya?", en: "Do they come in sizes?" }, a: { id: "Tidak perlu. Silikonnya dibentuk mengikuti telingamu.", en: "No need. You shape the silicone to your ear." } },
-    { q: { id: "Apakah semua suara hilang?", en: "Will I hear nothing at all?" }, a: { id: "Tidak. Earplug mengurangi suara sekitar, jadi pasang alarm dengan volume yang cukup.", en: "No. Earplugs reduce surrounding noise, so keep your alarm loud enough." } },
+    { q: { id: "Ada pilihan ukuran?", en: "Do they come in sizes?" }, a: { id: "Tidak perlu. Silikonnya dibentuk mengikuti telingamu.", en: "No need. You shape the silicone to your ear." } },
+    { q: { id: "Apakah semua suara hilang?", en: "Will I hear nothing at all?" }, a: { id: "Tidak. Earplug mengurangi suara sekitar, jadi atur alarm dengan volume yang cukup keras.", en: "No. Earplugs reduce surrounding noise, so keep your alarm loud enough." } },
     { q: { id: "Nyaman untuk tidur miring?", en: "Comfortable for side sleeping?" }, a: { id: "Ya, karena menutup dari luar dan tidak didorong ke dalam.", en: "Yes, because it seals from the outside instead of being pushed in." } },
   ],
   pairWith: ["cervicloud", "lumicloud"],

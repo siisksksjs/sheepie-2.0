@@ -182,7 +182,7 @@ export function SpinWheel() {
               <div className={styles.qrImage}>
                 <Image
                   src="/images/event/sheepiesleep-id-instagram-qr.svg"
-                  alt="QR code menuju Instagram @sheepiesleep.id"
+                  alt="Kode QR ke Instagram @sheepiesleep.id"
                   width={180}
                   height={180}
                   priority
@@ -284,7 +284,7 @@ export function SpinWheel() {
             {result?.claimable && (
               <div className={styles.claimNote}>
                 <span>✓</span>
-                Tunjukkan layar ini kepada staf kami untuk klaim
+                Tunjukkan layar ini ke staf kami untuk klaim hadiahmu
               </div>
             )}
             {!isFinished && (

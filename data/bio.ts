@@ -197,14 +197,14 @@ function productActions(slug: ProductSlug): [BioAction, BioAction] {
       label: "Beli di Shopee",
       href: product.shopeeUrl,
       destination: "shopee",
-      accessibleLabel: `Beli ${name} di Shopee (buka tab baru)`,
+      accessibleLabel: `Beli ${name} di Shopee (terbuka di tab baru)`,
     },
     {
       id: `bio-${slug}-tokopedia`,
       label: "Beli di Tokopedia",
       href: product.tokopediaUrl,
       destination: "tokopedia",
-      accessibleLabel: `Beli ${name} di Tokopedia (buka tab baru)`,
+      accessibleLabel: `Beli ${name} di Tokopedia (terbuka di tab baru)`,
     },
   ];
 }
@@ -215,8 +215,8 @@ const productStories: Array<Omit<BioProduct, "price" | "gallery" | "actions">> =
     slug: "cervicloud",
     rating: { score: 4.9 },
     name: "CerviCloud Pillow",
-    eyebrow: "Penyelarasan",
-    headline: "Leher lebih ditopang, pagi terasa lebih ringan.",
+    eyebrow: "Postur",
+    headline: "Leher tertopang, pagi terasa lebih ringan.",
     description:
       "Kontur ergonomis 4D memeluk leher dan membantu menjaga posisi tidur alami, dengan permukaan Ice-Silk yang terasa sejuk.",
     image: {
@@ -232,10 +232,10 @@ const productStories: Array<Omit<BioProduct, "price" | "gallery" | "actions">> =
     eyebrow: "Kegelapan",
     headline: "Redupkan dunia tanpa menekan mata.",
     description:
-      "Ruang mata 3D dan kain katun lembut menciptakan gelap menyeluruh dengan rasa ringan, sejuk, dan nyaman.",
+      "Ruang mata 3D dan kain katun lembut menghadirkan gelap yang nyaman, terasa ringan dan sejuk di wajah.",
     image: {
       src: "/images/products/lumicloud/listing-01.png",
-      alt: "Masker tidur LumiCloud biru muda dengan ruang mata tiga dimensi di latar biru muda",
+      alt: "Masker mata LumiCloud biru muda dengan ruang mata tiga dimensi di latar biru muda",
     },
   },
   {
@@ -246,7 +246,7 @@ const productStories: Array<Omit<BioProduct, "price" | "gallery" | "actions">> =
     eyebrow: "Keheningan",
     headline: "Bentuk ruang tenangmu sendiri.",
     description:
-      "Silikon kelas medis yang dapat dibentuk menutup bagian luar telinga dengan nyaman untuk membantu meredam suara sekitar.",
+      "Silikon lembut yang bisa dibentuk ini menutup bagian luar telinga dengan nyaman dan membantu meredam suara sekitar.",
     image: {
       src: "/images/products/calmicloud/listing-01.png",
       alt: "Earplug silikon CalmiCloud dalam wadah transparan di latar biru muda",
@@ -301,28 +301,28 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
       label: "Tokopedia",
       href: "https://www.tokopedia.com/sheepie",
       destination: "tokopedia",
-      accessibleLabel: "Kunjungi toko Sheepie di Tokopedia (buka tab baru)",
+      accessibleLabel: "Kunjungi toko Sheepie di Tokopedia (terbuka di tab baru)",
     },
     {
       id: "bio-hub-shopee",
       label: "Shopee",
       href: "https://shopee.co.id/sheepie.sleep",
       destination: "shopee",
-      accessibleLabel: "Kunjungi toko resmi Sheepie di Shopee (buka tab baru)",
+      accessibleLabel: "Kunjungi toko resmi Sheepie di Shopee (terbuka di tab baru)",
     },
     {
       id: "bio-hub-tiktok",
       label: "TikTok Shop",
       href: siteSource.socials.tiktok,
       destination: "tiktok",
-      accessibleLabel: "Ikuti Sheepie di TikTok (buka tab baru)",
+      accessibleLabel: "Belanja di TikTok Shop Sheepie (terbuka di tab baru)",
     },
     {
       id: "bio-hub-instagram",
       label: "Instagram",
       href: siteSource.socials.instagram,
       destination: "instagram",
-      accessibleLabel: "Ikuti Sheepie di Instagram (buka tab baru)",
+      accessibleLabel: "Ikuti Sheepie di Instagram (terbuka di tab baru)",
     },
   ];
 
@@ -345,7 +345,7 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
     label: "TikTok",
     href: siteSource.socials.tiktok,
     destination: "tiktok",
-    accessibleLabel: "Ikuti Sheepie di TikTok (buka tab baru)",
+    accessibleLabel: "Ikuti Sheepie di TikTok (terbuka di tab baru)",
   });
 
   hubActions.push({
@@ -353,7 +353,7 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
     label: "Website",
     href: "https://sheepiesleep.com/id",
     destination: "website",
-    accessibleLabel: "Kunjungi website Sheepie (buka tab baru)",
+    accessibleLabel: "Kunjungi website Sheepie (terbuka di tab baru)",
   });
 
   if (isValidWhatsAppUrl(whatsAppUrl)) {
@@ -362,7 +362,7 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
       label: "Tanya via WhatsApp",
       href: whatsAppUrl,
       destination: "whatsapp",
-      accessibleLabel: "Hubungi Sheepie melalui WhatsApp (buka tab baru)",
+      accessibleLabel: "Hubungi Sheepie melalui WhatsApp (terbuka di tab baru)",
     });
   }
 
@@ -373,7 +373,7 @@ export function createBioConfig(whatsAppUrl?: string): BioConfig {
     },
     bannerImage: {
       src: "/images/bio/sheepie-hero-v2.jpg",
-      alt: "Sheepie — Better Sleep Starts Here. Seseorang tidur nyenyak mengenakan LumiCloud Sleep Mask dan earplug CalmiCloud di atas bantal CerviCloud",
+      alt: "Sheepie — Better Sleep Starts Here. Seseorang tidur nyenyak mengenakan masker mata LumiCloud dan earplug CalmiCloud di atas bantal CerviCloud",
     },
     products: productStories.map((story) => ({
       ...story,

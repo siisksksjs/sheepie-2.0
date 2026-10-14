@@ -24,9 +24,9 @@ export const homeCopy: Record<Locale, HomeCopy> = {
   id: {
     hero: {
       eyebrow: "Standar Baru Istirahat",
-      title: ["Tidur adalah", "Pondasi."],
+      title: ["Tidur adalah", "Fondasi."],
       sub: "Kami tidak sekadar menjual bantal. Kami merancang keheningan, kegelapan, dan topangan untuk tidurmu.",
-      subStrong: "Bersiaplah untuk esok yang lebih segar.",
+      subStrong: "Sambut esok dengan lebih segar.",
       explore: "Jelajahi Koleksi",
       story: "Filosofi Kami",
       marquee: "SLEEP ·",
@@ -40,21 +40,21 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       coverLine: "Sarung ice-silk cadangan, mudah dilepas dan dicuci.",
     },
     cervi: {
-      title: "CerviCloud, bantal yang ikut bentuk tidurmu.",
+      title: "CerviCloud, bantal yang mengikuti gaya tidurmu.",
       lead: "Bentuk butterfly menopang leher saat telentang dan miring. Ada lekukan untuk menaruh tangan, jadi main HP sebelum tidur pun tetap nyaman.",
       features: [
-        ["Side & back sleeper", "Kontur berbeda untuk tiap posisi tidur."],
+        ["Miring & telentang", "Kontur berbeda untuk tiap posisi tidur."],
         ["Sarung ice-silk", "Terasa sejuk di kulit, bisa dilepas."],
-        ["Memory foam", "Slow-rebound, tidak cepat kempes."],
+        ["Memory foam", "Mengembang perlahan, tidak cepat kempes."],
         ["64 × 35 × 12 cm", "Cukup lebar untuk ganti posisi."],
       ],
       cta: "Lihat CerviCloud",
     },
     lumi: {
       title: "LumiCloud. Matikan lampu, tanpa menekan mata.",
-      lead: "Masker mata blackout yang ringan dan lembut. Tidak menekan kelopak mata, jadi nyaman dipakai semalaman, siang, atau di perjalanan.",
+      lead: "Masker mata blackout yang ringan dan lembut. Tidak menekan kelopak mata, jadi nyaman dipakai semalaman, saat tidur siang, atau di perjalanan.",
       features: [
-        ["Blackout", "Menutup cahaya untuk kebanyakan orang."],
+        ["Blackout", "Menghalangi cahaya bagi kebanyakan orang."],
         ["Tidak menekan mata", "Kelopak tetap bebas."],
         ["Aman untuk rambut", "Velcro halus, tidak menyangkut."],
         ["Ringan & praktis", "Untuk tidur siang dan perjalanan."],

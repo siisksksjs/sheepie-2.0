@@ -5,11 +5,11 @@
     "about": "Tentang Kami",
     "journal": "Blog",
     "shopNow": "Belanja Sekarang",
-    "shopAll": "Belanja Semua Produk"
+    "shopAll": "Lihat Semua Produk"
   },
   "Blog": {
     "metaTitle": "Blog | Sheepie.",
-    "metaDescription": "Wawasan tentang ilmu tidur, kesehatan, dan seni beristirahat.",
+    "metaDescription": "Bacaan seputar ilmu tidur, kesehatan, dan seni beristirahat.",
     "title": "Blog.",
     "subtitle": "Catatan tentang tidur, sains, dan keheningan.",
     "readMore": "Baca Artikel",
@@ -28,31 +28,31 @@
   },
   "AboutPage": {
     "metaTitle": "Filosofi Kami | Sheepie.",
-    "metaDescription": "Kami percaya istirahat adalah pondasi untuk hari esok yang lebih cerah. Pelajari bagaimana kami menjembatani ilmu ergonomi dan kenyamanan.",
+    "metaDescription": "Kami percaya istirahat adalah fondasi untuk hari esok yang lebih cerah. Kenali cara kami memadukan ilmu ergonomi dengan kenyamanan.",
     "label": "Filosofi Kami",
-    "title": "Istirahat bukanlah Kemewahan.<br></br><span1>Itu adalah Pondasi.</span1>",
-    "intro": "Kami percaya bahwa hari esok yang lebih cerah dimulai dari malam sebelumnya. Sheepie lahir untuk menjembatani kesenjangan antara sains ergonomis dan kenyamanan lembut yang Anda dambakan.",
+    "title": "Istirahat bukan kemewahan.<br></br><span1>Istirahat adalah fondasi.</span1>",
+    "intro": "Kami percaya hari esok yang lebih cerah dimulai dari malam sebelumnya. Sheepie lahir untuk memadukan ilmu ergonomi dengan kenyamanan lembut yang kamu dambakan.",
     "sectionTitle": "Dirancang untuk Setiap Orang",
-    "p1": "Kami menghabiskan berbulan-bulan terobsesi dengan kepadatan, tingkat pantulan, dan sirkulasi udara kain. Baik Anda membutuhkan presisi servikal dari <strong1>Bantal CerviCloud</strong1>, keheningan earplugs <strong2>CalmiCloud</strong2> kami, atau gelapnya <strong3>Masker Mata LumiCloud</strong3>, setiap lekukan disengaja.",
-    "p2": "Kami tidak sekadar menjual produk tidur. Kami menjual perasaan bangun dengan siap."
+    "p1": "Kami menghabiskan berbulan-bulan menekuni kepadatan busa, daya pantul, dan sirkulasi udara kain. Entah kamu butuh topangan leher yang presisi dari <strong1>Bantal CerviCloud</strong1>, keheningan dari earplug <strong2>CalmiCloud</strong2>, atau gelapnya <strong3>Masker Mata LumiCloud</strong3>, setiap lekukannya dibuat dengan sengaja.",
+    "p2": "Kami tidak sekadar menjual produk tidur. Kami menjual rasanya bangun dengan segar dan siap."
   },
   "ProductsPage": {
     "metaTitle": "Koleksi | Sheepie.",
-    "metaDescription": "Jelajahi tiga pilar tidur: Bantal CerviCloud, Masker Mata LumiCloud, dan Earplug CalmiCloud. Dibuat untuk keheningan, kegelapan, dan penyelarasan.",
+    "metaDescription": "Jelajahi tiga pilar tidur: Bantal CerviCloud, Masker Mata LumiCloud, dan CalmiCloud Earplugs. Dibuat untuk keheningan, kegelapan, dan postur tidur yang selaras.",
     "label": "Koleksi",
-    "title": "Esensial.",
-    "subtitle": "Direkayasa untuk tiga pilar istirahat yang mendalam.",
+    "title": "Yang Esensial.",
+    "subtitle": "Dirancang untuk tiga pilar tidur yang nyenyak.",
     "viewDetails": "Lihat Detail"
   },
   "FAQPage": {
     "metaTitle": "Pusat Bantuan | Sheepie.",
-    "metaDescription": "Temukan jawaban tentang produk kami, pengiriman, dan instruksi perawatan. Semua yang perlu Anda ketahui untuk memulai perjalanan tidur yang lebih baik.",
+    "metaDescription": "Temukan jawaban seputar produk, pengiriman, dan cara perawatan. Semua yang perlu kamu tahu untuk mulai tidur lebih nyenyak.",
     "title": "Pusat Bantuan",
-    "subtitle": "Semua yang perlu Anda ketahui tentang perjalanan Anda menuju istirahat yang lebih baik.",
+    "subtitle": "Semua yang perlu kamu tahu untuk istirahat yang lebih baik.",
     "categories": "Kategori",
     "stillHaveQuestions": "Masih punya pertanyaan?",
-    "contactDesc": "Pakar tidur kami siap membantu memandu pilihan Anda.",
-    "contactButton": "Hubungi Bantuan",
+    "contactDesc": "Tim kami siap membantu kamu memilih.",
+    "contactButton": "Hubungi Kami",
     "cats": {
       "calmi": "CalmiCloud Earplugs",
       "lumi": "Masker Mata LumiCloud",
@@ -62,16 +62,16 @@
   },
   "ContactPage": {
     "metaTitle": "Hubungi Kami | Sheepie.",
-    "metaDescription": "Punya pertanyaan? Hubungi pakar tidur kami atau dapatkan bantuan untuk pesanan Anda. Kami di sini untuk membantu Anda tidur lebih nyenyak.",
+    "metaDescription": "Punya pertanyaan? Hubungi tim kami atau minta bantuan untuk pesananmu. Kami siap membantumu tidur lebih nyenyak.",
     "title": "Hubungi Kami",
-    "subtitle": "Pertanyaan tentang pesanan Anda? Penasaran dengan produknya? Kami di sini untuk membantu Anda tidur lebih nyenyak.",
+    "subtitle": "Ada pertanyaan soal pesananmu? Penasaran dengan produknya? Kami siap membantumu tidur lebih nyenyak.",
     "infoTitle": "Informasi Kontak",
     "emailLabel": "Email Kami",
-    "emailNote": "Respon dalam 24 jam",
+    "emailNote": "Dibalas dalam 24 jam",
     "socialLabel": "Media Sosial",
-    "socialNote": "DM kami untuk pertanyaan cepat.",
+    "socialNote": "Kirim DM untuk pertanyaan singkat.",
     "marketplaceTitle": "Pesanan Marketplace",
-    "marketplaceDesc": "Untuk dukungan tercepat mengenai pengiriman atau pengembalian di Shopee/Tokopedia, silakan gunakan fitur chat langsung di aplikasi marketplace.",
+    "marketplaceDesc": "Untuk bantuan tercepat soal pengiriman atau pengembalian di Shopee/Tokopedia, gunakan fitur chat di aplikasi marketplace.",
     "shopeeChat": "Chat Shopee",
     "tokopediaChat": "Chat Tokopedia",
     "formTitle": "Kirim Pesan",
@@ -82,9 +82,9 @@
       "message": "Pesan"
     },
     "formPlaceholders": {
-      "name": "John Doe",
-      "email": "john@example.com",
-      "subject": "Pertanyaan Produk",
+      "name": "Budi Santoso",
+      "email": "budi@example.com",
+      "subject": "Pertanyaan produk",
       "message": "Apa yang bisa kami bantu?"
     },
     "submit": "Kirim Pesan"
@@ -92,16 +92,16 @@
   "FAQs": {
     "calmi": {
       "reusable": {
-        "q": "Apakah bisa dipakai ulang? Cara cucinya?",
-        "a": "Ya, CalmiCloud dirancang untuk penggunaan berulang. Cukup cuci lembut dengan sabun ringan dan air hangat, biarkan kering sepenuhnya, dan simpan dalam wadah yang disediakan. Dengan perawatan yang tepat, earplug ini jauh lebih awet daripada busa sekali pakai."
+        "q": "Apakah bisa dipakai ulang? Bagaimana cara mencucinya?",
+        "a": "Ya, CalmiCloud dibuat untuk dipakai berulang kali. Cuci perlahan dengan sabun lembut dan air hangat, biarkan kering sepenuhnya, lalu simpan di case yang tersedia. Kalau dirawat dengan baik, earplug ini jauh lebih awet daripada earplug busa sekali pakai."
       },
       "sizes": {
-        "q": "Apakah ada ukuran yang berbeda?",
-        "a": "CalmiCloud memiliki desain yang dapat dibentuk secara universal. Alih-alih memaksakan ukuran tertentu ke dalam saluran telinga Anda, Anda membentuk silikon untuk menyegel telinga luar Anda, memberikan kecocokan khusus tanpa tekanan untuk ukuran telinga apa pun."
+        "q": "Apakah tersedia dalam beberapa ukuran?",
+        "a": "CalmiCloud punya satu ukuran yang bisa dibentuk. Alih-alih memaksakan ukuran tertentu masuk ke liang telinga, kamu membentuk silikonnya untuk menutup bagian luar telinga. Hasilnya pas dan bebas tekanan, apa pun ukuran telingamu."
       },
       "alarm": {
-        "q": "Apakah saya masih akan mendengar alarm saya?",
-        "a": "CalmiCloud mengurangi suara sekitar seperti dengkuran, AC, atau lalu lintas, tapi tidak menghapus semua suara. Pasang alarm dengan volume yang tetap terdengar."
+        "q": "Apakah alarm masih terdengar?",
+        "a": "CalmiCloud meredam suara di sekitar seperti dengkuran, dengung AC, atau lalu lintas, tapi tidak menghilangkan semua suara. Atur alarm dengan volume yang tetap bisa kamu dengar."
       }
     },
     "lumi": {
@@ -111,70 +111,70 @@
       },
       "strap": {
         "q": "Apakah talinya aman untuk rambut?",
-        "a": "Ya. Kami menggunakan tali yang dapat disesuaikan yang halus dan bebas sangkut, dirancang khusus untuk mencegah kekusutan, tidak seperti karet elastis kasar pada masker standar."
+        "a": "Ya. Talinya halus, bisa diatur, dan tidak menyangkut di rambut, jadi rambut tidak kusut seperti saat memakai masker biasa dengan karet elastis yang kasar."
       },
       "washable": {
-        "q": "Apakah bisa dicuci dengan mesin?",
-        "a": "Kami menyarankan mencuci dengan tangan untuk memaksimalkan umur memory foam. Jika Anda harus menggunakan mesin, masukkan masker ke dalam kantong laundry dan gunakan siklus halus dengan air dingin."
+        "q": "Apakah bisa dicuci dengan mesin cuci?",
+        "a": "Kami sarankan mencucinya dengan tangan agar memory foam-nya lebih awet. Kalau perlu memakai mesin cuci, masukkan masker ke kantong laundry dan pilih siklus lembut dengan air dingin."
       }
     },
     "cervi": {
       "firmness": {
         "q": "Bantalnya keras atau empuk?",
-        "a": "CerviCloud menggunakan memory foam medium-firm. Dirancang agar cukup mendukung untuk menjaga tulang leher Anda dalam posisi netral, namun cukup lentur untuk terasa nyaman, tidak pernah kaku."
+        "a": "CerviCloud memakai memory foam dengan tingkat kekerasan sedang (medium-firm). Cukup kokoh untuk menjaga tulang leher tetap di posisi netral, tapi cukup lentur sehingga terasa nyaman dan tidak kaku."
       },
       "adjustment": {
         "q": "Apakah ada masa penyesuaian?",
-        "a": "Ya, biasanya 7-14 malam. Jika Anda beralih dari bantal tradisional, otot leher dan tulang belakang Anda mungkin perlu waktu untuk rileks ke posisi alami yang benar."
+        "a": "Ya, biasanya 7–14 malam. Kalau kamu beralih dari bantal biasa, otot leher dan tulang belakangmu mungkin butuh waktu untuk terbiasa dengan posisi alami yang benar."
       },
       "cover": {
         "q": "Apakah sarungnya bisa dicuci?",
-        "a": "Ya. Sarung ice-silk yang sejuk bisa dilepas dan dicuci. Mohon jangan mencuci inti memory foam bagian dalam."
+        "a": "Ya. Sarung ice-silk yang sejuk bisa dilepas dan dicuci. Mohon jangan mencuci inti memory foam di dalamnya."
       }
     },
     "shipping": {
       "returns": {
-        "q": "Apa kebijakan pengembalian Anda?",
-        "a": "Kami menerima pengembalian atau penukaran untuk cacat produksi atau barang yang salah diterima. Karena standar kebersihan yang ketat, kami tidak dapat menerima pengembalian produk tidur yang sudah dipakai kecuali cacat."
+        "q": "Bagaimana kebijakan pengembaliannya?",
+        "a": "Kami menerima pengembalian atau penukaran untuk produk yang cacat produksi atau tidak sesuai pesanan. Demi menjaga standar kebersihan, produk tidur yang sudah dipakai tidak bisa dikembalikan, kecuali jika cacat."
       },
       "duration": {
         "q": "Berapa lama pengiriman?",
-        "a": "Pesanan biasanya diproses dalam 24 jam. Pengiriman standar memakan waktu 2–5 hari kerja, tergantung lokasi Anda."
+        "a": "Pesanan biasanya diproses dalam 24 jam. Pengiriman reguler memakan waktu 2–5 hari kerja, tergantung lokasimu."
       }
     }
   },
   "Products": {
     "cervicloud": {
       "name": "Bantal CerviCloud",
-      "tagline": "Penyelarasan tulang belakang, disempurnakan.",
-      "description": "Ubah istirahat Anda dengan Bantal CerviCloud. Bentuk Kupu-kupu 4D-nya menopang leher Anda untuk menjaga keselarasan servikal alami, meredakan titik tekanan yang persisten. Diresapi dengan partikel difusi termal dan dibungkus kain Ice-Silk, ia menawarkan dukungan yang luas dan sejuk yang beradaptasi dengan setiap gerakan Anda.",
+      "tagline": "Tulang belakang selaras dengan sempurna.",
+      "description": "Ubah cara kamu beristirahat dengan Bantal CerviCloud. Bentuk Kupu-kupu 4D-nya menopang leher untuk menjaga posisi alami tulang leher dan mengurangi titik tekan yang terus mengganggu. Dilengkapi partikel difusi panas dan dibalut kain Ice-Silk, bantal ini memberi topangan yang lebar dan sejuk serta mengikuti setiap gerakanmu.",
       "benefits": {
         "0": "Kontur ergonomis Kupu-kupu 4D",
-        "1": "Ice-Silk yang menyejukkan & difusi panas",
-        "2": "Busa memori kepadatan tinggi lambat memantul",
-        "3": "Dukungan lebar 64cm yang luas"
+        "1": "Ice-Silk yang sejuk & difusi panas",
+        "2": "Memory foam padat yang mengembang perlahan",
+        "3": "Topangan lebar 64 cm"
       }
     },
     "lumicloud": {
       "name": "Masker Mata LumiCloud",
-      "tagline": "Pengalaman blackout tanpa beban.",
-      "description": "LumiCloud adalah masker mata katun yang ringan dan lembut, dibuat untuk menutup cahaya bagi kebanyakan orang tanpa menekan mata. Bernapas, bisa diatur, dan mudah dibawa untuk tidur malam, tidur siang, dan perjalanan.",
+      "tagline": "Blackout yang ringan tanpa beban.",
+      "description": "LumiCloud adalah masker mata katun yang ringan dan lembut, dibentuk untuk menghalangi cahaya bagi kebanyakan orang tanpa menekan mata. Adem, talinya bisa diatur, dan mudah dibawa untuk tidur malam, tidur siang, maupun perjalanan.",
       "benefits": {
-        "0": "Kain Katun Lembut",
+        "0": "Kain katun lembut",
         "1": "Blackout untuk kebanyakan orang",
         "2": "Tidak menekan kelopak mata",
-        "3": "Bernapas & tahan keringat"
+        "3": "Adem & tahan keringat"
       }
     },
     "calmicloud": {
       "name": "CalmiCloud Earplugs",
-      "tagline": "Keheningan yang dapat dibentuk untuk dunia yang bising.",
-      "description": "Earplug CalmiCloud dibuat dari silikon lembut yang bisa dibentuk dan menutup telinga dari luar, bukan didorong ke dalam. Bisa dipakai ulang dan nyaman untuk tidur miring, membantu meredam dengkuran, suara AC, dan lalu lintas.",
+      "tagline": "Hening yang bisa kamu bentuk, di tengah dunia yang bising.",
+      "description": "Earplug CalmiCloud dibuat dari silikon lembut yang bisa dibentuk dan menutup telinga dari luar, bukan didorong masuk. Bisa dipakai ulang dan nyaman untuk tidur menyamping, membantu meredam dengkuran, dengung AC, dan suara lalu lintas.",
       "benefits": {
-        "0": "Silikon cetakan pas khusus",
-        "1": "Segel luar bebas tekanan",
+        "0": "Silikon yang bisa dibentuk sesuai telinga",
+        "1": "Menutup dari luar tanpa tekanan",
         "2": "Tahan air & higienis",
-        "3": "Dapat digunakan kembali & ramah lingkungan"
+        "3": "Bisa dipakai ulang & ramah lingkungan"
       }
     }
   }

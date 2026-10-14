@@ -21,7 +21,7 @@ describe("home page", () => {
   it("opens on the editorial hero that leads into the collection", async () => {
     const html = await render("id");
     expect(html).toContain('id="hero"');
-    expect(html).toContain("Tidur adalah<em>Pondasi.</em>");
+    expect(html).toContain("Tidur adalah<em>Fondasi.</em>");
     expect(html).toContain('href="#products"');
     expect(html).toContain('id="products"');
     expect(html).toContain('href="/id/about"');

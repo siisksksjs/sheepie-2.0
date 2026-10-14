@@ -5,6 +5,8 @@ import { defaultLocale, locales } from "./i18n/config";
 export default createMiddleware({
   locales: [...locales],
   defaultLocale,
+  // Always open in Bahasa Indonesia; English only when the visitor picks it.
+  localeDetection: false,
 });
 
 export const config = {

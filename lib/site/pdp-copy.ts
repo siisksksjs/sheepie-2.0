@@ -29,7 +29,7 @@ export const pdpCopy: Record<Locale, PdpCopy> = {
     voucher: "Kode khusus website:",
     copy: "Salin",
     copied: "Tersalin",
-    assurances: ["Dikirim dari Indonesia lewat Shopee & Tokopedia", "Pembayaran & retur mengikuti perlindungan marketplace"],
+    assurances: ["Dikirim dari Indonesia lewat Shopee & Tokopedia", "Pembayaran & retur dilindungi marketplace"],
     fits: "Cocok",
     notFit: "Kurang cocok",
     reviews: "Kata mereka tentang {name}",

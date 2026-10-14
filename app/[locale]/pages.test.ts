@@ -13,7 +13,7 @@ const params = (locale: "id" | "en") => ({ params: Promise.resolve({ locale }) }
 describe("content pages", () => {
   it("About tells the story and links each product", async () => {
     const html = renderToStaticMarkup(await AboutPage(params("id")));
-    expect(html).toContain("Istirahat bukan kemewahan.<em>Itu pondasi.</em>");
+    expect(html).toContain("Istirahat bukan kemewahan.<em>Itu fondasi.</em>");
     for (const slug of ["cervicloud", "lumicloud", "calmicloud"]) expect(html).toContain(`href="/id/products/${slug}"`);
     expect(html).toContain("https://wa.me/6285117186188");
   });
@@ -42,7 +42,7 @@ describe("content pages", () => {
   it("CalmiCloud guide teaches the outer-ear method in four steps", async () => {
     const html = renderToStaticMarkup(await GuidePage(params("id")));
     for (const n of [1, 2, 3, 4]) expect(html).toContain(`calmi-step-${n}.webp`);
-    expect(html).toContain("Jangan didorong masuk ke dalam lubang telinga");
+    expect(html).toContain("Jangan didorong masuk ke liang telinga");
     expect(html).not.toMatch(/medical|kelas medis|saluran telinga lalu putar/i);
   });
 });
