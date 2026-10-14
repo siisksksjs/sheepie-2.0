@@ -45,7 +45,7 @@
 
 .socials {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 12px;
 }
 
@@ -121,7 +121,8 @@
 
 @media (max-width: 760px) {
   .footer .grid { grid-template-columns: 1fr 1fr; gap: 30px 20px; padding-block: 64px 40px; }
-  .grid > div:first-child { grid-column: 1 / -1; }
+  .footer .grid > div:first-child,
+  .footer .grid > div:last-child { grid-column: 1 / -1; }
   .say { font-size: 32px; }
   .footer .legal { flex-direction: column; }
 }

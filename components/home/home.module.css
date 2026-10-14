@@ -13,9 +13,11 @@
   color: var(--sp-ink);
 }
 
-/* Faint words drifting right behind the headline, as on the original hero. The
-   phrase is about one screen wide so it reads whole, and moves slowly enough to
-   go unnoticed (~10px a second). */
+/* Faint words drifting right behind the headline, as on the original hero.
+   Sized to cover the whole three-line headline (2.6x its font size) and moving
+   slowly enough to go unnoticed (~10px a second). The track holds two identical
+   copies, so when one copy has passed, the loop restarts on an identical frame:
+   no jump, no end. */
 .title {
   position: relative;
 }
@@ -35,12 +37,12 @@
 .marqueeTrack {
   display: flex;
   width: max-content;
-  animation: marquee 140s linear infinite;
+  animation: marquee 360s linear infinite;
 }
 
 .marqueeTrack span {
   padding-right: 4vw;
-  font: 900 8vw/1 var(--font-display), serif;
+  font: 900 calc(clamp(48px, min(7.6vw, 11.5svh), 128px) * 2.6)/1 var(--font-display), serif;
   letter-spacing: 0.02em;
   white-space: nowrap;
   color: var(--sp-ink);
@@ -508,7 +510,7 @@ div.lightsIn {
   /* Phones: photo on top, type on cream below. */
   .hero { display: block; height: auto; min-height: 0; }
   .heroMedia { position: relative; top: auto; width: 100%; height: 58svh; }
-  .marqueeTrack span { font-size: 14vw; }
+  .marqueeTrack span { font-size: calc(52px * 2.6); }
   .heroMedia::after { background: linear-gradient(rgba(255, 253, 245, 0) 70%, var(--sp-cream)); }
   .heroCopy { max-width: none; }
   .heroIn { padding-top: 8px; padding-bottom: 56px; }
@@ -521,7 +523,7 @@ div.lightsIn {
   section.collection { min-height: 0; padding-top: 84px; padding-bottom: 20px; }
   .head { margin-bottom: 22px; }
   .head h2, .reviews h2 { font-size: 30px; }
-  .duo { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--sp-gutter) * -1); padding: 0 var(--sp-gutter) 4px; scrollbar-width: none; }
+  .duo { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--sp-gutter); margin: 0 calc(var(--sp-gutter) * -1); padding: 0 var(--sp-gutter) 4px; scrollbar-width: none; }
   .duo::-webkit-scrollbar { display: none; }
   .duo > * { flex: 0 0 82%; scroll-snap-align: start; }
   .duo :global([data-product-card]) > div:first-child { aspect-ratio: 5 / 5.4; height: auto; }
