@@ -44,7 +44,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
   return (
     <div className={site.page}>
-      <SiteHeader locale={locale} overlay />
+      <SiteHeader locale={locale} />
       <main>
         <HomeHero locale={locale} />
         <ProductDuo locale={locale} />
