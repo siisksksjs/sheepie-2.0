@@ -39,7 +39,7 @@ export function ArticleBody({ blocks, labels }: { blocks: JournalBlock[]; labels
                   <tbody>
                     {block.rows.map((row, r) => (
                       <tr key={r}>
-                        {row.map((cell, c) => (c === 0 ? <th key={c} scope="row" dangerouslySetInnerHTML={html(cell)} /> : <td key={c} dangerouslySetInnerHTML={html(cell)} />))}
+                        {row.map((cell, c) => (c === 0 ? <th key={c} scope="row" dangerouslySetInnerHTML={html(cell)} /> : <td key={c} data-label={block.head[c]} dangerouslySetInnerHTML={html(cell)} />))}
                       </tr>
                     ))}
                   </tbody>

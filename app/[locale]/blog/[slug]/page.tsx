@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 
 import { ArticleBody } from "@/components/pages/article-body";
+import { ArticleStickyBar } from "@/components/pages/article-sticky-bar";
 import styles from "@/components/pages/pages.module.css";
 import { PostCard } from "@/components/pages/post-card";
 import { FadeIn } from "@/components/site/fade-in";
@@ -13,6 +14,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import site from "@/components/site/site.module.css";
 import { isLocale } from "@/i18n/config";
 import { getProduct, productPath } from "@/lib/catalog";
+import { formatIdr } from "@/lib/catalog/price";
 import { localeHref } from "@/lib/site/copy";
 import { findPost, formatPostDate, journalPosts, postHeadings, postJsonLd, postProduct, readMinutes, relatedPosts, SITE_URL } from "@/lib/site/journal";
 import { pagesCopy } from "@/lib/site/pages-copy";
@@ -76,7 +78,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               )}
             </span>
           </header>
-          <div className={styles.articleImg}>
+          <div className={styles.articleImg} data-article-hero>
             <Image src={post.image} alt={post.imageAlt ?? ""} fill preload fetchPriority="high" sizes="(max-width: 760px) 100vw, 1080px" className={styles.cover} />
           </div>
 
@@ -91,18 +93,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
           <ArticleBody blocks={post.content} labels={{ answer: t.answer, faqTitle: t.faqTitle }} />
 
-          {product && (
-            <Link className={styles.productCard} href={productPath(locale, product.slug)} data-article-product={product.slug}>
-              <span className={styles.postImg}>
-                <Image src={product.card.image} alt="" fill sizes="96px" className={styles.cover} />
-              </span>
-              <span>
-                <small>{t.productTitle}</small>
-                <b>{product.name}</b>
-              </span>
-              <em>{t.productCta} →</em>
-            </Link>
-          )}
         </article>
 
         {related.length > 0 && (
@@ -118,6 +108,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </section>
         )}
       </main>
+      {product && (
+        <ArticleStickyBar
+          href={productPath(locale, product.slug)}
+          slug={product.slug}
+          name={product.name}
+          image={product.card.image}
+          price={formatIdr(product.options[0].price)}
+          label={t.productTitle}
+          cta={t.productCta}
+        />
+      )}
       {postJsonLd(post).map((data, i) => (
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }} />
       ))}
