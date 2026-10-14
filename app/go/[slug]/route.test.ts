@@ -78,15 +78,12 @@ describe("tracked story redirect", () => {
       expect(html).toContain(`href="${shopeeHref("cervicloud").replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`);
     });
 
-    it("sends iPhones straight to the Shopee link after recording a PageView", async () => {
+    it("plain-redirects iPhones so the tap can open the Shopee app", async () => {
       for (const ua of [IG_IOS, SAFARI_IOS]) {
         const response = await GET(request("/go/lumicloud?utm_campaign=okt", ua), params("lumicloud"));
-        const html = await response.text();
 
-        expect(response.status).toBe(200);
-        expect(html).toContain(`var openHref = ${JSON.stringify(shopeeHref("lumicloud"))};`);
-        expect(html).not.toContain("Lanjut di browser");
-        expect(html).toContain('"event_name":"PageView"');
+        expect(response.status).toBe(307);
+        expect(response.headers.get("location")).toBe(shopeeHref("lumicloud"));
       }
     });
 

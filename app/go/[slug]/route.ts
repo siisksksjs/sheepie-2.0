@@ -1,6 +1,8 @@
 import { randomUUID } from "node:crypto";
 import { isIP } from "node:net";
 
+import { after } from "next/server";
+
 import { bioConfig } from "@/data/bio";
 import {
   BIO_EVENT_TEXT_LIMITS,
@@ -13,6 +15,7 @@ import { createDailyRateKey, ingestBioEvent } from "@/lib/bio-analytics/server";
 import { androidIntent, isShopeeUrl, platformOf } from "@/lib/go/app-link";
 import { openerPageHtml } from "@/lib/go/opener-page";
 import { pageView } from "@/lib/meta/events";
+import { buildServerEvent, forwardToMeta, readMetaEnv } from "@/lib/meta/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -145,11 +148,39 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
     return Response.redirect(target.href, 307);
   }
 
-  // Android: an intent opens the app straight away. iOS: go straight to the
-  // Shopee link (the owner chose no extra tap over a tap-to-open button).
-  const openHref = platform === "android" ? androidIntent(target.href) : target.href;
+  // iOS only opens the Shopee app (universal link) when the navigation comes
+  // from the shopper's own tap. A server redirect keeps that tap; a page that
+  // redirects with JavaScript loses it and Shopee opens inside Instagram. So
+  // iOS gets a plain 307 and the PageView is sent from the server instead.
+  if (platform === "ios") {
+    recordServerPageView(request, url);
+    return Response.redirect(target.href, 307);
+  }
+
+  const openHref = androidIntent(target.href);
 
   return new Response(openerPageHtml({ openHref, webHref: target.href, event: pageView() }), {
     headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
   });
+}
+
+const BOT = /bot|crawler|spider|facebookexternalhit|preview/i;
+
+/** Conversions API PageView for the redirect-only path. Runs after the response; never throws. */
+function recordServerPageView(request: Request, url: URL) {
+  const env = readMetaEnv();
+  if (!env || BOT.test(request.headers.get("user-agent") ?? "")) return;
+
+  const now = Date.now();
+  const serverEvent = buildServerEvent(pageView(), request, url.toString(), now);
+  const fbclid = url.searchParams.get("fbclid");
+  if (!serverEvent.user_data.fbc && fbclid && /^[\w-]+$/.test(fbclid)) {
+    serverEvent.user_data.fbc = `fb.1.${now}.${fbclid}`;
+  }
+
+  try {
+    after(() => forwardToMeta(serverEvent, env));
+  } catch {
+    // Outside a request scope (tests): skip rather than delay the redirect.
+  }
 }
