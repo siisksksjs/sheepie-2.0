@@ -1,6 +1,7 @@
 import blogData from "@/data/blog.json";
 import type { Locale } from "@/i18n/config";
 import type { ProductSlug } from "@/lib/catalog/types";
+import { SITE_URL } from "@/lib/site/seo";
 
 /**
  * Article content blocks. Text fields may carry inline HTML links (copy is authored in this repo).
@@ -40,7 +41,6 @@ export type JournalPost = {
   content: JournalBlock[];
 };
 
-export const SITE_URL = "https://sheepiesleep.com";
 
 export const journalPosts = (blogData as JournalPost[]).slice().sort((a, b) => b.date.localeCompare(a.date));
 

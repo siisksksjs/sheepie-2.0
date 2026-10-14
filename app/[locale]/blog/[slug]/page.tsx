@@ -17,8 +17,9 @@ import { isLocale } from "@/i18n/config";
 import { getProduct, productPath } from "@/lib/catalog";
 import { formatIdr } from "@/lib/catalog/price";
 import { localeHref } from "@/lib/site/copy";
-import { findPost, formatPostDate, journalPosts, postHeadings, postJsonLd, postProduct, readMinutes, relatedPosts, SITE_URL } from "@/lib/site/journal";
+import { findPost, formatPostDate, journalPosts, postHeadings, postJsonLd, postProduct, readMinutes, relatedPosts } from "@/lib/site/journal";
 import { pagesCopy } from "@/lib/site/pages-copy";
+import { buildMetadata, postOgImage } from "@/lib/site/seo";
 
 export function generateStaticParams() {
   return journalPosts.map((post) => ({ slug: post.slug }));
@@ -28,23 +29,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug, locale } = await params;
   const post = findPost(slug);
   if (!post) return {};
-  const url = `${SITE_URL}/id/blog/${post.slug}`;
-  return {
+  // Articles are written in Indonesian: the English URL points search engines at the Indonesian one.
+  return buildMetadata({
+    locale: isLocale(locale) ? locale : "id",
+    path: `/blog/${post.slug}`,
     title: post.seoTitle ?? `${post.title} | Sheepie`,
     description: post.description ?? post.excerpt,
-    alternates: { canonical: url },
-    robots: locale === "id" ? undefined : { index: false, follow: true },
-    openGraph: {
-      type: "article",
-      url,
-      title: post.title,
-      description: post.description ?? post.excerpt,
-      images: [{ url: post.image, alt: post.imageAlt ?? post.title }],
-      publishedTime: post.date,
-      modifiedTime: post.updated ?? post.date,
-      locale: "id_ID",
-    },
-  };
+    image: postOgImage(post.slug),
+    imageAlt: post.imageAlt,
+    type: "article",
+    languages: ["id"],
+    canonicalLocale: "id",
+    noindex: locale !== "id",
+    article: { publishedTime: post.date, modifiedTime: post.updated ?? post.date },
+  });
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string; locale: string }> }) {

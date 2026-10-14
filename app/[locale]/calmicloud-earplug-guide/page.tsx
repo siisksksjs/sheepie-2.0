@@ -14,12 +14,13 @@ import { isLocale } from "@/i18n/config";
 import { productPath } from "@/lib/catalog";
 import { guideCopy } from "@/lib/site/guide-copy";
 import { whatsappGreeting, whatsappUrl } from "@/lib/site/whatsapp";
+import { JsonLd } from "@/components/site/json-ld";
+import { breadcrumbLd, pageMetadata, pageSeo } from "@/lib/site/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  const t = guideCopy[locale];
-  return { title: t.metaTitle, description: t.metaDescription };
+  return pageMetadata("guide", locale);
 }
 
 /** CalmiCloud instructions: the page the box insert's QR code opens. */
@@ -138,6 +139,7 @@ export default async function CalmiGuidePage({ params }: { params: Promise<{ loc
           </FadeIn>
         </section>
       </main>
+      <JsonLd data={breadcrumbLd(locale, [[t.eyebrow, pageSeo("guide", locale).path]])} />
       <SiteFooter locale={locale} />
     </div>
   );

@@ -41,8 +41,9 @@ describe("product page", () => {
     expect(html).toContain('href="/en/products/calmicloud"');
   });
 
-  it("titles the page after the product", async () => {
+  it("titles the page with the search keyword and product name", async () => {
     const meta = await generateMetadata({ params: Promise.resolve({ locale: "id", slug: "lumicloud" }) });
-    expect(meta.title).toBe("LumiCloud Eye Mask | Sheepie.");
+    expect(meta.title).toBe("Penutup Mata Tidur Blackout LumiCloud | Sheepie");
+    expect(meta.alternates?.canonical).toBe("https://sheepiesleep.com/id/products/lumicloud");
   });
 });

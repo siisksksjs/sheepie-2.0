@@ -68,6 +68,7 @@ export function BioPage({ config }: BioPageProps) {
     <main className={styles.page}>
       <BioPostHog />
       <BioTracker />
+      <h1 className={styles.visuallyHidden}>Sheepie: bantal ergonomis, penutup mata tidur, dan earplug untuk tidur lebih nyenyak</h1>
 
       <section
         className={styles.banner}

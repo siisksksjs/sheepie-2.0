@@ -13,6 +13,8 @@ import { WhatsAppIcon } from "@/components/site/whatsapp-icon";
 import { isLocale } from "@/i18n/config";
 import { pagesCopy } from "@/lib/site/pages-copy";
 import { whatsappGreeting, whatsappUrl } from "@/lib/site/whatsapp";
+import { JsonLd } from "@/components/site/json-ld";
+import { breadcrumbLd, faqLd, pageMetadata } from "@/lib/site/seo";
 
 /** Question keys per category, in display order (copy lives in messages: FAQs.<cat>.<key>.q/a). */
 const GROUPS = [
@@ -25,8 +27,7 @@ const GROUPS = [
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  const t = await getTranslations({ locale, namespace: "FAQPage" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return pageMetadata("faq", locale);
 }
 
 export default async function FaqPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -78,6 +79,7 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
           </div>
         </section>
       </main>
+      <JsonLd data={[breadcrumbLd(locale, [["FAQ", "/faq"]]), faqLd(GROUPS.flatMap((g) => g.items.map((item) => ({ q: faqs(`${g.id}.${item}.q`), a: faqs(`${g.id}.${item}.a`) }))))]} />
       <SiteFooter locale={locale} />
     </div>
   );

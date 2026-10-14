@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { ProductCard } from "@/components/site/product-card";
@@ -9,15 +9,13 @@ import site from "@/components/site/site.module.css";
 import { isLocale } from "@/i18n/config";
 import { getProducts } from "@/lib/catalog";
 import { siteCopy } from "@/lib/site/copy";
+import { JsonLd } from "@/components/site/json-ld";
+import { breadcrumbLd, itemListLd, pageMetadata, pageSeo } from "@/lib/site/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  const t = await getTranslations({ locale, namespace: "ProductsPage" });
-  return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
-  };
+  return pageMetadata("products", locale);
 }
 
 export default async function ProductsPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -38,6 +36,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
           ))}
         </div>
       </main>
+      <JsonLd data={[breadcrumbLd(locale, [[pageSeo("products", locale).title.split(" | ")[0], "/products"]]), itemListLd(locale, getProducts(locale))]} />
       <SiteFooter locale={locale} />
     </div>
   );

@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     locales.forEach((l) => {
       languages[l] = `${baseUrl}/${l}${path}`
     })
+    languages['x-default'] = `${baseUrl}/id${path}`
     return { languages }
   }
 
@@ -39,6 +40,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const locale of locales) {
     // 1. Static Pages
     for (const route of routes) {
+      // The blog is Indonesian-only; /en/blog is noindex, so it stays out of the sitemap.
+      if (route === '/blog' && locale !== blogLocale) continue
+
       // The route itself (e.g., /about) is appended to the locale (e.g., /en)
       // For the home page (route === ''), it becomes /en
       const fullPath = route
@@ -48,7 +52,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: route === '' ? 1 : 0.8,
-        alternates: getAlternates(fullPath)
+        alternates: route === '/blog'
+          ? { languages: { id: `${baseUrl}/id/blog`, 'x-default': `${baseUrl}/id/blog` } }
+          : getAlternates(fullPath)
       })
     }
 
@@ -76,6 +82,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
           alternates: {
             languages: {
               id: `${baseUrl}/${blogLocale}${path}`,
+              'x-default': `${baseUrl}/${blogLocale}${path}`,
             },
           },
         })

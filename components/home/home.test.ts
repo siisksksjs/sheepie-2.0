@@ -3,7 +3,6 @@ import { describe, expect, it } from "vitest";
 
 import Home, { generateMetadata } from "@/app/[locale]/page";
 import { getProduct } from "@/lib/catalog";
-import { homeCopy } from "@/lib/site/home-copy";
 
 async function render(locale: "id" | "en") {
   const element = await Home({ params: Promise.resolve({ locale }) });
@@ -66,12 +65,12 @@ describe("home page", () => {
   });
 
   it.each([
-    ["id", "Sheepie. | Bantal ergonomis & penutup mata tidur blackout"],
-    ["en", "Sheepie. | Ergonomic pillows & blackout eye masks"],
+    ["id", "Sheepie | Bantal Ergonomis, Penutup Mata Tidur & Earplug"],
+    ["en", "Sheepie | Ergonomic Pillow, Sleep Mask & Earplugs"],
   ] as const)("has localized metadata on /%s", async (locale, title) => {
     const meta = await generateMetadata({ params: Promise.resolve({ locale }) });
     expect(meta.title).toBe(title);
-    expect(meta.description).toBe(homeCopy[locale].hero.sub);
+    expect(meta.alternates?.canonical).toBe(`https://sheepiesleep.com/${locale}`);
     expect(meta.openGraph?.url).toBe(`https://sheepiesleep.com/${locale}`);
   });
 });

@@ -18,6 +18,8 @@ import { getProduct, isProductSlug } from "@/lib/catalog";
 import { PRODUCT_SLUGS } from "@/lib/catalog/types";
 import { localeHref } from "@/lib/site/copy";
 import { pdpCopy } from "@/lib/site/pdp-copy";
+import { JsonLd } from "@/components/site/json-ld";
+import { breadcrumbLd, faqLd, productLd, productMetadata } from "@/lib/site/seo";
 
 type Params = { params: Promise<{ locale: string; slug: string }> };
 
@@ -30,12 +32,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!isLocale(locale) || !isProductSlug(slug)) return {};
-  const product = getProduct(slug, locale);
-  return {
-    title: `${product.name} | Sheepie.`,
-    description: product.sub,
-    openGraph: { images: [product.gallery[0].src] },
-  };
+  return productMetadata(getProduct(slug, locale), locale);
 }
 
 export default async function ProductPage({ params }: Params) {
@@ -68,6 +65,7 @@ export default async function ProductPage({ params }: Params) {
         </main>
         <StickyBuyBar locale={locale} showOption={product.options.length > 1} fallbackImage={product.gallery[0].src} />
       </OptionProvider>
+      <JsonLd data={[productLd(product, locale), breadcrumbLd(locale, [[locale === "id" ? "Koleksi" : "Collection", "/products"], [product.name, `/products/${product.slug}`]]), faqLd(product.faq)]} />
       <SiteFooter locale={locale} />
     </div>
   );

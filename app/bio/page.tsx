@@ -21,7 +21,10 @@ export const metadata: Metadata = {
     siteName: "Sheepie",
     images: [
       {
-        url: bioConfig.heroImage.src,
+        // 1200×630 JPG preview; link-preview crawlers read JPG most reliably.
+        url: "/og/bio.jpg",
+        width: 1200,
+        height: 630,
         alt: bioConfig.heroImage.alt,
       },
     ],
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: [bioConfig.heroImage.src],
+    images: ["/og/bio.jpg"],
   },
 };
 

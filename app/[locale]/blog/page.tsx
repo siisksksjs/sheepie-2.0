@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
 import { PageIntro } from "@/components/pages/page-intro";
 import styles from "@/components/pages/pages.module.css";
@@ -16,19 +16,15 @@ import { localeHref } from "@/lib/site/copy";
 import { getProducts, productPath } from "@/lib/catalog";
 import { formatPostDate, journalPosts, readMinutes } from "@/lib/site/journal";
 import { pagesCopy } from "@/lib/site/pages-copy";
+import { JsonLd } from "@/components/site/json-ld";
+import { breadcrumbLd, pageMetadata } from "@/lib/site/seo";
 
-const baseUrl = "https://sheepiesleep.com";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Blog" });
-  return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
-    alternates: { canonical: `${baseUrl}/id/blog` },
-    // Articles are written in Indonesian; the English listing points search engines there.
-    robots: locale === "id" ? undefined : { index: false, follow: true },
-  };
+  if (!isLocale(locale)) return {};
+  // Articles are written in Indonesian; the English listing points search engines there.
+  return pageMetadata("blog", locale, { languages: ["id"], canonicalLocale: "id", noindex: locale !== "id" });
 }
 
 export default async function JournalPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -96,6 +92,7 @@ export default async function JournalPage({ params }: { params: Promise<{ locale
           </>
         )}
       </main>
+      <JsonLd data={breadcrumbLd(locale, [["Blog", "/blog"]])} />
       <SiteFooter locale={locale} />
     </div>
   );

@@ -17,12 +17,13 @@ import { isLocale } from "@/i18n/config";
 import { localeHref, storeLinks } from "@/lib/site/copy";
 import { pagesCopy } from "@/lib/site/pages-copy";
 import { whatsappGreeting, whatsappUrl } from "@/lib/site/whatsapp";
+import { JsonLd } from "@/components/site/json-ld";
+import { breadcrumbLd, pageMetadata, pageSeo } from "@/lib/site/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  const t = pagesCopy[locale].contact;
-  return { title: t.metaTitle, description: t.metaDescription };
+  return pageMetadata("contact", locale);
 }
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -84,6 +85,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           </FadeIn>
         </section>
       </main>
+      <JsonLd data={breadcrumbLd(locale, [[t.eyebrow, pageSeo("contact", locale).path]])} />
       <SiteFooter locale={locale} />
     </div>
   );
