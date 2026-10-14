@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     images: [
       {
         // 1200×630 JPG preview; link-preview crawlers read JPG most reliably.
-        url: "/og/bio.jpg",
+        url: "/og/sheepie.jpg",
         width: 1200,
         height: 630,
         alt: bioConfig.heroImage.alt,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og/bio.jpg"],
+    images: ["/og/sheepie.jpg"],
   },
 };
 

@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://sheepiesleep.com"),
   title: "Sheepie | Ergonomic Pillow, Sleep Mask & Earplugs",
   description: "Sheepie: ergonomic CerviCloud pillows, LumiCloud blackout sleep masks and CalmiCloud earplugs for calmer nights in Indonesia.",
-  openGraph: { type: "website", siteName: "Sheepie", images: [{ url: "/og/home.jpg", width: 1200, height: 630 }] },
-  twitter: { card: "summary_large_image", images: ["/og/home.jpg"] },
+  openGraph: { type: "website", siteName: "Sheepie", images: [{ url: "/og/sheepie.jpg", width: 1200, height: 630 }] },
+  twitter: { card: "summary_large_image", images: ["/og/sheepie.jpg"] },
 };
 
 export function generateStaticParams() {
