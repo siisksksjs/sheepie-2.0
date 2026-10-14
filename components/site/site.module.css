@@ -116,9 +116,13 @@
 
 /* Review screenshots */
 .shots {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  columns: 3;
+  column-gap: 20px;
+}
+
+.shotWrap {
+  break-inside: avoid;
+  margin-bottom: 20px;
 }
 
 .shot {
@@ -137,8 +141,9 @@
 }
 
 .shot img {
-  object-fit: cover;
-  object-position: top;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .shotTag {
@@ -159,6 +164,7 @@
 
 @media (max-width: 760px) {
   .shots {
+    columns: auto;
     display: flex;
     gap: 12px;
     align-items: flex-start;
