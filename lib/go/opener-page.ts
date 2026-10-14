@@ -126,7 +126,7 @@ function tapPage(input: { openHref: string; event: MetaEvent | null; product?: O
 </head>
 <body>
 <main>
-  <div class="brand"><img src="${optimized("/images/bio/sheepie-logo.png", 256)}" alt="Sheepie" width="148" height="110"></div>
+  <div class="brand"><img src="${optimized("/images/bio/sheepie-logo.webp", 256)}" alt="Sheepie" width="148" height="110"></div>
   ${card}
   <ul class="stats">
     <li><b>4.9/5</b><span>dari 1000+ ulasan</span></li>
@@ -135,7 +135,7 @@ function tapPage(input: { openHref: string; event: MetaEvent | null; product?: O
   </ul>
 </main>
 <div class="dock">
-  <a class="cta" href="${attr(input.openHref)}"><img src="/images/bio/shopee-logo.png" alt="" width="28" height="28">Buka di aplikasi Shopee</a>
+  <a class="cta" href="${attr(input.openHref)}"><img src="/images/bio/shopee-logo.webp" alt="" width="28" height="28">Buka di aplikasi Shopee</a>
   <p class="note">Checkout di aplikasi Shopee: sudah login, voucher &amp; koin siap dipakai.</p>
 </div>
 ${trackingScript(input.event, null)}

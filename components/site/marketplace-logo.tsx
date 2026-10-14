@@ -15,5 +15,5 @@ export function MarketplaceLogo({ marketplace, size = 22, className }: { marketp
       </svg>
     );
   }
-  return <Image className={className} src="/images/bio/tokopedia-logo.png" alt="" width={size} height={size} />;
+  return <Image className={className} src="/images/bio/tokopedia-logo.webp" alt="" width={size} height={size} />;
 }

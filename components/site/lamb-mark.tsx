@@ -15,7 +15,7 @@ export function LambMark({
 }) {
   return (
     <Image
-      src={tone === "blue" ? "/brand/lamb-blue.png" : "/brand/lamb-white.png"}
+      src={tone === "blue" ? "/brand/lamb-blue.webp" : "/brand/lamb-white.webp"}
       alt=""
       width={size}
       height={size}

@@ -40,8 +40,8 @@ describe("home page", () => {
 
   it("quotes masked reviewers with a link to the original screenshot", async () => {
     const html = await render("id");
-    expect(html).toContain("/images/bio/testimonials/cervicloud-3-review.jpg");
-    expect(html).toContain("/images/bio/testimonials/lumicloud-1-review.jpg");
+    expect(html).toContain("/images/bio/testimonials/cervicloud-3-review.webp");
+    expect(html).toContain("/images/bio/testimonials/lumicloud-1-review.webp");
     expect(html).not.toContain("steve969");
   });
 

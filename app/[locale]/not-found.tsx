@@ -40,7 +40,7 @@ export default async function NotFound() {
       <SiteHeader locale={locale} />
       <main>
         <section className={`${site.shell} ${styles.intro} ${styles.notFound}`} data-section="not-found">
-          <Image src="/brand/lamb-blue.png" alt="" width={120} height={120} className={site.breathe} />
+          <Image src="/brand/lamb-blue.webp" alt="" width={120} height={120} className={site.breathe} />
           <p className={styles.eyebrow}>{t.eyebrow}</p>
           <h1 className={styles.title}>
             {t.title[0]}

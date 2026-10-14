@@ -20,10 +20,10 @@ export function FeatureBand({ locale }: { locale: Locale }) {
       <div className={`${site.shell} ${styles.bandIn}`}>
         <FadeIn className={styles.stack}>
           <div className={styles.stackBig}>
-            <Image src="/images/edited/DSC01139.JPG" alt="" fill sizes="(max-width: 760px) 90vw, 560px" className={styles.cover} />
+            <Image src="/images/edited/DSC01139.webp" alt="" fill sizes="(max-width: 760px) 90vw, 560px" className={styles.cover} />
           </div>
           <div className={styles.stackSmall}>
-            <Image src="/brand/icesilk.jpg" alt="" fill sizes="(max-width: 760px) 42vw, 280px" className={styles.cover} />
+            <Image src="/brand/icesilk.webp" alt="" fill sizes="(max-width: 760px) 42vw, 280px" className={styles.cover} />
           </div>
         </FadeIn>
         <FadeIn index={1} className={styles.feature}>

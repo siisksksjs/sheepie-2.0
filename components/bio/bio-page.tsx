@@ -38,9 +38,9 @@ const destinationIcons: Record<BioAction["destination"], typeof Globe2> = {
  * so a shopper recognises the destination before reading the label.
  */
 const brandLogos: Partial<Record<BioAction["destination"], string>> = {
-  shopee: "/images/bio/shopee-logo.png",
-  tokopedia: "/images/bio/tokopedia-logo.png",
-  tiktok: "/images/bio/tiktok-logo.png",
+  shopee: "/images/bio/shopee-logo.webp",
+  tokopedia: "/images/bio/tokopedia-logo.webp",
+  tiktok: "/images/bio/tiktok-logo.webp",
 };
 
 /** Storefronts, in the order they should be offered. */

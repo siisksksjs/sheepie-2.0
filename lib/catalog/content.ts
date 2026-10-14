@@ -5,8 +5,8 @@ const cervicloud: ProductCopy = {
   name: "CerviCloud Pillow",
   role: "hero",
   card: {
-    image: "/images/photoshoot/DSC01110.JPG",
-    hoverImage: "/images/edited/DSC01187.JPG",
+    image: "/images/photoshoot/DSC01110.webp",
+    hoverImage: "/images/edited/DSC01187.webp",
     chip: { id: "Sarung ice-silk", en: "Ice-silk cover" },
     line: {
       id: "Bantal ergonomis berbentuk butterfly yang menopang leher, untuk tidur telentang dan miring.",
@@ -40,7 +40,7 @@ const cervicloud: ProductCopy = {
       key: "pillow",
       label: { id: "Bantal + sarung", en: "Pillow + cover" },
       note: { id: "Paket lengkap", en: "Complete set" },
-      image: "/images/etalase/22.png",
+      image: "/images/etalase/22.webp",
       source: { kind: "variant", name: "Pillow" },
     },
   ],
@@ -140,8 +140,8 @@ const lumicloud: ProductCopy = {
   name: "LumiCloud Eye Mask",
   role: "hero",
   card: {
-    image: "/images/edited/DSC01278.JPG",
-    hoverImage: "/images/edited/DSC01225.JPG",
+    image: "/images/edited/DSC01278.webp",
+    hoverImage: "/images/edited/DSC01225.webp",
     chip: { id: "Blue · Apricot", en: "Blue · Apricot" },
     line: {
       id: "Penutup mata tidur blackout yang ringan dan tidak menekan mata, untuk tidur malam, tidur siang, dan perjalanan.",
@@ -216,7 +216,7 @@ const lumicloud: ProductCopy = {
       id: "Dibuat untuk menghalangi cahaya, tapi tetap nyaman di wajah sepanjang malam.",
       en: "Made to block light while staying comfortable on your face all night.",
     },
-    image: "/images/edited/DSC01334.JPG",
+    image: "/images/edited/DSC01334.webp",
     points: [
       {
         x: 38,
@@ -277,8 +277,8 @@ const calmicloud: ProductCopy = {
   name: "CalmiCloud Earplugs",
   role: "companion",
   card: {
-    image: "/images/edited/DSC01313.JPG",
-    hoverImage: "/images/edited/DSC01249.JPG",
+    image: "/images/edited/DSC01313.webp",
+    hoverImage: "/images/edited/DSC01249.webp",
     chip: { id: "Isi 3 pasang", en: "3 pairs" },
     line: {
       id: "Earplug silikon lembut untuk meredam dengkuran, dengung AC, dan suara jalan.",
@@ -312,7 +312,7 @@ const calmicloud: ProductCopy = {
       key: "set",
       label: { id: "3 pasang + case", en: "3 pairs + case" },
       note: { id: "Satu set", en: "One set" },
-      image: "/images/edited/DSC01313.JPG",
+      image: "/images/edited/DSC01313.webp",
       source: { kind: "base" },
     },
   ],
@@ -349,7 +349,7 @@ const calmicloud: ProductCopy = {
       id: "Tidak dimasukkan ke dalam telinga, tapi menutup dari luar.",
       en: "It doesn't go inside your ear; it seals from the outside.",
     },
-    image: "/images/edited/DSC01313.JPG",
+    image: "/images/edited/DSC01313.webp",
     points: [
       {
         x: 44,

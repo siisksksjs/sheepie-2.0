@@ -87,7 +87,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
           <footer className={styles.articleFoot}>
             <div className={styles.authorBox} data-block="author">
-              <span className={styles.authorMark}><Image src="/brand/lamb-blue.png" alt="" width={40} height={40} /></span>
+              <span className={styles.authorMark}><Image src="/brand/lamb-blue.webp" alt="" width={40} height={40} /></span>
               <div>
                 <small>{t.by}</small>
                 <b>{post.author}</b>

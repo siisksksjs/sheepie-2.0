@@ -120,7 +120,7 @@ export function postJsonLd(post: JournalPost): object[] {
       inLanguage: "id-ID",
       mainEntityOfPage: url,
       author: { "@type": "Organization", name: post.author, url: SITE_URL },
-      publisher: { "@type": "Organization", name: "Sheepie", url: SITE_URL, logo: { "@type": "ImageObject", url: `${SITE_URL}/brand/lamb-blue.png` } },
+      publisher: { "@type": "Organization", name: "Sheepie", url: SITE_URL, logo: { "@type": "ImageObject", url: `${SITE_URL}/brand/lamb-blue.webp` } },
     },
     {
       "@context": "https://schema.org",

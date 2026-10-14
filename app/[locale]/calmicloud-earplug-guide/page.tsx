@@ -45,7 +45,7 @@ export default async function CalmiGuidePage({ params }: { params: Promise<{ loc
               <p className={styles.lede}>{t.intro}</p>
             </div>
             <div className={styles.guideImg}>
-              <Image src="/images/edited/DSC01313.JPG" alt="CalmiCloud Earplugs" fill preload fetchPriority="high" sizes="(max-width: 760px) 100vw, 40vw" className={styles.cover} />
+              <Image src="/images/edited/DSC01313.webp" alt="CalmiCloud Earplugs" fill preload fetchPriority="high" sizes="(max-width: 760px) 100vw, 40vw" className={styles.cover} />
             </div>
           </div>
           <dl className={styles.facts}>

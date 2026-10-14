@@ -125,7 +125,7 @@ describe("bio page rendered contract", () => {
     expect(cards.length).toBeGreaterThanOrEqual(2);
     expect(cards.length).toBeLessThanOrEqual(3);
     for (const card of cards) {
-      expect(card).toMatch(/testimonials(?:%2F|\/)[^"']+\.jpg/);
+      expect(card).toMatch(/testimonials(?:%2F|\/)[^"']+\.webp/);
       // The quote is carried as alt text for assistive technology and search.
       expect(card).toMatch(/alt="[^"]{40,}"/);
       // The screenshot opens in a modal, so nothing targets a new tab.

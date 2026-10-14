@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
       ...LOCALES.map((locale) => ({ source: `/${locale}/blog/${slug}`, destination: `/${locale}${to}`, permanent: true })),
     ])];
   },
+  images: {
+    // AVIF first (smallest), WebP as the fallback; optimized images are cached for a year since paths change when content does.
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
+  },
   experimental: {
     // Inline the (small) CSS into the HTML so first paint does not wait on a stylesheet request.
     inlineCss: true,

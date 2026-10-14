@@ -9,7 +9,7 @@ describe("reviews", () => {
       expect(reviews).toHaveLength(3);
       for (const review of reviews) {
         expect(review.slug).toBe(slug);
-        expect(review.screenshot).toMatch(/^\/images\/bio\/testimonials\/.+\.jpg$/);
+        expect(review.screenshot).toMatch(/^\/images\/bio\/testimonials\/.+\.webp$/);
       }
     }
   });

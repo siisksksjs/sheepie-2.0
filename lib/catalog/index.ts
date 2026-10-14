@@ -152,7 +152,7 @@ export function cerviCover() {
   return {
     ...priced(variant.price, variant.originalPrice),
     shopeeUrl: variant.shopeeUrl,
-    image: "/brand/icesilk.jpg",
+    image: "/brand/icesilk.webp",
     soldOut: variant.soldOut === true,
   };
 }

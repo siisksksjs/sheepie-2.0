@@ -35,7 +35,7 @@ export function LightsOutBand({ locale }: { locale: Locale }) {
           <Link className={buttonClass("cream")} href={productPath(locale, "lumicloud")}>{t.cta}</Link>
         </FadeIn>
         <FadeIn index={1} className={styles.lightsPh}>
-          <Image src="/images/edited/DSC01058.JPG" alt="" fill sizes="(max-width: 760px) 90vw, 600px" className={styles.cover} />
+          <Image src="/images/edited/DSC01058.webp" alt="" fill sizes="(max-width: 760px) 90vw, 600px" className={styles.cover} />
         </FadeIn>
       </div>
     </section>

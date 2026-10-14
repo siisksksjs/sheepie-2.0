@@ -21,17 +21,17 @@ import { whatsappGreeting, whatsappUrl } from "@/lib/site/whatsapp";
 
 /** Pillar photos, each framed on the product in use. */
 const PILLAR_PHOTO = {
-  cervicloud: { src: "/images/edited/DSC01187.JPG", position: "50% 50%" },
-  lumicloud: { src: "/images/edited/DSC01334.JPG", position: "50% 0%" },
+  cervicloud: { src: "/images/edited/DSC01187.webp", position: "50% 50%" },
+  lumicloud: { src: "/images/edited/DSC01334.webp", position: "50% 0%" },
   calmicloud: { src: "/images/about/calmi-pillar.webp", position: "50% 50%" },
 } as const;
 
 const MOSAIC = [
   "/images/hero/sleep-mask-pillow.webp",
-  "/images/edited/DSC01263.JPG",
-  "/images/edited/DSC01313.JPG",
-  "/images/edited/DSC01148.JPG",
-  "/images/edited/DSC01225.JPG",
+  "/images/edited/DSC01263.webp",
+  "/images/edited/DSC01313.webp",
+  "/images/edited/DSC01148.webp",
+  "/images/edited/DSC01225.webp",
 ];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
