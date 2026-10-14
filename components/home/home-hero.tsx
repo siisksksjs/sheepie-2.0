@@ -16,7 +16,7 @@ import styles from "./home.module.css";
  */
 export function HomeHero({ locale }: { locale: Locale }) {
   const t = homeCopy[locale].hero;
-  // One short word is repeated so each half of the loop is wider than the marquee box.
+  // The phrase is repeated so each half of the loop is wider than the marquee box.
   const phrase = `${Array(4).fill(t.marquee).join("\u00a0")}\u00a0`;
 
   return (

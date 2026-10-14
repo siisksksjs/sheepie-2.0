@@ -29,7 +29,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       subStrong: "Sambut esok dengan lebih segar.",
       explore: "Jelajahi Koleksi",
       story: "Filosofi Kami",
-      marquee: "SLEEP ·",
+      marquee: "SHEEPIE SLEEP ·",
       alt: "Perempuan tidur nyenyak memakai LumiCloud di atas bantal CerviCloud",
     },
     products: {
@@ -72,7 +72,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
       subStrong: "Prepare for a clearer tomorrow.",
       explore: "Explore the Collection",
       story: "Our Philosophy",
-      marquee: "SLEEP ·",
+      marquee: "SHEEPIE SLEEP ·",
       alt: "A woman sleeping soundly in LumiCloud on a CerviCloud pillow",
     },
     products: {

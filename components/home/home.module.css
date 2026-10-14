@@ -37,7 +37,7 @@
 .marqueeTrack {
   display: flex;
   width: max-content;
-  animation: marquee 480s linear infinite;
+  animation: marquee 960s linear infinite;
 }
 
 .marqueeTrack span {
