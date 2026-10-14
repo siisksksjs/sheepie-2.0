@@ -29,11 +29,10 @@ describe("product page", () => {
     expect(html).not.toContain('data-fits="false"');
   });
 
-  it("shows three full-text reviews with screenshot links", async () => {
+  it("shows the three real review screenshots, each linking to the full image", async () => {
     const html = await render("id", "lumicloud");
-    expect((html.match(/Lihat ulasan asli/g) ?? []).length).toBe(3);
-    expect(html).toContain("silent velcro nya");
-    expect(html).not.toContain("…”");
+    for (const n of [1, 2, 3]) expect(html).toContain(`href="/images/bio/testimonials/lumicloud-${n}-review.jpg"`);
+    expect((html.match(/aria-label="Lihat ulasan asli:/g) ?? []).length).toBe(3);
   });
 
   it("pairs with the other products", async () => {

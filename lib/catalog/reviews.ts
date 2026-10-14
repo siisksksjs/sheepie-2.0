@@ -9,6 +9,8 @@ export interface Review {
   marketplace: Marketplace;
   quote: string;
   screenshot: string;
+  width: number;
+  height: number;
 }
 
 /** Bio testimonials, already masked at config-build time. */
@@ -22,6 +24,8 @@ export function getReviews(slug: ProductSlug): Review[] {
       marketplace: t.marketplace,
       quote: t.quote,
       screenshot: t.screenshot.src,
+      width: t.screenshot.width,
+      height: t.screenshot.height,
     }));
 }
 

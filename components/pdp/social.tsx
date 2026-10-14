@@ -6,6 +6,7 @@ import { FadeIn } from "@/components/site/fade-in";
 import type { Locale } from "@/i18n/config";
 import { getProduct, productPath } from "@/lib/catalog";
 import { formatIdr } from "@/lib/catalog/price";
+import { ReviewShots } from "@/components/site/review-shots";
 import { getReviews } from "@/lib/catalog/reviews";
 import type { Product } from "@/lib/catalog/types";
 import { pdpCopy } from "@/lib/site/pdp-copy";
@@ -18,16 +19,8 @@ export function ReviewGrid({ product, locale }: { product: Product; locale: Loca
   return (
     <section className={styles.block} data-section="reviews">
       <FadeIn><h2>{t.reviews.replace("{name}", product.name)}</h2></FadeIn>
-      <div className={styles.rvGrid}>
-        {getReviews(product.slug).map((review) => (
-          <figure key={review.id} className={styles.rv}>
-            <blockquote>“{review.quote}”</blockquote>
-            <figcaption>
-              <b>{review.author}</b> · {review.marketplace === "shopee" ? "Shopee" : "Tokopedia"}
-              <a href={review.screenshot} target="_blank" rel="noopener noreferrer">{t.viewOriginal}</a>
-            </figcaption>
-          </figure>
-        ))}
+      <div className={styles.shotsGap}>
+        <ReviewShots reviews={getReviews(product.slug)} label={(r) => `${t.viewOriginal}: ${r.author}`} />
       </div>
     </section>
   );

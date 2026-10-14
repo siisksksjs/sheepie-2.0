@@ -49,9 +49,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <HomeHero locale={locale} />
         <ProductDuo locale={locale} />
         <FeatureBand locale={locale} />
-        <ReviewSection locale={locale} slug="cervicloud" featuredId="cervicloud-3" tone="day" />
+        <ReviewSection locale={locale} slug="cervicloud" tone="day" />
         <LightsOutBand locale={locale} />
-        <ReviewSection locale={locale} slug="lumicloud" featuredId="lumicloud-1" tone="night" />
+        <ReviewSection locale={locale} slug="lumicloud" tone="night" />
       </main>
       <SiteFooter locale={locale} />
     </div>
