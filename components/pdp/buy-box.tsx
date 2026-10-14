@@ -10,7 +10,6 @@ import type { Locale } from "@/i18n/config";
 import type { Product } from "@/lib/catalog/types";
 import { WEBSITE_VOUCHER_CODE } from "@/lib/site/config";
 import { siteCopy } from "@/lib/site/copy";
-import { formatIdr } from "@/lib/catalog/price";
 import { pdpCopy } from "@/lib/site/pdp-copy";
 
 import { AskWhatsApp } from "./ask-whatsapp";
@@ -58,12 +57,19 @@ export function BuyBox({ product, locale }: { product: Product; locale: Locale }
         <>
           <div className={styles.optLabel}>{t.bundle}</div>
           <div className={styles.bundles}>
-            {product.bundles.map((b) => (
-              <button key={b.key} type="button" className={styles.bundle} data-bundle={b.key} aria-pressed={b.key === bundle.key} onClick={() => selectBundle(b.key)}>
-                <b>{b.label}</b>
-                <small>{b.qty > 1 ? t.perPiece.replace("{price}", formatIdr(Math.round(b.price / b.qty))) : formatIdr(b.price)}</small>
-              </button>
-            ))}
+            {product.bundles.map((b) => {
+              const thumb = b.imageByOption[option.key] ?? b.image;
+              return (
+                <button key={b.key} type="button" className={styles.bundle} data-bundle={b.key} aria-pressed={b.key === bundle.key} onClick={() => selectBundle(b.key)}>
+                  {thumb && (
+                    <span className={styles.bundleImg}>
+                      <Image src={thumb} alt="" fill sizes="88px" style={{ objectFit: "cover" }} />
+                    </span>
+                  )}
+                  <b>{b.label}</b>
+                </button>
+              );
+            })}
           </div>
         </>
       )}
@@ -80,15 +86,11 @@ export function BuyBox({ product, locale }: { product: Product; locale: Locale }
       {WEBSITE_VOUCHER_CODE && <VoucherLine code={WEBSITE_VOUCHER_CODE} label={t.voucher} copy={t.copy} copied={t.copied} />}
 
       <div className={styles.assure}>
-        <div>
-          {t.assurances[0]}
-        </div>
+        <div>{t.assurances[0]}</div>
+        <div>{t.assurances[1]}</div>
+      </div>
 
       <AskWhatsApp locale={locale} showOption={product.options.length > 1} />
-        <div>
-          {t.assurances[1]}
-        </div>
-      </div>
 
       {product.accordions.map((section, i) => (
         <details key={section.title} className={styles.acc} open={i === 0}>

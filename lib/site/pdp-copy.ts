@@ -6,7 +6,6 @@ export interface PdpCopy {
   products: string;
   save: string;
   bundle: string;
-  perPiece: string;
   voucher: string;
   copy: string;
   copied: string;
@@ -27,7 +26,6 @@ export const pdpCopy: Record<Locale, PdpCopy> = {
     products: "Produk",
     save: "Hemat {n}%",
     bundle: "Paket",
-    perPiece: "{price}/pcs",
     voucher: "Kode khusus website:",
     copy: "Salin",
     copied: "Tersalin",
@@ -46,7 +44,6 @@ export const pdpCopy: Record<Locale, PdpCopy> = {
     products: "Products",
     save: "Save {n}%",
     bundle: "Bundle",
-    perPiece: "{price} each",
     voucher: "Website-only code:",
     copy: "Copy",
     copied: "Copied",
