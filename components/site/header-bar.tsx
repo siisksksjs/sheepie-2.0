@@ -86,7 +86,6 @@ export function HeaderBar({ locale, shopItems }: { locale: Locale; shopItems: Sh
       <div className={styles.bar}>
         <button type="button" className={styles.menuBtn} aria-label={t.nav.menu} data-panel-trigger="menu" aria-haspopup="dialog" aria-expanded={panel === "menu"} onClick={openPanel("menu")}>
           <span />
-          <b>{t.nav.menu}</b>
         </button>
         <Link href={localeHref(locale, "/")} className={styles.brand} aria-label="Sheepie">
           <LambMark size={46} breathe />

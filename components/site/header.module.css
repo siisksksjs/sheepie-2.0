@@ -322,7 +322,6 @@
   .notice { height: 32px; font-size: 12px; }
   /* Equal outer columns keep the logo centred on the viewport. */
   .bar { height: 60px; }
-  .menuBtn b { display: none; }
   .actions .toggle { display: none; }
   .brand span { font-size: 22px; }
   .shopBtn { padding: 0 14px; font-size: 13px; }

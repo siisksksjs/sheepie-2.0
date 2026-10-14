@@ -2,9 +2,10 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import AboutPage from "@/app/[locale]/about/page";
-import ArticlePage from "@/app/[locale]/blog/[slug]/page";
 import JournalPage from "@/app/[locale]/blog/page";
+import GuidePage from "@/app/[locale]/calmicloud-earplug-guide/page";
 import ContactPage from "@/app/[locale]/contact/page";
+import retired from "@/data/retired-posts.json";
 import { journalPosts } from "@/lib/site/journal";
 
 const params = (locale: "id" | "en") => ({ params: Promise.resolve({ locale }) });
@@ -26,16 +27,22 @@ describe("content pages", () => {
     expect(html).not.toContain("<form");
   });
 
-  it("Journal features the first post and lists the rest", async () => {
+  it("Blog starts empty and points readers to the products meanwhile", async () => {
+    expect(journalPosts).toEqual([]);
     const html = renderToStaticMarkup(await JournalPage(params("id")));
-    for (const post of journalPosts) expect(html).toContain(`href="/id/blog/${post.slug}"`);
+    expect(html).toContain('data-section="empty"');
+    for (const slug of ["cervicloud", "lumicloud", "calmicloud"]) expect(html).toContain(`href="/id/products/${slug}"`);
   });
 
-  it("An article renders its blocks and links the product it is about", async () => {
-    const post = journalPosts[0];
-    const html = renderToStaticMarkup(await ArticlePage({ params: Promise.resolve({ locale: "id", slug: post.slug }) }));
-    expect(html).toContain(post.title);
-    expect(html).toContain('data-article-product="cervicloud"');
-    expect(html).toContain('data-section="more"');
+  it("retires every old article to a product page or the home page", () => {
+    expect(retired).toHaveLength(13);
+    for (const r of retired) expect(["", "/products/cervicloud", "/products/lumicloud", "/products/calmicloud"]).toContain(r.to);
+  });
+
+  it("CalmiCloud guide teaches the outer-ear method in four steps", async () => {
+    const html = renderToStaticMarkup(await GuidePage(params("id")));
+    for (const n of [1, 2, 3, 4]) expect(html).toContain(`calmi-step-${n}.webp`);
+    expect(html).toContain("Jangan didorong masuk ke dalam lubang telinga");
+    expect(html).not.toMatch(/medical|kelas medis|saluran telinga lalu putar/i);
   });
 });

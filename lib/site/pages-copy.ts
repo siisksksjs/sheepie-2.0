@@ -52,6 +52,8 @@ type PagesCopy = {
     more: string;
     productTitle: string;
     productCta: string;
+    emptyTitle: string;
+    emptyBody: string;
   };
 };
 
@@ -116,6 +118,8 @@ export const pagesCopy: Record<Locale, PagesCopy> = {
       more: "Artikel lainnya",
       productTitle: "Dari artikel ini",
       productCta: "Lihat produk",
+      emptyTitle: "Artikel pertama sedang ditulis.",
+      emptyBody: "Sambil menunggu, lihat panduan produk kami atau tanya langsung lewat WhatsApp.",
     },
   },
   en: {
@@ -178,6 +182,8 @@ export const pagesCopy: Record<Locale, PagesCopy> = {
       more: "More articles",
       productTitle: "From this article",
       productCta: "See the product",
+      emptyTitle: "The first article is on its way.",
+      emptyBody: "In the meantime, browse our products or ask us anything on WhatsApp.",
     },
   },
 };
