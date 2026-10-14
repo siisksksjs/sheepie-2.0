@@ -27,7 +27,7 @@ export function CompanionRow({ locale }: { locale: Locale }) {
         const body = (
           <>
             <div className={styles.miniImg}>
-              <Image src={tile.image} alt="" fill sizes="96px" className={styles.cover} />
+              <Image src={tile.image} alt="" fill sizes="72px" className={styles.cover} />
             </div>
             <div>
               <div className={styles.miniTag}>{t.companion}</div>
