@@ -78,13 +78,29 @@ describe("tracked story redirect", () => {
       expect(html).toContain(`href="${shopeeHref("cervicloud").replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`);
     });
 
-    it("plain-redirects iPhones so the tap can open the Shopee app", async () => {
+    it("shows iPhones a product card with one tap-to-open Shopee button and no redirect", async () => {
       for (const ua of [IG_IOS, SAFARI_IOS]) {
         const response = await GET(request("/go/lumicloud?utm_campaign=okt", ua), params("lumicloud"));
+        const html = await response.text();
+        const href = shopeeHref("lumicloud").replace(/&/g, "&amp;").replace(/"/g, "&quot;");
 
-        expect(response.status).toBe(307);
-        expect(response.headers.get("location")).toBe(shopeeHref("lumicloud"));
+        expect(response.status).toBe(200);
+        expect(html).toContain(`class="cta" href="${href}"`);
+        expect(html).toContain("var openHref = null;");
+        expect(html).toContain("LumiCloud");
+        expect(html).toContain("/_next/image?url=");
+        expect(html).not.toContain("Lanjut di browser");
+        expect(html).toContain('"event_name":"PageView"');
       }
+    });
+
+    it("shows the storefront button without a product card on iPhone", async () => {
+      const response = await GET(request("/go/shopee", IG_IOS), params("shopee"));
+      const html = await response.text();
+
+      expect(response.status).toBe(200);
+      expect(html).not.toContain('class="card"');
+      expect(html).toContain("Toko resmi Sheepie di Shopee");
     });
 
     it("plain-redirects when ?s=1 is set", async () => {

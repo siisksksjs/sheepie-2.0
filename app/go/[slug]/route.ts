@@ -1,8 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { isIP } from "node:net";
 
-import { after } from "next/server";
-
 import { bioConfig } from "@/data/bio";
 import {
   BIO_EVENT_TEXT_LIMITS,
@@ -13,9 +11,8 @@ import {
 } from "@/lib/bio-analytics/contracts";
 import { createDailyRateKey, ingestBioEvent } from "@/lib/bio-analytics/server";
 import { androidIntent, isShopeeUrl, platformOf } from "@/lib/go/app-link";
-import { openerPageHtml } from "@/lib/go/opener-page";
+import { openerPageHtml, type OpenerProduct } from "@/lib/go/opener-page";
 import { pageView } from "@/lib/meta/events";
-import { buildServerEvent, forwardToMeta, readMetaEnv } from "@/lib/meta/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -148,39 +145,33 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
     return Response.redirect(target.href, 307);
   }
 
-  // iOS only opens the Shopee app (universal link) when the navigation comes
-  // from the shopper's own tap. A server redirect keeps that tap; a page that
-  // redirects with JavaScript loses it and Shopee opens inside Instagram. So
-  // iOS gets a plain 307 and the PageView is sent from the server instead.
-  if (platform === "ios") {
-    recordServerPageView(request, url);
-    return Response.redirect(target.href, 307);
-  }
+  // iOS opens the Shopee app (universal link) only from the shopper's own tap
+  // on a Shopee link; any automatic redirect opens Shopee inside Instagram.
+  // So iPhones get a product card with one button; Android gets an intent.
+  const ios = platform === "ios";
+  const openHref = ios ? target.href : androidIntent(target.href);
 
-  const openHref = androidIntent(target.href);
+  const html = openerPageHtml({
+    mode: ios ? "tap" : "auto",
+    openHref,
+    webHref: target.href,
+    event: pageView(),
+    product: ios ? openerProductFor(target) : null,
+  });
 
-  return new Response(openerPageHtml({ openHref, webHref: target.href, event: pageView() }), {
+  return new Response(html, {
     headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
   });
 }
 
-const BOT = /bot|crawler|spider|facebookexternalhit|preview/i;
-
-/** Conversions API PageView for the redirect-only path. Runs after the response; never throws. */
-function recordServerPageView(request: Request, url: URL) {
-  const env = readMetaEnv();
-  if (!env || BOT.test(request.headers.get("user-agent") ?? "")) return;
-
-  const now = Date.now();
-  const serverEvent = buildServerEvent(pageView(), request, url.toString(), now);
-  const fbclid = url.searchParams.get("fbclid");
-  if (!serverEvent.user_data.fbc && fbclid && /^[\w-]+$/.test(fbclid)) {
-    serverEvent.user_data.fbc = `fb.1.${now}.${fbclid}`;
-  }
-
-  try {
-    after(() => forwardToMeta(serverEvent, env));
-  } catch {
-    // Outside a request scope (tests): skip rather than delay the redirect.
-  }
+function openerProductFor(target: Target): OpenerProduct | null {
+  const product = bioConfig.products.find((entry) => entry.slug === target.productSlug);
+  if (!product) return null;
+  return {
+    name: product.name,
+    headline: product.headline,
+    price: product.price.replace(/^IDR\s*/, "Rp"),
+    imageSrc: product.image.src,
+    rating: product.rating?.score,
+  };
 }
